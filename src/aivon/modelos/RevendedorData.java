@@ -320,13 +320,16 @@ public class RevendedorData {
         return revendedores;
     }
     
-    public List<Revendedor> buscar_revendedores_x_campaña(int idCampaña) {  //falta teminar sql
+    public List<Revendedor> buscar_revendedores_x_campaña(int idCampaña) {  
 
         Revendedor revendedor;
         List<Revendedor> revendedores = new ArrayList<>();
 
         try {
-            PreparedStatement instruccion = con.prepareStatement("SELECT * FROM revendedor where ");
+            PreparedStatement instruccion = con.prepareStatement("SELECT revendedor.id_revendedor, nombre, apellido, dni, tel, email, "
+                    + "revendedor.activo FROM revendedor, historico,campaña  where historico.id_campaña = campaña.id_campaña AND  "+
+                    "revendedor.id_revendedor= historico.id_revendedor AND campaña.id_campaña =" + idCampaña);
+
             ResultSet consulta = instruccion.executeQuery();
             
             if (consulta.next()) {
@@ -343,15 +346,15 @@ public class RevendedorData {
                     
                     revendedores.add(revendedor);
             }
-                JOptionPane.showMessageDialog(null, "Se encontraron revendedores");
-                System.out.println("Se encontraron revdendedores");
+                JOptionPane.showMessageDialog(null, "Se encontraron revendedores para la campaña "+idCampaña);
+                System.out.println("Se encontraron revdendedores para la campaña "+idCampaña);
             } else {
-                JOptionPane.showMessageDialog(null, "No se encontraron revendedores");
-                System.out.println("No se encontraron revendedores");
+                JOptionPane.showMessageDialog(null, "No se encontraron revendedores en la campaña "+idCampaña);
+                System.out.println("No se encontraron revendedores  en la campaña "+idCampaña);
             }
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al obtener revendedores");
+            JOptionPane.showMessageDialog(null, "Error al obtener revendedores  en la campaña "+idCampaña);
             System.out.println(ex.getMessage());
         }
 
