@@ -1,14 +1,14 @@
 package aivon.entidades;
 
-import java.time.LocalDate;
+import java.time.*;
 
 public class Pedido {
     
     private int id_pedido;
     private int id_revendedor;
-    private LocalDate fecha_ingreso;
-    private LocalDate fecha_entrega;
-    private LocalDate fecha_pago;
+    private LocalDateTime fecha_ingreso;
+    private LocalDateTime fecha_entrega;
+    private LocalDateTime fecha_pago;
     private int cantidad_cajas;
     private int estrellas_pedido;
     private boolean pago;
@@ -17,7 +17,7 @@ public class Pedido {
     public Pedido() {
     }
 
-    public Pedido(int id_revendedor, LocalDate fecha_ingreso, LocalDate fecha_entrega, LocalDate fecha_pago, int cantidad_cajas, int estrellas_pedido, boolean pago, boolean activo) {
+    public Pedido(int id_revendedor, LocalDateTime fecha_ingreso, LocalDateTime fecha_entrega, LocalDateTime fecha_pago, int cantidad_cajas, int estrellas_pedido, boolean pago, boolean activo) {
         this.id_revendedor = id_revendedor;
         this.fecha_ingreso = fecha_ingreso;
         this.fecha_entrega = fecha_entrega;
@@ -28,7 +28,7 @@ public class Pedido {
         this.activo = activo;
     }
 
-    public Pedido(int id_pedido, int id_revendedor, LocalDate fecha_ingreso, LocalDate fecha_entrega, LocalDate fecha_pago, int cantidad_cajas, int estrellas_pedido, boolean pago, boolean activo) {
+    public Pedido(int id_pedido, int id_revendedor, LocalDateTime fecha_ingreso, LocalDateTime fecha_entrega, LocalDateTime fecha_pago, int cantidad_cajas, int estrellas_pedido, boolean pago, boolean activo) {
         this.id_pedido = id_pedido;
         this.id_revendedor = id_revendedor;
         this.fecha_ingreso = fecha_ingreso;
@@ -56,27 +56,27 @@ public class Pedido {
         this.id_revendedor = id_revendedor;
     }
 
-    public LocalDate getFecha_ingreso() {
+    public LocalDateTime getFecha_ingreso() {
         return fecha_ingreso;
     }
 
-    public void setFecha_ingreso(LocalDate fecha_ingreso) {
+    public void setFecha_ingreso(LocalDateTime fecha_ingreso) {
         this.fecha_ingreso = fecha_ingreso;
     }
 
-    public LocalDate getFecha_entrega() {
+    public LocalDateTime getFecha_entrega() {
         return fecha_entrega;
     }
 
-    public void setFecha_entrega(LocalDate fecha_entrega) {
+    public void setFecha_entrega(LocalDateTime fecha_entrega) {
         this.fecha_entrega = fecha_entrega;
     }
 
-    public LocalDate getFecha_pago() {
+    public LocalDateTime getFecha_pago() {
         return fecha_pago;
     }
 
-    public void setFecha_pago(LocalDate fecha_pago) {
+    public void setFecha_pago(LocalDateTime fecha_pago) {
         this.fecha_pago = fecha_pago;
     }
 
