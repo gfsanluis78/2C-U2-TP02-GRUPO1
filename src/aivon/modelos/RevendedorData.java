@@ -32,7 +32,7 @@ public class RevendedorData {
         
         instruccion.setString(1,revendedor.getNombre() );
         instruccion.setString(2, revendedor.getApellido());
-        instruccion.setInt(3, revendedor.getDni());
+        instruccion.setString(3, revendedor.getDni());
         instruccion.setString(4, revendedor.getTel());
         instruccion.setString(5, revendedor.getEmail());
         instruccion.setBoolean(6, revendedor.isActivo());
@@ -116,7 +116,7 @@ public class RevendedorData {
             PreparedStatement instruccion = con.prepareStatement(pre_instruccion);
             instruccion.setString(1, revendedor.getNombre());
             instruccion.setString(2, revendedor.getApellido());
-            instruccion.setInt(3, revendedor.getDni());
+            instruccion.setString(3, revendedor.getDni());
             instruccion.setString(4, revendedor.getTel());
             instruccion.setString(5, revendedor.getEmail());
             instruccion.setBoolean(6, revendedor.isActivo());
@@ -150,13 +150,13 @@ public class RevendedorData {
 
         try {
             Statement instruccion = con.createStatement();
-            try (ResultSet consulta = instruccion.executeQuery("SELECT * FROM revendedor WHERE id_revendedor= ?" + id + ";")) {
+            try (ResultSet consulta = instruccion.executeQuery("SELECT * FROM revendedor WHERE id_revendedor=" + id + ";")) {
                 if (consulta.next()) {
                     revendedor = new Revendedor();
                     revendedor.setId_revendedor(consulta.getInt("id_revendedor"));
                     revendedor.setNombre(consulta.getString("nombre"));
                     revendedor.setApellido(consulta.getString("apellido"));
-                    revendedor.setDni(consulta.getInt("dni"));
+                    revendedor.setDni(consulta.getString("dni"));
                     revendedor.setTel(consulta.getString("tel"));
                     revendedor.setEmail(consulta.getString("email"));
                     revendedor.setActivo(consulta.getBoolean("activo"));
@@ -182,13 +182,13 @@ public class RevendedorData {
 
         try {
             Statement instruccion = con.createStatement();
-            try (ResultSet consulta = instruccion.executeQuery("SELECT * FROM revendedor WHERE dni= ?" + dni + ";")) {
+            try (ResultSet consulta = instruccion.executeQuery("SELECT * FROM revendedor WHERE dni='" + dni + "';")) {
                 if (consulta.next()) {
                     revendedor = new Revendedor();
                     revendedor.setId_revendedor(consulta.getInt("id_revendedor"));
                     revendedor.setNombre(consulta.getString("nombre"));
                     revendedor.setApellido(consulta.getString("apellido"));
-                    revendedor.setDni(consulta.getInt("dni"));
+                    revendedor.setDni(consulta.getString("dni"));
                     revendedor.setTel(consulta.getString("tel"));
                     revendedor.setEmail(consulta.getString("email"));
                     revendedor.setActivo(consulta.getBoolean("activo"));
@@ -214,7 +214,7 @@ public class RevendedorData {
         List<Revendedor> revendedores = new ArrayList<>();
 
         try {
-            PreparedStatement instruccion = con.prepareStatement("SELECT * FROM alumno");
+            PreparedStatement instruccion = con.prepareStatement("SELECT * FROM revendedor");
             ResultSet consulta = instruccion.executeQuery();
             
             if (consulta.next()) {
@@ -224,7 +224,7 @@ public class RevendedorData {
                     revendedor.setId_revendedor(consulta.getInt("id_revendedor"));
                     revendedor.setNombre(consulta.getString("nombre"));
                     revendedor.setApellido(consulta.getString("apellido"));
-                    revendedor.setDni(consulta.getInt("dni"));
+                    revendedor.setDni(consulta.getString("dni"));
                     revendedor.setTel(consulta.getString("tel"));
                     revendedor.setEmail(consulta.getString("email"));
                     revendedor.setActivo(consulta.getBoolean("activo"));
@@ -261,7 +261,7 @@ public class RevendedorData {
                     revendedor.setId_revendedor(consulta.getInt("id_revendedor"));
                     revendedor.setNombre(consulta.getString("nombre"));
                     revendedor.setApellido(consulta.getString("apellido"));
-                    revendedor.setDni(consulta.getInt("dni"));
+                    revendedor.setDni(consulta.getString("dni"));
                     revendedor.setTel(consulta.getString("tel"));
                     revendedor.setEmail(consulta.getString("email"));
                     revendedor.setActivo(consulta.getBoolean("activo"));
@@ -298,7 +298,7 @@ public class RevendedorData {
                     revendedor.setId_revendedor(consulta.getInt("id_revendedor"));
                     revendedor.setNombre(consulta.getString("nombre"));
                     revendedor.setApellido(consulta.getString("apellido"));
-                    revendedor.setDni(consulta.getInt("dni"));
+                    revendedor.setDni(consulta.getString("dni"));
                     revendedor.setTel(consulta.getString("tel"));
                     revendedor.setEmail(consulta.getString("email"));
                     revendedor.setActivo(consulta.getBoolean("activo"));
@@ -314,6 +314,44 @@ public class RevendedorData {
             
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al obtener Revendedores inactivos");
+            System.out.println(ex.getMessage());
+        }
+
+        return revendedores;
+    }
+    
+    public List<Revendedor> buscar_revendedores_x_campaña(int idCampaña) {  //falta teminar sql
+
+        Revendedor revendedor;
+        List<Revendedor> revendedores = new ArrayList<>();
+
+        try {
+            PreparedStatement instruccion = con.prepareStatement("SELECT * FROM revendedor where ");
+            ResultSet consulta = instruccion.executeQuery();
+            
+            if (consulta.next()) {
+                consulta.beforeFirst();
+                while (consulta.next()) {
+                    revendedor = new Revendedor();
+                    revendedor.setId_revendedor(consulta.getInt("id_revendedor"));
+                    revendedor.setNombre(consulta.getString("nombre"));
+                    revendedor.setApellido(consulta.getString("apellido"));
+                    revendedor.setDni(consulta.getString("dni"));
+                    revendedor.setTel(consulta.getString("tel"));
+                    revendedor.setEmail(consulta.getString("email"));
+                    revendedor.setActivo(consulta.getBoolean("activo"));
+                    
+                    revendedores.add(revendedor);
+            }
+                JOptionPane.showMessageDialog(null, "Se encontraron revendedores");
+                System.out.println("Se encontraron revdendedores");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontraron revendedores");
+                System.out.println("No se encontraron revendedores");
+            }
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al obtener revendedores");
             System.out.println(ex.getMessage());
         }
 
