@@ -2,7 +2,7 @@ package aivon.modelos;
 
 import aivon.entidades.*;
 import java.sql.*;
-import java.time.LocalDate;
+import java.time.*;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,8 +18,7 @@ public class PedidoData {
     }
 //##############################################################################
 //################ ALTA PEDIDO #################################################    
-    
-    public void alta_pedido(Pedido pedido) {
+    public void altaPedido(Pedido pedido) {
 
         String pre_instruccion = "INSERT INTO pedido (id_revendedor, id_campaña, fecha_ingreso) VALUES (?, ?, ?);";
 
@@ -50,16 +49,13 @@ public class PedidoData {
             }
             instruccion.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "No se pudo realizar el alta del pedido");
+            JOptionPane.showMessageDialog(null, "Error al realizar el alta del pedido");
             System.out.println(e.getMessage());
         }
-
     }
-
 //##############################################################################
 //################ COSTO PEDIDO ################################################    
-    
-    public double costo_pedido(Pedido pedido) {
+    public double costoPedido(Pedido pedido) {
 
         double costo = 0;
 
@@ -69,18 +65,20 @@ public class PedidoData {
             ResultSet consulta = statement.executeQuery("SELECT SUM(costo_caja)\n"
                     + "AS costo_pedido\n"
                     + "FROM caja_pedido\n"
-                    + "WHERE id_pedido="+pedido.getId_pedido()+";");
+                    + "WHERE id_pedido=" + pedido.getId_pedido() + ";");
 
             costo = consulta.getDouble("costo_pedido");
 
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al realizar la consulta");
             System.out.println(e.getMessage());
         }
 
         return costo;
     }
-    
-    public double costo_pedido_publico(Pedido pedido) {
+//##############################################################################
+//################### COSTO PEDIDO PÚBLICO #####################################
+    public double costoPedidoPublico(Pedido pedido) {
 
         double costo = 0;
 
@@ -90,20 +88,20 @@ public class PedidoData {
             ResultSet consulta = statement.executeQuery("SELECT SUM(costo_caja_publico)\n"
                     + "AS costo_pedido\n"
                     + "FROM caja_pedido\n"
-                    + "WHERE id_pedido="+pedido.getId_pedido()+";");
+                    + "WHERE id_pedido=" + pedido.getId_pedido() + ";");
 
             costo = consulta.getDouble("costo_pedido");
 
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al realizar la consulta");
             System.out.println(e.getMessage());
         }
 
         return costo;
     }
-    
 //##############################################################################
 //################ CANTIDAD ESTRELLAS PEDIDO ###################################
-    public int estrellas_pedido(Pedido pedido) {
+    public int cantEstrellasPedido(Pedido pedido) {
 
         int cantidad = 0;
 
@@ -113,11 +111,12 @@ public class PedidoData {
             ResultSet consulta = statement.executeQuery("SELECT SUM(estrellas_caja)\n"
                     + "AS estrellas\n"
                     + "FROM caja_pedido\n"
-                    + "WHERE id_pedido="+pedido.getId_pedido()+";");
+                    + "WHERE id_pedido=" + pedido.getId_pedido() + ";");
 
             cantidad = consulta.getInt("estrellas");
 
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al realizar la consulta");
             System.out.println(e.getMessage());
         }
         pedido.setEstrellas_pedido(cantidad);
@@ -125,7 +124,8 @@ public class PedidoData {
     }
 //##############################################################################
 //################ CANTIDAD DE CAJAS DE PEDIDO #################################
-        public int cant_cajas_pedido(Pedido pedido) {
+
+    public int cantCajasPedido(Pedido pedido) {
 
         int cantidad = 0;
 
@@ -136,11 +136,12 @@ public class PedidoData {
                     + "AS cajas "
                     + "FROM caja_pedido "
                     + "WHERE id_pedido="
-                    +pedido.getId_pedido()+";");
+                    + pedido.getId_pedido() + ";");
 
             cantidad = consulta.getInt("cajas");
 
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al realizar la consulta");
             System.out.println(e.getMessage());
         }
         pedido.setCantidad_cajas(cantidad);
@@ -148,9 +149,92 @@ public class PedidoData {
     }
 
 //##############################################################################
-//################ CANTIDAD DE CAJAS DE PEDIDO #################################        
-        
-        
+//################ ACTUALIZAR FECHA DE ENTREGA #################################
+    public void actualizarFechaEntrega(Pedido pedido, LocalDate fecha_entrega) {
+
+        try {
+            Statement statement = c.createStatement();
+            int celAfectadas = statement.executeUpdate("UPDATE pedido "
+                    + "SET fecha_entrega=" + Date.valueOf(fecha_entrega)
+                    + "WHERE pedido.id_pedido=" + pedido.getId_pedido() + ";");
+            if (celAfectadas > 0) {
+                System.out.println("Fecha de entrega cargada");
+                JOptionPane.showMessageDialog(null, "Fecha de entrega cargada");
+            } else {
+                System.out.println("No se cargó la fecha de entrega");
+                JOptionPane.showMessageDialog(null, "No se cargó la fecha de entrega");
+            }
+            statement.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al cargar la fecha de entrega");
+            System.out.println(e.getMessage());
+        }
+    }
+//##############################################################################
+//################### ACTUALIZAR FECHA DE PAGO #################################
+    public void actualizarFechaPago(Pedido pedido, LocalDate fecha_pago) {
+        // DEBERÍAMOS INFERIR EL ATRIBUTO PAGO(bool) DE LA BD
+        try {
+            Statement statement = c.createStatement();
+            int celAfectadas = statement.executeUpdate("UPDATE pedido "
+                    + "SET fecha_pago=" + Date.valueOf(fecha_pago)
+                    + "WHERE pedido.id_pedido=" + pedido.getId_pedido() + ";");
+            if (celAfectadas > 0) {
+                System.out.println("Fecha de pago cargada");
+                JOptionPane.showMessageDialog(null, "Fecha de pago cargada");
+            } else {
+                System.out.println("No se cargó la fecha de pago");
+                JOptionPane.showMessageDialog(null, "No se cargó la fecha de pago");
+            }
+            statement.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al cargar la fecha de pago");
+            System.out.println(e.getMessage());
+        }
+    }
+//##############################################################################
+//################### DESACTIVAR/CANCELAR PEDIDO ###############################
+    public void inhabilitarPedido(Pedido pedido) {
+        // DEBERÍAMOS INFERIR EL ATRIBUTO PAGO(bool) DE LA BD
+        try {
+            Statement statement = c.createStatement();
+            int celAfectadas = statement.executeUpdate("UPDATE pedido SET activo=0 "
+                    + "WHERE pedido.id_pedido=" + pedido.getId_pedido() + ";");
+            if (celAfectadas > 0) {
+                System.out.println("Pedido inhabilitado");
+                JOptionPane.showMessageDialog(null, "Pedido inhabilitado");
+            } else {
+                System.out.println("No se inhabilitó el pedido");
+                JOptionPane.showMessageDialog(null, "No se inhabilitó el pedido");
+            }
+            statement.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al inhabilitar el pedido");
+            System.out.println(e.getMessage());
+        }
+    }
+//##############################################################################
+//############################# HABILITAR PEDIDO ###############################
+    public void habilitarPedido(Pedido pedido) {
+        // DEBERÍAMOS INFERIR EL ATRIBUTO PAGO(bool) DE LA BD
+        try {
+            Statement statement = c.createStatement();
+            int celAfectadas = statement.executeUpdate("UPDATE pedido SET activo=1 "
+                    + "WHERE pedido.id_pedido=" + pedido.getId_pedido() + ";");
+            if (celAfectadas > 0) {
+                System.out.println("Pedido habilitado");
+                JOptionPane.showMessageDialog(null, "Pedido habilitado");
+            } else {
+                System.out.println("No se habilitó el pedido");
+                JOptionPane.showMessageDialog(null, "No se habilitó el pedido");
+            }
+            statement.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al habilitar el pedido");
+            System.out.println(e.getMessage());
+        }
+    }
+//################### ZONA RESIDUAL QUE NO BORRO POR LAS DUDAS #################
 //    public void generar_costo_pedido(Pedido pedido) {
 //
 //        try {
@@ -177,11 +261,8 @@ public class PedidoData {
 //        }
 //
 //    }
-        
-        
-        
 //    public void ver_pedidos(int id_pedido) {
 //
 //    }
-
+//##############################################################################
 }
