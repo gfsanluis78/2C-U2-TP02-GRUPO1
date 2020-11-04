@@ -87,6 +87,11 @@ public class Revendedor {
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
+
+    @Override
+    public String toString() {
+        return "Revendedor{" + "id_revendedor=" + id_revendedor + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", tel=" + tel + ", email=" + email + ", activo=" + activo + '}';
+    }
     
     
     

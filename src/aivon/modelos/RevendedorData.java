@@ -20,7 +20,7 @@ public class RevendedorData {
     //--------------------------ALTA----------------------------------------------//////
     
 
-    public void guardar_revendedor (Revendedor revendedor){
+    public void guardarRevendedor (Revendedor revendedor){
         
         String pre_instruccion;
         pre_instruccion="INSERT INTO revendedor(nombre, apellido, dni, tel, email, activo) VALUES (?,?,?,?,?);";
@@ -63,7 +63,7 @@ public class RevendedorData {
     
     //Por id
     
-    public void borrar_revendedor(int id) {
+    public void borrarRevendedor(int id) {
 
         try {
             Statement statement = con.createStatement();
@@ -86,7 +86,7 @@ public class RevendedorData {
     
     //Por dni
     
-     public void borrar_revendedor(String dni) { //en bd pasar el dni a string
+     public void borrarRevendedor(String dni) { //en bd pasar el dni a string
 
         try {
             Statement statement = con.createStatement();
@@ -109,7 +109,7 @@ public class RevendedorData {
             
     //----------------------Modificacion-----------------------------------------------////
      
-     public void modificar_revendedor(Revendedor revendedor) {
+     public void modificarRevendedor(Revendedor revendedor) {
 
         try {
             String pre_instruccion = "UPDATE revendedor SET nombre=?,apellido=?,dni=?,tel=?,email=?,activo=? WHERE id_revendedor=?";
@@ -144,7 +144,7 @@ public class RevendedorData {
     //Por Id: 
      
      
-     public Revendedor buscar_revendedor (int id) {
+     public Revendedor buscarRevendedor (int id) {
 
         Revendedor revendedor = null;
 
@@ -176,7 +176,7 @@ public class RevendedorData {
      
     //Por Dni:
     
-     public Revendedor buscar_revendedor (String dni) {
+     public Revendedor buscarRevendedor (String dni) {
 
         Revendedor revendedor = null;
 
@@ -208,7 +208,7 @@ public class RevendedorData {
         
     //-------------------Consulta Multiple-----------------------------------------------
      
-     public List<Revendedor> buscar_revendedores() {
+     public List<Revendedor> buscarRevendedores() {
 
         Revendedor revendedor;
         List<Revendedor> revendedores = new ArrayList<>();
@@ -246,7 +246,7 @@ public class RevendedorData {
         return revendedores;
     }
     
-     public List<Revendedor> buscar_revendedores_activos() {
+     public List<Revendedor> buscarRevendedoresActivos() {
 
         Revendedor revendedor;
         List<Revendedor> revendedores = new ArrayList<>();
@@ -283,7 +283,7 @@ public class RevendedorData {
         return revendedores;
     }
 
-    public List<Revendedor> buscar_revendedores_inactivos() {
+    public List<Revendedor> buscarRevendedoresInactivos() {
 
         Revendedor revendedor;
         List<Revendedor> revendedores = new ArrayList<>();
@@ -320,7 +320,7 @@ public class RevendedorData {
         return revendedores;
     }
     
-    public List<Revendedor> buscar_revendedores_x_campaña(int idCampaña) {  
+    public List<Revendedor> buscarRevendedoresXCampaña(int idCampaña) {  
 
         Revendedor revendedor;
         List<Revendedor> revendedores = new ArrayList<>();
