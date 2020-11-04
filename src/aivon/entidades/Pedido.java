@@ -5,20 +5,22 @@ import java.time.*;
 public class Pedido {
     
     private int id_pedido;
-    private int id_revendedor;
-    private LocalDateTime fecha_ingreso;
-    private LocalDateTime fecha_entrega;
-    private LocalDateTime fecha_pago;
+    private Revendedor revendedor;
+    private Campaña campaña;
+    private LocalDate fecha_ingreso;
+    private LocalDate fecha_entrega;
+    private LocalDate fecha_pago;
     private int cantidad_cajas;
     private int estrellas_pedido;
     private boolean pago;
     private boolean activo;
-
+    
     public Pedido() {
     }
 
-    public Pedido(int id_revendedor, LocalDateTime fecha_ingreso, LocalDateTime fecha_entrega, LocalDateTime fecha_pago, int cantidad_cajas, int estrellas_pedido, boolean pago, boolean activo) {
-        this.id_revendedor = id_revendedor;
+    public Pedido(Revendedor revendedor, Campaña campaña, LocalDate fecha_ingreso, LocalDate fecha_entrega, LocalDate fecha_pago, int cantidad_cajas, int estrellas_pedido, boolean pago, boolean activo) {
+        this.revendedor = revendedor;
+        this.campaña = campaña;
         this.fecha_ingreso = fecha_ingreso;
         this.fecha_entrega = fecha_entrega;
         this.fecha_pago = fecha_pago;
@@ -28,9 +30,10 @@ public class Pedido {
         this.activo = activo;
     }
 
-    public Pedido(int id_pedido, int id_revendedor, LocalDateTime fecha_ingreso, LocalDateTime fecha_entrega, LocalDateTime fecha_pago, int cantidad_cajas, int estrellas_pedido, boolean pago, boolean activo) {
+    public Pedido(int id_pedido, Revendedor revendedor, Campaña campaña, LocalDate fecha_ingreso, LocalDate fecha_entrega, LocalDate fecha_pago, int cantidad_cajas, int estrellas_pedido, boolean pago, boolean activo) {
         this.id_pedido = id_pedido;
-        this.id_revendedor = id_revendedor;
+        this.revendedor = revendedor;
+        this.campaña = campaña;
         this.fecha_ingreso = fecha_ingreso;
         this.fecha_entrega = fecha_entrega;
         this.fecha_pago = fecha_pago;
@@ -48,35 +51,43 @@ public class Pedido {
         this.id_pedido = id_pedido;
     }
 
-    public int getId_revendedor() {
-        return id_revendedor;
+    public Revendedor getRevendedor() {
+        return revendedor;
     }
 
-    public void setId_revendedor(int id_revendedor) {
-        this.id_revendedor = id_revendedor;
+    public void setRevendedor(Revendedor revendedor) {
+        this.revendedor = revendedor;
     }
 
-    public LocalDateTime getFecha_ingreso() {
+    public Campaña getCampaña() {
+        return campaña;
+    }
+
+    public void setCampaña(Campaña campaña) {
+        this.campaña = campaña;
+    }
+
+    public LocalDate getFecha_ingreso() {
         return fecha_ingreso;
     }
 
-    public void setFecha_ingreso(LocalDateTime fecha_ingreso) {
+    public void setFecha_ingreso(LocalDate fecha_ingreso) {
         this.fecha_ingreso = fecha_ingreso;
     }
 
-    public LocalDateTime getFecha_entrega() {
+    public LocalDate getFecha_entrega() {
         return fecha_entrega;
     }
 
-    public void setFecha_entrega(LocalDateTime fecha_entrega) {
+    public void setFecha_entrega(LocalDate fecha_entrega) {
         this.fecha_entrega = fecha_entrega;
     }
 
-    public LocalDateTime getFecha_pago() {
+    public LocalDate getFecha_pago() {
         return fecha_pago;
     }
 
-    public void setFecha_pago(LocalDateTime fecha_pago) {
+    public void setFecha_pago(LocalDate fecha_pago) {
         this.fecha_pago = fecha_pago;
     }
 
@@ -114,9 +125,8 @@ public class Pedido {
 
     @Override
     public String toString() {
-        return "Pedido{" + "id_pedido=" + id_pedido + ", id_revendedor=" + id_revendedor + ", fecha_ingreso=" + fecha_ingreso + ", fecha_entrega=" + fecha_entrega + ", fecha_pago=" + fecha_pago + ", cantidad_cajas=" + cantidad_cajas + ", estrellas_pedido=" + estrellas_pedido + ", pago=" + pago + ", activo=" + activo + '}';
+        return "Pedido{" + "id_pedido=" + id_pedido + ", revendedor=" + revendedor + ", campa\u00f1a=" + campaña + ", fecha_ingreso=" + fecha_ingreso + ", fecha_entrega=" + fecha_entrega + ", fecha_pago=" + fecha_pago + ", cantidad_cajas=" + cantidad_cajas + ", estrellas_pedido=" + estrellas_pedido + ", pago=" + pago + ", activo=" + activo + '}';
     }
-    
-    
+
 
 }

@@ -5,10 +5,18 @@
  */
 package aivon.modelos;
 
+import java.sql.Connection;
+
 /**
  *
  * @author Ezequiel
  */
 public class ProductoData {
+    private Connection con;
+
+    public ProductoData(Conexion conexion) {
+        con = conexion.getConnection();
+    }
+    //--------------------------ALTA----------------------------------------------//////
     
 }

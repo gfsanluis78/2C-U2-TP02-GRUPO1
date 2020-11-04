@@ -5,7 +5,7 @@ public class Revendedor {
     private int id_revendedor;
     private String nombre;
     private String apellido;
-    private int dni;
+    private String dni;
     private String tel;
     private String email;
     private boolean activo;
@@ -14,7 +14,7 @@ public class Revendedor {
     }
     
     
-    public Revendedor(String nombre, String apellido, int dni, String tel, String email, boolean activo) {
+    public Revendedor(String nombre, String apellido, String dni, String tel, String email, boolean activo) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
@@ -23,7 +23,7 @@ public class Revendedor {
         this.activo = activo;
     }
 
-    public Revendedor(int id_revendedor, String nombre, String apellido, int dni, String tel, boolean activo) {
+    public Revendedor(int id_revendedor, String nombre, String apellido, String dni, String tel, boolean activo) {
         this.id_revendedor = id_revendedor;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -56,11 +56,11 @@ public class Revendedor {
         this.apellido = apellido;
     }
 
-    public int getDni() {
+    public String getDni() {
         return dni;
     }
 
-    public void setDni(int dni) {
+    public void setDni(String dni) {
         this.dni = dni;
     }
 
