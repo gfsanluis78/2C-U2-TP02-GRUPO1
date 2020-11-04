@@ -7,7 +7,7 @@ package aivon.entidades;
 
 /**
  *
- * @author Ezequiel
+ * @author Mario
  id_producto
 nombre
 uso
@@ -117,6 +117,11 @@ public class Producto {
 
     public void setActivo(boolean activo) {
         this.activo = activo;
+    }
+
+    @Override
+    public String toString() {
+        return "Producto{" + "id_producto=" + id_producto + ", nombre=" + nombre + ", uso=" + uso + ", tama\u00f1o=" + tamaño + ", costo_publico=" + costo_publico + ", costo=" + costo + ", estrellas=" + estrellas + ", activo=" + activo + '}';
     }
     
 }

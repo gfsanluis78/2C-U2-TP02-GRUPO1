@@ -7,12 +7,12 @@ package aivon.entidades;
 
 /**
  *
- * @author Ezequiel
+ * @author Mario
  */
 public class Historico {
     private int id_historico;
-    private int id_revendedor;
-    private int id_campaña;
+    private Revendedor revendedor;
+    private Campaña campaña;
     private double monto_min;
     private double monto_max;
     private int estrellas_campaña_revendedor;
@@ -21,19 +21,19 @@ public class Historico {
     public Historico() {
     }
 
-    public Historico(int id_revendedor, int id_campaña, double monto_min, double monto_max, int estrellas_campaña_revendedor, boolean estado_campaña_revendedor) {
-        this.id_revendedor = id_revendedor;
-        this.id_campaña = id_campaña;
+    public Historico(Revendedor revendedor, Campaña campaña, double monto_min, double monto_max, int estrellas_campaña_revendedor, boolean estado_campaña_revendedor) {
+        this.revendedor = revendedor;
+        this.campaña = campaña;
         this.monto_min = monto_min;
         this.monto_max = monto_max;
         this.estrellas_campaña_revendedor = estrellas_campaña_revendedor;
         this.estado_campaña_revendedor = estado_campaña_revendedor;
     }
 
-    public Historico(int id_historico, int id_revendedor, int id_campaña, double monto_min, double monto_max, int estrellas_campaña_revendedor, boolean estado_campaña_revendedor) {
+    public Historico(int id_historico ,Revendedor revendedor, Campaña campaña, int id_campaña, double monto_min, double monto_max, int estrellas_campaña_revendedor, boolean estado_campaña_revendedor) {
         this.id_historico = id_historico;
-        this.id_revendedor = id_revendedor;
-        this.id_campaña = id_campaña;
+        this.revendedor = revendedor;
+        this.campaña = campaña;
         this.monto_min = monto_min;
         this.monto_max = monto_max;
         this.estrellas_campaña_revendedor = estrellas_campaña_revendedor;
@@ -48,20 +48,20 @@ public class Historico {
         this.id_historico = id_historico;
     }
 
-    public int getId_revendedor() {
-        return id_revendedor;
+    public Revendedor getRevendedor() {
+        return revendedor;
     }
 
-    public void setId_revendedor(int id_revendedor) {
-        this.id_revendedor = id_revendedor;
+    public void setRevendedor(Revendedor revendedor) {
+        this.revendedor = revendedor;
     }
 
-    public int getId_campaña() {
-        return id_campaña;
+    public Campaña getCampaña() {
+        return campaña;
     }
 
-    public void setId_campaña(int id_campaña) {
-        this.id_campaña = id_campaña;
+    public void setCampaña(Campaña campaña) {
+        this.campaña = campaña;
     }
 
     public double getMonto_min() {
@@ -94,6 +94,11 @@ public class Historico {
 
     public void setEstado_campaña_revendedor(boolean estado_campaña_revendedor) {
         this.estado_campaña_revendedor = estado_campaña_revendedor;
+    }
+
+    @Override
+    public String toString() {
+        return "Historico{" + "id_historico=" + id_historico + ", revendedor=" + revendedor + ", campa\u00f1a=" + campaña + ", monto_min=" + monto_min + ", monto_max=" + monto_max + ", estrellas_campa\u00f1a_revendedor=" + estrellas_campaña_revendedor + ", estado_campa\u00f1a_revendedor=" + estado_campaña_revendedor + '}';
     }
     
     
