@@ -8,27 +8,30 @@ public class Revendedor {
     private String dni;
     private String tel;
     private String email;
+    private int nivel;
     private boolean activo;
 
     public Revendedor() {
     }
     
     
-    public Revendedor(String nombre, String apellido, String dni, String tel, String email, boolean activo) {
+    public Revendedor(String nombre, String apellido, String dni, String tel, String email, int nivel, boolean activo) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
         this.tel = tel;
         this.email = email;
+        this.nivel = nivel;
         this.activo = activo;
     }
 
-    public Revendedor(int id_revendedor, String nombre, String apellido, String dni, String tel, boolean activo) {
+    public Revendedor(int id_revendedor, String nombre, String apellido, String dni, String tel, int nivel, boolean activo) {
         this.id_revendedor = id_revendedor;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
         this.tel = tel;
+        this.nivel = nivel;
         this.activo = activo;
     }
 
@@ -72,6 +75,15 @@ public class Revendedor {
         this.tel = tel;
     }
 
+    public int getNivel() {
+        return nivel;
+    }
+
+    public void setNivel(int nivel) {
+        this.nivel = nivel;
+    }
+
+    
     public String getEmail() {
         return email;
     }
@@ -90,8 +102,10 @@ public class Revendedor {
 
     @Override
     public String toString() {
-        return "Revendedor{" + "id_revendedor=" + id_revendedor + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", tel=" + tel + ", email=" + email + ", activo=" + activo + '}';
+        return "Revendedor{" + "id_revendedor=" + id_revendedor + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", tel=" + tel + ", email=" + email + ", nivel=" + nivel + ", activo=" + activo + '}';
     }
+
+    
     
     
     
