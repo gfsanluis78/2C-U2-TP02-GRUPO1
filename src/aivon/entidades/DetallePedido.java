@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package aivon.entidades;
 
 /**
@@ -11,8 +6,8 @@ package aivon.entidades;
  */
 public class DetallePedido {
     private int id_caja;
-    private int id_pedido;
-    private int id_producto;
+    private Pedido pedido;
+    private Producto producto;
     private int cantidad_producto;
     private double costo_caja;
     private double costo_caja_publico;
@@ -21,19 +16,19 @@ public class DetallePedido {
     public DetallePedido() {
     }
 
-    public DetallePedido(int id_pedido, int id_producto, int cantidad_producto, double costo_caja, double costo_caja_publico, int estrellas_caja) {
-        this.id_pedido = id_pedido;
-        this.id_producto = id_producto;
+    public DetallePedido(Pedido pedido, Producto producto, int cantidad_producto, double costo_caja, double costo_caja_publico, int estrellas_caja) {
+        this.pedido = pedido;
+        this.producto = producto;
         this.cantidad_producto = cantidad_producto;
         this.costo_caja = costo_caja;
         this.costo_caja_publico = costo_caja_publico;
         this.estrellas_caja = estrellas_caja;
     }
 
-    public DetallePedido(int id_caja, int id_pedido, int id_producto, int cantidad_producto, double costo_caja, double costo_caja_publico, int estrellas_caja) {
+    public DetallePedido(int id_caja, Pedido pedido, Producto producto, int cantidad_producto, double costo_caja, double costo_caja_publico, int estrellas_caja) {
         this.id_caja = id_caja;
-        this.id_pedido = id_pedido;
-        this.id_producto = id_producto;
+        this.pedido = pedido;
+        this.producto = producto;
         this.cantidad_producto = cantidad_producto;
         this.costo_caja = costo_caja;
         this.costo_caja_publico = costo_caja_publico;
@@ -48,21 +43,22 @@ public class DetallePedido {
         this.id_caja = id_caja;
     }
 
-    public int getId_pedido() {
-        return id_pedido;
+    public Pedido getPedido() {
+        return pedido;
     }
 
-    public void setId_pedido(int id_pedido) {
-        this.id_pedido = id_pedido;
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
     }
 
-    public int getId_producto() {
-        return id_producto;
+    public Producto getProducto() {
+        return producto;
     }
 
-    public void setId_producto(int id_producto) {
-        this.id_producto = id_producto;
+    public void setProducto(Producto producto) {
+        this.producto = producto;
     }
+
 
     public int getCantidad_producto() {
         return cantidad_producto;
@@ -98,9 +94,7 @@ public class DetallePedido {
 
     @Override
     public String toString() {
-        return "DetallePedido{" + "id_caja=" + id_caja + ", id_pedido=" + id_pedido + ", id_producto=" + id_producto + ", cantidad_producto=" + cantidad_producto + ", costo_caja=" + costo_caja + ", costo_caja_publico=" + costo_caja_publico + ", estrellas_caja=" + estrellas_caja + '}';
+        return "DetallePedido{" + "id_caja=" + id_caja + ", pedido=" + pedido + ", producto=" + producto + ", cantidad_producto=" + cantidad_producto + ", costo_caja=" + costo_caja + ", costo_caja_publico=" + costo_caja_publico + ", estrellas_caja=" + estrellas_caja + '}';
     }
-    
-    
-    
+
 }
