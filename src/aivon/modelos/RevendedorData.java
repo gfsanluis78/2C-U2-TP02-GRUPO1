@@ -20,10 +20,10 @@ public class RevendedorData {
     //--------------------------ALTA----------------------------------------------//////
     
 
-    public void guardar_revendedor (Revendedor revendedor){
+    public void guardarRevendedor (Revendedor revendedor){
         
         String pre_instruccion;
-        pre_instruccion="INSERT INTO revendedor(nombre, apellido, dni, tel, email, activo) VALUES (?,?,?,?,?);";
+        pre_instruccion="INSERT INTO revendedor(nombre, apellido, dni, tel, email, nivel, activo) VALUES (?,?,?,?,?,?,?);";
         
         try{
         
@@ -35,7 +35,8 @@ public class RevendedorData {
         instruccion.setString(3, revendedor.getDni());
         instruccion.setString(4, revendedor.getTel());
         instruccion.setString(5, revendedor.getEmail());
-        instruccion.setBoolean(6, revendedor.isActivo());
+        instruccion.setInt(6, revendedor.getNivel());
+        instruccion.setBoolean(7, revendedor.isActivo());
         
         
         instruccion.executeUpdate();
@@ -63,7 +64,7 @@ public class RevendedorData {
     
     //Por id
     
-    public void borrar_revendedor(int id) {
+    public void borrarRevendedor(int id) {
 
         try {
             Statement statement = con.createStatement();
@@ -86,7 +87,7 @@ public class RevendedorData {
     
     //Por dni
     
-     public void borrar_revendedor(String dni) { //en bd pasar el dni a string
+     public void borrarRevendedor(String dni) { 
 
         try {
             Statement statement = con.createStatement();
@@ -106,22 +107,25 @@ public class RevendedorData {
         }
 
     }
-            
-    //----------------------Modificacion-----------------------------------------------////
      
-     public void modificar_revendedor(Revendedor revendedor) {
+    
+            
+    //----------------------MODIFICACION-----------------------------------------------////
+     
+     public void modificarRevendedor(Revendedor revendedor) {
 
         try {
-            String pre_instruccion = "UPDATE revendedor SET nombre=?,apellido=?,dni=?,tel=?,email=?,activo=? WHERE id_revendedor=?";
+            String pre_instruccion = "UPDATE revendedor SET nombre=?,apellido=?,dni=?,tel=?,email=?, nivel=?, activo=? WHERE id_revendedor=?";
             PreparedStatement instruccion = con.prepareStatement(pre_instruccion);
             instruccion.setString(1, revendedor.getNombre());
             instruccion.setString(2, revendedor.getApellido());
             instruccion.setString(3, revendedor.getDni());
             instruccion.setString(4, revendedor.getTel());
             instruccion.setString(5, revendedor.getEmail());
-            instruccion.setBoolean(6, revendedor.isActivo());
+            instruccion.setInt(6, revendedor.getNivel());
+            instruccion.setBoolean(7, revendedor.isActivo());
             
-            instruccion.setInt(7,revendedor.getId_revendedor());
+            instruccion.setInt(8,revendedor.getId_revendedor());
 
             int celAfectadas = instruccion.executeUpdate();
             if (celAfectadas > 0) {
@@ -144,7 +148,7 @@ public class RevendedorData {
     //Por Id: 
      
      
-     public Revendedor buscar_revendedor (int id) {
+     public Revendedor buscarRevendedor (int id) {
 
         Revendedor revendedor = null;
 
@@ -159,6 +163,7 @@ public class RevendedorData {
                     revendedor.setDni(consulta.getString("dni"));
                     revendedor.setTel(consulta.getString("tel"));
                     revendedor.setEmail(consulta.getString("email"));
+                    revendedor.setNivel(consulta.getInt("nivel"));
                     revendedor.setActivo(consulta.getBoolean("activo"));
                     
                 } else {
@@ -174,9 +179,14 @@ public class RevendedorData {
         return revendedor;
     }
      
+     //#############################FALTA SEGUIR CON NIVEL
+     
+     
+     
+     
     //Por Dni:
     
-     public Revendedor buscar_revendedor (String dni) {
+     public Revendedor buscarRevendedor (String dni) {
 
         Revendedor revendedor = null;
 
@@ -191,6 +201,7 @@ public class RevendedorData {
                     revendedor.setDni(consulta.getString("dni"));
                     revendedor.setTel(consulta.getString("tel"));
                     revendedor.setEmail(consulta.getString("email"));
+                    revendedor.setNivel(consulta.getInt("nivel"));
                     revendedor.setActivo(consulta.getBoolean("activo"));
                     
                 } else {
@@ -206,9 +217,12 @@ public class RevendedorData {
         return revendedor;
     }
         
+     
     //-------------------Consulta Multiple-----------------------------------------------
      
-     public List<Revendedor> buscar_revendedores() {
+      //Buscar revendedores
+     
+     public List<Revendedor> buscarRevendedores() {
 
         Revendedor revendedor;
         List<Revendedor> revendedores = new ArrayList<>();
@@ -227,6 +241,7 @@ public class RevendedorData {
                     revendedor.setDni(consulta.getString("dni"));
                     revendedor.setTel(consulta.getString("tel"));
                     revendedor.setEmail(consulta.getString("email"));
+                    revendedor.setNivel(consulta.getInt("nivel"));
                     revendedor.setActivo(consulta.getBoolean("activo"));
                     
                     revendedores.add(revendedor);
@@ -245,8 +260,9 @@ public class RevendedorData {
 
         return revendedores;
     }
+      //Buscar revendedores activos
     
-     public List<Revendedor> buscar_revendedores_activos() {
+     public List<Revendedor> buscarRevendedoresActivos() {
 
         Revendedor revendedor;
         List<Revendedor> revendedores = new ArrayList<>();
@@ -264,6 +280,7 @@ public class RevendedorData {
                     revendedor.setDni(consulta.getString("dni"));
                     revendedor.setTel(consulta.getString("tel"));
                     revendedor.setEmail(consulta.getString("email"));
+                    revendedor.setNivel(consulta.getInt("nivel"));
                     revendedor.setActivo(consulta.getBoolean("activo"));
                     
                     revendedores.add(revendedor);
@@ -282,14 +299,16 @@ public class RevendedorData {
 
         return revendedores;
     }
-
-    public List<Revendedor> buscar_revendedores_inactivos() {
+     
+     //Buscar revendedores por nivel 
+     
+   public List<Revendedor> buscarRevendedoresXNivel(int nivel) {
 
         Revendedor revendedor;
         List<Revendedor> revendedores = new ArrayList<>();
 
         try {
-            PreparedStatement instruccion = con.prepareStatement("SELECT * FROM revendedor WHERE activo=0");
+            PreparedStatement instruccion = con.prepareStatement("SELECT * FROM revendedor WHERE nivel="+nivel+";");
             ResultSet consulta = instruccion.executeQuery();
             if (consulta.next()) {
                 consulta.beforeFirst();
@@ -301,26 +320,29 @@ public class RevendedorData {
                     revendedor.setDni(consulta.getString("dni"));
                     revendedor.setTel(consulta.getString("tel"));
                     revendedor.setEmail(consulta.getString("email"));
+                    revendedor.setNivel(consulta.getInt("nivel"));
                     revendedor.setActivo(consulta.getBoolean("activo"));
                     
                     revendedores.add(revendedor);
             }
-                JOptionPane.showMessageDialog(null, "Se encontraron revendedores inactivos");
-                System.out.println("Se encontraron revendedores inactivos");
+                JOptionPane.showMessageDialog(null, "Se encontraron revendedores por nivel");
+                System.out.println("Se encontraron revendedores po nivel");
             } else {
-                JOptionPane.showMessageDialog(null, "No se encontraron revendedores inactivos");
-                System.out.println("No se encontraron revendedores inactivos");
+                JOptionPane.showMessageDialog(null, "No se encontraron revendedores para ese nivel");
+                System.out.println("No se encontraron revendedores para ese nivel");
             }
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al obtener Revendedores inactivos");
+            JOptionPane.showMessageDialog(null, "Error al obtener Revendedores de ese nivel");
             System.out.println(ex.getMessage());
         }
 
         return revendedores;
     }
+   
+    //Buscar revendedores por campaña
     
-    public List<Revendedor> buscar_revendedores_x_campaña(int idCampaña) {  
+    public List<Revendedor> buscarRevendedoresXCampaña(int idCampaña) {  
 
         Revendedor revendedor;
         List<Revendedor> revendedores = new ArrayList<>();
@@ -342,6 +364,7 @@ public class RevendedorData {
                     revendedor.setDni(consulta.getString("dni"));
                     revendedor.setTel(consulta.getString("tel"));
                     revendedor.setEmail(consulta.getString("email"));
+                    revendedor.setNivel(consulta.getInt("nivel"));
                     revendedor.setActivo(consulta.getBoolean("activo"));
                     
                     revendedores.add(revendedor);
@@ -360,5 +383,7 @@ public class RevendedorData {
 
         return revendedores;
     }
+    
+    
     
 }
