@@ -1,6 +1,7 @@
 Procedimientos estándar para el desarrollo de clases.
 
 Convención de nombres:
+
 #Clases: 
 Primer letra mayúscula y las demás en minúsculas y en el caso de ser varias palabras deben ir unidas en CamelCase (uper).
 
@@ -11,6 +12,7 @@ public class CampañaData {
 }
 
 #Métodos: 
+
 En tipo de escritura camelCase (lower).
 
 Ejemplo:
@@ -20,14 +22,18 @@ public void setNombre(String nombre) {
     }
 
 
-#Variables: se utilizan todas las palabras en minúsculas y separadas por guion bajo (snake case).
+#Variables: 
+
+Se utilizan todas las palabras en minúsculas y separadas por guion bajo (snake case).
 
 Ejemplos:
 
 private int id_producto;
 
 Procedimiento para trabajo conjunto en GitHub sobre el presente proyecto.
+
 Convenimos en que vamos a tener una sola rama Master en el repositorio cuyo nombre es precisamente master. A su vez cada integrante del grupo va a tener una rama personal donde realizara los trabajos asignados. Luego desde la rama personal hará el push hacia el mater.
+
 Detalle de acciones.
 1.	Trabajar cada uno en su rama. (Genaro, Mario, Ezequiel).
 2.	Cuando finalizamos la sesión de trabajo, hacer un comit de la rama personal con el detalle de lo realizado.
