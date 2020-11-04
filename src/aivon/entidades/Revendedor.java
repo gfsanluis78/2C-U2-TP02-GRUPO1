@@ -14,6 +14,14 @@ public class Revendedor {
     public Revendedor() {
     }
     
+     public Revendedor(String nombre, String apellido, String dni, String tel, String email, int nivel) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.dni = dni;
+        this.tel = tel;
+        this.email = email;
+        this.nivel = nivel;
+    }
     
     public Revendedor(String nombre, String apellido, String dni, String tel, String email, int nivel, boolean activo) {
         this.nombre = nombre;
@@ -106,9 +114,26 @@ public class Revendedor {
     }
 
     
+    //-----------------------------------Metodos auxiliares-----------------------------------------------------------------
     
+    public double calcularGananciasTotales (){
+        
+        return 0;
+    }
     
+    public double calcularGananciasPorCampaña (){
+        
+        return 0;
+    }
     
+           
     
+    public int calcularNivel(){
+        
+        
+        return 0;
+    }
+    
+  
     
 }
