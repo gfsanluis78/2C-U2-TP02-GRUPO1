@@ -209,13 +209,13 @@ public class CampañaData {
         
      //Por Fecha Inicio:
     
-     public Campaña buscarCampañaXFechaInicio (LocalDate fecha_inicio) { //DUDA SI SE CONSULTA ASI LA FECHA O SE CONSULTA EL VALOR DE...
+     public Campaña buscarCampañaXFechaInicio (LocalDate fecha_inicio) { 
 
         Campaña campaña = null;
 
         try {
             Statement instruccion = con.createStatement();
-            try (ResultSet consulta = instruccion.executeQuery("SELECT * FROM campaña WHERE fecha_inicio=" + fecha_inicio + ";")) {
+            try (ResultSet consulta = instruccion.executeQuery("SELECT * FROM campaña WHERE fecha_inicio=" + Date.valueOf(fecha_inicio) + ";")) {
                 if (consulta.next()) {
                     campaña = new Campaña();
                     campaña.setId_campaña(consulta.getInt("id_campaña"));
