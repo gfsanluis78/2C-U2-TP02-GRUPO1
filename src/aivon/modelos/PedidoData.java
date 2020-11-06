@@ -2,7 +2,9 @@ package aivon.modelos;
 
 import aivon.entidades.*;
 import java.sql.*;
-import java.time.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,12 +14,15 @@ import javax.swing.JOptionPane;
 public class PedidoData {
 
     Connection c;
+    Conexion conexion;
 
     public PedidoData(Conexion conexion) {
         this.c = conexion.getConnection();
+        this.conexion = conexion;
     }
 //##############################################################################
 //################ ALTA PEDIDO #################################################    
+
     public void altaPedido(Pedido pedido) {
 
         String pre_instruccion = "INSERT INTO pedido (id_revendedor, id_campaña, fecha_ingreso) VALUES (?, ?, ?);";
@@ -55,6 +60,7 @@ public class PedidoData {
     }
 //##############################################################################
 //################ COSTO PEDIDO ################################################    
+
     public double costoPedido(Pedido pedido) {
 
         double costo = 0;
@@ -78,6 +84,7 @@ public class PedidoData {
     }
 //##############################################################################
 //################ COSTO PEDIDO ACTIVO #########################################    
+
     public double costoPedidoActivo(Pedido pedido) {
 
         double costo = 0;
@@ -102,6 +109,7 @@ public class PedidoData {
     }
 //##############################################################################
 //################### COSTO PÚBLICO PEDIDO #####################################
+
     public double costoPublicoPedido(Pedido pedido) {
 
         double costo = 0;
@@ -125,6 +133,7 @@ public class PedidoData {
     }
 //##############################################################################
 //################### COSTO PÚBLICO PEDIDO ACTIVO ##############################
+
     public double costoPublicoPedidoActivo(Pedido pedido) {
 
         double costo = 0;
@@ -149,6 +158,7 @@ public class PedidoData {
     }
 //##############################################################################
 //################ COSTO PEDIDOS PAGOS X REVENDEDOR ############################
+
     public double costoPedidosPagosRevendedor(Revendedor revendedor) {
 
         double costo = 0;
@@ -171,6 +181,7 @@ public class PedidoData {
     }
 //##############################################################################
 //################ COSTO PÚBLICO PEDIDOS PAGOS X REVENDEDOR ####################    
+
     public double costoPublicoPedidosPagosRevendedor(Revendedor revendedor) {
 
         double costo = 0;
@@ -216,6 +227,7 @@ public class PedidoData {
 //    }    
 //##############################################################################
 //################ CANTIDAD ESTRELLAS PEDIDO ###################################
+
     public int cantEstrellasPedido(Pedido pedido) {
 
         int cantidad = 0;
@@ -239,6 +251,7 @@ public class PedidoData {
     }
 //##############################################################################
 //################ CANTIDAD ESTRELLAS PEDIDO ACTIVO ############################
+
     public int cantEstrellasPedidoActivo(Pedido pedido) {
 
         int cantidad = 0;
@@ -262,8 +275,68 @@ public class PedidoData {
         return cantidad;
     }
 //##############################################################################
+//################ CANTIDAD ESTRELLAS PEDIDO PAGO X REVENDEDOR #################
+//
+//    public int cantEstrellasPedidoPago(Pedido pedido) {
+//
+//        int cantidad = 0;
+//
+//        try {
+//
+//            Statement statement = c.createStatement();
+//            ResultSet consulta = statement.executeQuery("SELECT SUM(estrellas_caja)\n"
+//                    + "AS estrellas\n"
+//                    + "FROM caja_pedido, pedido\n"
+//                    + "WHERE pedido.fecha_pago IS NOT NULL\n"
+//                    + "AND pedido.id_revendedor=" + pedido.getRevendedor().getId_revendedor()
+//                    + " AND caja_pedido.id_pedido=" + pedido.getId_pedido() + ";");
+//
+//            cantidad = consulta.getInt("estrellas");
+//
+//        } catch (SQLException e) {
+//            JOptionPane.showMessageDialog(null, "Error al realizar la consulta");
+//            System.out.println(e.getMessage());
+//        }
+//        pedido.setEstrellas_pedido(cantidad);
+//        return cantidad;
+//    }
+
+//##############################################################################
+//################### BUSCAR UN PEDIDO X REVENDEDOR Y CAMAPAÑA #################
+    public Pedido buscarPedido(int id_revendedor, int id_campaña) {
+        Pedido pedido = new Pedido();
+        Revendedor revendedor;
+        try {
+            Statement statement = c.createStatement();
+            ResultSet consulta = statement.executeQuery("SELECT * FROM pedido WHERE id_campaña=" 
+                    + id_campaña + "AND id_revendedor=" + id_revendedor + ";");
+
+            if (consulta.next()) {
+                pedido.setId_pedido(consulta.getInt("id_pedido"));
+                pedido.setFecha_ingreso(consulta.getDate("fecha_ingreso").toLocalDate());
+                pedido.setFecha_entrega(consulta.getDate("fecha_entrega").toLocalDate());
+                pedido.setFecha_pago(consulta.getDate("fecha_pago").toLocalDate());
+                pedido.setCantidad_cajas(consulta.getInt("cantidad_cajas"));
+                pedido.setEstrellas_pedido(consulta.getInt("estrellas_pedido"));
+
+                revendedor = this.buscarRevendedor(id_revendedor);
+
+                pedido.setRevendedor(revendedor);
+            } else {
+                System.out.println("No se pudo obtener lista de pedidos");
+                JOptionPane.showMessageDialog(null, "No se pudo obtener lista de pedidos");
+            }
+            statement.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al obtener lista de pedidos");
+            System.out.println(e.getMessage());
+        }
+
+        return pedido;
+    }
+//##############################################################################
 //################ COSTO PEDIDOS PAGOS X REVENDEDOR ############################
-    public double cantEstrellasPedidosPagoRevendedor(Revendedor revendedor) {
+    public double cantEstrellasPedidosPagosRevendedor(Revendedor revendedor) {
 
         int estrellas = 0;
 
@@ -272,7 +345,7 @@ public class PedidoData {
             Statement statement = c.createStatement();
             ResultSet consulta = statement.executeQuery("SELECT SUM(estrellas_caja) AS estrellas "
                     + "FROM caja_pedido, pedido WHERE caja_pedido.id_pedido = pedido.id_pedido "
-                    + "AND pedido.fecha_pago IS NOT NULL AND pedido.id_revendedor=" 
+                    + "AND pedido.fecha_pago IS NOT NULL AND pedido.id_revendedor="
                     + revendedor.getId_revendedor() + ";");
 
             estrellas = consulta.getInt("estrellas");
@@ -284,6 +357,51 @@ public class PedidoData {
 
         return estrellas;
     }
+//##############################################################################
+//################### LISTA DE PEDIDOS DE X CAMPAÑA ############################
+
+    public List<Pedido> listaPedidosCampaña(Campaña campaña) {
+
+        List<Pedido> pedidos = new ArrayList();
+        Pedido pedido;
+        Revendedor revendedor;
+        int id_revendedor;
+
+        try {
+            Statement statement = c.createStatement();
+            ResultSet consulta = statement.executeQuery("SELECT * FROM pedido WHERE id_campaña=" + campaña.getId_campaña() + ";");
+
+            if (consulta.next()) {
+                consulta.beforeFirst();
+                while (consulta.next()) {
+
+                    pedido = new Pedido();
+                    pedido.setId_pedido(consulta.getInt("id_pedido"));
+                    pedido.setFecha_ingreso(consulta.getDate("fecha_ingreso").toLocalDate());
+                    pedido.setFecha_entrega(consulta.getDate("fecha_entrega").toLocalDate());
+                    pedido.setFecha_pago(consulta.getDate("fecha_pago").toLocalDate());
+                    pedido.setCantidad_cajas(consulta.getInt("cantidad_cajas"));
+                    pedido.setEstrellas_pedido(consulta.getInt("estrellas_pedido"));
+
+                    id_revendedor = consulta.getInt("id_revendedor");
+                    revendedor = this.buscarRevendedor(id_revendedor);
+
+                    pedido.setRevendedor(revendedor);
+                    pedidos.add(pedido);
+                }
+            } else {
+                System.out.println("No se pudo obtener lista de pedidos");
+                JOptionPane.showMessageDialog(null, "No se pudo obtener lista de pedidos");
+            }
+            statement.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al obtener lista de pedidos");
+            System.out.println(e.getMessage());
+        }
+
+        return pedidos;
+    }
+
 //##############################################################################
 //################ CANTIDAD DE CAJAS DE PEDIDO #################################
     public int cantCajasPedido(Pedido pedido) {
@@ -310,6 +428,7 @@ public class PedidoData {
     }
 //##############################################################################
 //################### CANTIDAD DE CAJAS DE PEDIDO ACTIVO #######################
+
     public int cantCajasPedidoActivo(Pedido pedido) {
 
         int cantidad = 0;
@@ -335,6 +454,7 @@ public class PedidoData {
     }
 //##############################################################################
 //################ ACTUALIZAR FECHA DE ENTREGA #################################
+
     public void actualizarFechaEntrega(Pedido pedido, LocalDate fecha_entrega) {
 
         try {
@@ -453,4 +573,10 @@ public class PedidoData {
 //
 //    }
 //##############################################################################
+
+    public Revendedor buscarRevendedor(int id) {
+        RevendedorData rd = new RevendedorData(conexion);
+        return rd.buscarRevendedor(id);
+    }
+
 }
