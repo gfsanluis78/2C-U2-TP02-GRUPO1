@@ -14,7 +14,7 @@ public class Revendedor {
     public Revendedor() {
     }
     
-     public Revendedor(String nombre, String apellido, String dni, String tel, String email, int nivel) {
+     public Revendedor(String nombre, String apellido, String dni, String tel, String email) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;

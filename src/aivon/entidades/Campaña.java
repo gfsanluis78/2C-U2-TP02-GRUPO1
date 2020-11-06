@@ -9,23 +9,38 @@ public class Campaña {
    private String nombre;
    private LocalDate fecha_inicio;
    private LocalDate fecha_fin;
+   private double monto_min;
+   private double monto_max;
    private boolean activa;
+   
 
     public Campaña() {
     }
-   
-    public Campaña(String nombre, LocalDate fecha_inicio, LocalDate fecha_fin, boolean activa) {
+    
+     public Campaña(String nombre, LocalDate fecha_inicio, double monto_min, double monto_max, boolean activa) {
         this.nombre = nombre;
         this.fecha_inicio = fecha_inicio;
-        this.fecha_fin = fecha_fin;
+        this.monto_min = monto_min;
+        this.monto_max = monto_max;
         this.activa = activa;
     }
    
-    public Campaña(int id_campaña, String nombre, LocalDate fecha_inicio, LocalDate fecha_fin, boolean activa) {
+    public Campaña(String nombre, LocalDate fecha_inicio, LocalDate fecha_fin, double monto_min, double monto_max, boolean activa) {
+        this.nombre = nombre;
+        this.fecha_inicio = fecha_inicio;
+        this.fecha_fin = fecha_fin;
+        this.monto_min = monto_min;
+        this.monto_max = monto_max;
+        this.activa = activa;
+    }
+   
+    public Campaña(int id_campaña, String nombre, LocalDate fecha_inicio, LocalDate fecha_fin, double monto_min, double monto_max, boolean activa) {
         this.id_campaña = id_campaña;
         this.nombre = nombre;
         this.fecha_inicio = fecha_inicio;
         this.fecha_fin = fecha_fin;
+        this.monto_min = monto_min;
+        this.monto_max = monto_max;
         this.activa = activa;
     }
 
@@ -62,6 +77,23 @@ public class Campaña {
         this.fecha_fin = fecha_fin;
     }
 
+    public double getMonto_min() {
+        return monto_min;
+    }
+
+    public void setMonto_min(double monto_min) {
+        this.monto_min = monto_min;
+    }
+
+    public double getMonto_max() {
+        return monto_max;
+    }
+
+    public void setMonto_max(double monto_max) {
+        this.monto_max = monto_max;
+    }
+
+    
     public boolean isActiva() {
         return activa;
     }
@@ -72,9 +104,10 @@ public class Campaña {
 
     @Override
     public String toString() {
-        return "Campa\u00f1a{" + "id_campa\u00f1a=" + id_campaña + ", nombre=" + nombre + ", fecha_inicio=" + fecha_inicio + ", fecha_fin=" + fecha_fin + ", activa=" + activa + '}';
+        return "Campa\u00f1a{" + "id_campa\u00f1a=" + id_campaña + ", nombre=" + nombre + ", fecha_inicio=" + fecha_inicio + ", fecha_fin=" + fecha_fin + ", monto_min=" + monto_min + ", monto_max=" + monto_max + ", activa=" + activa + '}';
     }
-    
+
+        
         
     
 }
