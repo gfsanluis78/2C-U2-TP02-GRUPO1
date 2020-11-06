@@ -423,7 +423,8 @@ public class RevendedorData {
             Statement statement = con.createStatement();
             ResultSet consulta = statement.executeQuery("SELECT SUM(costo_caja_publico) - SUM(costo_caja) "
                     + "AS ganancia FROM caja_pedido, pedido WHERE caja_pedido.id_pedido=pedido.id_pedido "
-                    + "AND pedido.fecha_pago IS NULL AND pedido.id_revendedor=" + revendedor.getId_revendedor() + " AND pedido.id_pedido ="+ pedido.getId_pedido()+";");
+                    + "AND pedido.fecha_pago IS NULL AND pedido.id_revendedor=" + revendedor.getId_revendedor() 
+                    + " AND pedido.id_pedido ="+ pedido.getId_pedido()+";");
 
             ganancia = consulta.getDouble("ganancia");
 
@@ -462,8 +463,129 @@ public class RevendedorData {
 
         return ganancia;
     }
+    
+    //consultar estrellas totales de revendedor
        
-       
-    //   
+       public int buscarEstrellasTotalesRevendedor(Revendedor revendedor) {
+           
+     
+           
+        int estrellas=0;
+        
+        try {
 
+            Statement statement = con.createStatement();
+            ResultSet consulta = statement.executeQuery("SELECT SUM(estrellas_pedido) "
+                    + "AS estrellas FROM pedido"
+                    + "WHERE pedido.fecha_pago IS NOT null "                              //puede ser pago tambien
+                    + "AND pedido.id_revendedor =" + revendedor.getId_revendedor() 
+                    +";");
+
+            estrellas = consulta.getInt("estrellas");
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al realizar la consulta");
+            System.out.println(e.getMessage());
+        }
+
+        return estrellas;
+    }   
+    //calcular nivel de revendedor
+       
+       public int calcularNivelRevendedor(Revendedor revendedor) {
+           
+           /*SELECT SUM(estrellas_pedido) / 50 
+                    AS nivel FROM pedido
+                    WHERE pedido.fecha_pago IS NOT null
+                    AND pedido.id_revendedor = 1
+           */
+           
+        int nivel = 1;
+        int escalon=50;
+
+        try {
+
+            Statement statement = con.createStatement();
+            ResultSet consulta = statement.executeQuery("SELECT SUM(estrellas_pedido) / "+escalon+" "
+                    + "AS nivel FROM pedido"
+                    + "WHERE pedido.fecha_pago IS NOT null "                              //puede ser pago tambien
+                    + "AND pedido.id_revendedor =" + revendedor.getId_revendedor() 
+                    +";");
+
+            nivel = consulta.getInt("nivel");
+            
+            int celAfectadas = statement.executeUpdate("Update revendedor Set nivel = "+nivel+" where id_revendedor = "+revendedor.getId_revendedor()+";");
+            if (celAfectadas > 0) {
+                System.out.println("Nivel actualizado");
+                JOptionPane.showMessageDialog(null, "Nivel actualizado");
+            } else {
+                System.out.println("El Registro del nivel de Id " + revendedor.getId_revendedor() + " no pudo ser actualizado");
+                JOptionPane.showMessageDialog(null, "El Nivel del Revendedor no se pudo actualizar");
+            }
+            
+                   
+                    
+            statement.close();
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al realizar la consulta");
+            System.out.println(e.getMessage());
+        }
+
+        return nivel;
+    }
+       
+       public double calcularMontoMinimoRevendedor(Revendedor revendedor) {
+           
+         
+        Campaña campaña;   
+        int nivel = revendedor.getNivel()-1;
+        double min=0;
+        
+        try {
+
+            Statement statement = con.createStatement();
+            ResultSet consulta = statement.executeQuery("SELECT monto_min FROM campaña WHERE campaña.activa = 1;");
+                    
+            min=(consulta.getDouble("monto_min"));
+            
+            min += 0.10*nivel;
+            
+            
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al realizar la consulta");
+            System.out.println(e.getMessage());
+        }
+
+        return min;
+    }
+       
+    
+       public double calcularMontoMaximoRevendedor(Revendedor revendedor) {
+           
+           
+        Campaña campaña;   
+        int nivel = revendedor.getNivel()-1;
+        double max=0;
+        
+        try {
+
+            Statement statement = con.createStatement();
+            ResultSet consulta = statement.executeQuery("SELECT monto_max FROM campaña WHERE campaña.activa = 1;");
+                    
+            max=(consulta.getDouble("monto_max"));
+            
+            max += 0.10*nivel;
+            
+            
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al realizar la consulta");
+            System.out.println(e.getMessage());
+        }
+
+        return max;
+    }
+       
 }

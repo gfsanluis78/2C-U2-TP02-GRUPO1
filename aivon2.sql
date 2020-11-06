@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-11-2020 a las 02:38:59
+-- Tiempo de generación: 06-11-2020 a las 02:27:42
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.10
 
@@ -37,14 +37,6 @@ CREATE TABLE `caja_pedido` (
   `estrellas_caja` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `caja_pedido`
---
-
-INSERT INTO `caja_pedido` (`id_caja`, `id_pedido`, `id_producto`, `cantidad_producto`, `costo_caja`, `costo_caja_publico`, `estrellas_caja`) VALUES
-(1, 1, 1, 5, 1000, 1400, 10),
-(2, 1, 2, 2, 650, 750, 10);
-
 -- --------------------------------------------------------
 
 --
@@ -53,17 +45,13 @@ INSERT INTO `caja_pedido` (`id_caja`, `id_pedido`, `id_producto`, `cantidad_prod
 
 CREATE TABLE `campaña` (
   `id_campaña` int(11) NOT NULL,
+  `nombre` varchar(30) NOT NULL,
   `fecha_inicio` date NOT NULL,
   `fecha_fin` date NOT NULL,
+  `monto_min` double NOT NULL,
+  `monto_max` double NOT NULL,
   `activa` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `campaña`
---
-
-INSERT INTO `campaña` (`id_campaña`, `fecha_inicio`, `fecha_fin`, `activa`) VALUES
-(1, '2020-11-01', '2020-11-25', 1);
 
 -- --------------------------------------------------------
 
@@ -91,7 +79,7 @@ CREATE TABLE `pedido` (
   `id_pedido` int(11) NOT NULL,
   `id_revendedor` int(11) NOT NULL,
   `id_campaña` int(11) NOT NULL,
-  `fecha_ingreso` datetime NOT NULL,
+  `fecha_ingreso` date NOT NULL DEFAULT current_timestamp(),
   `fecha_entrega` date DEFAULT NULL,
   `fecha_pago` date DEFAULT NULL,
   `cantidad_cajas` int(11) DEFAULT NULL,
@@ -99,13 +87,6 @@ CREATE TABLE `pedido` (
   `pago` tinyint(1) NOT NULL DEFAULT 0,
   `activo` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `pedido`
---
-
-INSERT INTO `pedido` (`id_pedido`, `id_revendedor`, `id_campaña`, `fecha_ingreso`, `fecha_entrega`, `fecha_pago`, `cantidad_cajas`, `estrellas_pedido`, `pago`, `activo`) VALUES
-(1, 1, 0, '2020-11-05 00:00:00', NULL, NULL, NULL, NULL, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -130,7 +111,9 @@ CREATE TABLE `producto` (
 
 INSERT INTO `producto` (`id_producto`, `nombre`, `uso`, `tamaño_cm3`, `costo_publico`, `costo`, `estrellas`, `activo`) VALUES
 (1, 'CREMA MIVEA', 'CREMA CORPORAL', 100, 230, 200, 2, 1),
-(2, 'DESODORANTE ROXANA', 'DESODORANTE CORPORAL', 240, 350, 300, 5, 1);
+(2, 'DESODORANTE ROXANA', 'DESODORANTE CORPORAL', 240, 350, 300, 5, 1),
+(3, 'ESMALTE UÑAS', 'MANOS', 10, 100, 70, 2, 1),
+(4, 'ESPONJA VEGETAL', 'CORPORAL', 30, 70, 50, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -145,6 +128,7 @@ CREATE TABLE `revendedor` (
   `dni` varchar(9) NOT NULL,
   `tel` varchar(20) NOT NULL,
   `email` varchar(40) NOT NULL,
+  `nivel` int(11) NOT NULL DEFAULT 1,
   `activo` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -152,10 +136,10 @@ CREATE TABLE `revendedor` (
 -- Volcado de datos para la tabla `revendedor`
 --
 
-INSERT INTO `revendedor` (`id_revendedor`, `nombre`, `apellido`, `dni`, `tel`, `email`, `activo`) VALUES
-(1, 'Mario', 'Avaca', '30377673', '2664222979', 'marioraulavaca@gmail.com', 0),
-(2, 'Ezequiel', 'Albornoz', '36227970', '1123917575', 'franco.ezequiel@outlook.com', 0),
-(3, 'Genaro', 'Farias', '26525567', '2664692950', 'gfsanluis78@gmail.com', 1);
+INSERT INTO `revendedor` (`id_revendedor`, `nombre`, `apellido`, `dni`, `tel`, `email`, `nivel`, `activo`) VALUES
+(1, 'Mario', 'Avaca', '30377673', '2664222979', 'marioraulavaca@gmail.com', 1, 0),
+(2, 'Ezequiel', 'Albornoz', '36227970', '1123917575', 'franco.ezequiel@outlook.com', 1, 0),
+(3, 'Genaro', 'Farias', '26525567', '2664692950', 'gfsanluis78@gmail.com', 1, 1);
 
 --
 -- Índices para tablas volcadas
@@ -188,8 +172,9 @@ ALTER TABLE `historico`
 --
 ALTER TABLE `pedido`
   ADD PRIMARY KEY (`id_pedido`),
+  ADD UNIQUE KEY `id_revendedor` (`id_revendedor`,`id_campaña`) USING BTREE,
   ADD KEY `id_pedido` (`id_pedido`),
-  ADD KEY `id_revendedor` (`id_revendedor`);
+  ADD KEY `pedido_campaña_fk` (`id_campaña`);
 
 --
 -- Indices de la tabla `producto`
@@ -230,13 +215,13 @@ ALTER TABLE `historico`
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `revendedor`
@@ -266,7 +251,8 @@ ALTER TABLE `historico`
 -- Filtros para la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  ADD CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`id_revendedor`) REFERENCES `revendedor` (`id_revendedor`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `pedido_campaña_fk` FOREIGN KEY (`id_campaña`) REFERENCES `campaña` (`id_campaña`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pedido_revendedor_fk` FOREIGN KEY (`id_revendedor`) REFERENCES `revendedor` (`id_revendedor`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
