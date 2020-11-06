@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 
 public class Conexion {
 
-    private final String base = "aivon";
+    private final String base = "aivon2";
     private final String url = "jdbc:mysql://localhost:3306/" + base;
     private final String user = "root";
     private final String pass = "";
