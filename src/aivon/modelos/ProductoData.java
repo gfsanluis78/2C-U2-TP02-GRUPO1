@@ -115,33 +115,33 @@ public class ProductoData {
     }
     
     //Desactivar producto
-    public void bajaProducto(Producto producto) {
-
-        try {
-            Statement statement = con.createStatement();
-            int celAfectadas = statement.executeUpdate("UPDATE producto SET activo=0 WHERE id_producto=" + producto.getId_producto()+ ";");
-
-            if (celAfectadas > 0) {
-                JOptionPane.showMessageDialog(null, "Producto dado de baja");
-                System.out.println("Producto Borrado");
-            } else {
-                JOptionPane.showMessageDialog(null, "El Registro con id " + producto.getId_producto() + " que pretende borrar no existe!!");
-                System.out.println("El Registro con id " + producto.getId_producto() + " que pretende borrar no existe!!");
-            }
-            statement.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al dar de baja producto por Id");
-            System.out.println("Error al dar de baja producto");
-        }
-
-    }
+//    public void bajaProducto(Producto producto) {
+//
+//        try {
+//            Statement statement = con.createStatement();
+//            int celAfectadas = statement.executeUpdate("UPDATE producto SET activo=0 WHERE id_producto=" + producto.getId_producto()+ ";");
+//
+//            if (celAfectadas > 0) {
+//                JOptionPane.showMessageDialog(null, "Producto dado de baja");
+//                System.out.println("Producto Borrado");
+//            } else {
+//                JOptionPane.showMessageDialog(null, "El Registro con id " + producto.getId_producto() + " que pretende borrar no existe!!");
+//                System.out.println("El Registro con id " + producto.getId_producto() + " que pretende borrar no existe!!");
+//            }
+//            statement.close();
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "Error al dar de baja producto por Id");
+//            System.out.println("Error al dar de baja producto");
+//        }
+//
+//    }
             
     //----------------------Modificacion-----------------------------------------------////
      
      public void modificarProducto(Producto producto) {
 
         try {
-            String pre_instruccion = "UPDATE revendedor SET nombre=?,uso=?, tamaño_cm3=?,costo=?,costo_publico=?,estrellas=? WHERE id_producto=" + producto.getId_producto()+";";
+            String pre_instruccion = "UPDATE producto SET nombre=?,uso=?, tamaño_cm3=?,costo=?,costo_publico=?,estrellas=?, activo=? WHERE id_producto=" + producto.getId_producto()+";";
             PreparedStatement instruccion = con.prepareStatement(pre_instruccion);
             instruccion.setString(1, producto.getNombre());
             instruccion.setString(2, producto.getUso());
@@ -149,7 +149,7 @@ public class ProductoData {
             instruccion.setDouble(4, producto.getCosto());
             instruccion.setDouble(5, producto.getCosto_publico());
             instruccion.setInt(6, producto.getEstrellas());
-            
+            instruccion.setBoolean(7, producto.isActivo());
             int celAfectadas = instruccion.executeUpdate();
             if (celAfectadas > 0) {
                 System.out.println("Producto Modificado");
@@ -230,7 +230,7 @@ public class ProductoData {
                     productos.add(producto);
             }
                 JOptionPane.showMessageDialog(null, "Se encontraron los productos");
-                System.out.println("Se encontraron revdendedores");
+                System.out.println("Se encontraron los productos");
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontraron los productos");
                 System.out.println("No se encontraron los productos");
@@ -324,7 +324,7 @@ public class ProductoData {
         List<Producto> productos = new ArrayList<>();
 
         try {
-            PreparedStatement instruccion = con.prepareStatement("SELECT * FROM producto WHERE nombre="+ nombre +";");
+            PreparedStatement instruccion = con.prepareStatement("SELECT * FROM producto WHERE nombre LIKE '%"+ nombre +"%';");
             ResultSet consulta = instruccion.executeQuery();
             
             if (consulta.next()) {
@@ -342,7 +342,7 @@ public class ProductoData {
                     productos.add(producto);
             }
                 JOptionPane.showMessageDialog(null, "Se encontraron los productos");
-                System.out.println("Se encontraron revdendedores");
+                System.out.println("Se encontraron los productos");
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontraron los productos");
                 System.out.println("No se encontraron los productos");

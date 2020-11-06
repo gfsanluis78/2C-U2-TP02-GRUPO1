@@ -8,8 +8,8 @@ public class Revendedor {
     private String dni;
     private String tel;
     private String email;
-    private int nivel;
-    private boolean activo;
+    private int nivel = 1;
+    private boolean activo = true;
 
     public Revendedor() {
     }
@@ -20,26 +20,26 @@ public class Revendedor {
         this.dni = dni;
         this.tel = tel;
         this.email = email;
-        this.nivel = nivel;
+        //this.nivel = nivel;
     }
     
-    public Revendedor(String nombre, String apellido, String dni, String tel, String email, int nivel, boolean activo) {
+    public Revendedor(String nombre, String apellido, String dni, String tel, String email, boolean activo) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
         this.tel = tel;
         this.email = email;
-        this.nivel = nivel;
+        //this.nivel = nivel;
         this.activo = activo;
     }
 
-    public Revendedor(int id_revendedor, String nombre, String apellido, String dni, String tel, int nivel, boolean activo) {
+    public Revendedor(int id_revendedor, String nombre, String apellido, String dni, String tel, boolean activo) {
         this.id_revendedor = id_revendedor;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
         this.tel = tel;
-        this.nivel = nivel;
+        //this.nivel = nivel;
         this.activo = activo;
     }
 
@@ -112,6 +112,7 @@ public class Revendedor {
     public String toString() {
         return "Revendedor{" + "id_revendedor=" + id_revendedor + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", tel=" + tel + ", email=" + email + ", nivel=" + nivel + ", activo=" + activo + '}';
     }
+
 
     
     //-----------------------------------Metodos auxiliares-----------------------------------------------------------------
