@@ -1,5 +1,7 @@
 package aivon.modelos;
 
+import aivon.entidades.Campaña;
+import aivon.entidades.Pedido;
 import aivon.entidades.Revendedor;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -384,6 +386,84 @@ public class RevendedorData {
         return revendedores;
     }
     
+    
+    //-------------------Metodos auxilares-----------------------------------------------
      
+    //ganacias totales del revendedor
+    
+       public double gananciaFinalRevendedor(Revendedor revendedor) {
+
+        double ganancia = 0;
+
+        try {
+
+            Statement statement = con.createStatement();
+            ResultSet consulta = statement.executeQuery("SELECT SUM(costo_caja_publico) - SUM(costo_caja) "
+                    + "AS ganancia FROM caja_pedido, pedido WHERE caja_pedido.id_pedido=pedido.id_pedido "
+                    + "AND pedido.fecha_pago IS NULL AND pedido.id_revendedor=" + revendedor.getId_revendedor() + ";");
+
+            ganancia = consulta.getDouble("ganancia");
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al realizar la consulta");
+            System.out.println(e.getMessage());
+        }
+
+        return ganancia;
+    }
+       
+    //ganancias por revendedor y por un pedido especifico
+       
+       public double gananciaRevendedorPorPedido(Revendedor revendedor, Pedido pedido) {
+
+        double ganancia = 0;
+
+        try {
+
+            Statement statement = con.createStatement();
+            ResultSet consulta = statement.executeQuery("SELECT SUM(costo_caja_publico) - SUM(costo_caja) "
+                    + "AS ganancia FROM caja_pedido, pedido WHERE caja_pedido.id_pedido=pedido.id_pedido "
+                    + "AND pedido.fecha_pago IS NULL AND pedido.id_revendedor=" + revendedor.getId_revendedor() + " AND pedido.id_pedido ="+ pedido.getId_pedido()+";");
+
+            ganancia = consulta.getDouble("ganancia");
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al realizar la consulta");
+            System.out.println(e.getMessage());
+        }
+
+        return ganancia;
+    }
+       
+       
+       //ganancias por revendedor y por campaña
+       
+       public double gananciaRevendedorPorCampaña(Revendedor revendedor, Campaña campaña) {
+
+        double ganancia = 0;
+
+        try {
+
+            Statement statement = con.createStatement();
+            ResultSet consulta = statement.executeQuery("SELECT SUM(costo_caja_publico) - SUM(costo_caja) "
+                    + "AS ganancia FROM caja_pedido, pedido, campaña"
+                    + "WHERE caja_pedido.id_pedido=pedido.id_pedido "
+                    + "AND pedido.id_campaña = campaña.id_campaña " 
+                    + "AND pedido.fecha_pago IS NOT null "
+                    + "AND pedido.id_revendedor =" + revendedor.getId_revendedor() 
+                    + "AND campaña.id_campaña =" + campaña.getId_campaña()+";");
+
+            ganancia = consulta.getDouble("ganancia");
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al realizar la consulta");
+            System.out.println(e.getMessage());
+        }
+
+        return ganancia;
+    }
+       
+       
+    //   
 
 }
