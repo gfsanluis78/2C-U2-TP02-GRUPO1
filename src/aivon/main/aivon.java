@@ -53,8 +53,8 @@ public class aivon {
 //############################################################################## 
 //########################## GUARDAR CAMPAÑA ####################################    
 
-     /*
-       Campaña nov = new Campaña("Febrero", LocalDate.of(2020, 02, 01), 1500, 2000, true );
+     /*AL CREAR LA CAMPAÑA INGRESAR NOMBRE, FECHA DE INICIO (LA FECHA DE FIN SE CALCULA SOLA EN BD), MONTO MIN Y MONTO MAX.
+       Campaña nov = new Campaña("DecimoPrimera", LocalDate.of(2020,08,22), 1500, 2000, false );
        cd.guardarCampaña(nov);
        System.out.println(nov);
     
