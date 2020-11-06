@@ -182,11 +182,7 @@ public class RevendedorData {
         return revendedor;
     }
      
-     //#############################FALTA SEGUIR CON NIVEL
-     
-     
-     
-     
+          
     //Por Dni:
     
      public Revendedor buscarRevendedor (String dni) {
@@ -331,7 +327,7 @@ public class RevendedorData {
                     revendedores.add(revendedor);
             }
                 JOptionPane.showMessageDialog(null, "Se encontraron revendedores por nivel");
-                System.out.println("Se encontraron revendedores po nivel");
+                System.out.println("Se encontraron revendedores por nivel");
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontraron revendedores para ese nivel");
                 System.out.println("No se encontraron revendedores para ese nivel");

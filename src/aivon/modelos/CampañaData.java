@@ -27,7 +27,8 @@ public class CampañaData {
     public void guardarCampaña (Campaña campaña){
         
         String pre_instruccion;
-        pre_instruccion="INSERT INTO campaña(nombre, fecha_inicio, fecha_fin, activa) VALUES (?,?,?,?);";
+        pre_instruccion="INSERT INTO campaña(nombre, fecha_inicio, fecha_fin, monto_min, monto_max, activa)"
+                + " VALUES (?,?,date_add(fecha_inicio, interval 25 day),?,?,?)";
         
         try{
         
@@ -36,8 +37,10 @@ public class CampañaData {
         
         instruccion.setString(1, campaña.getNombre());
         instruccion.setDate(2,Date.valueOf(campaña.getFecha_inicio()) );
-        instruccion.setDate(3, Date.valueOf(campaña.getFecha_fin()) );
-        instruccion.setBoolean(4, campaña.isActiva());
+        //instruccion.setDate(3, Date.valueOf(campaña.getFecha_fin()) );
+        instruccion.setDouble(3, campaña.getMonto_min());
+        instruccion.setDouble(4, campaña.getMonto_max());
+        instruccion.setBoolean(5, campaña.isActiva());
         
         
         instruccion.executeUpdate();
@@ -52,7 +55,19 @@ public class CampañaData {
                     System.out.println("No pudo obtener id");
                 }
             }
-
+        
+        Statement statement= con.createStatement();
+        ResultSet consulta = statement.executeQuery("Select fecha_fin FROM campaña WHERE id_campaña ="+campaña.getId_campaña()+";");
+        
+        if (consulta.next()) {
+               campaña.setFecha_fin(consulta.getDate("fecha_fin").toLocalDate());
+                    
+                } else {
+                    
+                    System.out.println("No setear la fecha de FIn");
+                }
+            
+            statement.close();
             instruccion.close();
         }catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al guardar Campaña");
@@ -118,29 +133,94 @@ public class CampañaData {
     public void modificarCampaña(Campaña campaña) {
 
         try {
-            String pre_instruccion = "UPDATE campaña SET nombre=?, fecha_inicio=?, fecha_fin=?, activa=? WHERE id_campaña=?";
+            String pre_instruccion = "UPDATE campaña SET nombre=?, fecha_inicio=?, fecha_fin=?, monto_min=?, monto_max=?, activa=? WHERE id_campaña= ?;";
             PreparedStatement instruccion = con.prepareStatement(pre_instruccion);
             instruccion.setString(1, campaña.getNombre());
             instruccion.setDate(2, Date.valueOf(campaña.getFecha_inicio()));
             instruccion.setDate(3, Date.valueOf(campaña.getFecha_fin()));
-            instruccion.setBoolean(4, campaña.isActiva());
+            instruccion.setDouble(4, campaña.getMonto_min());
+            instruccion.setDouble(5, campaña.getMonto_max());
+            instruccion.setBoolean(6, campaña.isActiva());
             
-            instruccion.setInt(5,campaña.getId_campaña());
+            instruccion.setInt(7, campaña.getId_campaña());
 
             int celAfectadas = instruccion.executeUpdate();
             if (celAfectadas > 0) {
                 System.out.println("Campaña Modificada");
-                JOptionPane.showMessageDialog(null, "Campaña Modificado");
+                JOptionPane.showMessageDialog(null, "Campaña Modificada");
             } else {
                 System.out.println("El Registro " + campaña.getId_campaña() + " no pudo ser actualizado");
                 JOptionPane.showMessageDialog(null, "La Campaña no se pudo actualizar");
             }
+            
+            Statement statement=con.createStatement();
+            ResultSet consulta = statement.executeQuery("SELECT * FROM campaña WHERE id_campaña=" + campaña.getId_campaña() + ";");
+        
+        if (consulta.next()) {
+            
+               campaña.setActiva(consulta.getBoolean("activa"));
+               campaña.setNombre(consulta.getString("nombre"));
+               campaña.setFecha_inicio(consulta.getDate("fecha_inicio").toLocalDate());
+               campaña.setFecha_fin(consulta.getDate("fecha_fin").toLocalDate());
+               campaña.setMonto_min(consulta.getDouble("monto_min"));
+               campaña.setMonto_max(consulta.getDouble("monto_max"));
+               campaña.setActiva(consulta.getBoolean("activa"));
+                    
+                } else {
+                    
+                    System.out.println("No se pudo setear las modificaiones a la campaña");
+                }
+            
+            statement.close();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             JOptionPane.showMessageDialog(null, "Error al actualizar campaña");
         }
 
     }
+    
+    public void cerrarCampaña(Campaña campaña) {        
+
+        if(campaña.isActiva()){
+        try {
+            Statement statement = con.createStatement();
+            int celAfectadas = statement.executeUpdate("UPDATE campaña SET activa=false WHERE id_campaña= "+campaña.getId_campaña()+";");
+            
+            if (celAfectadas > 0) {
+                System.out.println("Campaña Cerrada");
+                JOptionPane.showMessageDialog(null, "Campaña Cerrada");
+            } else {
+                System.out.println("El Registro " + campaña.getId_campaña() + " no pudo ser desactivada");
+                JOptionPane.showMessageDialog(null, "La Campaña no se pudo cerrar");
+            }
+            
+            
+        ResultSet consulta = statement.executeQuery("Select activa FROM campaña WHERE id_campaña ="+campaña.getId_campaña()+";");
+        
+        if (consulta.next()) {
+               campaña.setActiva(consulta.getBoolean("activa"));
+                    
+                } else {
+                    
+                    System.out.println("No setar inactiva a la campaña");
+                }
+            
+            statement.close();
+            
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al cerrar campaña");
+            
+            
+        }
+        }else{
+            System.out.println("La campaña ya se encuentra cerrada");
+            JOptionPane.showMessageDialog(null, "La campaña ya se encuentra cerrada, no es necesario realizar esta accion ");
+        }
+
+    }
+    
+    
 
 
 //--------------------------CONSULTA-------------------------------------------------------//////
@@ -160,13 +240,15 @@ public class CampañaData {
                     campaña.setId_campaña(consulta.getInt("id_campaña"));
                     campaña.setNombre(consulta.getString("nombre"));
                     campaña.setFecha_inicio(consulta.getDate("fecha_inicio").toLocalDate());
-                    campaña.setFecha_inicio(consulta.getDate("fecha_fin").toLocalDate());
+                    campaña.setFecha_fin(consulta.getDate("fecha_fin").toLocalDate());
+                    campaña.setMonto_min(consulta.getDouble("monto_min"));
+                    campaña.setMonto_max(consulta.getDouble("monto_max"));
                     campaña.setActiva(consulta.getBoolean("activa"));
                     
                                        
                 } else {
-                    JOptionPane.showMessageDialog(null, "No se pudo buscar campaña por Id");
-                    System.out.println("No se pudo buscar campaña por Id");
+                    JOptionPane.showMessageDialog(null, "No existe la campaña con ese Id de registro");
+                    System.out.println("No existe la campaña con ese Id de registro");
                 }
             }
             instruccion.close();
@@ -191,17 +273,19 @@ public class CampañaData {
                     campaña.setId_campaña(consulta.getInt("id_campaña"));
                     campaña.setNombre(consulta.getString("nombre"));
                     campaña.setFecha_inicio(consulta.getDate("fecha_inicio").toLocalDate());
-                    campaña.setFecha_inicio(consulta.getDate("fecha_fin").toLocalDate());
+                    campaña.setFecha_fin(consulta.getDate("fecha_fin").toLocalDate());
+                    campaña.setMonto_min(consulta.getDouble("monto_min"));
+                    campaña.setMonto_max(consulta.getDouble("monto_max"));
                     campaña.setActiva(consulta.getBoolean("activa"));
                     
                 } else {
-                    JOptionPane.showMessageDialog(null, "No se pudo buscar campaña por Id");
-                    System.out.println("No se pudo buscar campaña por Id");
+                    JOptionPane.showMessageDialog(null, "No existe la campaña con ese Nombre de campaña");
+                    System.out.println("No existe la campaña con ese Nombre de campaña");
                 }
             }
             instruccion.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al buscar campaña por Id");
+            JOptionPane.showMessageDialog(null, "Error al buscar campaña por Nombre");
             System.out.println(ex.getMessage());
         }
         return campaña;
@@ -215,18 +299,20 @@ public class CampañaData {
 
         try {
             Statement instruccion = con.createStatement();
-            try (ResultSet consulta = instruccion.executeQuery("SELECT * FROM campaña WHERE fecha_inicio=" + Date.valueOf(fecha_inicio) + ";")) {
+            try (ResultSet consulta = instruccion.executeQuery("SELECT * FROM campaña WHERE fecha_inicio='" + Date.valueOf(fecha_inicio) + "';")) {
                 if (consulta.next()) {
                     campaña = new Campaña();
                     campaña.setId_campaña(consulta.getInt("id_campaña"));
                     campaña.setNombre(consulta.getString("nombre"));
                     campaña.setFecha_inicio(consulta.getDate("fecha_inicio").toLocalDate());
-                    campaña.setFecha_inicio(consulta.getDate("fecha_fin").toLocalDate());
+                    campaña.setFecha_fin(consulta.getDate("fecha_fin").toLocalDate());
+                    campaña.setMonto_min(consulta.getDouble("monto_min"));
+                    campaña.setMonto_max(consulta.getDouble("monto_max"));
                     campaña.setActiva(consulta.getBoolean("activa"));
                     
                 } else {
-                    JOptionPane.showMessageDialog(null, "No se pudo buscar campaña por fecha e inicio");
-                    System.out.println("No se pudo buscar campaña por fecha de inicio");
+                    JOptionPane.showMessageDialog(null, "No existe registro de campaña con esa fecha de inicio");
+                    System.out.println("No existe registro de campaña con esa fecha de inicio");
                 }
             }
             instruccion.close();
@@ -236,6 +322,38 @@ public class CampañaData {
         }
         return campaña;
     }
+     
+     public Campaña buscarCampañaActiva () {
+
+        Campaña campaña = null;
+
+        try {
+            Statement instruccion = con.createStatement();
+            try (ResultSet consulta = instruccion.executeQuery("SELECT * FROM campaña WHERE activa = 1")) {
+                if (consulta.next()) {
+                    campaña = new Campaña();
+                    campaña.setId_campaña(consulta.getInt("id_campaña"));
+                    campaña.setNombre(consulta.getString("nombre"));
+                    campaña.setFecha_inicio(consulta.getDate("fecha_inicio").toLocalDate());
+                    campaña.setFecha_fin(consulta.getDate("fecha_fin").toLocalDate());
+                    campaña.setMonto_min(consulta.getDouble("monto_min"));
+                    campaña.setMonto_max(consulta.getDouble("monto_max"));
+                    campaña.setActiva(consulta.getBoolean("activa"));
+                    
+                                       
+                } else {
+                    JOptionPane.showMessageDialog(null, "No existe registro de campaña con estado activa");
+                    System.out.println("No existe registro de campaña con estado activa");
+                }
+            }
+            instruccion.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al buscar campaña activa");
+            System.out.println(ex.getMessage());
+        }
+        return campaña;
+    }
+     
         
     
     
@@ -261,7 +379,9 @@ public class CampañaData {
                     campaña.setId_campaña(consulta.getInt("id_campaña"));
                     campaña.setNombre(consulta.getString("nombre"));
                     campaña.setFecha_inicio(consulta.getDate("fecha_inicio").toLocalDate());
-                    campaña.setFecha_inicio(consulta.getDate("fecha_fin").toLocalDate());
+                    campaña.setFecha_fin(consulta.getDate("fecha_fin").toLocalDate());
+                    campaña.setMonto_min(consulta.getDouble("monto_min"));
+                    campaña.setMonto_max(consulta.getDouble("monto_max"));
                     campaña.setActiva(consulta.getBoolean("activa"));
                     
                     campañas.add(campaña);
@@ -284,42 +404,44 @@ public class CampañaData {
         
     // BUsca Todas las campañas activas
     
-    public List<Campaña> buscarCampañasActivas() {
-
-        Campaña campaña;
-        List<Campaña> campañas = new ArrayList<>();
-
-        try {
-            PreparedStatement instruccion = con.prepareStatement("SELECT * FROM campaña WHERE activa = 1");
-            ResultSet consulta = instruccion.executeQuery();
-            
-            if (consulta.next()) {
-                consulta.beforeFirst();
-                while (consulta.next()) {
-                    campaña = new Campaña();
-                    
-                    campaña.setId_campaña(consulta.getInt("id_campaña"));
-                    campaña.setNombre(consulta.getString("nombre"));
-                    campaña.setFecha_inicio(consulta.getDate("fecha_inicio").toLocalDate());
-                    campaña.setFecha_inicio(consulta.getDate("fecha_fin").toLocalDate());
-                    campaña.setActiva(consulta.getBoolean("activa"));
-                    
-                    campañas.add(campaña);
-            }
-                JOptionPane.showMessageDialog(null, "Se encontraron campañas activas");
-                System.out.println("Se encontraron campañas activas");
-            } else {
-                JOptionPane.showMessageDialog(null, "No se encontraron campañas activas");
-                System.out.println("No se encontraron campañas");
-            }
-            
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al obtener campañas activas");
-            System.out.println(ex.getMessage());
-        }
-
-        return campañas;
-    }
+//    public List<Campaña> buscarCampañasActivas() {
+//
+//        Campaña campaña;
+//        List<Campaña> campañas = new ArrayList<>();
+//
+//        try {
+//            PreparedStatement instruccion = con.prepareStatement("SELECT * FROM campaña WHERE activa = 1");
+//            ResultSet consulta = instruccion.executeQuery();
+//            
+//            if (consulta.next()) {
+//                consulta.beforeFirst();
+//                while (consulta.next()) {
+//                    campaña = new Campaña();
+//                    
+//                    campaña.setId_campaña(consulta.getInt("id_campaña"));
+//                    campaña.setNombre(consulta.getString("nombre"));
+//                    campaña.setFecha_inicio(consulta.getDate("fecha_inicio").toLocalDate());
+//                    campaña.setFecha_inicio(consulta.getDate("fecha_fin").toLocalDate());
+//                    campaña.setMonto_min(consulta.getDouble("monto_min"));
+//                    campaña.setMonto_max(consulta.getDouble("monto_max"));
+//                    campaña.setActiva(consulta.getBoolean("activa"));
+//                    
+//                    campañas.add(campaña);
+//            }
+//                JOptionPane.showMessageDialog(null, "Se encontraron campañas activas");
+//                System.out.println("Se encontraron campañas activas");
+//            } else {
+//                JOptionPane.showMessageDialog(null, "No se encontraron campañas activas");
+//                System.out.println("No se encontraron campañas");
+//            }
+//            
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "Error al obtener campañas activas");
+//            System.out.println(ex.getMessage());
+//        }
+//
+//        return campañas;
+//    }
     
     
     // Busca todas las campañas Inactivas
@@ -341,7 +463,9 @@ public class CampañaData {
                     campaña.setId_campaña(consulta.getInt("id_campaña"));
                     campaña.setNombre(consulta.getString("nombre"));
                     campaña.setFecha_inicio(consulta.getDate("fecha_inicio").toLocalDate());
-                    campaña.setFecha_inicio(consulta.getDate("fecha_fin").toLocalDate());
+                    campaña.setFecha_fin(consulta.getDate("fecha_fin").toLocalDate());
+                    campaña.setMonto_min(consulta.getDouble("monto_min"));
+                    campaña.setMonto_max(consulta.getDouble("monto_max"));
                     campaña.setActiva(consulta.getBoolean("activa"));
                     
                     campañas.add(campaña);
