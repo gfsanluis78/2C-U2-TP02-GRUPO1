@@ -137,6 +137,7 @@ public class RevendedorData {
                 System.out.println("El Registro " + revendedor.getId_revendedor() + " no pudo ser actualizado");
                 JOptionPane.showMessageDialog(null, "El Revendedor no se pudo actualizar");
             }
+            instruccion.close();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             JOptionPane.showMessageDialog(null, "Error al actualizar revendedor");
@@ -181,11 +182,7 @@ public class RevendedorData {
         return revendedor;
     }
      
-     //#############################FALTA SEGUIR CON NIVEL
-     
-     
-     
-     
+          
     //Por Dni:
     
      public Revendedor buscarRevendedor (String dni) {
@@ -254,6 +251,7 @@ public class RevendedorData {
                 JOptionPane.showMessageDialog(null, "No se encontraron revendedores");
                 System.out.println("No se encontraron revendedores");
             }
+            instruccion.close();
             
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al obtener revendedores");
@@ -293,6 +291,7 @@ public class RevendedorData {
                 JOptionPane.showMessageDialog(null, "No se encontraron revendedores activos");
                 System.out.println("No se encontraron revendedores activos");
             }
+            instruccion.close();
             
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al obtener Revendedores activos");
@@ -328,11 +327,12 @@ public class RevendedorData {
                     revendedores.add(revendedor);
             }
                 JOptionPane.showMessageDialog(null, "Se encontraron revendedores por nivel");
-                System.out.println("Se encontraron revendedores po nivel");
+                System.out.println("Se encontraron revendedores por nivel");
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontraron revendedores para ese nivel");
                 System.out.println("No se encontraron revendedores para ese nivel");
             }
+            instruccion.close();
             
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al obtener Revendedores de ese nivel");
@@ -377,6 +377,7 @@ public class RevendedorData {
                 JOptionPane.showMessageDialog(null, "No se encontraron revendedores en la campaña "+idCampaña);
                 System.out.println("No se encontraron revendedores  en la campaña "+idCampaña);
             }
+            instruccion.close();
             
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al obtener revendedores  en la campaña "+idCampaña);
@@ -404,6 +405,8 @@ public class RevendedorData {
 
             ganancia = consulta.getDouble("ganancia");
 
+           statement.close();
+           
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al realizar la consulta");
             System.out.println(e.getMessage());
@@ -428,6 +431,8 @@ public class RevendedorData {
 
             ganancia = consulta.getDouble("ganancia");
 
+            statement.close();
+            
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al realizar la consulta");
             System.out.println(e.getMessage());
@@ -456,6 +461,8 @@ public class RevendedorData {
 
             ganancia = consulta.getDouble("ganancia");
 
+            statement.close();
+            
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al realizar la consulta");
             System.out.println(e.getMessage());
@@ -483,6 +490,8 @@ public class RevendedorData {
 
             estrellas = consulta.getInt("estrellas");
 
+            statement.close();
+            
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al realizar la consulta");
             System.out.println(e.getMessage());
@@ -525,6 +534,7 @@ public class RevendedorData {
             
                    
                     
+            
             statement.close();
 
         } catch (SQLException e) {
@@ -553,6 +563,8 @@ public class RevendedorData {
             
             
 
+            statement.close();
+            
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al realizar la consulta");
             System.out.println(e.getMessage());
@@ -577,9 +589,10 @@ public class RevendedorData {
             max=(consulta.getDouble("monto_max"));
             
             max += 0.10*nivel;
-            
-            
+                  
 
+            statement.close();
+            
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al realizar la consulta");
             System.out.println(e.getMessage());
