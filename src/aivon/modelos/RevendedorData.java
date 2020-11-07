@@ -457,13 +457,7 @@ public class RevendedorData {
         try {
 
             Statement statement = con.createStatement();
-            ResultSet consulta = statement.executeQuery("SELECT SUM(costo_caja_publico) - SUM(costo_caja) "
-                    + "AS ganancia FROM caja_pedido, pedido, campaña"
-                    + "WHERE caja_pedido.id_pedido=pedido.id_pedido "
-                    + "AND pedido.id_campaña = campaña.id_campaña " 
-                    + "AND pedido.fecha_pago IS NOT null "
-                    + "AND pedido.id_revendedor =" + revendedor.getId_revendedor() 
-                    + "AND campaña.id_campaña =" + campaña.getId_campaña()+";");
+            ResultSet consulta = statement.executeQuery("SELECT SUM(costo_caja_publico) - SUM(costo_caja) AS ganancia FROM caja_pedido, pedido, campaña WHERE caja_pedido.id_pedido=pedido.id_pedido AND pedido.id_campaña = campaña.id_campaña AND pedido.fecha_pago IS NOT null AND pedido.id_revendedor = " + revendedor.getId_revendedor() +" AND campaña.id_campaña = " + campaña.getId_campaña()+";");
 
             if(consulta.next()){
             ganancia = consulta.getDouble("ganancia");
@@ -471,7 +465,7 @@ public class RevendedorData {
             statement.close();
             
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al realizar la consulta");
+            JOptionPane.showMessageDialog(null, "Error al realizar la consulta ganancia");
             System.out.println(e.getMessage());
         }
 
@@ -523,11 +517,7 @@ public class RevendedorData {
         try {
 
             Statement statement = con.createStatement();
-            ResultSet consulta = statement.executeQuery("SELECT SUM(estrellas_pedido) / "+escalon+" "
-                    + "AS nivel FROM pedido"
-                    + "WHERE pedido.fecha_pago IS NOT null "                              //puede ser pago tambien
-                    + "AND pedido.id_revendedor =" + revendedor.getId_revendedor() 
-                    +";");
+            ResultSet consulta = statement.executeQuery("SELECT SUM(estrellas_pedido) / "+escalon+ " AS nivel FROM pedido WHERE pedido.fecha_pago IS NOT null AND pedido.id_revendedor =" + revendedor.getId_revendedor()+";");
 
             if(consulta.next()){
             nivel = consulta.getInt("nivel");
@@ -537,7 +527,7 @@ public class RevendedorData {
                 System.out.println("No se obtuvo el nivel");
             }
                 
-            statement.close();
+            
             int celAfectadas = statement.executeUpdate("Update revendedor Set nivel = "+nivel+" where id_revendedor = "+revendedor.getId_revendedor()+";");
             if (celAfectadas > 0) {
                 System.out.println("Nivel actualizado");
@@ -571,9 +561,10 @@ public class RevendedorData {
 
             Statement statement = con.createStatement();
             ResultSet consulta = statement.executeQuery("SELECT monto_min FROM campaña WHERE campaña.activa = 1;");
-                    
-            min=(consulta.getDouble("monto_min"));
             
+            if(consulta.next()){
+            min=(consulta.getDouble("monto_min"));
+            }
             min += 0.10*nivel;
             
             
@@ -600,9 +591,9 @@ public class RevendedorData {
 
             Statement statement = con.createStatement();
             ResultSet consulta = statement.executeQuery("SELECT monto_max FROM campaña WHERE campaña.activa = 1;");
-                    
+            if(consulta.next()){        
             max=(consulta.getDouble("monto_max"));
-            
+            }
             max += 0.10*nivel;
                   
 
