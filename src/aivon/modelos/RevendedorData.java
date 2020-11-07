@@ -458,12 +458,12 @@ public class RevendedorData {
 
             Statement statement = con.createStatement();
             ResultSet consulta = statement.executeQuery("SELECT SUM(costo_caja_publico) - SUM(costo_caja) "
-                    + "AS ganancia FROM caja_pedido, pedido, campaña"
-                    + "WHERE caja_pedido.id_pedido=pedido.id_pedido "
-                    + "AND pedido.id_campaña = campaña.id_campaña " 
-                    + "AND pedido.fecha_pago IS NOT null "
-                    + "AND pedido.id_revendedor =" + revendedor.getId_revendedor() 
-                    + "AND campaña.id_campaña =" + campaña.getId_campaña()+";");
+                    + " AS ganancia FROM caja_pedido, pedido, campaña"
+                    + " WHERE caja_pedido.id_pedido=pedido.id_pedido"
+                    + " AND pedido.id_campaña = campaña.id_campaña" 
+                    + " AND pedido.fecha_pago IS NOT NULL"
+                    + " AND pedido.id_revendedor =" + revendedor.getId_revendedor() 
+                    + " AND campaña.id_campaña =" + campaña.getId_campaña()+";");
 
             if(consulta.next()){
             ganancia = consulta.getDouble("ganancia");
@@ -509,36 +509,35 @@ public class RevendedorData {
     }   
     //calcular nivel de revendedor
        
-       public int calcularNivelRevendedor(Revendedor revendedor) {
-           
-           /*SELECT SUM(estrellas_pedido) / 50 
+    public int calcularNivelRevendedor(Revendedor revendedor) {
+
+        /*SELECT SUM(estrellas_pedido) / 50 
                     AS nivel FROM pedido
                     WHERE pedido.fecha_pago IS NOT null
                     AND pedido.id_revendedor = 1
-           */
-           
+         */
         int nivel = 1;
-        int escalon=50;
+        int escalon = 50;
 
         try {
 
             Statement statement = con.createStatement();
-            ResultSet consulta = statement.executeQuery("SELECT SUM(estrellas_pedido) / "+escalon+" "
-                    + "AS nivel FROM pedido"
-                    + "WHERE pedido.fecha_pago IS NOT null "                              //puede ser pago tambien
-                    + "AND pedido.id_revendedor =" + revendedor.getId_revendedor() 
-                    +";");
+            ResultSet consulta = statement.executeQuery("SELECT SUM(estrellas_pedido) / " + escalon + " "
+                    + "AS nivel FROM pedido "
+                    + "WHERE pedido.fecha_pago IS NOT NULL " //puede ser pago tambien
+                    + "AND pedido.id_revendedor =" + revendedor.getId_revendedor()
+                    + ";");
 
-            if(consulta.next()){
-            nivel = consulta.getInt("nivel");
-            revendedor.setNivel(nivel);
-            }else{
+            if (consulta.next()) {
+                nivel = consulta.getInt("nivel")+1;
+                revendedor.setNivel(nivel);
+            } else {
                 JOptionPane.showMessageDialog(null, "No se obtuvo nivel");
                 System.out.println("No se obtuvo el nivel");
             }
-                
-            statement.close();
-            int celAfectadas = statement.executeUpdate("Update revendedor Set nivel = "+nivel+" where id_revendedor = "+revendedor.getId_revendedor()+";");
+
+            //statement.close();
+            int celAfectadas = statement.executeUpdate("Update revendedor Set nivel = " + nivel + " where id_revendedor = " + revendedor.getId_revendedor() + ";");
             if (celAfectadas > 0) {
                 System.out.println("Nivel actualizado");
                 JOptionPane.showMessageDialog(null, "Nivel actualizado");
@@ -546,10 +545,7 @@ public class RevendedorData {
                 System.out.println("El Registro del nivel de Id " + revendedor.getId_revendedor() + " no pudo ser actualizado");
                 JOptionPane.showMessageDialog(null, "El Nivel del Revendedor no se pudo actualizar");
             }
-            
-                   
-                    
-            
+
             statement.close();
 
         } catch (SQLException e) {
@@ -571,9 +567,10 @@ public class RevendedorData {
 
             Statement statement = con.createStatement();
             ResultSet consulta = statement.executeQuery("SELECT monto_min FROM campaña WHERE campaña.activa = 1;");
-                    
-            min=(consulta.getDouble("monto_min"));
             
+            if (consulta.next()) {
+            min=(consulta.getDouble("monto_min"));
+            }
             min += 0.10*nivel;
             
             
@@ -600,9 +597,9 @@ public class RevendedorData {
 
             Statement statement = con.createStatement();
             ResultSet consulta = statement.executeQuery("SELECT monto_max FROM campaña WHERE campaña.activa = 1;");
-                    
+            if (consulta.next()) {        
             max=(consulta.getDouble("monto_max"));
-            
+            }
             max += 0.10*nivel;
                   
 

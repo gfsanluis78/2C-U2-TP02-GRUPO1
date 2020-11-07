@@ -93,7 +93,7 @@ public class PedidoData {
                     System.out.println("No hay fecha de pago aún");
                 }
                 pedido.setCantidad_cajas(this.cantCajasPedido(pedido));
-                pedido.setEstrellas_pedido(this.cantCajasPedido(pedido));
+                pedido.setEstrellas_pedido(this.cantEstrellasPedido(pedido));
 
                 revendedor = this.buscarRevendedor(id_revendedor);
                 campaña = this.buscarCampaña(id_campaña);
