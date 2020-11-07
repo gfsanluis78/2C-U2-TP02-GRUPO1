@@ -313,6 +313,9 @@ public class PedidoData {
 
             if (consulta.next()) {
                 pedido.setId_pedido(consulta.getInt("id_pedido"));
+                 if (consulta.getObject("fecha_ingreso") != null && !consulta.wasNull()) {
+                     pedido.setFecha_ingreso(consulta.getDate("fecha_ingreso").toLocalDate());
+                 }
                 pedido.setFecha_ingreso(consulta.getDate("fecha_ingreso").toLocalDate());
                 pedido.setFecha_entrega(consulta.getDate("fecha_entrega").toLocalDate());
                 pedido.setFecha_pago(consulta.getDate("fecha_pago").toLocalDate());
