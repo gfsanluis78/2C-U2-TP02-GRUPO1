@@ -12,7 +12,20 @@ import aivon.modelos.DetallePedidoData;
 import aivon.modelos.PedidoData;
 import aivon.modelos.ProductoData;
 import aivon.modelos.RevendedorData;
+import aivon.entidades.*;
+import aivon.modelos.*;
 import java.util.List;
+import aivon.entidades.Campaña;
+import aivon.modelos.CampañaData;
+import aivon.modelos.Conexion;
+import aivon.modelos.DetallePedidoData;
+import aivon.modelos.PedidoData;
+import aivon.modelos.ProductoData;
+import aivon.modelos.RevendedorData;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.Month;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -94,6 +107,239 @@ public class aivon {
 //    }
     
     
-    }
+//##################### REGISTRO DE MÉTODOS ####################################
+
+    // REVENDEDOR
+    // guardarRevendedor() - OK
+    // borrarRevendedor() - OK
+    // modificarRevendedor() - OK
+    // buscarRevendedor() - OK
     
+    
+        
+//##############################################################################        
+//################ ALTA REVENDEDOR #############################################
+
+    //String nombre, String apellido, String dni, String tel, String email
+//    Revendedor eze = new Revendedor("Ezequiel", "Albornoz", "36227970", "1123917575", "franco.ezequielq@outlook.com");
+//    Revendedor mario = new Revendedor("Mario", "Avaca", "30377673", "2664222979", "marioraulavaca@gmail.com");
+//    Revendedor genaro = new Revendedor("Genaro", "Farias", "26525567", "2664692950", "gfsanluis78@gmail.com");
+    
+//    rd.guardarRevendedor(eze);
+//    rd.guardarRevendedor(mario);
+//    rd.guardarRevendedor(genaro);
+//    
+//    System.out.println(eze.toString());
+//    
+//##############################################################################        
+//################ BORRAR REVENDEDOR ###########################################    
+    
+//    rd.borrarRevendedor("36227970");// Ezequiel Albornoz (eze)
+//    rd.borrarRevendedor(10); // Genaro Farias
+    
+//##############################################################################        
+//################ ACTUALIZAR REVENDEDOR #######################################
+    
+//    Revendedor genaro = new Revendedor("Genaro", "Farias", "26525567", "2664692950", "gfsanluis78@gmail.com");
+//    rd.guardarRevendedor(genaro);
+//    
+//    genaro.setActivo(false);
+//    
+//    rd.modificarRevendedor(genaro);
+   
+//##############################################################################        
+//#################### BUSCAR REVENDEDOR #######################################
+    
+//        Revendedor alguien = rd.buscarRevendedor("26525567");
+//        System.out.println(alguien.toString());
+//        Revendedor alguien2 = rd.buscarRevendedor(alguien.getId_revendedor());
+//        System.out.println(alguien2.toString());
+
+//##############################################################################        
+//#################### LISTA REVENDEDORES ######################################
+
+//    List<Revendedor> revendedores = rd.buscarRevendedores();
+//    revendedores.forEach((it) -> {
+//        System.out.println(it.toString());
+//        });    
+
+//##############################################################################        
+//#################### LISTA REVENDEDORES ######################################
+
+//    List<Revendedor> revendedores = rd.buscarRevendedoresActivos();
+//    revendedores.forEach((it) -> {
+//        System.out.println(it.toString());
+//        });
+//##############################################################################        
+//#################### LISTA REVENDEDORES X NIVEL ##############################
+
+//    List<Revendedor> revendedores = rd.buscarRevendedoresXNivel(4);
+//    revendedores.forEach((it) -> {
+//        System.out.println(it.toString());
+//        });
+    
+      
+    
+//############################################################################## 
+//######################## TODO CAMPAÑA DATA ####################################
+
+// GUARDAR CAMPAÑA - ok
+// BORRAR CAMPAÑA X ID - ok
+// BORRAR CAMPAÑA X NOMBRE - ok
+// MODIFICAR CAMPAÑA - ok
+// BUSCAR CAMPAÑA X ID - ok
+// BUSCAR CAMPAÑA X NOMBRE - ok
+// BUSCAR CAMPAÑA X FECHA DE INICIO - ok
+// BUSCAR CAMPAÑA ACTIVA - ok
+// BUSCAR LISTA CAMPAÑAS - ok
+// BUSCAR LISTA CAMPAÑAS INACTIVAS - ok
+    
+//############################################################################## 
+//########################## GUARDAR CAMPAÑA ####################################    
+
+     /*
+       Campaña nov = new Campaña("Febrero", LocalDate.of(2020, 02, 01), 1500, 2000, true );
+       cd.guardarCampaña(nov);
+       System.out.println(nov);
+    
+      //Campaña oct = new Campaña("Octubre", LocalDate.of(2020, 10, 01), LocalDate.of(2020, 10, 26), 1500, 2000, false );
+      //cd.guardarCampaña(oct);
+    */
+      
+//##############################################################################
+//########################## BORRAR CAMPAÑA ####################################    
+    
+        //BORRAR X ID
+        //cd.borrarCampaña(2);
+        
+        //BORRAR X NOMBRE
+        //cd.borrarCampaña("Noviembre");
+        
+                
+//##############################################################################
+//########################## MODIFICAR CAMPAÑA #################################           
+    
+    /*
+        //MODIFICAR CAMPAÑA
+        Campaña nov = cd.buscarCampaña(8);
+        System.out.println(nov);
+        nov.setNombre("Mayo");
+        System.out.println(nov);
+        cd.modificarCampaña(nov);
+        System.out.println(nov);
+    */ 
+    
+    /*
+        //CERRAR CAMPAÑA
+        Campaña nov = cd.buscarCampaña(12);
+        System.out.println(nov);
+        cd.cerrarCampaña(nov);
+        System.out.println(nov);
+        
+    */
+//##############################################################################
+//########################### BUSCAR CAMPAÑA ###################################          
+   
+        //BUSCAR CAMPAÑA X ID
+        //System.out.println(cd.buscarCampaña(3));
+         
+        //BUSCAR CAMPAÑA X NOMBRE
+        //System.out.println(cd.buscarCampaña("marzo"));
+    
+        //BUSCAR CAMPAÑA X FECHA DE INICIO
+        //System.out.println(cd.buscarCampañaXFechaInicio(LocalDate.of(2020,11,6)));
+        
+        //BUSCAR CAMPAÑA ACTIVA
+        //System.out.println(cd.buscarCampañaActiva());
+    
+//##############################################################################
+//####################### BUSCAR CAMPAÑAS - LISTAS #############################
+
+        /* VER TODOS LAS CAMPAÑAS
+            for (Campaña it: cd.buscarCampañas()) {
+                System.out.println(it);
+            }
+        */    
+            
+                    
+        /* VER TODOS LAS CAMPAÑAS INACTIVAS
+            for (Campaña it: cd.buscarCampañasInActivas()) {
+                System.out.println(it);
+            }    
+        */
+        
+//##############################################################################        
+//################ BLOQUE PRUEBA PEDIDO / DETALLE PEDIDO #######################
+
+    //Pedido(Revendedor revendedor, Campaña campaña, LocalDate fecha_ingreso, boolean activo)
+//    Pedido pedido1 = new Pedido(rd.buscarRevendedor("36227970"), cd.buscarCampañaActiva(), LocalDate.now(), true);
+//    ped.altaPedido(pedido1);
+
+//    Pedido pedido2 = new Pedido(rd.buscarRevendedor("30377673"), cd.buscarCampañaActiva(), LocalDate.of(2020,11,9), true);
+//    ped.altaPedido(pedido2);
+
+//    DetallePedido det_ped = new DetallePedido(pedido1, prd.buscarProducto(2), 5);
+//    DetallePedido det_ped2 = new DetallePedido(pedido1, prd.buscarProducto(5), 3);
+//    DetallePedido det_ped3 = new DetallePedido(pedido1, prd.buscarProducto(7), 5);
+//    dp.pedirProducto(det_ped);
+//    dp.pedirProducto(det_ped2);
+//    dp.pedirProducto(det_ped3);
+
+//##############################################################################        
+//############################ CONSULTAS SOBRE UN PEDIDO #######################
+    
+//    // Cantidad estrellas pedido activo -OK
+//        System.out.println("Cant estrellas: "+ped.cantEstrellasPedidoActivo(ped.buscarPedido(1, 12)));
+//        System.out.println(ped.buscarPedido(1, 12).toString());
+//    
+//    // Cantidad cajas de un pedido -OK
+//        System.out.println("Cant cajas: "+ped.cantCajasPedido(ped.buscarPedido(1, 12))); 
+//        
+//    // Costo pedido activo -OK
+//        System.out.println("Costo pedido: "+ped.costoPedidoActivo(ped.buscarPedido(1, 12)));
+
+//    // Costo pedido pago -OK
+//        System.out.println("Costo pedido: "+ped.costoPedidoPago(ped.buscarPedido(1, 12)));
+//        
+//    // Costo público pedido activo -OK
+//        System.out.println("Costo público pedido: "+ped.costoPublicoPedidoActivo(ped.buscarPedido(1, 12)));
+        
+//##############################################################################        
+//################ ACTUALIZANDO FECHAS DE ENTREGA Y PAGO #######################
+    
+    /* Los métodos controlan si se ingresan fechas anteriores a las fechas
+     relativas y también se controla que la fecha de pago no sea a más
+     de 10 días de la fecha de entrega o que no se pueda ingresar fecha de
+     pago si no hay una fecha de entrega. */
+    
+//    Pedido pedido = ped.buscarPedido(1, 12);
+//    LocalDate fecha_entrega = LocalDate.of(2020, 11, 8);
+//    LocalDate fecha_pago = LocalDate.of(2020, 11, 18);
+//    
+//    // fecha de entrega - OK
+//    ped.actualizarFechaEntrega(pedido, fecha_entrega);
+//    // fecha de pago - OK
+//    ped.actualizarFechaPago(pedido, fecha_pago);
+
+//##############################################################################        
+//###################### ACTIVANDO / DESACTIVANDO PEDIDO #######################
+
+ //ped.inhabilitarPedido(ped.buscarPedido(1, 12)); // OK
+ //ped.habilitarPedido(ped.buscarPedido(1, 12)); // OK
+ 
+//##############################################################################        
+//########################## LISTA PEDIDOS X CAMPAÑA ###########################
+            
+//        // LISTA PEDIDOS PAGOS O NO - OK
+//        List<Pedido> pedidos = ped.listaPedidosCampaña(cd.buscarCampaña(12));
+//        pedidos.forEach((it) -> {
+//            System.out.println(it.toString());
+//        });
+//        
+//        // LISTA PEDIDOS PAGOS - OK
+//        List<Pedido> pedidos_pagos = ped.listaPedidosPagosCampaña(cd.buscarCampaña(12));
+//        pedidos_pagos.forEach((it) -> {
+//            System.out.println(it.toString());
+//        });
+    }
 }
