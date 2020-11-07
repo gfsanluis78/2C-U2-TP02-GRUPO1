@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-11-2020 a las 02:27:42
+-- Tiempo de generación: 07-11-2020 a las 01:58:08
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.10
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `aivon2`
+-- Base de datos: `aivon`
 --
 
 -- --------------------------------------------------------
@@ -37,6 +37,15 @@ CREATE TABLE `caja_pedido` (
   `estrellas_caja` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `caja_pedido`
+--
+
+INSERT INTO `caja_pedido` (`id_caja`, `id_pedido`, `id_producto`, `cantidad_producto`, `costo_caja`, `costo_caja_publico`, `estrellas_caja`) VALUES
+(3, 5, 2, 5, 1500, 1750, 25),
+(4, 5, 5, 3, 750, 900, 3),
+(5, 5, 7, 5, 500, 750, 5);
+
 -- --------------------------------------------------------
 
 --
@@ -52,6 +61,25 @@ CREATE TABLE `campaña` (
   `monto_max` double NOT NULL,
   `activa` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `campaña`
+--
+
+INSERT INTO `campaña` (`id_campaña`, `nombre`, `fecha_inicio`, `fecha_fin`, `monto_min`, `monto_max`, `activa`) VALUES
+(1, 'Primera', '2020-01-01', '2020-01-26', 1500, 2000, 0),
+(2, 'Segunda', '2020-01-27', '2020-02-21', 1500, 2000, 0),
+(3, 'Tercera', '2020-02-22', '2020-03-18', 1500, 2000, 0),
+(4, 'Cuarta', '2020-03-19', '2020-04-13', 1500, 2000, 0),
+(5, 'Quinta', '2020-04-14', '2020-05-09', 1500, 2000, 0),
+(6, 'Sexta', '2020-05-10', '2020-06-04', 1500, 2000, 0),
+(7, 'Septima', '2020-06-05', '2020-06-30', 1500, 2000, 0),
+(8, 'Octava', '2020-07-01', '2020-07-26', 1500, 2000, 0),
+(9, 'Novena', '2020-07-27', '2020-08-22', 1500, 2000, 0),
+(10, 'Decima', '2020-08-23', '2020-09-17', 1500, 2000, 0),
+(11, 'DECIMAPRIMERA', '2020-09-18', '2020-10-13', 1500, 2000, 0),
+(12, 'DECIMASEGUNDA', '2020-10-14', '2020-11-08', 1500, 2000, 1),
+(13, 'DECIMATERCERA', '2020-11-09', '2020-12-04', 1500, 2000, 0);
 
 -- --------------------------------------------------------
 
@@ -88,6 +116,13 @@ CREATE TABLE `pedido` (
   `activo` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `pedido`
+--
+
+INSERT INTO `pedido` (`id_pedido`, `id_revendedor`, `id_campaña`, `fecha_ingreso`, `fecha_entrega`, `fecha_pago`, `cantidad_cajas`, `estrellas_pedido`, `pago`, `activo`) VALUES
+(5, 1, 12, '2020-11-06', '2020-11-08', '2020-11-18', NULL, NULL, 0, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -99,8 +134,8 @@ CREATE TABLE `producto` (
   `nombre` varchar(30) NOT NULL,
   `uso` varchar(30) NOT NULL,
   `tamaño_cm3` int(11) NOT NULL,
-  `costo_publico` double NOT NULL,
   `costo` double NOT NULL,
+  `costo_publico` double NOT NULL,
   `estrellas` int(11) NOT NULL DEFAULT 0,
   `activo` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -109,11 +144,22 @@ CREATE TABLE `producto` (
 -- Volcado de datos para la tabla `producto`
 --
 
-INSERT INTO `producto` (`id_producto`, `nombre`, `uso`, `tamaño_cm3`, `costo_publico`, `costo`, `estrellas`, `activo`) VALUES
-(1, 'CREMA MIVEA', 'CREMA CORPORAL', 100, 230, 200, 2, 1),
-(2, 'DESODORANTE ROXANA', 'DESODORANTE CORPORAL', 240, 350, 300, 5, 1),
-(3, 'ESMALTE UÑAS', 'MANOS', 10, 100, 70, 2, 1),
-(4, 'ESPONJA VEGETAL', 'CORPORAL', 30, 70, 50, 3, 1);
+INSERT INTO `producto` (`id_producto`, `nombre`, `uso`, `tamaño_cm3`, `costo`, `costo_publico`, `estrellas`, `activo`) VALUES
+(1, 'CREMA MIVEA', 'CREMA CORPORAL', 100, 200, 230, 2, 1),
+(2, 'DESODORANTE ROXANA', 'DESODORANTE CORPORAL', 240, 300, 350, 5, 1),
+(3, 'ESMALTE UÑAS', 'MANOS', 10, 70, 100, 2, 1),
+(4, 'ESPONJA VEGETAL', 'CORPORAL', 30, 50, 70, 3, 1),
+(5, 'Jabon liquido Frutilla', 'Cabello', 120, 250, 300, 1, 1),
+(6, 'Shampoo ', 'Cabello', 120, 200, 250, 1, 1),
+(7, 'SHAMPOO PARA BARBA ', 'Cabello', 120, 100, 150, 1, 1),
+(8, 'SUERO REDUCTOR DE ARRUGAS', 'PIEL', 130, 1002, 1305, 5, 1),
+(9, 'DESODORANTE CORPORAL', 'PERSONAL', 130, 270, 330, 4, 1),
+(10, 'DESODORANTE ANTIMANCHAS', 'PERSONAL', 130, 180, 225, 4, 1),
+(11, 'ANTISEÑALES', 'PIEL', 130, 960, 870, 4, 1),
+(12, 'JABONES EN BARRA LIMON', 'PIEL', 130, 336, 280, 4, 1),
+(13, 'ACEITE CORPORAL ALMENDRAS', 'PIEL', 130, 913, 800, 4, 1),
+(14, 'BALSAMO POST BARBA', 'BARBA', 130, 344, 250, 4, 1),
+(15, 'MASCARILLA EXFOLIANTE', 'CARA', 130, 590, 389, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -137,9 +183,9 @@ CREATE TABLE `revendedor` (
 --
 
 INSERT INTO `revendedor` (`id_revendedor`, `nombre`, `apellido`, `dni`, `tel`, `email`, `nivel`, `activo`) VALUES
-(1, 'Mario', 'Avaca', '30377673', '2664222979', 'marioraulavaca@gmail.com', 1, 0),
-(2, 'Ezequiel', 'Albornoz', '36227970', '1123917575', 'franco.ezequiel@outlook.com', 1, 0),
-(3, 'Genaro', 'Farias', '26525567', '2664692950', 'gfsanluis78@gmail.com', 1, 1);
+(1, 'Ezequiel', 'Albornoz', '36227970', '1123917575', 'franco.ezequielq@outlook.com', 1, 1),
+(3, 'Mario', 'Avaca', '30377673', '2664222979', 'marioraulavaca@gmail.com', 1, 1),
+(4, 'Genaro', 'Farias', '26525567', '2664692950', 'gfsanluis78@gmail.com', 1, 1);
 
 --
 -- Índices para tablas volcadas
@@ -197,13 +243,13 @@ ALTER TABLE `revendedor`
 -- AUTO_INCREMENT de la tabla `caja_pedido`
 --
 ALTER TABLE `caja_pedido`
-  MODIFY `id_caja` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_caja` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `campaña`
 --
 ALTER TABLE `campaña`
-  MODIFY `id_campaña` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_campaña` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `historico`
@@ -215,19 +261,19 @@ ALTER TABLE `historico`
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `revendedor`
 --
 ALTER TABLE `revendedor`
-  MODIFY `id_revendedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_revendedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas

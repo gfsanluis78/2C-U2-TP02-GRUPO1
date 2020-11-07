@@ -15,6 +15,12 @@ public class DetallePedido {
 
     public DetallePedido() {
     }
+    
+    public DetallePedido(Pedido pedido, Producto producto, int cantidad_producto) {
+        this.pedido = pedido;
+        this.producto = producto;
+        this.cantidad_producto = cantidad_producto;
+    }
 
     public DetallePedido(Pedido pedido, Producto producto, int cantidad_producto, double costo_caja, double costo_caja_publico, int estrellas_caja) {
         this.pedido = pedido;
