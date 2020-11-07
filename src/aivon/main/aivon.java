@@ -114,7 +114,18 @@ public class aivon {
     // guardarRevendedor() - OK
     // borrarRevendedor() - OK
     // modificarRevendedor() - OK
-    // buscarRevendedor() - OK
+    // buscarRevendedor x dni() - OK
+    // BUSCAR REVENDEDOR X ID - ok
+    // BUSCAR REVENEDORES - OK
+    // BUSCAR REVENDEDORES ACTIVOS - ok
+    // BUSCAR REVENDEDORES X NIVEL - ok
+    // BUSCAR REVENDEDORES X CAMPAÑA - Falta historico
+    // GANANCIA FINAL O TOTAL POR REVENDEDOR -
+    // GANANCIA REVENDEDOR POR PEDIDO 
+    // GANANCIA REVENDEDOR POR CAMPAÑA
+    // BUSCAR ESTRELLAS TOTALES POR REVENDEDOR
+    // CALCULAR MONOT MINIMO REVENDOR
+    // CALCULAR MNTO MAXIMO REVENDEDOR
     
     
         
@@ -149,12 +160,21 @@ public class aivon {
 //    rd.modificarRevendedor(genaro);
    
 //##############################################################################        
-//#################### BUSCAR REVENDEDOR #######################################
+//#################### BUSCAR REVENDEDOR POR DNI ###############################
     
 //        Revendedor alguien = rd.buscarRevendedor("26525567");
 //        System.out.println(alguien.toString());
 //        Revendedor alguien2 = rd.buscarRevendedor(alguien.getId_revendedor());
 //        System.out.println(alguien2.toString());
+
+//##############################################################################        
+//#################### BUSCAR REVENDEDOR POR ID ################################
+    
+//        Revendedor alguien = rd.buscarRevendedor(3);
+//        System.out.println(alguien.toString());
+//        Revendedor alguien2 = rd.buscarRevendedor(alguien.getId_revendedor());
+//        System.out.println(alguien2.toString());
+
 
 //##############################################################################        
 //#################### LISTA REVENDEDORES ######################################
@@ -165,8 +185,8 @@ public class aivon {
 //        });    
 
 //##############################################################################        
-//#################### LISTA REVENDEDORES ######################################
-
+//#################### LISTA REVENDEDORES ACTIVOS ##############################
+//
 //    List<Revendedor> revendedores = rd.buscarRevendedoresActivos();
 //    revendedores.forEach((it) -> {
 //        System.out.println(it.toString());
@@ -174,13 +194,28 @@ public class aivon {
 //##############################################################################        
 //#################### LISTA REVENDEDORES X NIVEL ##############################
 
-//    List<Revendedor> revendedores = rd.buscarRevendedoresXNivel(4);
+//    List<Revendedor> revendedores = rd.buscarRevendedoresXNivel(1);
 //    revendedores.forEach((it) -> {
 //        System.out.println(it.toString());
 //        });
-    
-      
-    
+//    
+//      
+//##############################################################################        
+//#################### LISTA REVENDEDORES X CAMPAÑA ##############################
+
+//    List<Revendedor> revendedores = rd.buscarRevendedoresXCampaña(12);
+//    revendedores.forEach((it) -> {
+//        System.out.println(it.toString());
+//        });
+////    
+////
+//##############################################################################        
+//#################### GANANCIA FINAL REVENDEDOR ###############################
+
+        Revendedor alguien = rd.buscarRevendedor(1);
+        System.out.println(alguien.toString());
+        System.out.println("La ganancia suma al dia de hoy $"+alguien.calcularGananciasTotales()+".");
+          
 //############################################################################## 
 //######################## TODO CAMPAÑA DATA ####################################
 
