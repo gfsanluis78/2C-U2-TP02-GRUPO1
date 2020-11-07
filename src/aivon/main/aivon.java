@@ -47,7 +47,7 @@ public class aivon {
     //Se debe controlar en vistas que los precios no pueden ser nulos/vacios
     //Controlar el largo de los nombres (varchar30)
 
-//    Producto aux=new Producto("MASCARILLA EXFOLIANTE","CARA","130", 590.0, 389.0, 4, true);
+//    Producto aux=new Producto("Jabon liquido miel","Cabello","120", 250.0, 300.0, 1, true);
 //  
 //    prd.altaProducto(aux);
 
@@ -122,7 +122,7 @@ public class aivon {
 //    Revendedor eze = new Revendedor("Ezequiel", "Albornoz", "36227970", "1123917575", "franco.ezequielq@outlook.com");
 //    Revendedor mario = new Revendedor("Mario", "Avaca", "30377673", "2664222979", "marioraulavaca@gmail.com");
 //    Revendedor genaro = new Revendedor("Genaro", "Farias", "26525567", "2664692950", "gfsanluis78@gmail.com");
-//    
+    
 //    rd.guardarRevendedor(eze);
 //    rd.guardarRevendedor(mario);
 //    rd.guardarRevendedor(genaro);
