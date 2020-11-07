@@ -213,6 +213,7 @@ public class aivon {
 //##############################################################################        
 //#################### GANANCIA FINAL REVENDEDOR ###############################
 
+//
 //        Revendedor alguien = rd.buscarRevendedor(1);
 //        System.out.println(alguien.toString());
 //        System.out.println("La ganancia suma al dia de hoy $"+alguien.calcularGananciasTotales()+".");
