@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-11-2020 a las 01:58:08
+-- Tiempo de generación: 07-11-2020 a las 05:59:19
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.10
 
@@ -94,8 +94,16 @@ CREATE TABLE `historico` (
   `monto_min` double NOT NULL,
   `monto_max` double NOT NULL,
   `estrellas_campaña_revendedor` int(11) NOT NULL,
-  `estado_campaña_revendedor` tinyint(1) NOT NULL
+  `ganancia` double NOT NULL DEFAULT 0,
+  `nivel` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `historico`
+--
+
+INSERT INTO `historico` (`id_historico`, `id_revendedor`, `id_campaña`, `monto_min`, `monto_max`, `estrellas_campaña_revendedor`, `ganancia`, `nivel`) VALUES
+(4, 1, 12, 1500, 2000, 33, 650, 1);
 
 -- --------------------------------------------------------
 
@@ -112,7 +120,6 @@ CREATE TABLE `pedido` (
   `fecha_pago` date DEFAULT NULL,
   `cantidad_cajas` int(11) DEFAULT NULL,
   `estrellas_pedido` int(11) DEFAULT NULL,
-  `pago` tinyint(1) NOT NULL DEFAULT 0,
   `activo` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -120,8 +127,8 @@ CREATE TABLE `pedido` (
 -- Volcado de datos para la tabla `pedido`
 --
 
-INSERT INTO `pedido` (`id_pedido`, `id_revendedor`, `id_campaña`, `fecha_ingreso`, `fecha_entrega`, `fecha_pago`, `cantidad_cajas`, `estrellas_pedido`, `pago`, `activo`) VALUES
-(5, 1, 12, '2020-11-06', '2020-11-08', '2020-11-18', NULL, NULL, 0, 1);
+INSERT INTO `pedido` (`id_pedido`, `id_revendedor`, `id_campaña`, `fecha_ingreso`, `fecha_entrega`, `fecha_pago`, `cantidad_cajas`, `estrellas_pedido`, `activo`) VALUES
+(5, 1, 12, '2020-11-06', '2020-11-08', '2020-11-18', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -255,7 +262,7 @@ ALTER TABLE `campaña`
 -- AUTO_INCREMENT de la tabla `historico`
 --
 ALTER TABLE `historico`
-  MODIFY `id_historico` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_historico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido`

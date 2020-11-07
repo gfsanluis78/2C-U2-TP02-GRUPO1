@@ -5,6 +5,7 @@
  */
 package aivon.main;
 
+
 import aivon.entidades.Producto;
 import aivon.modelos.CampañaData;
 import aivon.modelos.Conexion;
@@ -114,7 +115,18 @@ public class aivon {
     // guardarRevendedor() - OK
     // borrarRevendedor() - OK
     // modificarRevendedor() - OK
-    // buscarRevendedor() - OK
+    // buscarRevendedor x dni() - OK
+    // BUSCAR REVENDEDOR X ID - ok
+    // BUSCAR REVENEDORES - OK
+    // BUSCAR REVENDEDORES ACTIVOS - ok
+    // BUSCAR REVENDEDORES X NIVEL - ok
+    // BUSCAR REVENDEDORES X CAMPAÑA - Falta historico
+    // GANANCIA FINAL O TOTAL POR REVENDEDOR -
+    // GANANCIA REVENDEDOR POR PEDIDO 
+    // GANANCIA REVENDEDOR POR CAMPAÑA
+    // BUSCAR ESTRELLAS TOTALES POR REVENDEDOR
+    // CALCULAR MONOT MINIMO REVENDOR
+    // CALCULAR MNTO MAXIMO REVENDEDOR
     
     
         
@@ -149,12 +161,21 @@ public class aivon {
 //    rd.modificarRevendedor(genaro);
    
 //##############################################################################        
-//#################### BUSCAR REVENDEDOR #######################################
+//#################### BUSCAR REVENDEDOR POR DNI ###############################
     
 //        Revendedor alguien = rd.buscarRevendedor("26525567");
 //        System.out.println(alguien.toString());
 //        Revendedor alguien2 = rd.buscarRevendedor(alguien.getId_revendedor());
 //        System.out.println(alguien2.toString());
+
+//##############################################################################        
+//#################### BUSCAR REVENDEDOR POR ID ################################
+    
+//        Revendedor alguien = rd.buscarRevendedor(3);
+//        System.out.println(alguien.toString());
+//        Revendedor alguien2 = rd.buscarRevendedor(alguien.getId_revendedor());
+//        System.out.println(alguien2.toString());
+
 
 //##############################################################################        
 //#################### LISTA REVENDEDORES ######################################
@@ -165,8 +186,8 @@ public class aivon {
 //        });    
 
 //##############################################################################        
-//#################### LISTA REVENDEDORES ######################################
-
+//#################### LISTA REVENDEDORES ACTIVOS ##############################
+//
 //    List<Revendedor> revendedores = rd.buscarRevendedoresActivos();
 //    revendedores.forEach((it) -> {
 //        System.out.println(it.toString());
@@ -174,13 +195,28 @@ public class aivon {
 //##############################################################################        
 //#################### LISTA REVENDEDORES X NIVEL ##############################
 
-//    List<Revendedor> revendedores = rd.buscarRevendedoresXNivel(4);
+//    List<Revendedor> revendedores = rd.buscarRevendedoresXNivel(1);
 //    revendedores.forEach((it) -> {
 //        System.out.println(it.toString());
 //        });
-    
-      
-    
+//    
+//      
+//##############################################################################        
+//#################### LISTA REVENDEDORES X CAMPAÑA ##############################
+
+//    List<Revendedor> revendedores = rd.buscarRevendedoresXCampaña(12);
+//    revendedores.forEach((it) -> {
+//        System.out.println(it.toString());
+//        });
+////    
+////
+//##############################################################################        
+//#################### GANANCIA FINAL REVENDEDOR ###############################
+
+//        Revendedor alguien = rd.buscarRevendedor(1);
+//        System.out.println(alguien.toString());
+//        System.out.println("La ganancia suma al dia de hoy $"+alguien.calcularGananciasTotales()+".");
+          
 //############################################################################## 
 //######################## TODO CAMPAÑA DATA ####################################
 
@@ -198,8 +234,8 @@ public class aivon {
 //############################################################################## 
 //########################## GUARDAR CAMPAÑA ####################################    
 
-     /*
-       Campaña nov = new Campaña("Febrero", LocalDate.of(2020, 02, 01), 1500, 2000, true );
+     /*AL CREAR LA CAMPAÑA INGRESAR NOMBRE, FECHA DE INICIO (LA FECHA DE FIN SE CALCULA SOLA EN BD), MONTO MIN Y MONTO MAX.
+       Campaña nov = new Campaña("DecimoPrimera", LocalDate.of(2020,08,22), 1500, 2000, false );
        cd.guardarCampaña(nov);
        System.out.println(nov);
     
@@ -289,8 +325,8 @@ public class aivon {
 //##############################################################################        
 //############################ CONSULTAS SOBRE UN PEDIDO #######################
     
-//    // Cantidad estrellas pedido activo -OK
-//        System.out.println("Cant estrellas: "+ped.cantEstrellasPedidoActivo(ped.buscarPedido(1, 12)));
+//    // Cantidad estrellas pedido pago -OK
+//        System.out.println("Cant estrellas: "+ped.cantEstrellasPedidoPago(ped.buscarPedido(1, 12)));
 //        System.out.println(ped.buscarPedido(1, 12).toString());
 //    
 //    // Cantidad cajas de un pedido -OK
@@ -343,19 +379,24 @@ public class aivon {
 //            System.out.println(it.toString());
 //        });
 //##############################################################################        
-//########################## HISTORICO ###########################
-    Revendedor revendedor= rd.buscarRevendedor("36227970");
-    Campaña campaña=cd.buscarCampaña(12);
-    Pedido pedido=ped.buscarPedido(revendedor.getId_revendedor(), campaña.getId_campaña());
-    int cantidadEstrellas=ped.cantEstrellasPedidoPago(pedido);
-    double ganancia=rd.gananciaRevendedorPorCampaña(revendedor, campaña);
-    double monto_min=rd.calcularMontoMinimoRevendedor(revendedor);
-    double monto_max=rd.calcularMontoMaximoRevendedor(revendedor);
-    int nivel=rd.calcularNivelRevendedor(revendedor);
-    Historico historico=new Historico(revendedor, campaña, monto_min, monto_max, nivel, ganancia, cantidadEstrellas);
-    hd.altaHistorico(historico);
+//########################## HISTORICO #########################################
+
+//    Revendedor revendedor= rd.buscarRevendedor("36227970");
+//    Campaña campaña=cd.buscarCampaña(12);
+//    Pedido pedido=ped.buscarPedido(revendedor.getId_revendedor(), campaña.getId_campaña());
+//    int cantidadEstrellas=ped.cantEstrellasPedidoPago(pedido);
+//    System.out.println(cantidadEstrellas);
+//    double ganancia=rd.gananciaRevendedorPorCampaña(revendedor, campaña);
+//    System.out.println(ganancia);
+//    double monto_min=rd.calcularMontoMinimoRevendedor(revendedor);
+//    System.out.println(monto_min);
+//    double monto_max=rd.calcularMontoMaximoRevendedor(revendedor);
+//    System.out.println(monto_max);
+//    int nivel=rd.calcularNivelRevendedor(revendedor);
+//    System.out.println(nivel);
+//    Historico historico=new Historico(revendedor, campaña, monto_min, monto_max, nivel, ganancia, cantidadEstrellas);
+//    hd.altaHistorico(historico);
+//    System.out.println(historico.toString());
     
-
-
     }
 }
