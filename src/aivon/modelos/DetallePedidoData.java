@@ -19,7 +19,7 @@ public class DetallePedidoData {
 //################ AGREGAR PEDIDO DE X PRODUCTO ################################
     public void pedirProducto(DetallePedido detalle_pedido) {
 
-        String pre_instruccion = "INSERT INTO detalle_pedido (id_pedido, id_producto, cant_producto, costo_caja, costo_caja_publico, estrellas_caja) VALUES (?, ?, ?, ?, ?, ?);";
+        String pre_instruccion = "INSERT INTO caja_pedido (id_pedido, id_producto, cantidad_producto, costo_caja, costo_caja_publico, estrellas_caja) VALUES (?, ?, ?, ?, ?, ?);";
 
         try {
             PreparedStatement instruccion = c.prepareStatement(pre_instruccion, Statement.RETURN_GENERATED_KEYS);

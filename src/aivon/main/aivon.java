@@ -24,6 +24,8 @@ import aivon.modelos.ProductoData;
 import aivon.modelos.RevendedorData;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.Month;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -266,7 +268,78 @@ public class aivon {
             }    
         */
         
+//##############################################################################        
+//################ BLOQUE PRUEBA PEDIDO / DETALLE PEDIDO #######################
+
+    //Pedido(Revendedor revendedor, Campaña campaña, LocalDate fecha_ingreso, boolean activo)
+//    Pedido pedido1 = new Pedido(rd.buscarRevendedor("36227970"), cd.buscarCampañaActiva(), LocalDate.now(), true);
+//    ped.altaPedido(pedido1);
+
+//    Pedido pedido2 = new Pedido(rd.buscarRevendedor("30377673"), cd.buscarCampañaActiva(), LocalDate.of(2020,11,9), true);
+//    ped.altaPedido(pedido2);
+
+//    DetallePedido det_ped = new DetallePedido(pedido1, prd.buscarProducto(2), 5);
+//    DetallePedido det_ped2 = new DetallePedido(pedido1, prd.buscarProducto(5), 3);
+//    DetallePedido det_ped3 = new DetallePedido(pedido1, prd.buscarProducto(7), 5);
+//    dp.pedirProducto(det_ped);
+//    dp.pedirProducto(det_ped2);
+//    dp.pedirProducto(det_ped3);
+
+//##############################################################################        
+//############################ CONSULTAS SOBRE UN PEDIDO #######################
+    
+//    // Cantidad estrellas pedido activo -OK
+//        System.out.println("Cant estrellas: "+ped.cantEstrellasPedidoActivo(ped.buscarPedido(1, 12)));
+//        System.out.println(ped.buscarPedido(1, 12).toString());
+//    
+//    // Cantidad cajas de un pedido -OK
+//        System.out.println("Cant cajas: "+ped.cantCajasPedido(ped.buscarPedido(1, 12))); 
+//        
+//    // Costo pedido activo -OK
+//        System.out.println("Costo pedido: "+ped.costoPedidoActivo(ped.buscarPedido(1, 12)));
+
+//    // Costo pedido pago -OK
+//        System.out.println("Costo pedido: "+ped.costoPedidoPago(ped.buscarPedido(1, 12)));
+//        
+//    // Costo público pedido activo -OK
+//        System.out.println("Costo público pedido: "+ped.costoPublicoPedidoActivo(ped.buscarPedido(1, 12)));
         
-        
+//##############################################################################        
+//################ ACTUALIZANDO FECHAS DE ENTREGA Y PAGO #######################
+    
+    /* Los métodos controlan si se ingresan fechas anteriores a las fechas
+     relativas y también se controla que la fecha de pago no sea a más
+     de 10 días de la fecha de entrega o que no se pueda ingresar fecha de
+     pago si no hay una fecha de entrega. */
+    
+//    Pedido pedido = ped.buscarPedido(1, 12);
+//    LocalDate fecha_entrega = LocalDate.of(2020, 11, 8);
+//    LocalDate fecha_pago = LocalDate.of(2020, 11, 18);
+//    
+//    // fecha de entrega - OK
+//    ped.actualizarFechaEntrega(pedido, fecha_entrega);
+//    // fecha de pago - OK
+//    ped.actualizarFechaPago(pedido, fecha_pago);
+
+//##############################################################################        
+//###################### ACTIVANDO / DESACTIVANDO PEDIDO #######################
+
+ //ped.inhabilitarPedido(ped.buscarPedido(1, 12)); // OK
+ //ped.habilitarPedido(ped.buscarPedido(1, 12)); // OK
+ 
+//##############################################################################        
+//########################## LISTA PEDIDOS X CAMPAÑA ###########################
+            
+//        // LISTA PEDIDOS PAGOS O NO - OK
+//        List<Pedido> pedidos = ped.listaPedidosCampaña(cd.buscarCampaña(12));
+//        pedidos.forEach((it) -> {
+//            System.out.println(it.toString());
+//        });
+//        
+//        // LISTA PEDIDOS PAGOS - OK
+//        List<Pedido> pedidos_pagos = ped.listaPedidosPagosCampaña(cd.buscarCampaña(12));
+//        pedidos_pagos.forEach((it) -> {
+//            System.out.println(it.toString());
+//        });
     }
 }
