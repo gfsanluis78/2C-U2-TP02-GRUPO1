@@ -383,7 +383,7 @@ public class PedidoData {
 //################ CANTIDAD ESTRELLAS PEDIDO PAGO ############################
 
     public int cantEstrellasPedidoPago(Pedido pedido) {
-
+       
         int cantidad = 0;
 
         try {

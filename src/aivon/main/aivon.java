@@ -49,7 +49,7 @@ public class aivon {
     //Se debe controlar en vistas que los precios no pueden ser nulos/vacios
     //Controlar el largo de los nombres (varchar30)
 
-//    Producto aux=new Producto("Jabon liquido miel","Cabello","120", 250.0, 300.0, 1, true);
+//    Producto aux=new Producto("MASCARILLA EXFOLIANTE","CARA","130", 590.0, 389.0, 4, true);
 //  
 //    prd.altaProducto(aux);
 
@@ -197,8 +197,8 @@ public class aivon {
 //############################################################################## 
 //########################## GUARDAR CAMPAÑA ####################################    
 
-     /*
-       Campaña nov = new Campaña("Febrero", LocalDate.of(2020, 02, 01), 1500, 2000, true );
+     /*AL CREAR LA CAMPAÑA INGRESAR NOMBRE, FECHA DE INICIO (LA FECHA DE FIN SE CALCULA SOLA EN BD), MONTO MIN Y MONTO MAX.
+       Campaña nov = new Campaña("DecimoPrimera", LocalDate.of(2020,08,22), 1500, 2000, false );
        cd.guardarCampaña(nov);
        System.out.println(nov);
     
