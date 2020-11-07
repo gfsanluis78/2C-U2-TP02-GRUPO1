@@ -43,6 +43,7 @@ public class aivon {
         ProductoData prd = new ProductoData(con);
         DetallePedidoData dp = new DetallePedidoData(con);
         PedidoData ped = new PedidoData(con);
+        HistoricoData hd= new HistoricoData(con);
         RevendedorData rd = new RevendedorData(con);
         
 //##############################################################################
@@ -342,5 +343,20 @@ public class aivon {
 //        pedidos_pagos.forEach((it) -> {
 //            System.out.println(it.toString());
 //        });
+//##############################################################################        
+//########################## HISTORICO ###########################
+    Revendedor revendedor= rd.buscarRevendedor("36227970");
+    Campaña campaña=cd.buscarCampaña(12);
+    Pedido pedido=ped.buscarPedido(revendedor.getId_revendedor(), campaña.getId_campaña());
+    int cantidadEstrellas=ped.cantEstrellasPedidoPago(pedido);
+    double ganancia=rd.gananciaRevendedorPorCampaña(revendedor, campaña);
+    double monto_min=rd.calcularMontoMinimoRevendedor(revendedor);
+    double monto_max=rd.calcularMontoMaximoRevendedor(revendedor);
+    int nivel=rd.calcularNivelRevendedor(revendedor);
+    Historico historico=new Historico(revendedor, campaña, monto_min, monto_max, nivel, ganancia, cantidadEstrellas);
+    hd.altaHistorico(historico);
+    
+
+
     }
 }
