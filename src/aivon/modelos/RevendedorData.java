@@ -350,12 +350,7 @@ public class RevendedorData {
         List<Revendedor> revendedores = new ArrayList<>();
 
         try {
-            PreparedStatement instruccion = con.prepareStatement("SELECT revendedor.id_revendedor, "
-                    + "revendedor.nombre, apellido, dni, tel, email, "
-                    + "revendedor.activo FROM revendedor,campaña  "
-                    + "where historico.id_campaña = campaña.id_campaña AND  "
-                    + "revendedor.id_revendedor= historico.id_revendedor "
-                    + "AND campaña.id_campaña =" + idCampaña);
+            PreparedStatement instruccion = con.prepareStatement("SELECT revendedor.id_revendedor, revendedor.nombre, apellido, dni, tel, email, revendedor.nivel, revendedor.activo FROM revendedor,campaña, historico where historico.id_campaña = campaña.id_campaña AND revendedor.id_revendedor= historico.id_revendedor AND campaña.id_campaña = " + idCampaña+";");
 
             ResultSet consulta = instruccion.executeQuery();
             
@@ -483,18 +478,14 @@ public class RevendedorData {
         try {
 
             Statement statement = con.createStatement();
-            ResultSet consulta = statement.executeQuery("SELECT SUM(estrellas_pedido) "
-                    + "AS estrellas FROM pedido"
-                    + "WHERE pedido.fecha_pago IS NOT null "                              //puede ser pago tambien
-                    + "AND pedido.id_revendedor =" + revendedor.getId_revendedor() 
-                    +";");
+            ResultSet consulta = statement.executeQuery("SELECT SUM(estrellas_pedido) AS estrellas FROM pedido WHERE pedido.fecha_pago IS NOT null AND pedido.id_revendedor = " + revendedor.getId_revendedor()+" ;");
 
             if(consulta.next()){
             estrellas = consulta.getInt("estrellas");
             }
-            statement.close();
             
-        } catch (SQLException e) {
+            statement.close();
+            } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al realizar la consulta");
             System.out.println(e.getMessage());
         }
