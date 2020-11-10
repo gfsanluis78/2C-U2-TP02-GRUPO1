@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-11-2020 a las 05:59:19
+-- Tiempo de generación: 10-11-2020 a las 04:11:20
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.10
 
@@ -44,7 +44,10 @@ CREATE TABLE `caja_pedido` (
 INSERT INTO `caja_pedido` (`id_caja`, `id_pedido`, `id_producto`, `cantidad_producto`, `costo_caja`, `costo_caja_publico`, `estrellas_caja`) VALUES
 (3, 5, 2, 5, 1500, 1750, 25),
 (4, 5, 5, 3, 750, 900, 3),
-(5, 5, 7, 5, 500, 750, 5);
+(5, 5, 7, 5, 500, 750, 5),
+(11, 12, 7, 5, 500, 1000, 25),
+(12, 13, 3, 5, 350, 500, 10),
+(13, 13, 4, 2, 100, 140, 6);
 
 -- --------------------------------------------------------
 
@@ -103,7 +106,9 @@ CREATE TABLE `historico` (
 --
 
 INSERT INTO `historico` (`id_historico`, `id_revendedor`, `id_campaña`, `monto_min`, `monto_max`, `estrellas_campaña_revendedor`, `ganancia`, `nivel`) VALUES
-(4, 1, 12, 1500, 2000, 33, 650, 1);
+(4, 1, 12, 1500, 2000, 33, 650, 1),
+(5, 3, 12, 1500, 2000, 25, 500, 1),
+(6, 4, 12, 1500, 2000, 16, 190, 1);
 
 -- --------------------------------------------------------
 
@@ -128,7 +133,9 @@ CREATE TABLE `pedido` (
 --
 
 INSERT INTO `pedido` (`id_pedido`, `id_revendedor`, `id_campaña`, `fecha_ingreso`, `fecha_entrega`, `fecha_pago`, `cantidad_cajas`, `estrellas_pedido`, `activo`) VALUES
-(5, 1, 12, '2020-11-06', '2020-11-08', '2020-11-18', NULL, NULL, 1);
+(5, 1, 12, '2020-11-06', '2020-11-08', '2020-11-18', NULL, NULL, 1),
+(12, 3, 12, '2020-11-05', '2020-11-06', '2020-11-07', NULL, NULL, 1),
+(13, 4, 12, '2020-10-28', '2020-11-01', '2020-11-03', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -153,12 +160,12 @@ CREATE TABLE `producto` (
 
 INSERT INTO `producto` (`id_producto`, `nombre`, `uso`, `tamaño_cm3`, `costo`, `costo_publico`, `estrellas`, `activo`) VALUES
 (1, 'CREMA MIVEA', 'CREMA CORPORAL', 100, 200, 230, 2, 1),
-(2, 'DESODORANTE ROXANA', 'DESODORANTE CORPORAL', 240, 300, 350, 5, 1),
+(2, 'DESODORANTE ROXANA', 'DESODORANTE CORPORAL', 240, 300, 400, 10, 1),
 (3, 'ESMALTE UÑAS', 'MANOS', 10, 70, 100, 2, 1),
 (4, 'ESPONJA VEGETAL', 'CORPORAL', 30, 50, 70, 3, 1),
-(5, 'Jabon liquido Frutilla', 'Cabello', 120, 250, 300, 1, 1),
+(5, 'Jabon liquido Frutilla', 'Cabello', 120, 250, 350, 5, 1),
 (6, 'Shampoo ', 'Cabello', 120, 200, 250, 1, 1),
-(7, 'SHAMPOO PARA BARBA ', 'Cabello', 120, 100, 150, 1, 1),
+(7, 'SHAMPOO PARA BARBA ', 'Cabello', 120, 100, 200, 5, 1),
 (8, 'SUERO REDUCTOR DE ARRUGAS', 'PIEL', 130, 1002, 1305, 5, 1),
 (9, 'DESODORANTE CORPORAL', 'PERSONAL', 130, 270, 330, 4, 1),
 (10, 'DESODORANTE ANTIMANCHAS', 'PERSONAL', 130, 180, 225, 4, 1),
@@ -250,7 +257,7 @@ ALTER TABLE `revendedor`
 -- AUTO_INCREMENT de la tabla `caja_pedido`
 --
 ALTER TABLE `caja_pedido`
-  MODIFY `id_caja` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_caja` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `campaña`
@@ -262,13 +269,13 @@ ALTER TABLE `campaña`
 -- AUTO_INCREMENT de la tabla `historico`
 --
 ALTER TABLE `historico`
-  MODIFY `id_historico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_historico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
