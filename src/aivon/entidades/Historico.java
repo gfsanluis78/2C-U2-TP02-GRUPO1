@@ -23,6 +23,19 @@ public class Historico {
     public Historico() {
     }
 
+    public Historico(Revendedor revendedor, Campaña campaña, double monto_min, double monto_max, int nivel) {
+        this.revendedor = revendedor;
+        this.campaña = campaña;
+        this.monto_min = monto_min;
+        this.monto_max = monto_max;
+        this.nivel = nivel;
+    }
+
+    public Historico(Revendedor revendedor, Campaña campaña) {
+        this.revendedor = revendedor;
+        this.campaña = campaña;
+    }
+          
     public Historico(Revendedor revendedor, Campaña campaña, double monto_min, double monto_max, int nivel, double ganancia, int estrellas_campaña_revendedor) {
         this.revendedor = revendedor;
         this.campaña = campaña;
@@ -32,7 +45,6 @@ public class Historico {
         this.ganancia = ganancia;
         this.estrellas_campaña_revendedor = estrellas_campaña_revendedor;
     }
-
     
     public Historico(int id_historico, Revendedor revendedor, Campaña campaña, double monto_min, double monto_max, int nivel, double ganancia, int estrellas_campaña_revendedor) {
         this.id_historico = id_historico;

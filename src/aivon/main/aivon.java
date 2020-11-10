@@ -26,6 +26,7 @@ import aivon.modelos.RevendedorData;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.Iterator;
 import javax.swing.JOptionPane;
 
 /**
@@ -381,8 +382,8 @@ public class aivon {
 //##############################################################################        
 //########################## HISTORICO #########################################
 
-//    Revendedor revendedor= rd.buscarRevendedor("36227970");
-//    Campaña campaña=cd.buscarCampaña(12);
+//    Revendedor revendedor= rd.buscarRevendedor("30377673");
+//    Campaña campaña=cd.buscarCampañaActiva();
 //    Pedido pedido=ped.buscarPedido(revendedor.getId_revendedor(), campaña.getId_campaña());
 //    int cantidadEstrellas=ped.cantEstrellasPedidoPago(pedido);
 //    System.out.println(cantidadEstrellas);
@@ -397,6 +398,67 @@ public class aivon {
 //    Historico historico=new Historico(revendedor, campaña, monto_min, monto_max, nivel, ganancia, cantidadEstrellas);
 //    hd.altaHistorico(historico);
 //    System.out.println(historico.toString());
+
+//##############################################################################        
+//##################### ACTUALIZAR HISTORICO ###################################
+//
+//        Revendedor revendedor = rd.buscarRevendedor("30377673");
+//        Campaña campaña = cd.buscarCampañaActiva();
+//        Pedido pedido = new Pedido(revendedor, campaña, LocalDate.of(2020, 11, 5), true);
+//        ped.altaPedido(pedido);
+//        DetallePedido detalle_pedido = new DetallePedido(pedido, prd.buscarProducto(7), 5);
+//        dp.pedirProducto(detalle_pedido);
+//        ped.actualizarFechaEntrega(pedido, LocalDate.of(2020, 11, 6));
+//        ped.actualizarFechaPago(pedido, LocalDate.of(2020, 11, 7));
+//        
+//
+//        double monto_min = rd.calcularMontoMinimoRevendedor(revendedor);
+//        System.out.println(monto_min);
+//
+//        double monto_max = rd.calcularMontoMaximoRevendedor(revendedor);
+//        System.out.println(monto_max);
+//
+//        int nivel = rd.calcularNivelRevendedor(revendedor);
+//        System.out.println(nivel);
+//
+//        double ganancia = rd.gananciaRevendedorPorCampaña(revendedor, campaña);
+//        System.out.println(ganancia);
+//
+//        int cantidadEstrellas = ped.cantEstrellasPedidoPago(pedido);
+//        System.out.println(cantidadEstrellas);
+//
+////        historico.setCampaña(campaña);
+////        historico.setRevendedor(revendedor);
+//        Historico historico = hd.buscarHistorico(revendedor, campaña);
+//        historico.setMonto_min(monto_min);
+//        historico.setMonto_max(monto_max);
+//        historico.setGanancia(ganancia);
+//        historico.setEstrellas_campaña_revendedor(cantidadEstrellas);
+//        historico.setNivel(nivel);
+//        hd.actualizarHistorico(historico);
+
+//##############################################################################        
+//##################### LISTA HISTORICO POR REVENDEDOR #########################
+
+        //HISTORICO POR REVENDEDOR
+//        for (Historico iterator : hd.buscarHistoricosPorRevendedor(rd.buscarRevendedor("36227970"))) {
+//            System.out.println(iterator.toString());
+//            
+//        }
+        //HISTORICO POR CAMAPAÑAS  
+//           for (Historico iterator : hd.buscarHistoricosPorCampaña(cd.buscarCampañaActiva())) {
+//           System.out.println(iterator.toString());
+//            
+//        }
+        
+//        // HISTORICOS GENERALES
+//          for (Historico iterator : hd.buscarHistoricos()) {
+//           System.out.println(iterator.toString());
+//            
+//        }
+          
+
+
     
     }
 }
