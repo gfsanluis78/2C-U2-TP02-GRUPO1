@@ -121,13 +121,12 @@ public class aivon {
     // BUSCAR REVENEDORES - OK
     // BUSCAR REVENDEDORES ACTIVOS - ok
     // BUSCAR REVENDEDORES X NIVEL - ok
-    // BUSCAR REVENDEDORES X CAMPAÑA - Falta historico
-    // GANANCIA FINAL O TOTAL POR REVENDEDOR -
-    // GANANCIA REVENDEDOR POR PEDIDO 
-    // GANANCIA REVENDEDOR POR CAMPAÑA
-    // BUSCAR ESTRELLAS TOTALES POR REVENDEDOR
-    // CALCULAR MONOT MINIMO REVENDOR
-    // CALCULAR MNTO MAXIMO REVENDEDOR
+    // BUSCAR REVENDEDORES X CAMPAÑA - ok
+    // GANANCIA FINAL O TOTAL POR REVENDEDOR - ok
+    // GANANCIA REVENDEDOR POR CAMPAÑA - ok
+    // BUSCAR ESTRELLAS TOTALES POR REVENDEDOR - ok
+    // CALCULAR MONTO MINIMO REVENDOR - ok
+    // CALCULAR MNTO MAXIMO REVENDEDOR - ok
     
     
         
@@ -205,21 +204,52 @@ public class aivon {
 //##############################################################################        
 //#################### LISTA REVENDEDORES X CAMPAÑA ##############################
 
-//    List<Revendedor> revendedores = rd.buscarRevendedoresXCampaña(12);
-//    revendedores.forEach((it) -> {
-//        System.out.println(it.toString());
-//        });
-////    
-////
+    List<Revendedor> revendedores = rd.buscarRevendedoresXCampaña(12);
+    revendedores.forEach((it) -> {
+        System.out.println(it.toString());
+        });
+//    
+//
 //##############################################################################        
 //#################### GANANCIA FINAL REVENDEDOR ###############################
+//
+//        Revendedor elRevendedor =  rd.buscarRevendedor(1);    
+//        double laGanancia = rd.gananciaFinalRevendedor(elRevendedor);
+//        System.out.println(elRevendedor.toString());
+//        System.out.println("La ganancia final es $"+laGanancia+".");
+//          
+//############################################################################## 
+//#################### GANANCIA REVENDEDOR POR CAMPAÑA #########################
+
+//        Revendedor alguien = rd.buscarRevendedor(1);
+//        Campaña laCampaña = cd.buscarCampaña(11);
+//        System.out.println(alguien.toString());
+//        System.out.println(laCampaña.toString());
+//        System.out.println("La ganancia suma al dia de hoy $"+rd.gananciaRevendedorPorCampaña(alguien, laCampaña)+")");
+          
+//############################################################################## 
+//################## BUSCAR ESTRELLAS TOTALES POR REVENDEDOR ###################
 
 //        Revendedor alguien = rd.buscarRevendedor(1);
 //        System.out.println(alguien.toString());
-//        System.out.println("La ganancia suma al dia de hoy $"+alguien.calcularGananciasTotales()+".");
+//        System.out.println("Las Estrellas que tiene "+alguien.getApellido()+ " son "+rd.buscarEstrellasTotalesRevendedor(alguien)+".");
           
+//##############################################################################
+//###################### CALCULAR MONTO MINIMO REVENDOR ########################
+//
+//        Revendedor alguien = rd.buscarRevendedor(1);
+//        System.out.println(alguien.toString());
+//        System.out.println("El monto minimo para "+alguien.getApellido()+" es $"+rd.calcularMontoMinimoRevendedor(alguien)+".");
+          
+//##############################################################################
+//###################### CALCULAR MONTO MAXIMO REVENDOR ########################
+
+//        Revendedor alguien = rd.buscarRevendedor(1);
+//        System.out.println(alguien.toString());
+//        System.out.println("El monto maximo para "+alguien.getApellido()+" es $"+rd.calcularMontoMaximoRevendedor(alguien)+".");
+//          
 //############################################################################## 
-//######################## TODO CAMPAÑA DATA ####################################
+//######################## TODO CAMPAÑA DATA ###################################
 
 // GUARDAR CAMPAÑA - ok
 // BORRAR CAMPAÑA X ID - ok
