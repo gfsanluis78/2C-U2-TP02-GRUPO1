@@ -123,6 +123,11 @@ public class Historico {
 //    public String toString() {
 //        return "Historico{" + "id_historico=" + id_historico + ", revendedor=" + revendedor + ", campa\u00f1a=" + campaña + ", monto_min=" + monto_min + ", monto_max=" + monto_max + ", estrellas_campa\u00f1a_revendedor=" + estrellas_campaña_revendedor + ", estado_campa\u00f1a_revendedor=" + estado_campaña_revendedor + '}';
 //    }
+
+    @Override
+    public String toString() {
+        return "\nHistorico{" + "id_historico=" + id_historico + ", revendedor=" + revendedor + ", campa\u00f1a=" + campaña + ", monto_min=" + monto_min + ", monto_max=" + monto_max + ", nivel=" + nivel + ", ganancia=" + ganancia + ", estrellas_campa\u00f1a_revendedor=" + estrellas_campaña_revendedor + '}';
+    }
     
     
 }
