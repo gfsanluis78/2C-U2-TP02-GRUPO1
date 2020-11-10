@@ -204,10 +204,10 @@ public class aivon {
 //##############################################################################        
 //#################### LISTA REVENDEDORES X CAMPAÑA ##############################
 
-    List<Revendedor> revendedores = rd.buscarRevendedoresXCampaña(12);
-    revendedores.forEach((it) -> {
-        System.out.println(it.toString());
-        });
+//    List<Revendedor> revendedores = rd.buscarRevendedoresXCampaña(12);
+//    revendedores.forEach((it) -> {
+//        System.out.println(it.toString());
+//        });
 //    
 //
 //##############################################################################        
@@ -412,7 +412,7 @@ public class aivon {
 //##############################################################################        
 //########################## HISTORICO #########################################
 
-//    Revendedor revendedor= rd.buscarRevendedor("30377673");
+//    Revendedor revendedor= rd.buscarRevendedor("26525567");
 //    Campaña campaña=cd.buscarCampañaActiva();
 //    Pedido pedido=ped.buscarPedido(revendedor.getId_revendedor(), campaña.getId_campaña());
 //    int cantidadEstrellas=ped.cantEstrellasPedidoPago(pedido);
@@ -432,14 +432,16 @@ public class aivon {
 //##############################################################################        
 //##################### ACTUALIZAR HISTORICO ###################################
 //
-//        Revendedor revendedor = rd.buscarRevendedor("30377673");
+//        Revendedor revendedor = rd.buscarRevendedor("26525567");
 //        Campaña campaña = cd.buscarCampañaActiva();
-//        Pedido pedido = new Pedido(revendedor, campaña, LocalDate.of(2020, 11, 5), true);
+//        Pedido pedido = new Pedido(revendedor, campaña, LocalDate.of(2020, 10, 28), true);
 //        ped.altaPedido(pedido);
-//        DetallePedido detalle_pedido = new DetallePedido(pedido, prd.buscarProducto(7), 5);
+//        DetallePedido detalle_pedido = new DetallePedido(pedido, prd.buscarProducto(3), 5);
+//        DetallePedido detalle_pedido2 = new DetallePedido(pedido, prd.buscarProducto(4), 2);
 //        dp.pedirProducto(detalle_pedido);
-//        ped.actualizarFechaEntrega(pedido, LocalDate.of(2020, 11, 6));
-//        ped.actualizarFechaPago(pedido, LocalDate.of(2020, 11, 7));
+//        dp.pedirProducto(detalle_pedido2);
+//        ped.actualizarFechaEntrega(pedido, LocalDate.of(2020, 11, 1));
+//        ped.actualizarFechaPago(pedido, LocalDate.of(2020, 11, 3));
 //        
 //
 //        double monto_min = rd.calcularMontoMinimoRevendedor(revendedor);
@@ -457,8 +459,6 @@ public class aivon {
 //        int cantidadEstrellas = ped.cantEstrellasPedidoPago(pedido);
 //        System.out.println(cantidadEstrellas);
 //
-////        historico.setCampaña(campaña);
-////        historico.setRevendedor(revendedor);
 //        Historico historico = hd.buscarHistorico(revendedor, campaña);
 //        historico.setMonto_min(monto_min);
 //        historico.setMonto_max(monto_max);
