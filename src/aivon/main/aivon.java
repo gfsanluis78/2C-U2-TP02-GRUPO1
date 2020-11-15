@@ -343,11 +343,11 @@ public class aivon {
 //    Pedido pedido1 = new Pedido(rd.buscarRevendedor("36227970"), cd.buscarCampañaActiva(), LocalDate.now(), true);
 //    ped.altaPedido(pedido1);
 
-//    Pedido pedido2 = new Pedido(rd.buscarRevendedor("30377673"), cd.buscarCampañaActiva(), LocalDate.of(2020,11,9), true);
-//    ped.altaPedido(pedido2);
-
-//    DetallePedido det_ped = new DetallePedido(pedido1, prd.buscarProducto(2), 5);
-//    DetallePedido det_ped2 = new DetallePedido(pedido1, prd.buscarProducto(5), 3);
+//    Pedido pedido1 = new Pedido(rd.buscarRevendedor("30377673"), cd.buscarCampañaActiva(), LocalDate.now(), true);
+//    ped.altaPedido(pedido1);
+//
+//    DetallePedido det_ped = new DetallePedido(pedido1, prd.buscarProducto(4), 5);
+//    DetallePedido det_ped2 = new DetallePedido(pedido1, prd.buscarProducto(6), 3);
 //    DetallePedido det_ped3 = new DetallePedido(pedido1, prd.buscarProducto(7), 5);
 //    dp.pedirProducto(det_ped);
 //    dp.pedirProducto(det_ped2);
