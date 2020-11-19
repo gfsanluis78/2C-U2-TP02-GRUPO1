@@ -93,7 +93,7 @@ public class PedidoData {
                     System.out.println("No hay fecha de pago aún");
                 }
                 pedido.setCantidad_cajas(this.cantCajasPedido(pedido));
-                pedido.setEstrellas_pedido(this.cantCajasPedido(pedido));
+                pedido.setEstrellas_pedido(this.cantEstrellasPedido(pedido));
 
                 revendedor = this.buscarRevendedor(id_revendedor);
                 campaña = this.buscarCampaña(id_campaña);
@@ -383,7 +383,7 @@ public class PedidoData {
 //################ CANTIDAD ESTRELLAS PEDIDO PAGO ############################
 
     public int cantEstrellasPedidoPago(Pedido pedido) {
-
+       
         int cantidad = 0;
 
         try {
@@ -392,7 +392,8 @@ public class PedidoData {
             ResultSet consulta = statement.executeQuery("SELECT SUM(estrellas_caja)\n"
                     + "AS estrellas\n"
                     + "FROM caja_pedido, pedido\n"
-                    + "WHERE pedido.fecha_pago IS NOT NULL\n"
+                    + "WHERE caja_pedido.id_pedido=pedido.id_pedido\n"
+                    + "AND pedido.fecha_pago IS NOT NULL\n"
                     + "AND caja_pedido.id_pedido=" + pedido.getId_pedido() + ";");
             if (consulta.next()) {
                 cantidad = consulta.getInt("estrellas");
@@ -639,6 +640,7 @@ public class PedidoData {
                         + "SET fecha_entrega='" + Date.valueOf(fecha_entrega)
                         + "' WHERE pedido.id_pedido=" + pedido.getId_pedido() + ";");
                 if (celAfectadas > 0) {
+                    pedido.setFecha_entrega(fecha_entrega);
                     System.out.println("Fecha de entrega cargada");
                     JOptionPane.showMessageDialog(null, "Fecha de entrega cargada");
                 } else {
@@ -670,6 +672,7 @@ public class PedidoData {
                             + "SET fecha_pago='" + Date.valueOf(fecha_pago)
                             + "' WHERE pedido.id_pedido=" + pedido.getId_pedido() + ";");
                     if (celAfectadas > 0) {
+                        pedido.setFecha_pago(fecha_pago);
                         System.out.println("Fecha de pago cargada");
                         JOptionPane.showMessageDialog(null, "Fecha de pago cargada");
                     } else {

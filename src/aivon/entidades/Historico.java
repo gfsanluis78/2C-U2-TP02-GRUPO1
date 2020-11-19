@@ -15,29 +15,64 @@ public class Historico {
     private Campaña campaña;
     private double monto_min;
     private double monto_max;
+    private int nivel;
+    private double ganancia;
     private int estrellas_campaña_revendedor;
-    private boolean estado_campaña_revendedor;
+    //private boolean estado_campaña_revendedor;
 
     public Historico() {
     }
 
-    public Historico(Revendedor revendedor, Campaña campaña, double monto_min, double monto_max, int estrellas_campaña_revendedor, boolean estado_campaña_revendedor) {
+    public Historico(Revendedor revendedor, Campaña campaña, double monto_min, double monto_max, int nivel) {
         this.revendedor = revendedor;
         this.campaña = campaña;
         this.monto_min = monto_min;
         this.monto_max = monto_max;
-        this.estrellas_campaña_revendedor = estrellas_campaña_revendedor;
-        this.estado_campaña_revendedor = estado_campaña_revendedor;
+        this.nivel = nivel;
     }
 
-    public Historico(int id_historico ,Revendedor revendedor, Campaña campaña, int id_campaña, double monto_min, double monto_max, int estrellas_campaña_revendedor, boolean estado_campaña_revendedor) {
+    public Historico(Revendedor revendedor, Campaña campaña) {
+        this.revendedor = revendedor;
+        this.campaña = campaña;
+    }
+          
+    public Historico(Revendedor revendedor, Campaña campaña, double monto_min, double monto_max, int nivel, double ganancia, int estrellas_campaña_revendedor) {
+        this.revendedor = revendedor;
+        this.campaña = campaña;
+        this.monto_min = monto_min;
+        this.monto_max = monto_max;
+        this.nivel = nivel;
+        this.ganancia = ganancia;
+        this.estrellas_campaña_revendedor = estrellas_campaña_revendedor;
+    }
+    
+    public Historico(int id_historico, Revendedor revendedor, Campaña campaña, double monto_min, double monto_max, int nivel, double ganancia, int estrellas_campaña_revendedor) {
         this.id_historico = id_historico;
         this.revendedor = revendedor;
         this.campaña = campaña;
         this.monto_min = monto_min;
         this.monto_max = monto_max;
+        this.nivel = nivel;
+        this.ganancia = ganancia;
         this.estrellas_campaña_revendedor = estrellas_campaña_revendedor;
-        this.estado_campaña_revendedor = estado_campaña_revendedor;
+    }
+
+    
+
+    public int getNivel() {
+        return nivel;
+    }
+
+    public void setNivel(int nivel) {
+        this.nivel = nivel;
+    }
+
+    public double getGanancia() {
+        return ganancia;
+    }
+
+    public void setGanancia(double ganancia) {
+        this.ganancia = ganancia;
     }
 
     public int getId_historico() {
@@ -88,17 +123,22 @@ public class Historico {
         this.estrellas_campaña_revendedor = estrellas_campaña_revendedor;
     }
 
-    public boolean isEstado_campaña_revendedor() {
-        return estado_campaña_revendedor;
-    }
+//    public boolean isEstado_campaña_revendedor() {
+//        return estado_campaña_revendedor;
+//    }
 
-    public void setEstado_campaña_revendedor(boolean estado_campaña_revendedor) {
-        this.estado_campaña_revendedor = estado_campaña_revendedor;
-    }
+//    public void setEstado_campaña_revendedor(boolean estado_campaña_revendedor) {
+//        this.estado_campaña_revendedor = estado_campaña_revendedor;
+//    }
+
+//    @Override
+//    public String toString() {
+//        return "Historico{" + "id_historico=" + id_historico + ", revendedor=" + revendedor + ", campa\u00f1a=" + campaña + ", monto_min=" + monto_min + ", monto_max=" + monto_max + ", estrellas_campa\u00f1a_revendedor=" + estrellas_campaña_revendedor + ", estado_campa\u00f1a_revendedor=" + estado_campaña_revendedor + '}';
+//    }
 
     @Override
     public String toString() {
-        return "Historico{" + "id_historico=" + id_historico + ", revendedor=" + revendedor + ", campa\u00f1a=" + campaña + ", monto_min=" + monto_min + ", monto_max=" + monto_max + ", estrellas_campa\u00f1a_revendedor=" + estrellas_campaña_revendedor + ", estado_campa\u00f1a_revendedor=" + estado_campaña_revendedor + '}';
+        return "\nHistorico{" + "id_historico=" + id_historico + ", revendedor=" + revendedor + ", campa\u00f1a=" + campaña + ", monto_min=" + monto_min + ", monto_max=" + monto_max + ", nivel=" + nivel + ", ganancia=" + ganancia + ", estrellas_campa\u00f1a_revendedor=" + estrellas_campaña_revendedor + '}';
     }
     
     
