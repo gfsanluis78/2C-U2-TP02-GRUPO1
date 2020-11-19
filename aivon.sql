@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-11-2020 a las 04:11:20
+-- Tiempo de generación: 15-11-2020 a las 16:24:44
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.10
 
@@ -47,7 +47,13 @@ INSERT INTO `caja_pedido` (`id_caja`, `id_pedido`, `id_producto`, `cantidad_prod
 (5, 5, 7, 5, 500, 750, 5),
 (11, 12, 7, 5, 500, 1000, 25),
 (12, 13, 3, 5, 350, 500, 10),
-(13, 13, 4, 2, 100, 140, 6);
+(13, 13, 4, 2, 100, 140, 6),
+(14, 14, 2, 5, 1500, 2000, 50),
+(15, 14, 5, 3, 750, 1050, 15),
+(16, 14, 7, 5, 500, 1000, 25),
+(17, 15, 4, 5, 250, 350, 15),
+(18, 15, 6, 3, 600, 750, 3),
+(19, 15, 7, 5, 500, 1000, 25);
 
 -- --------------------------------------------------------
 
@@ -81,8 +87,8 @@ INSERT INTO `campaña` (`id_campaña`, `nombre`, `fecha_inicio`, `fecha_fin`, `m
 (9, 'Novena', '2020-07-27', '2020-08-22', 1500, 2000, 0),
 (10, 'Decima', '2020-08-23', '2020-09-17', 1500, 2000, 0),
 (11, 'DECIMAPRIMERA', '2020-09-18', '2020-10-13', 1500, 2000, 0),
-(12, 'DECIMASEGUNDA', '2020-10-14', '2020-11-08', 1500, 2000, 1),
-(13, 'DECIMATERCERA', '2020-11-09', '2020-12-04', 1500, 2000, 0);
+(12, 'DECIMASEGUNDA', '2020-10-14', '2020-11-08', 1500, 2000, 0),
+(13, 'DECIMATERCERA', '2020-11-09', '2020-12-04', 1500, 2000, 1);
 
 -- --------------------------------------------------------
 
@@ -120,11 +126,9 @@ CREATE TABLE `pedido` (
   `id_pedido` int(11) NOT NULL,
   `id_revendedor` int(11) NOT NULL,
   `id_campaña` int(11) NOT NULL,
-  `fecha_ingreso` date NOT NULL DEFAULT current_timestamp(),
+  `fecha_ingreso` date NOT NULL,
   `fecha_entrega` date DEFAULT NULL,
   `fecha_pago` date DEFAULT NULL,
-  `cantidad_cajas` int(11) DEFAULT NULL,
-  `estrellas_pedido` int(11) DEFAULT NULL,
   `activo` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -132,10 +136,12 @@ CREATE TABLE `pedido` (
 -- Volcado de datos para la tabla `pedido`
 --
 
-INSERT INTO `pedido` (`id_pedido`, `id_revendedor`, `id_campaña`, `fecha_ingreso`, `fecha_entrega`, `fecha_pago`, `cantidad_cajas`, `estrellas_pedido`, `activo`) VALUES
-(5, 1, 12, '2020-11-06', '2020-11-08', '2020-11-18', NULL, NULL, 1),
-(12, 3, 12, '2020-11-05', '2020-11-06', '2020-11-07', NULL, NULL, 1),
-(13, 4, 12, '2020-10-28', '2020-11-01', '2020-11-03', NULL, NULL, 1);
+INSERT INTO `pedido` (`id_pedido`, `id_revendedor`, `id_campaña`, `fecha_ingreso`, `fecha_entrega`, `fecha_pago`, `activo`) VALUES
+(5, 1, 12, '2020-11-06', '2020-11-08', '2020-11-18', 1),
+(12, 3, 12, '2020-11-05', '2020-11-06', '2020-11-07', 1),
+(13, 4, 12, '2020-10-28', '2020-11-01', '2020-11-03', 1),
+(14, 1, 13, '2020-11-15', NULL, NULL, 1),
+(15, 3, 13, '2020-11-15', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -257,7 +263,7 @@ ALTER TABLE `revendedor`
 -- AUTO_INCREMENT de la tabla `caja_pedido`
 --
 ALTER TABLE `caja_pedido`
-  MODIFY `id_caja` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_caja` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `campaña`
@@ -275,7 +281,7 @@ ALTER TABLE `historico`
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
