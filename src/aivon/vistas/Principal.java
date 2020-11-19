@@ -5,6 +5,8 @@
  */
 package aivon.vistas;
 
+import java.awt.Dimension;
+
 /**
  *
  * @author Ezequiel
@@ -27,16 +29,30 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jdp_escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jmi_producto_alta = new javax.swing.JMenuItem();
+        jmi_producto_actualizar = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        javax.swing.GroupLayout jdp_escritorioLayout = new javax.swing.GroupLayout(jdp_escritorio);
+        jdp_escritorio.setLayout(jdp_escritorioLayout);
+        jdp_escritorioLayout.setHorizontalGroup(
+            jdp_escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 973, Short.MAX_VALUE)
+        );
+        jdp_escritorioLayout.setVerticalGroup(
+            jdp_escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 739, Short.MAX_VALUE)
+        );
 
         jMenu1.setText("Archivo");
 
@@ -51,6 +67,23 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Producto");
+
+        jmi_producto_alta.setText("Producto Alta");
+        jmi_producto_alta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_producto_altaActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jmi_producto_alta);
+
+        jmi_producto_actualizar.setText("Producto Actualizar");
+        jmi_producto_actualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_producto_actualizarActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jmi_producto_actualizar);
+
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Revendedor");
@@ -71,11 +104,11 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 804, Short.MAX_VALUE)
+            .addComponent(jdp_escritorio)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 518, Short.MAX_VALUE)
+            .addComponent(jdp_escritorio)
         );
 
         pack();
@@ -86,6 +119,33 @@ public class Principal extends javax.swing.JFrame {
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jmi_producto_altaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_producto_altaActionPerformed
+        // TODO add your handling code here:
+        jdp_escritorio.removeAll();
+        jdp_escritorio.repaint();
+        ProductoAlta pa=new ProductoAlta();
+        pa.setVisible(true);
+        jdp_escritorio.add(pa);
+        Dimension desktopSize = jdp_escritorio.getSize();
+        Dimension FrameSize = pa.getSize();
+        pa.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        pa.show();
+        
+    }//GEN-LAST:event_jmi_producto_altaActionPerformed
+
+    private void jmi_producto_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_producto_actualizarActionPerformed
+        // TODO add your handling code here:
+        jdp_escritorio.removeAll();
+        jdp_escritorio.repaint();
+        ProductoActualizar pac=new ProductoActualizar();
+        pac.setVisible(true);
+        jdp_escritorio.add(pac);
+        Dimension desktopSize = jdp_escritorio.getSize();
+        Dimension FrameSize = pac.getSize();
+        pac.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        pac.show();
+    }//GEN-LAST:event_jmi_producto_actualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -131,5 +191,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JDesktopPane jdp_escritorio;
+    private javax.swing.JMenuItem jmi_producto_actualizar;
+    private javax.swing.JMenuItem jmi_producto_alta;
     // End of variables declaration//GEN-END:variables
 }

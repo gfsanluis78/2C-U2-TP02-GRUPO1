@@ -23,9 +23,9 @@ public class Producto {
     private int id_producto;
     private String nombre;
     private String uso;
-    private String tamaño;
-    private Double costo_publico;
-    private Double costo;
+    private int tamaño;
+    private double costo_publico;
+    private double costo;
     private int estrellas;
     private boolean activo;
     
@@ -34,7 +34,7 @@ public class Producto {
     public Producto() {
     }
 
-    public Producto(String nombre, String uso, String tamaño, Double costo_publico, Double costo, int estrellas, boolean activo) {
+    public Producto(String nombre, String uso, int tamaño, double costo_publico, double costo, int estrellas, boolean activo) {
         this.nombre = nombre;
         this.uso = uso;
         this.tamaño = tamaño;
@@ -44,7 +44,7 @@ public class Producto {
         this.activo = activo;
     }
 
-    public Producto(int id_producto, String nombre, String uso, String tamaño, Double costo_publico, Double costo, int estrellas, boolean activo) {
+    public Producto(int id_producto, String nombre, String uso, int tamaño, double costo_publico, double costo, int estrellas, boolean activo) {
         this.id_producto = id_producto;
         this.nombre = nombre;
         this.uso = uso;
@@ -79,27 +79,27 @@ public class Producto {
         this.uso = uso;
     }
 
-    public String getTamaño() {
+    public int getTamaño() {
         return tamaño;
     }
 
-    public void setTamaño(String tamaño) {
+    public void setTamaño(int tamaño) {
         this.tamaño = tamaño;
     }
 
-    public Double getCosto_publico() {
+    public double getCosto_publico() {
         return costo_publico;
     }
 
-    public void setCosto_publico(Double costo_publico) {
+    public void setCosto_publico(double costo_publico) {
         this.costo_publico = costo_publico;
     }
 
-    public Double getCosto() {
+    public double getCosto() {
         return costo;
     }
 
-    public void setCosto(Double costo) {
+    public void setCosto(double costo) {
         this.costo = costo;
     }
 
