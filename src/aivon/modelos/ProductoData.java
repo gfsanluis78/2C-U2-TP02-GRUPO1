@@ -41,7 +41,7 @@ public class ProductoData {
         
         instruccion.setString(1, producto.getNombre() );
         instruccion.setString(2, producto.getUso());
-        instruccion.setString(3, producto.getTamaño());
+        instruccion.setInt(3, producto.getTamaño());
         instruccion.setDouble(4, producto.getCosto());
         instruccion.setDouble(5, producto.getCosto_publico());
         instruccion.setInt(6, producto.getEstrellas());
@@ -93,7 +93,7 @@ public class ProductoData {
 //
 //    }
     //Desactivar producto por id
-    public void bajaProducto(int id) {
+    public void desactivarProducto(int id) {
 
         try {
             Statement statement = con.createStatement();
@@ -145,7 +145,7 @@ public class ProductoData {
             PreparedStatement instruccion = con.prepareStatement(pre_instruccion);
             instruccion.setString(1, producto.getNombre());
             instruccion.setString(2, producto.getUso());
-            instruccion.setString(3, producto.getTamaño());
+            instruccion.setInt(3, producto.getTamaño());
             instruccion.setDouble(4, producto.getCosto());
             instruccion.setDouble(5, producto.getCosto_publico());
             instruccion.setInt(6, producto.getEstrellas());
@@ -183,10 +183,11 @@ public class ProductoData {
                     producto.setId_producto(consulta.getInt("id_producto"));
                     producto.setNombre(consulta.getString("nombre"));
                     producto.setUso(consulta.getString("uso"));
-                    producto.setTamaño(consulta.getString("tamaño_cm3"));
+                    producto.setTamaño(consulta.getInt("tamaño_cm3"));
                     producto.setCosto(consulta.getDouble("costo"));
                     producto.setCosto_publico(consulta.getDouble("costo_publico"));
                     producto.setEstrellas(consulta.getInt("estrellas"));
+                    producto.setActivo(consulta.getBoolean("activo"));
                     
                 } else {
                     JOptionPane.showMessageDialog(null, "No se pudo buscar Producto por id");
@@ -221,7 +222,7 @@ public class ProductoData {
                      producto.setId_producto(consulta.getInt("id_producto"));
                     producto.setNombre(consulta.getString("nombre"));
                     producto.setUso(consulta.getString("uso"));
-                    producto.setTamaño(consulta.getString("tamaño_cm3"));
+                    producto.setTamaño(consulta.getInt("tamaño_cm3"));
                     producto.setCosto(consulta.getDouble("costo"));
                     producto.setCosto_publico(consulta.getDouble("costo_publico"));
                     producto.setEstrellas(consulta.getInt("estrellas"));
@@ -260,7 +261,7 @@ public class ProductoData {
                      producto.setId_producto(consulta.getInt("id_producto"));
                     producto.setNombre(consulta.getString("nombre"));
                     producto.setUso(consulta.getString("uso"));
-                    producto.setTamaño(consulta.getString("tamaño_cm3"));
+                    producto.setTamaño(consulta.getInt("tamaño_cm3"));
                     producto.setCosto(consulta.getDouble("costo"));
                     producto.setCosto_publico(consulta.getDouble("costo_publico"));
                     producto.setEstrellas(consulta.getInt("estrellas"));
@@ -297,7 +298,7 @@ public class ProductoData {
                      producto.setId_producto(consulta.getInt("id_producto"));
                     producto.setNombre(consulta.getString("nombre"));
                     producto.setUso(consulta.getString("uso"));
-                    producto.setTamaño(consulta.getString("tamaño_cm3"));
+                    producto.setTamaño(consulta.getInt("tamaño_cm3"));
                     producto.setCosto(consulta.getDouble("costo"));
                     producto.setCosto_publico(consulta.getDouble("costo_publico"));
                     producto.setEstrellas(consulta.getInt("estrellas"));
@@ -334,7 +335,7 @@ public class ProductoData {
                     producto.setId_producto(consulta.getInt("id_producto"));
                     producto.setNombre(consulta.getString("nombre"));
                     producto.setUso(consulta.getString("uso"));
-                    producto.setTamaño(consulta.getString("tamaño_cm3"));
+                    producto.setTamaño(consulta.getInt("tamaño_cm3"));
                     producto.setCosto(consulta.getDouble("costo"));
                     producto.setCosto_publico(consulta.getDouble("costo_publico"));
                     producto.setEstrellas(consulta.getInt("estrellas"));
