@@ -1,0 +1,792 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Aivon_copia">
+  <ClassDiagramComponents>
+    <Class name="Campania" package="aivon.entidades" visibility="public" xPosition="2988.0" yPosition="1176.0">
+      <Fields>
+        <Field name="id_campania" type="int" visibility="private"/>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="fecha_inicio" type="LocalDate" visibility="private"/>
+        <Field name="fecha_fin" type="LocalDate" visibility="private"/>
+        <Field name="monto_min" type="double" visibility="private"/>
+        <Field name="monto_max" type="double" visibility="private"/>
+        <Field name="activa" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="nombre"/>
+          <Argument type="LocalDate" name="fecha_inicio"/>
+          <Argument type="double" name="monto_min"/>
+          <Argument type="double" name="monto_max"/>
+          <Argument type="boolean" name="activa"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="String" name="nombre"/>
+          <Argument type="LocalDate" name="fecha_inicio"/>
+          <Argument type="LocalDate" name="fecha_fin"/>
+          <Argument type="double" name="monto_min"/>
+          <Argument type="double" name="monto_max"/>
+          <Argument type="boolean" name="activa"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="int" name="id_campania"/>
+          <Argument type="String" name="nombre"/>
+          <Argument type="LocalDate" name="fecha_inicio"/>
+          <Argument type="LocalDate" name="fecha_fin"/>
+          <Argument type="double" name="monto_min"/>
+          <Argument type="double" name="monto_max"/>
+          <Argument type="boolean" name="activa"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getId_campania" returnType="int" visibility="public"/>
+        <Method name="setId_campania" returnType="void" visibility="public">
+          <Argument type="int" name="id_campania"/>
+        </Method>
+        <Method name="getNombre" returnType="String" visibility="public"/>
+        <Method name="setNombre" returnType="void" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="getFecha_inicio" returnType="LocalDate" visibility="public"/>
+        <Method name="setFecha_inicio" returnType="void" visibility="public">
+          <Argument type="LocalDate" name="fecha_inicio"/>
+        </Method>
+        <Method name="getFecha_fin" returnType="LocalDate" visibility="public"/>
+        <Method name="setFecha_fin" returnType="void" visibility="public">
+          <Argument type="LocalDate" name="fecha_fin"/>
+        </Method>
+        <Method name="getMonto_min" returnType="double" visibility="public"/>
+        <Method name="setMonto_min" returnType="void" visibility="public">
+          <Argument type="double" name="monto_min"/>
+        </Method>
+        <Method name="getMonto_max" returnType="double" visibility="public"/>
+        <Method name="setMonto_max" returnType="void" visibility="public">
+          <Argument type="double" name="monto_max"/>
+        </Method>
+        <Method name="isActiva" returnType="boolean" visibility="public"/>
+        <Method name="setActiva" returnType="void" visibility="public">
+          <Argument type="boolean" name="activa"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="DetallePedido" package="aivon.entidades" visibility="public" xPosition="2445.0" yPosition="60.0">
+      <Fields>
+        <Field name="id_caja" type="int" visibility="private"/>
+        <Field name="pedido" type="Pedido" visibility="private"/>
+        <Field name="producto" type="Producto" visibility="private"/>
+        <Field name="cantidad_producto" type="int" visibility="private"/>
+        <Field name="costo_caja" type="double" visibility="private"/>
+        <Field name="costo_caja_publico" type="double" visibility="private"/>
+        <Field name="estrellas_caja" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="Pedido" name="pedido"/>
+          <Argument type="Producto" name="producto"/>
+          <Argument type="int" name="cantidad_producto"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="Pedido" name="pedido"/>
+          <Argument type="Producto" name="producto"/>
+          <Argument type="int" name="cantidad_producto"/>
+          <Argument type="double" name="costo_caja"/>
+          <Argument type="double" name="costo_caja_publico"/>
+          <Argument type="int" name="estrellas_caja"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="int" name="id_caja"/>
+          <Argument type="Pedido" name="pedido"/>
+          <Argument type="Producto" name="producto"/>
+          <Argument type="int" name="cantidad_producto"/>
+          <Argument type="double" name="costo_caja"/>
+          <Argument type="double" name="costo_caja_publico"/>
+          <Argument type="int" name="estrellas_caja"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getId_caja" returnType="int" visibility="public"/>
+        <Method name="setId_caja" returnType="void" visibility="public">
+          <Argument type="int" name="id_caja"/>
+        </Method>
+        <Method name="getPedido" returnType="Pedido" visibility="public"/>
+        <Method name="setPedido" returnType="void" visibility="public">
+          <Argument type="Pedido" name="pedido"/>
+        </Method>
+        <Method name="getProducto" returnType="Producto" visibility="public"/>
+        <Method name="setProducto" returnType="void" visibility="public">
+          <Argument type="Producto" name="producto"/>
+        </Method>
+        <Method name="getCantidad_producto" returnType="int" visibility="public"/>
+        <Method name="setCantidad_producto" returnType="void" visibility="public">
+          <Argument type="int" name="cantidad_producto"/>
+        </Method>
+        <Method name="getCosto_caja" returnType="double" visibility="public"/>
+        <Method name="setCosto_caja" returnType="void" visibility="public">
+          <Argument type="double" name="costo_caja"/>
+        </Method>
+        <Method name="getCosto_caja_publico" returnType="double" visibility="public"/>
+        <Method name="setCosto_caja_publico" returnType="void" visibility="public">
+          <Argument type="double" name="costo_caja_publico"/>
+        </Method>
+        <Method name="getEstrellas_caja" returnType="int" visibility="public"/>
+        <Method name="setEstrellas_caja" returnType="void" visibility="public">
+          <Argument type="int" name="estrellas_caja"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Historico" package="aivon.entidades" visibility="public" xPosition="1189.0" yPosition="2237.0">
+      <Fields>
+        <Field name="id_historico" type="int" visibility="private"/>
+        <Field name="revendedor" type="Revendedor" visibility="private"/>
+        <Field name="campania" type="Campania" visibility="private"/>
+        <Field name="monto_min" type="double" visibility="private"/>
+        <Field name="monto_max" type="double" visibility="private"/>
+        <Field name="nivel" type="int" visibility="private"/>
+        <Field name="ganancia" type="double" visibility="private"/>
+        <Field name="estrellas_campania_revendedor" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="Revendedor" name="revendedor"/>
+          <Argument type="Campania" name="campania"/>
+          <Argument type="double" name="monto_min"/>
+          <Argument type="double" name="monto_max"/>
+          <Argument type="int" name="nivel"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="Revendedor" name="revendedor"/>
+          <Argument type="Campania" name="campania"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="Revendedor" name="revendedor"/>
+          <Argument type="Campania" name="campania"/>
+          <Argument type="double" name="monto_min"/>
+          <Argument type="double" name="monto_max"/>
+          <Argument type="int" name="nivel"/>
+          <Argument type="double" name="ganancia"/>
+          <Argument type="int" name="estrellas_campania_revendedor"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="int" name="id_historico"/>
+          <Argument type="Revendedor" name="revendedor"/>
+          <Argument type="Campania" name="campania"/>
+          <Argument type="double" name="monto_min"/>
+          <Argument type="double" name="monto_max"/>
+          <Argument type="int" name="nivel"/>
+          <Argument type="double" name="ganancia"/>
+          <Argument type="int" name="estrellas_campania_revendedor"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getNivel" returnType="int" visibility="public"/>
+        <Method name="setNivel" returnType="void" visibility="public">
+          <Argument type="int" name="nivel"/>
+        </Method>
+        <Method name="getGanancia" returnType="double" visibility="public"/>
+        <Method name="setGanancia" returnType="void" visibility="public">
+          <Argument type="double" name="ganancia"/>
+        </Method>
+        <Method name="getId_historico" returnType="int" visibility="public"/>
+        <Method name="setId_historico" returnType="void" visibility="public">
+          <Argument type="int" name="id_historico"/>
+        </Method>
+        <Method name="getRevendedor" returnType="Revendedor" visibility="public"/>
+        <Method name="setRevendedor" returnType="void" visibility="public">
+          <Argument type="Revendedor" name="revendedor"/>
+        </Method>
+        <Method name="getCampania" returnType="Campania" visibility="public"/>
+        <Method name="setCampania" returnType="void" visibility="public">
+          <Argument type="Campania" name="campania"/>
+        </Method>
+        <Method name="getMonto_min" returnType="double" visibility="public"/>
+        <Method name="setMonto_min" returnType="void" visibility="public">
+          <Argument type="double" name="monto_min"/>
+        </Method>
+        <Method name="getMonto_max" returnType="double" visibility="public"/>
+        <Method name="setMonto_max" returnType="void" visibility="public">
+          <Argument type="double" name="monto_max"/>
+        </Method>
+        <Method name="getEstrellas_campania_revendedor" returnType="int" visibility="public"/>
+        <Method name="setEstrellas_campania_revendedor" returnType="void" visibility="public">
+          <Argument type="int" name="estrellas_campania_revendedor"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Pedido" package="aivon.entidades" visibility="public" xPosition="1273.0" yPosition="60.0">
+      <Fields>
+        <Field name="id_pedido" type="int" visibility="private"/>
+        <Field name="revendedor" type="Revendedor" visibility="private"/>
+        <Field name="campania" type="Campania" visibility="private"/>
+        <Field name="fecha_ingreso" type="LocalDate" visibility="private"/>
+        <Field name="fecha_entrega" type="LocalDate" visibility="private"/>
+        <Field name="fecha_pago" type="LocalDate" visibility="private"/>
+        <Field name="cantidad_cajas" type="int" visibility="private"/>
+        <Field name="estrellas_pedido" type="int" visibility="private"/>
+        <Field name="activo" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="Revendedor" name="revendedor"/>
+          <Argument type="Campania" name="campania"/>
+          <Argument type="LocalDate" name="fecha_ingreso"/>
+          <Argument type="boolean" name="activo"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="Revendedor" name="revendedor"/>
+          <Argument type="Campania" name="campania"/>
+          <Argument type="LocalDate" name="fecha_ingreso"/>
+          <Argument type="LocalDate" name="fecha_entrega"/>
+          <Argument type="LocalDate" name="fecha_pago"/>
+          <Argument type="boolean" name="activo"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="int" name="id_pedido"/>
+          <Argument type="Revendedor" name="revendedor"/>
+          <Argument type="Campania" name="campania"/>
+          <Argument type="LocalDate" name="fecha_ingreso"/>
+          <Argument type="LocalDate" name="fecha_entrega"/>
+          <Argument type="LocalDate" name="fecha_pago"/>
+          <Argument type="boolean" name="activo"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getId_pedido" returnType="int" visibility="public"/>
+        <Method name="setId_pedido" returnType="void" visibility="public">
+          <Argument type="int" name="id_pedido"/>
+        </Method>
+        <Method name="getRevendedor" returnType="Revendedor" visibility="public"/>
+        <Method name="setRevendedor" returnType="void" visibility="public">
+          <Argument type="Revendedor" name="revendedor"/>
+        </Method>
+        <Method name="getCampania" returnType="Campania" visibility="public"/>
+        <Method name="setCampania" returnType="void" visibility="public">
+          <Argument type="Campania" name="campania"/>
+        </Method>
+        <Method name="getFecha_ingreso" returnType="LocalDate" visibility="public"/>
+        <Method name="setFecha_ingreso" returnType="void" visibility="public">
+          <Argument type="LocalDate" name="fecha_ingreso"/>
+        </Method>
+        <Method name="getFecha_entrega" returnType="LocalDate" visibility="public"/>
+        <Method name="setFecha_entrega" returnType="void" visibility="public">
+          <Argument type="LocalDate" name="fecha_entrega"/>
+        </Method>
+        <Method name="getFecha_pago" returnType="LocalDate" visibility="public"/>
+        <Method name="setFecha_pago" returnType="void" visibility="public">
+          <Argument type="LocalDate" name="fecha_pago"/>
+        </Method>
+        <Method name="getCantidad_cajas" returnType="int" visibility="public"/>
+        <Method name="setCantidad_cajas" returnType="void" visibility="public">
+          <Argument type="int" name="cantidad_cajas"/>
+        </Method>
+        <Method name="getEstrellas_pedido" returnType="int" visibility="public"/>
+        <Method name="setEstrellas_pedido" returnType="void" visibility="public">
+          <Argument type="int" name="estrellas_pedido"/>
+        </Method>
+        <Method name="isActivo" returnType="boolean" visibility="public"/>
+        <Method name="setActivo" returnType="void" visibility="public">
+          <Argument type="boolean" name="activo"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Producto" package="aivon.entidades" visibility="public" xPosition="3567.0" yPosition="60.0">
+      <Fields>
+        <Field name="id_producto" type="int" visibility="private"/>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="uso" type="String" visibility="private"/>
+        <Field name="tamanio" type="String" visibility="private"/>
+        <Field name="costo_publico" type="Double" visibility="private"/>
+        <Field name="costo" type="Double" visibility="private"/>
+        <Field name="estrellas" type="int" visibility="private"/>
+        <Field name="activo" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="nombre"/>
+          <Argument type="String" name="uso"/>
+          <Argument type="String" name="tamanio"/>
+          <Argument type="Double" name="costo_publico"/>
+          <Argument type="Double" name="costo"/>
+          <Argument type="int" name="estrellas"/>
+          <Argument type="boolean" name="activo"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="int" name="id_producto"/>
+          <Argument type="String" name="nombre"/>
+          <Argument type="String" name="uso"/>
+          <Argument type="String" name="tamanio"/>
+          <Argument type="Double" name="costo_publico"/>
+          <Argument type="Double" name="costo"/>
+          <Argument type="int" name="estrellas"/>
+          <Argument type="boolean" name="activo"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getId_producto" returnType="int" visibility="public"/>
+        <Method name="setId_producto" returnType="void" visibility="public">
+          <Argument type="int" name="id_producto"/>
+        </Method>
+        <Method name="getNombre" returnType="String" visibility="public"/>
+        <Method name="setNombre" returnType="void" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="getUso" returnType="String" visibility="public"/>
+        <Method name="setUso" returnType="void" visibility="public">
+          <Argument type="String" name="uso"/>
+        </Method>
+        <Method name="getTamanio" returnType="String" visibility="public"/>
+        <Method name="setTamanio" returnType="void" visibility="public">
+          <Argument type="String" name="tamanio"/>
+        </Method>
+        <Method name="getCosto_publico" returnType="Double" visibility="public"/>
+        <Method name="setCosto_publico" returnType="void" visibility="public">
+          <Argument type="Double" name="costo_publico"/>
+        </Method>
+        <Method name="getCosto" returnType="Double" visibility="public"/>
+        <Method name="setCosto" returnType="void" visibility="public">
+          <Argument type="Double" name="costo"/>
+        </Method>
+        <Method name="getEstrellas" returnType="int" visibility="public"/>
+        <Method name="setEstrellas" returnType="void" visibility="public">
+          <Argument type="int" name="estrellas"/>
+        </Method>
+        <Method name="isActivo" returnType="boolean" visibility="public"/>
+        <Method name="setActivo" returnType="void" visibility="public">
+          <Argument type="boolean" name="activo"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Revendedor" package="aivon.entidades" visibility="public" xPosition="68.0" yPosition="513.0">
+      <Fields>
+        <Field name="id_revendedor" type="int" visibility="private"/>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="apellido" type="String" visibility="private"/>
+        <Field name="dni" type="String" visibility="private"/>
+        <Field name="tel" type="String" visibility="private"/>
+        <Field name="email" type="String" visibility="private"/>
+        <Field name="nivel" type="int" visibility="private"/>
+        <Field name="activo" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="nombre"/>
+          <Argument type="String" name="apellido"/>
+          <Argument type="String" name="dni"/>
+          <Argument type="String" name="tel"/>
+          <Argument type="String" name="email"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="String" name="nombre"/>
+          <Argument type="String" name="apellido"/>
+          <Argument type="String" name="dni"/>
+          <Argument type="String" name="tel"/>
+          <Argument type="String" name="email"/>
+          <Argument type="boolean" name="activo"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="int" name="id_revendedor"/>
+          <Argument type="String" name="nombre"/>
+          <Argument type="String" name="apellido"/>
+          <Argument type="String" name="dni"/>
+          <Argument type="String" name="tel"/>
+          <Argument type="boolean" name="activo"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getId_revendedor" returnType="int" visibility="public"/>
+        <Method name="setId_revendedor" returnType="void" visibility="public">
+          <Argument type="int" name="id_revendedor"/>
+        </Method>
+        <Method name="getNombre" returnType="String" visibility="public"/>
+        <Method name="setNombre" returnType="void" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="getApellido" returnType="String" visibility="public"/>
+        <Method name="setApellido" returnType="void" visibility="public">
+          <Argument type="String" name="apellido"/>
+        </Method>
+        <Method name="getDni" returnType="String" visibility="public"/>
+        <Method name="setDni" returnType="void" visibility="public">
+          <Argument type="String" name="dni"/>
+        </Method>
+        <Method name="getTel" returnType="String" visibility="public"/>
+        <Method name="setTel" returnType="void" visibility="public">
+          <Argument type="String" name="tel"/>
+        </Method>
+        <Method name="getNivel" returnType="int" visibility="public"/>
+        <Method name="setNivel" returnType="void" visibility="public">
+          <Argument type="int" name="nivel"/>
+        </Method>
+        <Method name="getEmail" returnType="String" visibility="public"/>
+        <Method name="setEmail" returnType="void" visibility="public">
+          <Argument type="String" name="email"/>
+        </Method>
+        <Method name="isActivo" returnType="boolean" visibility="public"/>
+        <Method name="setActivo" returnType="void" visibility="public">
+          <Argument type="boolean" name="activo"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="calcularGananciasTotales" returnType="double" visibility="public"/>
+        <Method name="calcularGananciasPorCampania" returnType="double" visibility="public"/>
+        <Method name="calcularNivel" returnType="int" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="aivon" package="aivon.main" visibility="public" xPosition="93.0" yPosition="75.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="CampaniaData" package="aivon.modelos" visibility="public" xPosition="146.0" yPosition="2193.0">
+      <Fields>
+        <Field name="con" type="Connection" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Conexion" name="conexion"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="guardarCampania" returnType="void" visibility="public">
+          <Argument type="Campania" name="campania"/>
+        </Method>
+        <Method name="borrarCampania" returnType="void" visibility="public">
+          <Argument type="int" name="id"/>
+        </Method>
+        <Method name="borrarCampania" returnType="void" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="modificarCampania" returnType="void" visibility="public">
+          <Argument type="Campania" name="campania"/>
+        </Method>
+        <Method name="cerrarCampania" returnType="void" visibility="public">
+          <Argument type="Campania" name="campania"/>
+        </Method>
+        <Method name="buscarCampania" returnType="Campania" visibility="public">
+          <Argument type="int" name="id"/>
+        </Method>
+        <Method name="buscarCampania" returnType="Campania" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="buscarCampaniaXFechaInicio" returnType="Campania" visibility="public">
+          <Argument type="LocalDate" name="fecha_inicio"/>
+        </Method>
+        <Method name="buscarCampaniaActiva" returnType="Campania" visibility="public"/>
+        <Method name="buscarCampanias" returnType="List&lt;Campania&gt;" visibility="public"/>
+        <Method name="buscarCampaniasInActivas" returnType="List&lt;Campania&gt;" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Conexion" package="aivon.modelos" visibility="public" xPosition="1821.0" yPosition="1472.0">
+      <Fields>
+        <Field name="base" type="String" visibility="private" isFinal="true"/>
+        <Field name="url" type="String" visibility="private" isFinal="true"/>
+        <Field name="user" type="String" visibility="private" isFinal="true"/>
+        <Field name="pass" type="String" visibility="private" isFinal="true"/>
+        <Field name="conexion" type="Connection" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getConnection" returnType="Connection" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="DetallePedidoData" package="aivon.modelos" visibility="public" xPosition="710.0" yPosition="177.0">
+      <Fields>
+        <Field name="c" type="Connection" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Conexion" name="conexion"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="pedirProducto" returnType="void" visibility="public">
+          <Argument type="DetallePedido" name="detalle_pedido"/>
+        </Method>
+        <Method name="borrarPedirProducto" returnType="void" visibility="public">
+          <Argument type="DetallePedido" name="detalle_pedido"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="HistoricoData" package="aivon.modelos" visibility="public" xPosition="1189.0" yPosition="849.0">
+      <Fields>
+        <Field name="con" type="Connection" visibility="private"/>
+        <Field name="conexion" type="Conexion" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Conexion" name="conexion"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="altaHistorico" returnType="void" visibility="public">
+          <Argument type="Historico" name="historico"/>
+        </Method>
+        <Method name="actualizarHistorico" returnType="void" visibility="public">
+          <Argument type="Historico" name="historico"/>
+        </Method>
+        <Method name="buscarHistorico" returnType="Historico" visibility="public">
+          <Argument type="Revendedor" name="revendedor"/>
+          <Argument type="Campania" name="campania"/>
+        </Method>
+        <Method name="buscarHistoricosPorRevendedor" returnType="List&lt;Historico&gt;" visibility="public">
+          <Argument type="Revendedor" name="revendedor"/>
+        </Method>
+        <Method name="buscarHistoricosPorCampania" returnType="List&lt;Historico&gt;" visibility="public">
+          <Argument type="Campania" name="campania"/>
+        </Method>
+        <Method name="buscarHistoricos" returnType="List&lt;Historico&gt;" visibility="public"/>
+        <Method name="mostrarEstrellasPorRevendedor" returnType="void" visibility="public"/>
+        <Method name="recuperarEstadoUltimaCampania" returnType="void" visibility="public"/>
+        <Method name="listaHistoricosDeCampanias" returnType="void" visibility="public"/>
+        <Method name="buscarRevendedor" returnType="Revendedor" visibility="public">
+          <Argument type="String" name="dni"/>
+        </Method>
+        <Method name="buscarRevendedor" returnType="Revendedor" visibility="public">
+          <Argument type="int" name="id"/>
+        </Method>
+        <Method name="buscarCampania" returnType="Campania" visibility="public">
+          <Argument type="int" name="id"/>
+        </Method>
+        <Method name="cantidadEstrellasCampania" returnType="int" visibility="public">
+          <Argument type="Revendedor" name="revendedor"/>
+          <Argument type="Campania" name="campania"/>
+        </Method>
+        <Method name="gananciaRevendedorCampania" returnType="double" visibility="public">
+          <Argument type="Revendedor" name="revendedor"/>
+          <Argument type="Campania" name="campania"/>
+        </Method>
+        <Method name="nivelRevendedor" returnType="int" visibility="public">
+          <Argument type="Revendedor" name="revendedor"/>
+        </Method>
+        <Method name="montoMinRevendedor" returnType="double" visibility="public">
+          <Argument type="Revendedor" name="revendedor"/>
+        </Method>
+        <Method name="montoMaxRevendedor" returnType="double" visibility="public">
+          <Argument type="Revendedor" name="revendedor"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="PedidoData" package="aivon.modelos" visibility="public" xPosition="3009.0" yPosition="2114.0">
+      <Fields>
+        <Field name="c" type="Connection" visibility="package"/>
+        <Field name="conexion" type="Conexion" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Conexion" name="conexion"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="altaPedido" returnType="void" visibility="public">
+          <Argument type="Pedido" name="pedido"/>
+        </Method>
+        <Method name="buscarPedido" returnType="Pedido" visibility="public">
+          <Argument type="int" name="id_revendedor"/>
+          <Argument type="int" name="id_campania"/>
+        </Method>
+        <Method name="costoPedido" returnType="double" visibility="public">
+          <Argument type="Pedido" name="pedido"/>
+        </Method>
+        <Method name="costoPedidoActivo" returnType="double" visibility="public">
+          <Argument type="Pedido" name="pedido"/>
+        </Method>
+        <Method name="costoPedidoPago" returnType="double" visibility="public">
+          <Argument type="Pedido" name="pedido"/>
+        </Method>
+        <Method name="costoPublicoPedido" returnType="double" visibility="public">
+          <Argument type="Pedido" name="pedido"/>
+        </Method>
+        <Method name="costoPublicoPedidoActivo" returnType="double" visibility="public">
+          <Argument type="Pedido" name="pedido"/>
+        </Method>
+        <Method name="costoPublicoPedidoPago" returnType="double" visibility="public">
+          <Argument type="Pedido" name="pedido"/>
+        </Method>
+        <Method name="costoPedidosPagosRevendedor" returnType="double" visibility="public">
+          <Argument type="Revendedor" name="revendedor"/>
+        </Method>
+        <Method name="costoPublicoPedidosPagosRevendedor" returnType="double" visibility="public">
+          <Argument type="Revendedor" name="revendedor"/>
+        </Method>
+        <Method name="cantEstrellasPedido" returnType="int" visibility="public">
+          <Argument type="Pedido" name="pedido"/>
+        </Method>
+        <Method name="cantEstrellasPedidoActivo" returnType="int" visibility="public">
+          <Argument type="Pedido" name="pedido"/>
+        </Method>
+        <Method name="cantEstrellasPedidoPago" returnType="int" visibility="public">
+          <Argument type="Pedido" name="pedido"/>
+        </Method>
+        <Method name="cantEstrellasPedidosPagosRevendedor" returnType="double" visibility="public">
+          <Argument type="Revendedor" name="revendedor"/>
+        </Method>
+        <Method name="listaPedidosCampania" returnType="List&lt;Pedido&gt;" visibility="public">
+          <Argument type="Campania" name="campania"/>
+        </Method>
+        <Method name="listaPedidosPagosCampania" returnType="List&lt;Pedido&gt;" visibility="public">
+          <Argument type="Campania" name="campania"/>
+        </Method>
+        <Method name="cantCajasPedido" returnType="int" visibility="public">
+          <Argument type="Pedido" name="pedido"/>
+        </Method>
+        <Method name="cantCajasPedidoActivo" returnType="int" visibility="public">
+          <Argument type="Pedido" name="pedido"/>
+        </Method>
+        <Method name="cantCajasPedidoPago" returnType="int" visibility="public">
+          <Argument type="Pedido" name="pedido"/>
+        </Method>
+        <Method name="actualizarFechaEntrega" returnType="void" visibility="public">
+          <Argument type="Pedido" name="pedido"/>
+          <Argument type="LocalDate" name="fecha_entrega"/>
+        </Method>
+        <Method name="actualizarFechaPago" returnType="void" visibility="public">
+          <Argument type="Pedido" name="pedido"/>
+          <Argument type="LocalDate" name="fecha_pago"/>
+        </Method>
+        <Method name="inhabilitarPedido" returnType="void" visibility="public">
+          <Argument type="Pedido" name="pedido"/>
+        </Method>
+        <Method name="habilitarPedido" returnType="void" visibility="public">
+          <Argument type="Pedido" name="pedido"/>
+        </Method>
+        <Method name="buscarRevendedor" returnType="Revendedor" visibility="public">
+          <Argument type="int" name="id"/>
+        </Method>
+        <Method name="buscarCampania" returnType="Campania" visibility="public">
+          <Argument type="int" name="id"/>
+        </Method>
+        <Method name="buscarCampaniaActiva" returnType="Campania" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="ProductoData" package="aivon.modelos" visibility="public" xPosition="3871.0" yPosition="799.0">
+      <Fields>
+        <Field name="con" type="Connection" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Conexion" name="conexion"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="altaProducto" returnType="void" visibility="public">
+          <Argument type="Producto" name="producto"/>
+        </Method>
+        <Method name="bajaProducto" returnType="void" visibility="public">
+          <Argument type="int" name="id"/>
+        </Method>
+        <Method name="modificarProducto" returnType="void" visibility="public">
+          <Argument type="Producto" name="producto"/>
+        </Method>
+        <Method name="buscarProducto" returnType="Producto" visibility="public">
+          <Argument type="int" name="id"/>
+        </Method>
+        <Method name="buscarProductos" returnType="List&lt;Producto&gt;" visibility="public"/>
+        <Method name="buscarProductosActivos" returnType="List&lt;Producto&gt;" visibility="public"/>
+        <Method name="buscarProductosInactivos" returnType="List&lt;Producto&gt;" visibility="public"/>
+        <Method name="buscarProductosPorNombre" returnType="List&lt;Producto&gt;" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="RevendedorData" package="aivon.modelos" visibility="public" xPosition="52.0" yPosition="1535.0">
+      <Fields>
+        <Field name="con" type="Connection" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Conexion" name="conexion"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="guardarRevendedor" returnType="void" visibility="public">
+          <Argument type="Revendedor" name="revendedor"/>
+        </Method>
+        <Method name="borrarRevendedor" returnType="void" visibility="public">
+          <Argument type="int" name="id"/>
+        </Method>
+        <Method name="borrarRevendedor" returnType="void" visibility="public">
+          <Argument type="String" name="dni"/>
+        </Method>
+        <Method name="modificarRevendedor" returnType="void" visibility="public">
+          <Argument type="Revendedor" name="revendedor"/>
+        </Method>
+        <Method name="buscarRevendedor" returnType="Revendedor" visibility="public">
+          <Argument type="int" name="id"/>
+        </Method>
+        <Method name="buscarRevendedor" returnType="Revendedor" visibility="public">
+          <Argument type="String" name="dni"/>
+        </Method>
+        <Method name="buscarRevendedores" returnType="List&lt;Revendedor&gt;" visibility="public"/>
+        <Method name="buscarRevendedoresActivos" returnType="List&lt;Revendedor&gt;" visibility="public"/>
+        <Method name="buscarRevendedoresXNivel" returnType="List&lt;Revendedor&gt;" visibility="public">
+          <Argument type="int" name="nivel"/>
+        </Method>
+        <Method name="buscarRevendedoresXCampania" returnType="List&lt;Revendedor&gt;" visibility="public">
+          <Argument type="int" name="idCampania"/>
+        </Method>
+        <Method name="gananciaFinalRevendedor" returnType="double" visibility="public">
+          <Argument type="Revendedor" name="revendedor"/>
+        </Method>
+        <Method name="gananciaRevendedorPorPedido" returnType="double" visibility="public">
+          <Argument type="Revendedor" name="revendedor"/>
+          <Argument type="Pedido" name="pedido"/>
+        </Method>
+        <Method name="gananciaRevendedorPorCampania" returnType="double" visibility="public">
+          <Argument type="Revendedor" name="revendedor"/>
+          <Argument type="Campania" name="campania"/>
+        </Method>
+        <Method name="buscarEstrellasTotalesRevendedor" returnType="int" visibility="public">
+          <Argument type="Revendedor" name="revendedor"/>
+        </Method>
+        <Method name="calcularNivelRevendedor" returnType="int" visibility="public">
+          <Argument type="Revendedor" name="revendedor"/>
+        </Method>
+        <Method name="calcularMontoMinimoRevendedor" returnType="double" visibility="public">
+          <Argument type="Revendedor" name="revendedor"/>
+        </Method>
+        <Method name="calcularMontoMaximoRevendedor" returnType="double" visibility="public">
+          <Argument type="Revendedor" name="revendedor"/>
+        </Method>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <UseRelation source="aivon.modelos.RevendedorData" target="aivon.entidades.Revendedor" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="campania" source="aivon.entidades.Historico" target="aivon.entidades.Campania" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="aivon.modelos.HistoricoData" target="aivon.entidades.Historico" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="aivon.entidades.Historico" target="aivon.entidades.Revendedor" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="revendedor" source="aivon.entidades.Historico" target="aivon.entidades.Revendedor" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="campania" source="aivon.entidades.Pedido" target="aivon.entidades.Campania" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="aivon.modelos.CampaniaData" target="aivon.entidades.Campania" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="revendedor" source="aivon.entidades.Pedido" target="aivon.entidades.Revendedor" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="conexion" source="aivon.modelos.HistoricoData" target="aivon.modelos.Conexion" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="aivon.modelos.PedidoData" target="aivon.entidades.Pedido" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="pedido" source="aivon.entidades.DetallePedido" target="aivon.entidades.Pedido" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="aivon.entidades.Historico" target="aivon.entidades.Campania" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="aivon.entidades.DetallePedido" target="aivon.entidades.Producto" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="aivon.entidades.DetallePedido" target="aivon.entidades.Pedido" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="conexion" source="aivon.modelos.PedidoData" target="aivon.modelos.Conexion" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="aivon.modelos.HistoricoData" target="aivon.entidades.Revendedor" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="aivon.modelos.PedidoData" target="aivon.entidades.Campania" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="aivon.modelos.ProductoData" target="aivon.entidades.Producto" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="producto" source="aivon.entidades.DetallePedido" target="aivon.entidades.Producto" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="aivon.modelos.HistoricoData" target="aivon.entidades.Campania" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="aivon.entidades.Pedido" target="aivon.entidades.Revendedor" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="aivon.modelos.PedidoData" target="aivon.entidades.Revendedor" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="aivon.modelos.DetallePedidoData" target="aivon.entidades.Pedido" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="aivon.entidades.Pedido" target="aivon.entidades.Campania" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
