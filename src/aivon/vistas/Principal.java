@@ -39,6 +39,7 @@ public class Principal extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
+        jmi_pedido_alta = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -93,6 +94,15 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu4);
 
         jMenu5.setText("Pedido");
+
+        jmi_pedido_alta.setText("Pedido Alta");
+        jmi_pedido_alta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_pedido_altaActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jmi_pedido_alta);
+
         jMenuBar1.add(jMenu5);
 
         jMenu6.setText("Consultas");
@@ -147,6 +157,19 @@ public class Principal extends javax.swing.JFrame {
         pac.show();
     }//GEN-LAST:event_jmi_producto_actualizarActionPerformed
 
+    private void jmi_pedido_altaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_pedido_altaActionPerformed
+        // TODO add your handling code here:
+        jdp_escritorio.removeAll();
+        jdp_escritorio.repaint();
+        PedidoAlta pal=new PedidoAlta();
+        pal.setVisible(true);
+        jdp_escritorio.add(pal);
+        Dimension desktopSize = jdp_escritorio.getSize();
+        Dimension FrameSize = pal.getSize();
+        pal.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        pal.show();
+    }//GEN-LAST:event_jmi_pedido_altaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -192,6 +215,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JDesktopPane jdp_escritorio;
+    private javax.swing.JMenuItem jmi_pedido_alta;
     private javax.swing.JMenuItem jmi_producto_actualizar;
     private javax.swing.JMenuItem jmi_producto_alta;
     // End of variables declaration//GEN-END:variables
