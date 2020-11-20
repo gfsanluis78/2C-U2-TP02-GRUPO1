@@ -9,9 +9,12 @@ import aivon.entidades.Revendedor;
 import aivon.modelos.Conexion;
 import aivon.modelos.HistoricoData;
 import aivon.modelos.RevendedorData;
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -24,38 +27,59 @@ public class RevendedorAlta extends javax.swing.JInternalFrame {
     private RevendedorData revendedor_data;
     private HistoricoData historico_data;
     private Revendedor revendedor;
+    private Color color;
     /**
      * Creates new form RevendedorAlta
      */
+  
     public RevendedorAlta() {
         initComponents();
         try {
+             color= new Color(204, 204, 204); 
              conexion=new Conexion();
              revendedor_data=new RevendedorData(conexion);
              historico_data=new HistoricoData(conexion);
+             this.colorGris();
+             this.agregarAyuda();
              
-            
         } catch (Exception e) {
         }
 
         
     }
+
+
+      private void colorGris(){
+        jtf_nombre.setForeground(color);
+        jtf_apellido.setForeground(color);
+        jtf_dni.setForeground(color);
+        jtf_email.setForeground(color);
+        jtf_telefono.setForeground(color);
+        jtf_caracteristica.setForeground(color);
+    }
+    private void agregarAyuda(){
+        jtf_nombre.setText("Ingrese el nombre");
+        jtf_apellido.setText("Ingrese el apellido");
+        jtf_dni.setText("Ingrese el DNI");
+        jtf_email.setText("Ingrese el Email");
+        jtf_telefono.setText("222979");
+        jtf_caracteristica.setText("2664");
+
+    }
+    private static final String EMAIL_PATTERN = 
+    "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\\\.[A-Za-z0-9-]+)*(\\\\.[A-Za-z]{2,})$";
+     private static final String EMAIL_PATTERN2 = "^(.+)@(\\S+)$";
+     private static final String NOMBRE = "/^[A-Z a-z\\s]+$/";
+     private static final String EMAIL_PATTERN3 = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$";
     private void Limpiar(){
         jtf_nombre.setText("");
         jtf_apellido.setText("");
         jtf_dni.setText("");
+        jtf_email.setText("");
+        jtf_caracteristica.setText("");
         jcb_activo.setSelectedIndex(0);
-        Timer timer = new Timer();
-        TimerTask task=new TimerTask(){
-        int tic=0;
-        @Override
-        public void run(){
-         jtf_aviso.setText("");
-         setOpaque(false);
-        }
-    };
-    timer.schedule(task,30000,5000000);
-        jtf_aviso.setText("");
+        
+       this.delay("", 5, 5);
     }
     
     private void delay(String mensaje, int a, int b ){
@@ -95,7 +119,7 @@ public class RevendedorAlta extends javax.swing.JInternalFrame {
         jl_email = new javax.swing.JLabel();
         jl_activo = new javax.swing.JLabel();
         jtf_email = new javax.swing.JTextField();
-        jtf_telefono = new javax.swing.JTextField();
+        jtf_caracteristica = new javax.swing.JTextField();
         jtf_apellido = new javax.swing.JTextField();
         jtf_dni = new javax.swing.JTextField();
         jtf_nombre = new javax.swing.JTextField();
@@ -107,6 +131,7 @@ public class RevendedorAlta extends javax.swing.JInternalFrame {
         jtf_aviso = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jcb_activo = new javax.swing.JComboBox<>();
+        jtf_telefono = new javax.swing.JTextField();
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setText("Alta Revendedoras");
@@ -130,19 +155,94 @@ public class RevendedorAlta extends javax.swing.JInternalFrame {
         jl_activo.setText("Activo:");
 
         jtf_email.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jtf_email.setText("jTextField1");
+        jtf_email.setCaretColor(new java.awt.Color(255, 51, 51));
+        jtf_email.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtf_emailFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtf_emailFocusLost(evt);
+            }
+        });
+        jtf_email.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtf_emailActionPerformed(evt);
+            }
+        });
+        jtf_email.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_emailKeyTyped(evt);
+            }
+        });
 
-        jtf_telefono.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jtf_telefono.setText("jTextField1");
+        jtf_caracteristica.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jtf_caracteristica.setCaretColor(new java.awt.Color(255, 51, 51));
+        jtf_caracteristica.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtf_caracteristicaFocusGained(evt);
+            }
+        });
+        jtf_caracteristica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtf_caracteristicaActionPerformed(evt);
+            }
+        });
+        jtf_caracteristica.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_caracteristicaKeyTyped(evt);
+            }
+        });
 
         jtf_apellido.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jtf_apellido.setText("jTextField1");
+        jtf_apellido.setCaretColor(new java.awt.Color(255, 51, 51));
+        jtf_apellido.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtf_apellidoFocusGained(evt);
+            }
+        });
+        jtf_apellido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtf_apellidoActionPerformed(evt);
+            }
+        });
+        jtf_apellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_apellidoKeyTyped(evt);
+            }
+        });
 
         jtf_dni.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jtf_dni.setText("jTextField1");
+        jtf_dni.setCaretColor(new java.awt.Color(255, 51, 51));
+        jtf_dni.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtf_dniFocusGained(evt);
+            }
+        });
+        jtf_dni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtf_dniActionPerformed(evt);
+            }
+        });
+        jtf_dni.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_dniKeyTyped(evt);
+            }
+        });
 
         jtf_nombre.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jtf_nombre.setText("jTextField1");
+        jtf_nombre.setToolTipText("");
+        jtf_nombre.setCaretColor(new java.awt.Color(255, 51, 51));
+        jtf_nombre.setName(""); // NOI18N
+        jtf_nombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtf_nombreFocusGained(evt);
+            }
+        });
+        jtf_nombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtf_nombreActionPerformed(evt);
+            }
+        });
         jtf_nombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtf_nombreKeyTyped(evt);
@@ -183,7 +283,35 @@ public class RevendedorAlta extends javax.swing.JInternalFrame {
         jLabel2.setText("Estado:");
 
         jcb_activo.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jcb_activo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "  ", "SI", "NO" }));
+        jcb_activo.setForeground(new java.awt.Color(0, 0, 0));
+        jcb_activo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elija", "SI", "NO" }));
+        jcb_activo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jcb_activoFocusGained(evt);
+            }
+        });
+        jcb_activo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcb_activoActionPerformed(evt);
+            }
+        });
+
+        jtf_telefono.setCaretColor(new java.awt.Color(255, 51, 51));
+        jtf_telefono.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtf_telefonoFocusGained(evt);
+            }
+        });
+        jtf_telefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtf_telefonoActionPerformed(evt);
+            }
+        });
+        jtf_telefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_telefonoKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -206,12 +334,16 @@ public class RevendedorAlta extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jtf_apellido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jtf_dni, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jtf_nombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jtf_email, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jtf_telefono, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(67, 67, 67)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jtf_caracteristica, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jtf_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jtf_dni, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jtf_nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                                            .addComponent(jtf_apellido))
+                                        .addGap(27, 27, 27)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(10, 10, 10)
@@ -225,7 +357,8 @@ public class RevendedorAlta extends javax.swing.JInternalFrame {
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(jb_salir)
                                         .addComponent(jb_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(jcb_activo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jtf_email, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcb_activo, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(92, 92, 92)
                         .addComponent(jLabel1)))
@@ -258,6 +391,7 @@ public class RevendedorAlta extends javax.swing.JInternalFrame {
                         .addGap(14, 14, 14)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jl_telefono)
+                            .addComponent(jtf_caracteristica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jtf_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(14, 14, 14)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -281,14 +415,19 @@ public class RevendedorAlta extends javax.swing.JInternalFrame {
                 .addComponent(jLabel2)
                 .addGap(4, 4, 4)
                 .addComponent(jtf_aviso, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
+
+        jtf_nombre.getAccessibleContext().setAccessibleName("");
+        jtf_nombre.getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jb_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_limpiarActionPerformed
         this.Limpiar();
+        this.colorGris();
+        this.agregarAyuda();
     }//GEN-LAST:event_jb_limpiarActionPerformed
 
     private void jb_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_guardarActionPerformed
@@ -308,14 +447,14 @@ public class RevendedorAlta extends javax.swing.JInternalFrame {
             jtf_aviso.setText("No Debe estar vacio el DNI");
             jtf_dni.requestFocus();
         }
-        if(cont==0&&(JOptionPane.YES_NO_OPTION==JOptionPane.showConfirmDialog(this, "Esta correctos todos los datos??", "Guaradar Revendedora", JOptionPane.YES_NO_OPTION))){
+        if(cont==0&&(JOptionPane.YES_NO_OPTION==JOptionPane.showConfirmDialog(this, "Estan correctos todos los datos??", "Guardar Revendedora", JOptionPane.YES_NO_OPTION))){
 
             revendedor= new Revendedor();
             revendedor.setNombre(jtf_nombre.getText());
             revendedor.setApellido(jtf_apellido.getText());
             revendedor.setDni(jtf_dni.getText());
             revendedor.setEmail(jtf_email.getText());
-            revendedor.setTel(jtf_email.getText());
+            revendedor.setTel(jtf_caracteristica.getText()+jtf_telefono.getText());
 
             if ( jcb_activo.getSelectedItem().toString().equalsIgnoreCase("si")){
                 revendedor.setActivo(true);
@@ -327,19 +466,23 @@ public class RevendedorAlta extends javax.swing.JInternalFrame {
             System.out.println(revendedor.getId_revendedor());
             if(revendedor.getId_revendedor()==0){
                 this.Limpiar();
-                System.out.println("Ya existe el alumno");
-                jtf_aviso.setText("Ya existe el alumno");
+                System.out.println("Ya existe el revendedor");
+                jtf_aviso.setText("Ya existe el Revendedor");
                 this.delay(" ", 3, 5);
             }else{
-                jtf_aviso.setText("Alumno guardado con Exito");
-                this.delay(" ", 3, 5);
+                jtf_aviso.setText("Revendedor guardado con Exito");
+                this.delay(" ", 5, 7);
                 this.Limpiar();
+                this.colorGris();
+                this.agregarAyuda();
             }
         }
         else{
             jtf_aviso.setText("Llene todos los campos Nombre, Apellido, DNI!!! ");
             //this.delay("Llene todos los campos Nombre, Apellido, DNI y FechaN ");
             this.delay(" ", 3, 5);
+            this.Limpiar();
+            this.agregarAyuda();
             //JOptionPane.showMessageDialog(this, "Deben estar los ca");
 
         }
@@ -352,26 +495,192 @@ public class RevendedorAlta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jb_salirActionPerformed
 
     private void jtf_nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_nombreKeyTyped
-       char c = evt.getKeyChar();
-        if ((Character.isDigit(c) == false) && !(evt.getKeyChar()==KeyEvent.VK_BACK_SPACE)&&!(Character.isLetter(evt.getKeyChar()))&& !(evt.getKeyChar()==KeyEvent.VK_SPACE)) {
-            evt.consume();
-            jtf_aviso.setText("Solo letras");
-        } 
-//        else {
+//######  Controla que no sean numeros y que no tenga espacios no dejando entrar espacios        
+        if(!(evt.getKeyChar()==KeyEvent.VK_BACK_SPACE)&&!(Character.isDigit(evt.getKeyChar()))&&!(evt.getKeyChar()==KeyEvent.VK_SPACE)){
             
-//         }
- //////////////////////////////////////////////
-       if(jtf_nombre.getText().trim().isEmpty()){
-            jtf_aviso.setText("Complete");
         }
-///////////////////////////////////////        
-        if(Character.isSpaceChar(c)||jtf_nombre.getText().isEmpty()){
-            jtf_aviso.setText("Complete");
+        else{
+            jtf_aviso.setText("Solo letras");
+            evt.consume();
         }
         this.limpiarJL(jtf_aviso, 3, 2);
-
-     
     }//GEN-LAST:event_jtf_nombreKeyTyped
+
+    private void jtf_dniKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_dniKeyTyped
+         char caracter = evt.getKeyChar();
+//#####  Controla que sean solo numeros y sin espacios  ########################
+        if (((caracter < '0')
+                || (caracter > '9'))
+                && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
+            evt.consume();  // ignorar el evento de teclado
+            jtf_aviso.setText("Solo numeros");
+        }
+//######    Controla que sean 8 digitos   ######################################
+        if(!(jtf_dni.getText().length()<8)){
+            evt.consume();
+            jtf_aviso.setText("Solo 8 digitos");
+        }
+        this.limpiarJL(jtf_aviso, 3, 2);
+        
+    }//GEN-LAST:event_jtf_dniKeyTyped
+
+    private void jtf_apellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_apellidoKeyTyped
+//######  Controla que no sean numeros y que no tenga espacios no dejando entrar espacios        
+        if(!(evt.getKeyChar()==KeyEvent.VK_BACK_SPACE)&&!(Character.isDigit(evt.getKeyChar()))&&!(evt.getKeyChar()==KeyEvent.VK_SPACE)){
+            
+        }
+        else{
+            jtf_aviso.setText("Solo letras");
+            evt.consume();
+        }
+        this.limpiarJL(jtf_aviso, 3, 2);
+    }//GEN-LAST:event_jtf_apellidoKeyTyped
+
+    private void jtf_emailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_emailKeyTyped
+        
+//        boolean ac=(jcb_activo.getSelectedItem()==null)||(jcb_activo.getSelectedItem()!=null);
+//        if( !ac && !(email.contains("@"))){
+//            jtf_aviso.setText("Debe llevar un @");
+//            jcb_activo.setEditable(false);
+//        }
+        //
+    }//GEN-LAST:event_jtf_emailKeyTyped
+
+    private void jtf_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_nombreActionPerformed
+        
+    }//GEN-LAST:event_jtf_nombreActionPerformed
+
+    private void jtf_apellidoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_apellidoFocusGained
+        if(jtf_apellido.getForeground()==color){
+            jtf_apellido.setText("");
+            jtf_apellido.setForeground(Color.BLACK);
+        }
+        else{
+        
+        }
+    }//GEN-LAST:event_jtf_apellidoFocusGained
+
+    private void jtf_dniFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_dniFocusGained
+          if (jtf_dni.getForeground() == color) {
+            jtf_dni.setText("");
+            jtf_dni.setForeground(Color.BLACK);
+        } else {
+
+        }
+    }//GEN-LAST:event_jtf_dniFocusGained
+
+    private void jtf_caracteristicaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_caracteristicaFocusGained
+            if (jtf_caracteristica.getForeground() == color) {
+            jtf_caracteristica.setText("");
+            jtf_caracteristica.setForeground(Color.BLACK);
+        } else {
+
+        }
+    }//GEN-LAST:event_jtf_caracteristicaFocusGained
+
+    private void jtf_telefonoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_telefonoFocusGained
+        if (jtf_telefono.getForeground() == color) {
+            jtf_telefono.setText("");
+            jtf_telefono.setForeground(Color.BLACK);
+        } else {
+
+        }
+    }//GEN-LAST:event_jtf_telefonoFocusGained
+
+    private void jtf_emailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_emailFocusGained
+        if (jtf_email.getForeground() == color) {
+            jtf_email.setText("");
+            jtf_email.setForeground(Color.BLACK);
+        } else {
+
+        }
+    }//GEN-LAST:event_jtf_emailFocusGained
+
+    private void jtf_apellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_apellidoActionPerformed
+ 
+    }//GEN-LAST:event_jtf_apellidoActionPerformed
+
+    private void jtf_dniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_dniActionPerformed
+
+    }//GEN-LAST:event_jtf_dniActionPerformed
+
+    private void jtf_emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_emailActionPerformed
+            
+    }//GEN-LAST:event_jtf_emailActionPerformed
+
+    private void jtf_telefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_telefonoActionPerformed
+ 
+    }//GEN-LAST:event_jtf_telefonoActionPerformed
+
+    private void jtf_caracteristicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_caracteristicaActionPerformed
+       
+    }//GEN-LAST:event_jtf_caracteristicaActionPerformed
+
+    private void jtf_nombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_nombreFocusGained
+        if(jtf_nombre.getForeground()==color){
+            jtf_nombre.setText("");
+        jtf_nombre.setForeground(Color.BLACK);
+        }
+        else{
+        
+        }
+        
+    }//GEN-LAST:event_jtf_nombreFocusGained
+
+    private void jtf_caracteristicaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_caracteristicaKeyTyped
+                 char caracter = evt.getKeyChar();
+//#####  Controla que sean solo numeros y sin espacios  ########################
+        if (((caracter < '0')
+                || (caracter > '9'))
+                && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
+            evt.consume();  // ignorar el evento de teclado
+            jtf_aviso.setText("Solo numeros");
+        }
+//######    Controla que sean 8 digitos   ######################################
+        if(!(jtf_caracteristica.getText().length()<4)){
+            evt.consume();
+            jtf_aviso.setText("Solo 4 digitos");
+        }
+        this.limpiarJL(jtf_aviso, 3, 2);
+    }//GEN-LAST:event_jtf_caracteristicaKeyTyped
+
+    private void jtf_telefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_telefonoKeyTyped
+         char caracter = evt.getKeyChar();
+//#####  Controla que sean solo numeros y sin espacios  ########################
+        if (((caracter < '0')
+                || (caracter > '9'))
+                && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
+            evt.consume();  // ignorar el evento de teclado
+            jtf_aviso.setText("Solo numeros");
+        }
+//######    Controla que sean 8 digitos   ######################################
+        if(!(jtf_telefono.getText().length()<6)){
+            evt.consume();
+            jtf_aviso.setText("Solo 6 digitos");
+        }
+        this.limpiarJL(jtf_aviso, 3, 2);
+    }//GEN-LAST:event_jtf_telefonoKeyTyped
+
+    private void jcb_activoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jcb_activoFocusGained
+        
+    }//GEN-LAST:event_jcb_activoFocusGained
+
+    private void jcb_activoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcb_activoActionPerformed
+        
+    }//GEN-LAST:event_jcb_activoActionPerformed
+
+    private void jtf_emailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_emailFocusLost
+//        String email=jtf_email.getText();
+//        System.out.println(email);
+//        System.out.println(Validacion.isValid(email));
+//        if(email.matches(EMAIL_PATTERN)){
+//            jcb_activo.setEnabled(true);
+//        }
+//        else{
+//            jcb_activo.setEnabled(false);
+//            jtf_aviso.setText("Debe ingresar un email valido");
+//        }
+    }//GEN-LAST:event_jtf_emailFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -391,6 +700,7 @@ public class RevendedorAlta extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jl_telefono;
     private javax.swing.JTextField jtf_apellido;
     private javax.swing.JLabel jtf_aviso;
+    private javax.swing.JTextField jtf_caracteristica;
     private javax.swing.JTextField jtf_dni;
     private javax.swing.JTextField jtf_email;
     private javax.swing.JTextField jtf_nombre;
