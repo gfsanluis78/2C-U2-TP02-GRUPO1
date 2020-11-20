@@ -76,6 +76,16 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Pedido"/>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jmi_pedido_alta">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Pedido Alta"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmi_pedido_altaActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu6">
           <Properties>

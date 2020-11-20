@@ -268,7 +268,7 @@ public class ProductoData {
                     
                     productos.add(producto);
             }
-                JOptionPane.showMessageDialog(null, "Se encontraron los productos");
+                //JOptionPane.showMessageDialog(null, "Se encontraron los productos");
                 System.out.println("Se encontraron revdendedores");
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontraron los productos");

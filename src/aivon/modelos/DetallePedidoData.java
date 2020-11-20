@@ -37,7 +37,7 @@ public class DetallePedidoData {
             // NOTIFICANDO OPERACION
             if (celAfectadas > 0) {
                 System.out.println("Pedido de producto cargado");
-                JOptionPane.showMessageDialog(null, "Pedido producto cargado");
+                //JOptionPane.showMessageDialog(null, "Pedido producto cargado");
             } else {
                 System.out.println("No se pudo cargar pedido del producto");
                 JOptionPane.showMessageDialog(null, "No se pudo cargar pedido del producto");
