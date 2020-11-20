@@ -189,13 +189,42 @@ public class PedidoAlta extends javax.swing.JInternalFrame {
     //######### GENERANDO DETALLES PEDIDO DESDE TABLA PRODUCTOS PEDIDOS ########
     
     private void generarDetallesPedido() {
-        int a = modelo_pedido.getRowCount()- 1;
+        DetallePedido det_ped;
+        ped.altaPedido(pedido);
+        int a = modelo_pedido.getRowCount() - 1;
         for (int i = a; i >= 0; i--) {
-        Producto prod = pd.buscarProducto(Integer.parseInt(jt_prod_pedidos.getValueAt(i, 0).toString()));
-        int cant = Integer.parseInt(jt_prod_pedidos.getValueAt(i, 4).toString());
-        dpd.pedirProducto(new DetallePedido(pedido, prod, cant));
+            Producto prod = pd.buscarProducto(Integer.parseInt(jt_prod_pedidos.getValueAt(i, 0).toString()));
+            System.out.println(prod.toString());
+            int cant = Integer.parseInt(jt_prod_pedidos.getValueAt(i, 4).toString());
+            System.out.println(cant);
+            det_ped = new DetallePedido(pedido, prod, cant);
+            dpd.pedirProducto(det_ped);
         }
-        JOptionPane.showMessageDialog(this, "Productos cargados al pedido");
+        //JOptionPane.showMessageDialog(this, "Pedido cargado");
+        this.resetearVista();
+    }
+    //###### FIN GENERANDO DETALLES PEDIDO DESDE TABLA PRODUCTOS PEDIDOS #######
+    //--------------------------------------------------------------------------
+    //######################### HERRAMIENTAS ###################################
+    
+    private void resetearVista() {
+        jb_ordenar.setEnabled(false);
+        jb_eliminar_det_ped.setEnabled(false);
+        this.borraFilasTablaPedido();
+        jt_prod_pedidos.setEnabled(false);
+        jb_agregar_producto.setEnabled(false);
+        js_cantidad.setEnabled(false);
+        jb_crear_pedido.setEnabled(false);
+        jdc_fecha_ingreso.setEnabled(false);
+        jtf_activo.setText("");
+        jtf_apellido_rev.setText("");
+        jtf_nombre_rev.setText("");
+        jtf_dni.setText("");
+        revendedor = null;
+        pedido = null;
+        campaña = null;
+        jtf_dni.setEditable(true);
+        jtf_dni.requestFocus();
     }
     
     /**
@@ -240,6 +269,7 @@ public class PedidoAlta extends javax.swing.JInternalFrame {
         jLabel12 = new javax.swing.JLabel();
         jl_monto_min = new javax.swing.JLabel();
         jl_monto_max = new javax.swing.JLabel();
+        jb_cancelar = new javax.swing.JButton();
 
         jLabel1.setText("DNI");
 
@@ -283,12 +313,12 @@ public class PedidoAlta extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jdc_fecha_ingreso, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jb_crear_pedido, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jdc_fecha_ingreso, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jb_crear_pedido, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(58, 58, 58)
@@ -333,7 +363,7 @@ public class PedidoAlta extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jb_crear_pedido, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jdc_fecha_ingreso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -377,7 +407,7 @@ public class PedidoAlta extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jt_productos);
 
-        jb_ordenar.setText("ORDENAR PEDIDO");
+        jb_ordenar.setText("ALTA PEDIDO");
         jb_ordenar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jb_ordenarActionPerformed(evt);
@@ -418,6 +448,13 @@ public class PedidoAlta extends javax.swing.JInternalFrame {
 
         jl_monto_max.setText("     ");
 
+        jb_cancelar.setText("REINICIAR");
+        jb_cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_cancelarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -432,30 +469,32 @@ public class PedidoAlta extends javax.swing.JInternalFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 3, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(jb_eliminar_det_ped)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jb_cancelar)
+                                    .addGap(97, 97, 97)
+                                    .addComponent(jb_ordenar))
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jb_eliminar_det_ped)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jb_ordenar))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jl_total_costo_lista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jl_total_costo_publico, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(63, 63, 63)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel12))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jl_monto_max, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jl_monto_min, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(57, 57, 57)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jl_total_costo_lista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jl_total_costo_publico, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(63, 63, 63)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel12))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jl_monto_max, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jl_monto_min, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(57, 57, 57)))))
                 .addGap(21, 21, 21)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -521,7 +560,8 @@ public class PedidoAlta extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jb_ordenar)
-                                    .addComponent(jb_eliminar_det_ped))))
+                                    .addComponent(jb_eliminar_det_ped)
+                                    .addComponent(jb_cancelar))))
                         .addGap(36, 36, 36))))
         );
 
@@ -586,11 +626,12 @@ public class PedidoAlta extends javax.swing.JInternalFrame {
                         pedido.setRevendedor(revendedor);
                         pedido.setCampaña(campaña);
                         pedido.setFecha_ingreso(fecha_ingreso);
-                        pedido.setActivo(false);
-                        ped.altaPedido(pedido);
+                        pedido.setActivo(true);
+                        
                         jt_prod_pedidos.setEnabled(true);
                         jb_agregar_producto.setEnabled(true);
                         js_cantidad.setEnabled(true);
+                        jb_ordenar.setEnabled(true);
                         jl_monto_min.setText(String.valueOf(rd.calcularMontoMinimoRevendedor(revendedor)));
                         jl_monto_max.setText(String.valueOf(rd.calcularMontoMaximoRevendedor(revendedor)));
                     } else {
@@ -615,17 +656,22 @@ public class PedidoAlta extends javax.swing.JInternalFrame {
     private void jb_agregar_productoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_agregar_productoActionPerformed
         // BOTON AGREGAR PRODUCTO A LISTA
         int fila_prod_sel = jt_productos.getSelectedRow();
-        int id_producto = Integer.parseInt(jt_productos.getValueAt(fila_prod_sel, 0).toString());
-        Producto producto = pd.buscarProducto(id_producto);
-        int cant_prod = Integer.parseInt(js_cantidad.getValue().toString());
-        
-        if (pedido!=null) {
-            DetallePedido detalle_pedido = new DetallePedido(pedido, producto, cant_prod);
-            this.cargaDetallePedido(detalle_pedido);
-            
+
+        if (fila_prod_sel > -1) {
+            int id_producto = Integer.parseInt(jt_productos.getValueAt(fila_prod_sel, 0).toString());
+            Producto producto = pd.buscarProducto(id_producto);
+            int cant_prod = Integer.parseInt(js_cantidad.getValue().toString());
+
+            if (pedido != null) {
+                DetallePedido detalle_pedido = new DetallePedido(pedido, producto, cant_prod);
+                this.cargaDetallePedido(detalle_pedido);
+
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe elegir un producto de la lista");
+            jt_productos.requestFocus();
         }
-        
-        
+
     }//GEN-LAST:event_jb_agregar_productoActionPerformed
 
     private void jb_eliminar_det_pedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_eliminar_det_pedActionPerformed
@@ -635,23 +681,37 @@ public class PedidoAlta extends javax.swing.JInternalFrame {
 
     private void jb_ordenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_ordenarActionPerformed
         // TODO add your handling code here:
-        if (total_costo_lista < rd.calcularMontoMinimoRevendedor(revendedor)) {
-            JOptionPane.showMessageDialog(this, "El monto a pagar está por debajo de su monto mínimo");
-        } else {
-            if (total_costo_lista > rd.calcularMontoMaximoRevendedor(revendedor)) {
-                JOptionPane.showMessageDialog(this, "El monto a pagar está por debajo de su monto máximo");
+        int cant_det_ped = modelo_pedido.getRowCount();
+
+        if (cant_det_ped > 0) {
+            if (total_costo_lista < rd.calcularMontoMinimoRevendedor(revendedor)) {
+                JOptionPane.showMessageDialog(this, "El monto a pagar está por debajo de su monto mínimo");
             } else {
-                // ACÁ VA EL CÓDIGO PARA GENERAR LOS DETALLE_PEDIDO
-                int respuesta = JOptionPane.showConfirmDialog(this, "¿Seguro que desea cargar estos productos?", "Pedir productos", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (total_costo_lista > rd.calcularMontoMaximoRevendedor(revendedor)) {
+                    JOptionPane.showMessageDialog(this, "El monto a pagar está por encima de su monto máximo");
+                } else {
+                    // ACÁ VA EL CÓDIGO PARA GENERAR LOS DETALLE_PEDIDO
+                    int respuesta = JOptionPane.showConfirmDialog(this, "¿Seguro que desea cargar estos productos?", "Pedir productos", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
-                if (respuesta == 0) {
-                    this.generarDetallesPedido();
+                    if (respuesta == 0) {
+                        this.generarDetallesPedido();
+                    }
+
                 }
-
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "No ha agregado productos a la lista");
+            jt_productos.requestFocus();
         }
 
+
     }//GEN-LAST:event_jb_ordenarActionPerformed
+
+    private void jb_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_cancelarActionPerformed
+        // BOTON REINICIAR
+        this.resetearVista();
+        
+    }//GEN-LAST:event_jb_cancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -673,6 +733,7 @@ public class PedidoAlta extends javax.swing.JInternalFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton jb_agregar_producto;
     private javax.swing.JButton jb_buscar_revendedor;
+    private javax.swing.JButton jb_cancelar;
     private javax.swing.JButton jb_crear_pedido;
     private javax.swing.JButton jb_eliminar_det_ped;
     private javax.swing.JButton jb_ordenar;
@@ -689,6 +750,8 @@ public class PedidoAlta extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtf_dni;
     private javax.swing.JTextField jtf_nombre_rev;
     // End of variables declaration//GEN-END:variables
+
+
 
 
 
