@@ -49,7 +49,7 @@ public class CampañaData {
                 if (resultado.next()) {
                campaña.setId_campaña(resultado.getInt(1));
                     System.out.println("Campaña cargada");
-                    JOptionPane.showMessageDialog(null, "Campaña cargado");
+                    JOptionPane.showMessageDialog(null, "Campaña cargada");
                 } else {
                     JOptionPane.showMessageDialog(null, "No pudo obtener id");
                     System.out.println("No pudo obtener id");
@@ -402,8 +402,8 @@ public class CampañaData {
     }
     
         
-    // BUsca Todas las campañas activas
-    
+//    //BUsca Todas las campañas activas
+//    
 //    public List<Campaña> buscarCampañasActivas() {
 //
 //        Campaña campaña;
@@ -442,8 +442,8 @@ public class CampañaData {
 //
 //        return campañas;
 //    }
-    
-    
+//    
+//    
     // Busca todas las campañas Inactivas
     
     public List<Campaña> buscarCampañasInActivas() {
@@ -486,4 +486,68 @@ public class CampañaData {
     }
     
     
+
+
+public void desactivarCampañas() {        
+
+        
+            try {
+            Statement statement = con.createStatement();
+            int celAfectadas = statement.executeUpdate("UPDATE campaña SET activa=false WHERE 1;");
+            System.out.println(celAfectadas);
+            
+            if (celAfectadas > 0) {
+                System.out.println("Campaña activa desactivada");
+                JOptionPane.showMessageDialog(null, "Campaña Cerrada");
+            
+            } else { 
+                System.out.println("No hay campañas activas para desactivar");
+                JOptionPane.showMessageDialog(null, "No hay campañas activas");
+                
+            }
+              
+            statement.close();
+            
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al cerrar campaña");
+            
+            
+        }
+        
+    }
+
+
+public Campaña ultimaCampaña(){
+    
+        Campaña campaña = null;
+
+        try {
+            Statement instruccion = con.createStatement();
+             ResultSet consulta = instruccion.executeQuery("SELECT  id_campaña FROM campaña WHERE id_campaña = (SELECT MAX(id_campaña) FROM campaña);");
+                if (consulta.next()) {
+                    campaña=this.buscarCampaña(consulta.getInt("id_campaña"));
+                    System.out.println(campaña.getId_campaña());
+                                       
+                    
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se pudo buscar la ultima campaña");
+                    System.out.println("No existe la campaña ultima campaña");
+                }
+            
+            instruccion.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al buscar campaña");
+            System.out.println(ex.getMessage());
+        }
+        return campaña;
+    }
+    
+
+
+    
+    
 }
+
+
+
