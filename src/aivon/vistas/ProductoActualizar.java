@@ -83,6 +83,22 @@ public class ProductoActualizar extends javax.swing.JInternalFrame {
 
     }
     
+    private void cargaProductosPorNombre(String nombre) {
+
+        List<Producto> lista = pd.buscarProductosPorNombre(nombre);
+
+        if (lista.size() > 0) {
+            this.borraFilasTabla();
+            lista.forEach((p) -> {
+                if (p.isActivo()) {
+                    modelo.addRow(new Object[]{p.getId_producto(), p.getNombre(), p.getUso(), p.getTamaño(), p.getCosto(), p.getCosto_publico(), p.getEstrellas(), "Sí"});
+                } else {
+                    modelo.addRow(new Object[]{p.getId_producto(), p.getNombre(), p.getUso(), p.getTamaño(), p.getCosto(), p.getCosto_publico(), p.getEstrellas(), "No"});
+                }
+            });
+        }
+    }
+    
     //###################### FIN TABLA PRODUCTOS ###############################
     //--------------------------------------------------------------------------
     //########################## HERRAMIENTAS ##################################
@@ -151,6 +167,10 @@ public class ProductoActualizar extends javax.swing.JInternalFrame {
         jtf_nombre = new javax.swing.JTextField();
         jtf_uso = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jtf_buscar_por_nombre = new javax.swing.JTextField();
+        jb_buscar_por_nombre = new javax.swing.JButton();
+        jb_reiniciar_tabla_productos = new javax.swing.JButton();
 
         jt_productos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -262,6 +282,22 @@ public class ProductoActualizar extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("ACTUALIZACIÓN DE PRODUCTOS");
 
+        jLabel13.setText("BUSCAR POR NOMBRE");
+
+        jb_buscar_por_nombre.setText("BUSCAR");
+        jb_buscar_por_nombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_buscar_por_nombreActionPerformed(evt);
+            }
+        });
+
+        jb_reiniciar_tabla_productos.setText("REINICIAR");
+        jb_reiniciar_tabla_productos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_reiniciar_tabla_productosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -269,9 +305,21 @@ public class ProductoActualizar extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(37, 37, 37)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel13)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jtf_buscar_por_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jb_buscar_por_nombre)
+                                .addGap(18, 18, 18)
+                                .addComponent(jb_reiniciar_tabla_productos)
+                                .addGap(70, 70, 70)))
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -323,7 +371,7 @@ public class ProductoActualizar extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jb_modificar_producto_sel)
@@ -360,10 +408,17 @@ public class ProductoActualizar extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jb_limpiar)
                             .addComponent(jb_cargar))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
                         .addComponent(jButton6))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
-                    .addComponent(jSeparator1))
+                    .addComponent(jSeparator1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel13)
+                            .addComponent(jtf_buscar_por_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jb_buscar_por_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jb_reiniciar_tabla_productos, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(32, 32, 32))
         );
 
@@ -467,10 +522,12 @@ public class ProductoActualizar extends javax.swing.JInternalFrame {
                                                     producto.setActivo(true);
                                                     pd.modificarProducto(producto); // MODIFICACION DEL PRODUCTO
                                                     this.cargaProductos();
+                                                    jtf_buscar_por_nombre.setText("");
                                                 } else if (jrb_activo_no.isSelected()) {
                                                     producto.setActivo(false);
                                                     pd.modificarProducto(producto); // MODIFICACION DEL PRODUCTO
                                                     this.cargaProductos();
+                                                    jtf_buscar_por_nombre.setText("");
                                                 } else {
                                                     JOptionPane.showMessageDialog(this, "Debe seleccionar un estado activo o inactivo");
                                                 }
@@ -574,11 +631,28 @@ public class ProductoActualizar extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jb_modificar_producto_selActionPerformed
 
+    private void jb_buscar_por_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_buscar_por_nombreActionPerformed
+        // TODO add your handling code here:
+        if ("".equals(jtf_buscar_por_nombre.getText())) {
+            jtf_buscar_por_nombre.requestFocus();
+        } else {
+            this.cargaProductosPorNombre(jtf_buscar_por_nombre.getText());
+        }
+    }//GEN-LAST:event_jb_buscar_por_nombreActionPerformed
+
+    private void jb_reiniciar_tabla_productosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_reiniciar_tabla_productosActionPerformed
+        // TODO add your handling code here:
+        this.cargaProductos();
+        jtf_buscar_por_nombre.setText("");
+        jtf_buscar_por_nombre.requestFocus();
+    }//GEN-LAST:event_jb_reiniciar_tabla_productosActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bg_jrb_activo;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -588,12 +662,15 @@ public class ProductoActualizar extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JButton jb_buscar_por_nombre;
     private javax.swing.JButton jb_cargar;
     private javax.swing.JButton jb_limpiar;
     private javax.swing.JButton jb_modificar_producto_sel;
+    private javax.swing.JButton jb_reiniciar_tabla_productos;
     private javax.swing.JRadioButton jrb_activo_no;
     private javax.swing.JRadioButton jrb_activo_si;
     private javax.swing.JTable jt_productos;
+    private javax.swing.JTextField jtf_buscar_por_nombre;
     private javax.swing.JTextField jtf_costo_lista;
     private javax.swing.JTextField jtf_costo_publico;
     private javax.swing.JTextField jtf_estrellas;
