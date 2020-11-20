@@ -69,7 +69,7 @@ public class PedidoData {
 //################### BUSCAR UN PEDIDO X REVENDEDOR Y CAMAPAÑA #################
 
     public Pedido buscarPedido(int id_revendedor, int id_campaña) {
-        Pedido pedido = new Pedido();
+        Pedido pedido = null;
         Revendedor revendedor;
         Campaña campaña;
         try {
@@ -78,6 +78,7 @@ public class PedidoData {
                     + id_campaña + " AND id_revendedor=" + id_revendedor + ";");
 
             if (consulta.next()) {
+                pedido = new Pedido();
                 pedido.setId_pedido(consulta.getInt("id_pedido"));
                 pedido.setFecha_ingreso(consulta.getDate("fecha_ingreso").toLocalDate());
                 pedido.setActivo(consulta.getBoolean("activo"));
@@ -102,11 +103,11 @@ public class PedidoData {
                 pedido.setCampaña(campaña);
             } else {
                 System.out.println("No se pudo obtener pedido");
-                JOptionPane.showMessageDialog(null, "No se pudo obtener pedido");
+                //JOptionPane.showMessageDialog(null, "No se pudo obtener pedido");
             }
             statement.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al obtener pedido");
+            //JOptionPane.showMessageDialog(null, "Error al obtener pedido");
             System.out.println(e.getMessage());
         }
 
