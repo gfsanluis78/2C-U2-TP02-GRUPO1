@@ -38,6 +38,8 @@ public class Principal extends javax.swing.JFrame {
         jmi_producto_actualizar = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
+        jCheckBoxMenuItem_campañaAlta = new javax.swing.JCheckBoxMenuItem();
+        jCheckBoxMenuItem_campañaActualizar = new javax.swing.JCheckBoxMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jmi_pedido_alta = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
@@ -91,6 +93,25 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Campaña");
+
+        jCheckBoxMenuItem_campañaAlta.setSelected(true);
+        jCheckBoxMenuItem_campañaAlta.setText("Campaña Alta");
+        jCheckBoxMenuItem_campañaAlta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxMenuItem_campañaAltaActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jCheckBoxMenuItem_campañaAlta);
+
+        jCheckBoxMenuItem_campañaActualizar.setSelected(true);
+        jCheckBoxMenuItem_campañaActualizar.setText("Campaña Actualizar");
+        jCheckBoxMenuItem_campañaActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxMenuItem_campañaActualizarActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jCheckBoxMenuItem_campañaActualizar);
+
         jMenuBar1.add(jMenu4);
 
         jMenu5.setText("Pedido");
@@ -118,7 +139,7 @@ public class Principal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jdp_escritorio)
+            .addComponent(jdp_escritorio, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pack();
@@ -157,6 +178,32 @@ public class Principal extends javax.swing.JFrame {
         pac.show();
     }//GEN-LAST:event_jmi_producto_actualizarActionPerformed
 
+    private void jCheckBoxMenuItem_campañaAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem_campañaAltaActionPerformed
+        // TODO add your handling code here:
+        jdp_escritorio.removeAll();
+        jdp_escritorio.repaint();
+        CampañaAlta cal=new CampañaAlta();
+        cal.setVisible(true);
+        jdp_escritorio.add(cal);
+        Dimension desktopSize = jdp_escritorio.getSize();
+        Dimension FrameSize = cal.getSize();
+        cal.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        cal.show();
+    }//GEN-LAST:event_jCheckBoxMenuItem_campañaAltaActionPerformed
+
+    private void jCheckBoxMenuItem_campañaActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem_campañaActualizarActionPerformed
+        // TODO add your handling code here:
+        jdp_escritorio.removeAll();
+        jdp_escritorio.repaint();
+        CampañaActualizar cal=new CampañaActualizar();
+        cal.setVisible(true);
+        jdp_escritorio.add(cal);
+        Dimension desktopSize = jdp_escritorio.getSize();
+        Dimension FrameSize = cal.getSize();
+        cal.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        cal.show();
+        
+    }//GEN-LAST:event_jCheckBoxMenuItem_campañaActualizarActionPerformed
     private void jmi_pedido_altaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_pedido_altaActionPerformed
         // TODO add your handling code here:
         jdp_escritorio.removeAll();
@@ -206,6 +253,8 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem_campañaActualizar;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem_campañaAlta;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
