@@ -9,6 +9,7 @@ import aivon.entidades.Campaña;
 import aivon.modelos.CampañaData;
 import aivon.modelos.Conexion;
 import aivon.modelos.ProductoData;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -19,8 +20,10 @@ import javax.swing.JOptionPane;
  * @author Genaro
  */
 public class CampañaAlta extends javax.swing.JInternalFrame {
+
     private Conexion conexion;
     private CampañaData cd;
+
     /**
      * Creates new form ProductoAlta
      */
@@ -30,8 +33,9 @@ public class CampañaAlta extends javax.swing.JInternalFrame {
             conexion = new Conexion();
             cd = new CampañaData(conexion);
             jtf_nombre.requestFocus();
-            
-            jt_idNextCampana.setText(String.valueOf(cd.ultimaCampaña().getId_campaña()+1));
+
+            jt_idNextCampana.setText(String.valueOf(cd.ultimaCampaña().getId_campaña() + 1));
+            jDateChooser_finUltima.setDate(Date.valueOf(cd.ultimaCampaña().getFecha_fin()));
         } catch (Exception e) {
         }
     }
@@ -60,6 +64,8 @@ public class CampañaAlta extends javax.swing.JInternalFrame {
         jDateChooser_inicio = new com.toedter.calendar.JDateChooser();
         jLabel2 = new javax.swing.JLabel();
         jt_idNextCampana = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jDateChooser_finUltima = new com.toedter.calendar.JDateChooser();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("ALTA DE CAMPAÑA");
@@ -116,7 +122,23 @@ public class CampañaAlta extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel2.setText("ID");
+        jDateChooser_inicio.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jDateChooser_inicioFocusGained(evt);
+            }
+        });
+        jDateChooser_inicio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jDateChooser_inicioMouseEntered(evt);
+            }
+        });
+        jDateChooser_inicio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jDateChooser_inicioKeyTyped(evt);
+            }
+        });
+
+        jLabel2.setText("N° Campaña");
 
         jt_idNextCampana.setEditable(false);
         jt_idNextCampana.setText("___");
@@ -127,6 +149,11 @@ public class CampañaAlta extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel3.setText("fecha fin ultima campaña");
+
+        jDateChooser_finUltima.setEnabled(false);
+        jDateChooser_finUltima.setFocusable(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -134,47 +161,62 @@ public class CampañaAlta extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(79, 79, 79)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jl_montoMinimo)
-                            .addComponent(jl_montoMaximo))
-                        .addGap(119, 133, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jtf_montoMaximo, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-                            .addComponent(jtf_montoMinimo)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jbt_limpiar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jbt_cargar))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jt_idNextCampana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jL_nombre)
-                            .addComponent(jl_fechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jtf_nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                            .addComponent(jDateChooser_inicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(0, 86, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jl_montoMinimo)
+                                .addComponent(jl_montoMaximo))
+                            .addGap(131, 131, 131)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jtf_montoMaximo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jtf_montoMinimo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jL_nombre)
+                                .addComponent(jl_fechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(26, 26, 26)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jtf_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jDateChooser_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jt_idNextCampana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addGap(0, 85, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(199, 199, 199)
-                        .addComponent(jbt_salir))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(144, 144, 144)
-                        .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(199, 199, 199)
+                                .addComponent(jbt_salir))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(144, 144, 144)
+                                .addComponent(jLabel1)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jDateChooser_finUltima, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(jLabel3))
+                    .addComponent(jDateChooser_finUltima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13)
                 .addComponent(jLabel1)
-                .addGap(3, 3, 3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jt_idNextCampana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -213,7 +255,7 @@ public class CampañaAlta extends javax.swing.JInternalFrame {
 
     private void jtf_nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_nombreKeyTyped
         // TODO add your handling code here:
-        if(!(jtf_nombre.getText().length()<30)){
+        if (!(jtf_nombre.getText().length() < 30)) {
             evt.consume();
         }
     }//GEN-LAST:event_jtf_nombreKeyTyped
@@ -221,10 +263,10 @@ public class CampañaAlta extends javax.swing.JInternalFrame {
     private void jtf_montoMinimoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_montoMinimoKeyTyped
         // TODO add your handling code here:
         char caracter = evt.getKeyChar();
-        if (((caracter < '0')|| (caracter > '9')) && (caracter != '\b') &&(caracter != '.')) {
+        if (((caracter < '0') || (caracter > '9')) && (caracter != '\b') && (caracter != '.')) {
             evt.consume();
         }
-        if(!(jtf_montoMinimo.getText().length()<7)){
+        if (!(jtf_montoMinimo.getText().length() < 7)) {
             evt.consume();
         }
     }//GEN-LAST:event_jtf_montoMinimoKeyTyped
@@ -232,27 +274,19 @@ public class CampañaAlta extends javax.swing.JInternalFrame {
     private void jtf_montoMaximoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_montoMaximoKeyTyped
         // TODO add your handling code here:
         char caracter = evt.getKeyChar();
-        if (((caracter < '0')|| (caracter > '9')) && (caracter != '\b') &&(caracter != '.')) {
+        if (((caracter < '0') || (caracter > '9')) && (caracter != '\b') && (caracter != '.')) {
             evt.consume();
         }
-        if(!(jtf_montoMaximo.getText().length()<7)){
+        if (!(jtf_montoMaximo.getText().length() < 7)) {
             evt.consume();
         }
     }//GEN-LAST:event_jtf_montoMaximoKeyTyped
-private void limpiar(){
-        jtf_nombre.setText("");
-        jtf_montoMinimo.setText("");
-        jtf_montoMaximo.setText("");
-        jDateChooser_inicio.setDate(null);
-        jt_idNextCampana.setText(String.valueOf(cd.ultimaCampaña().getId_campaña()+1));
-        jtf_nombre.requestFocus();
-        
-    }    
-    
+
+
     private void jbt_cargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_cargarActionPerformed
         // TODO add your handling code here:
         //¿Validamos si hay dos campañas en el mismo lapso de tiempo? Consultar a la catedra! Genaro.
-        
+
         Campaña campaña = new Campaña();
         if (jtf_nombre.getText().length() > 4) {
             campaña.setNombre(jtf_nombre.getText());
@@ -276,24 +310,48 @@ private void limpiar(){
                 jtf_montoMaximo.setText("");
                 jtf_montoMaximo.requestFocus();
             }
-            LocalDate fecha;
-            fecha = LocalDateTime.ofInstant(jDateChooser_inicio.getDate().toInstant(), ZoneId.systemDefault()).toLocalDate();
+            LocalDate fecha=null;
+            
+            try {
+                fecha = LocalDateTime.ofInstant(jDateChooser_inicio.getDate().toInstant(), ZoneId.systemDefault()).toLocalDate();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "No ha elegido una fecha"+e.toString());
+                jDateChooser_inicio.requestFocus();
+            }
+            
             if (jDateChooser_inicio.getDate() != null) {
-                campaña.setFecha_inicio(fecha);
-                cd.guardarCampaña(campaña);
-                limpiar();
+                if (jDateChooser_inicio.getDate().after(Date.valueOf(cd.ultimaCampaña().getFecha_fin()))) {
+                    campaña.setFecha_inicio(fecha);
+                    cd.guardarCampaña(campaña);
+                    limpiar();
+                } else {
+                    JOptionPane.showMessageDialog(this, "La fecha elegida es anterior a la fecha de fin de la ultima campaña");
+                    jDateChooser_inicio.requestFocus();
+                }
 
             } else {
                 JOptionPane.showMessageDialog(this, "La fecha elegida es nula");
                 jDateChooser_inicio.requestFocus();
             }
 
-        }
+        }else {
+                JOptionPane.showMessageDialog(this, "Debe ingresar un Noombre con mas de 4 caracteres");
+                jtf_nombre.requestFocus();
+            }
 
 
 
     }//GEN-LAST:event_jbt_cargarActionPerformed
+    private void limpiar() {
+        jtf_nombre.setText("");
+        jtf_montoMinimo.setText("");
+        jtf_montoMaximo.setText("");
+        jDateChooser_inicio.setDate(null);
+        jDateChooser_finUltima.setDate(Date.valueOf(cd.ultimaCampaña().getFecha_fin()));
+        jt_idNextCampana.setText(String.valueOf(cd.ultimaCampaña().getId_campaña() + 1));
+        jtf_nombre.requestFocus();
 
+    }
     private void jbt_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_salirActionPerformed
         // TODO add your handling code here:
         this.dispose();
@@ -307,13 +365,30 @@ private void limpiar(){
         // TODO add your handling code here:
     }//GEN-LAST:event_jt_idNextCampanaActionPerformed
 
+    private void jDateChooser_inicioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDateChooser_inicioKeyTyped
+        // TODO add your handling code here:
+        //jbt_cargar.setEnabled(true);
+    }//GEN-LAST:event_jDateChooser_inicioKeyTyped
+
+    private void jDateChooser_inicioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jDateChooser_inicioMouseEntered
+        // TODO add your handling code here:
+         //jbt_cargar.setEnabled(true);
+    }//GEN-LAST:event_jDateChooser_inicioMouseEntered
+
+    private void jDateChooser_inicioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDateChooser_inicioFocusGained
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_jDateChooser_inicioFocusGained
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bg_jrb_activo;
+    private com.toedter.calendar.JDateChooser jDateChooser_finUltima;
     private com.toedter.calendar.JDateChooser jDateChooser_inicio;
     private javax.swing.JLabel jL_nombre;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JButton jbt_cargar;
     private javax.swing.JButton jbt_limpiar;
     private javax.swing.JButton jbt_salir;
