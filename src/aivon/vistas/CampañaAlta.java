@@ -294,51 +294,61 @@ public class CampañaAlta extends javax.swing.JInternalFrame {
                 double monto_min = Double.parseDouble(jtf_montoMinimo.getText());
                 if (monto_min > 0) {
                     campaña.setMonto_min(monto_min);
+
+                    try {
+                        double monto_max = Double.parseDouble(jtf_montoMaximo.getText());
+                        if (monto_max > campaña.getMonto_min()) {
+                            campaña.setMonto_max(monto_max);
+
+                            LocalDate fecha = null;
+
+                            try {
+                                fecha = LocalDateTime.ofInstant(jDateChooser_inicio.getDate().toInstant(), ZoneId.systemDefault()).toLocalDate();
+
+                                if (jDateChooser_inicio.getDate() != null) {
+                                    if (jDateChooser_inicio.getDate().after(Date.valueOf(cd.ultimaCampaña().getFecha_fin()))) {
+                                        campaña.setFecha_inicio(fecha);
+                                        cd.guardarCampaña(campaña);
+                                        limpiar();
+                                    } else {
+                                        JOptionPane.showMessageDialog(this, "La fecha elegida es anterior a la fecha de fin de la ultima campaña");
+                                        jDateChooser_inicio.requestFocus();
+                                    }
+
+                                } else {
+                                    JOptionPane.showMessageDialog(this, "La fecha elegida es nula");
+                                    jDateChooser_inicio.requestFocus();
+                                }
+
+                            } catch (Exception e) {
+                                JOptionPane.showMessageDialog(this, "No ha elegido una fecha" + e.toString());
+                                jDateChooser_inicio.requestFocus();
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Debe ingresar un monto maximo mayor que el monto minimo");
+                            jtf_montoMaximo.setText("");
+                            jtf_montoMaximo.requestFocus();
+                        }
+                    } catch (NumberFormatException e) { ///
+                        JOptionPane.showMessageDialog(this, "Debe ingresar un monto maximo mayor que el monto minimo");
+                        jtf_montoMaximo.setText("");
+                        jtf_montoMaximo.requestFocus();
+                    }
+                } else { //
+                    JOptionPane.showMessageDialog(this, "Debe ingresar un monto minimo válido");
+                    jtf_montoMinimo.setText("");
+                    jtf_montoMinimo.requestFocus();
                 }
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "Debe ingresar un monto minimo válido");
                 jtf_montoMinimo.setText("");
                 jtf_montoMinimo.requestFocus();
             }
-            try {
-                double monto_max = Double.parseDouble(jtf_montoMaximo.getText());
-                if (monto_max > campaña.getMonto_min()) {
-                    campaña.setMonto_max(monto_max);
-                }
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "Debe ingresar un monto maximo mayor que el monto minimo");
-                jtf_montoMaximo.setText("");
-                jtf_montoMaximo.requestFocus();
-            }
-            LocalDate fecha=null;
-            
-            try {
-                fecha = LocalDateTime.ofInstant(jDateChooser_inicio.getDate().toInstant(), ZoneId.systemDefault()).toLocalDate();
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "No ha elegido una fecha"+e.toString());
-                jDateChooser_inicio.requestFocus();
-            }
-            
-            if (jDateChooser_inicio.getDate() != null) {
-                if (jDateChooser_inicio.getDate().after(Date.valueOf(cd.ultimaCampaña().getFecha_fin()))) {
-                    campaña.setFecha_inicio(fecha);
-                    cd.guardarCampaña(campaña);
-                    limpiar();
-                } else {
-                    JOptionPane.showMessageDialog(this, "La fecha elegida es anterior a la fecha de fin de la ultima campaña");
-                    jDateChooser_inicio.requestFocus();
-                }
 
-            } else {
-                JOptionPane.showMessageDialog(this, "La fecha elegida es nula");
-                jDateChooser_inicio.requestFocus();
-            }
-
-        }else {
-                JOptionPane.showMessageDialog(this, "Debe ingresar un Noombre con mas de 4 caracteres");
-                jtf_nombre.requestFocus();
-            }
-
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe ingresar un Noombre con mas de 4 caracteres");
+            jtf_nombre.requestFocus();
+        }
 
 
     }//GEN-LAST:event_jbt_cargarActionPerformed
@@ -372,12 +382,12 @@ public class CampañaAlta extends javax.swing.JInternalFrame {
 
     private void jDateChooser_inicioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jDateChooser_inicioMouseEntered
         // TODO add your handling code here:
-         //jbt_cargar.setEnabled(true);
+        //jbt_cargar.setEnabled(true);
     }//GEN-LAST:event_jDateChooser_inicioMouseEntered
 
     private void jDateChooser_inicioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDateChooser_inicioFocusGained
         // TODO add your handling code here:
-       
+
     }//GEN-LAST:event_jDateChooser_inicioFocusGained
 
 
