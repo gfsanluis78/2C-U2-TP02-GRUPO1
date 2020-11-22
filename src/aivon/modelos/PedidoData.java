@@ -632,8 +632,10 @@ public class PedidoData {
 //################ ACTUALIZAR FECHA DE ENTREGA #################################
 
     public void actualizarFechaEntrega(Pedido pedido, LocalDate fecha_entrega) {
-
-        if (pedido.getFecha_ingreso().isBefore(fecha_entrega)) {
+        
+        
+        
+        if (pedido.getFecha_pago()!=null&&(pedido.getFecha_pago().isBefore(fecha_entrega)||pedido.getFecha_pago().isEqual(fecha_entrega))) {
 
             try {
                 Statement statement = c.createStatement();
@@ -654,8 +656,8 @@ public class PedidoData {
                 System.out.println(e.getMessage());
             }
         } else {
-            System.out.println("La fecha ingresada es anterior a la fecha de ingreso del pedido");
-            JOptionPane.showMessageDialog(null, "La fecha ingresada es anterior a la fecha de ingreso del pedido");
+            System.out.println("La fecha ingresada es anterior a la fecha de pago del pedido\no no se pagó el pedido");
+            JOptionPane.showMessageDialog(null, "La fecha ingresada es anterior a la fecha de pago del pedido\no no se pagó el pedido");
         }
     }
 //##############################################################################
@@ -664,8 +666,8 @@ public class PedidoData {
     public void actualizarFechaPago(Pedido pedido, LocalDate fecha_pago) {
         // DEBERÍAMOS INFERIR EL ATRIBUTO PAGO(bool) DE LA BD
 
-        if (pedido.getFecha_entrega() != null && pedido.getFecha_entrega().isBefore(fecha_pago)) {
-            Period p = Period.between(pedido.getFecha_entrega(), fecha_pago);
+        if (pedido.getFecha_ingreso() != null && (pedido.getFecha_ingreso().isBefore(fecha_pago) || fecha_pago.isEqual(pedido.getFecha_ingreso()))) {
+            Period p = Period.between(pedido.getFecha_ingreso(), fecha_pago);
             if (p.getDays() <= 10) {
                 try {
                     Statement statement = c.createStatement();
@@ -690,8 +692,8 @@ public class PedidoData {
                 JOptionPane.showMessageDialog(null, "Ya pasaron los 10 días hábiles para poder pagar el pedido");
             }
         } else {
-            System.out.println("La fecha ingresada es anterior a la fecha de entrega del pedido\no no hay fecha de entrega");
-            JOptionPane.showMessageDialog(null, "La fecha ingresada es anterior a la fecha de entrega del pedido\no no hay fecha de entrega");
+            System.out.println("La fecha ingresada es anterior a la fecha de ingreso del pedido");
+            JOptionPane.showMessageDialog(null, "La fecha ingresada es anterior a la fecha de ingreso del pedido");
         }
     }
 //##############################################################################
@@ -756,5 +758,24 @@ public class PedidoData {
         return cd.buscarCampañaActiva();
     }
 //##############################################################################
+
+    public void borrarPedido(Pedido pedido) {
+        try {
+            Statement statement = c.createStatement();
+            int celAfectadas = statement.executeUpdate("DELETE FROM pedido WHERE id_pedido=" + pedido.getId_pedido() + ";");
+
+            if (celAfectadas > 0) {
+                JOptionPane.showMessageDialog(null, "Pedido Borrado");
+                System.out.println("Pedido Borrado");
+            } else {
+                JOptionPane.showMessageDialog(null, "El pedido con id " + pedido.getId_pedido() + " que pretende borrar no existe!!");
+                System.out.println("El pedido con id " + pedido.getId_pedido()+ " que pretende borrar no existe!!");
+            }
+            statement.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al borrar pedido");
+            System.out.println("Error al borrar pedido");
+        }
+    }
 
 }
