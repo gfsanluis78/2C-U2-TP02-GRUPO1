@@ -475,7 +475,7 @@ public class RevendedorAlta extends javax.swing.JInternalFrame {
             revendedor_data.guardarRevendedor(revendedor);
             historico.setMonto_max(revendedor_data.calcularMontoMaximoRevendedor(revendedor));
             historico.setMonto_min(revendedor_data.calcularMontoMinimoRevendedor(revendedor));
-            historico.setNivel(1);
+            //historico.setNivel(1);
             historico.setCampaña(campaña_data.ultimaCampaña());
             historico.setRevendedor(revendedor);
             historico_data.altaHistorico(historico);
