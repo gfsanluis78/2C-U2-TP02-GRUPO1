@@ -103,6 +103,7 @@ public class RevendedorBaja extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(14, 0), new java.awt.Dimension(14, 0), new java.awt.Dimension(14, 32767));
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(8, 0), new java.awt.Dimension(8, 0), new java.awt.Dimension(8, 32767));
+        jb_salir = new javax.swing.JButton();
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -222,6 +223,14 @@ public class RevendedorBaja extends javax.swing.JInternalFrame {
         getContentPane().add(filler1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 160, 90, 100));
         getContentPane().add(filler2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 410, 340, 40));
 
+        jb_salir.setText("Salir");
+        jb_salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_salirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jb_salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 10, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -298,6 +307,10 @@ public class RevendedorBaja extends javax.swing.JInternalFrame {
         this.delay("", 4, 4);
     }//GEN-LAST:event_jb_bajaActionPerformed
 
+    private void jb_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_salirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jb_salirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.Box.Filler filler1;
@@ -309,6 +322,7 @@ public class RevendedorBaja extends javax.swing.JInternalFrame {
     private javax.swing.JButton jb_baja;
     private javax.swing.JButton jb_buscar_revendedor;
     private javax.swing.JButton jb_limpiar;
+    private javax.swing.JButton jb_salir;
     private javax.swing.JComboBox<String> jcb_activo;
     private javax.swing.JLabel jl_DNI;
     private javax.swing.JLabel jl_activo;

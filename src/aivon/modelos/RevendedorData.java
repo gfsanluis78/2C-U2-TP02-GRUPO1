@@ -21,7 +21,10 @@ public class RevendedorData {
     
     //--------------------------ALTA----------------------------------------------//////
     
-
+/**
+ * 
+ * @param revendedor revendedor es un revendedor para cargar en base de datos
+ */
     public void guardarRevendedor (Revendedor revendedor){
         
         String pre_instruccion;

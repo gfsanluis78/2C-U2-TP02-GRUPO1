@@ -5,7 +5,10 @@
  */
 package aivon.vistas;
 
+import aivon.entidades.Campaña;
+import aivon.entidades.Historico;
 import aivon.entidades.Revendedor;
+import aivon.modelos.CampañaData;
 import aivon.modelos.Conexion;
 import aivon.modelos.HistoricoData;
 import aivon.modelos.RevendedorData;
@@ -26,8 +29,11 @@ public class RevendedorAlta extends javax.swing.JInternalFrame {
     private Conexion conexion;
     private RevendedorData revendedor_data;
     private HistoricoData historico_data;
+    private CampañaData campaña_data;
     private Revendedor revendedor;
     private Color color;
+    private Historico historico;
+    private Campaña campaña;
     /**
      * Creates new form RevendedorAlta
      */
@@ -39,6 +45,7 @@ public class RevendedorAlta extends javax.swing.JInternalFrame {
              conexion=new Conexion();
              revendedor_data=new RevendedorData(conexion);
              historico_data=new HistoricoData(conexion);
+             campaña_data=new CampañaData(conexion);
              this.colorGris();
              this.agregarAyuda();
              
@@ -71,6 +78,7 @@ public class RevendedorAlta extends javax.swing.JInternalFrame {
      private static final String EMAIL_PATTERN2 = "^(.+)@(\\S+)$";
      private static final String NOMBRE = "/^[A-Z a-z\\s]+$/";
      private static final String EMAIL_PATTERN3 = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$";
+     private static final String EMAIL_PATTERN4="[A-Za-z0-9_-]+([A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(a?.[A-Za-z0-9-]+)*([A-Za-z]{2,})$";
     private void Limpiar(){
         jtf_nombre.setText("");
         jtf_apellido.setText("");
@@ -450,6 +458,8 @@ public class RevendedorAlta extends javax.swing.JInternalFrame {
         if(cont==0&&(JOptionPane.YES_NO_OPTION==JOptionPane.showConfirmDialog(this, "Estan correctos todos los datos??", "Guardar Revendedora", JOptionPane.YES_NO_OPTION))){
 
             revendedor= new Revendedor();
+            historico=new Historico();
+            //campaña=new Campaña();
             revendedor.setNombre(jtf_nombre.getText());
             revendedor.setApellido(jtf_apellido.getText());
             revendedor.setDni(jtf_dni.getText());
@@ -463,6 +473,12 @@ public class RevendedorAlta extends javax.swing.JInternalFrame {
                 revendedor.setActivo(false);
             }
             revendedor_data.guardarRevendedor(revendedor);
+            historico.setMonto_max(revendedor_data.calcularMontoMaximoRevendedor(revendedor));
+            historico.setMonto_min(revendedor_data.calcularMontoMinimoRevendedor(revendedor));
+            //historico.setNivel(1);
+            historico.setCampaña(campaña_data.ultimaCampaña());
+            historico.setRevendedor(revendedor);
+            historico_data.altaHistorico(historico);
             System.out.println(revendedor.getId_revendedor());
             if(revendedor.getId_revendedor()==0){
                 this.Limpiar();
@@ -670,16 +686,16 @@ public class RevendedorAlta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jcb_activoActionPerformed
 
     private void jtf_emailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_emailFocusLost
-//        String email=jtf_email.getText();
-//        System.out.println(email);
-//        System.out.println(Validacion.isValid(email));
-//        if(email.matches(EMAIL_PATTERN)){
-//            jcb_activo.setEnabled(true);
-//        }
-//        else{
-//            jcb_activo.setEnabled(false);
-//            jtf_aviso.setText("Debe ingresar un email valido");
-//        }
+        String email=jtf_email.getText();
+        System.out.println(email);
+        System.out.println(Validacion.isValid(email));
+        if(Validacion.isValid(email)){
+            jcb_activo.setEnabled(true);
+        }
+        else{
+            jcb_activo.setEnabled(false);
+            jtf_aviso.setText("Debe ingresar un email valido");
+        }
     }//GEN-LAST:event_jtf_emailFocusLost
 
 
