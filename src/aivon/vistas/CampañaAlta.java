@@ -149,7 +149,9 @@ public class CampañaAlta extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel3.setText("fecha fin ultima campaña");
+        jLabel3.setText("Fecha fin ultima campaña");
+        jLabel3.setEnabled(false);
+        jLabel3.setOpaque(true);
 
         jDateChooser_finUltima.setEnabled(false);
         jDateChooser_finUltima.setFocusable(false);
@@ -218,8 +220,8 @@ public class CampañaAlta extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jt_idNextCampana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jt_idNextCampana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jL_nombre)
@@ -242,7 +244,7 @@ public class CampañaAlta extends javax.swing.JInternalFrame {
                     .addComponent(jbt_cargar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jbt_salir)
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
         pack();
