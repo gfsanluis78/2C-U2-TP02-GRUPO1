@@ -230,10 +230,10 @@ public class ProductoData {
                     
                     productos.add(producto);
             }
-                JOptionPane.showMessageDialog(null, "Se encontraron los productos");
+                //JOptionPane.showMessageDialog(null, "Se encontraron los productos");
                 System.out.println("Se encontraron los productos");
             } else {
-                JOptionPane.showMessageDialog(null, "No se encontraron los productos");
+                JOptionPane.showMessageDialog(null, "No se encontraron productos");
                 System.out.println("No se encontraron los productos");
             }
             
@@ -265,7 +265,7 @@ public class ProductoData {
                     producto.setCosto(consulta.getDouble("costo"));
                     producto.setCosto_publico(consulta.getDouble("costo_publico"));
                     producto.setEstrellas(consulta.getInt("estrellas"));
-                    
+                    producto.setActivo(consulta.getBoolean("activo"));
                     productos.add(producto);
             }
                 //JOptionPane.showMessageDialog(null, "Se encontraron los productos");
@@ -302,7 +302,7 @@ public class ProductoData {
                     producto.setCosto(consulta.getDouble("costo"));
                     producto.setCosto_publico(consulta.getDouble("costo_publico"));
                     producto.setEstrellas(consulta.getInt("estrellas"));
-                    
+                    producto.setActivo(consulta.getBoolean("activo"));
                     productos.add(producto);
             }
                 JOptionPane.showMessageDialog(null, "Se encontraron los productos");
@@ -339,13 +339,51 @@ public class ProductoData {
                     producto.setCosto(consulta.getDouble("costo"));
                     producto.setCosto_publico(consulta.getDouble("costo_publico"));
                     producto.setEstrellas(consulta.getInt("estrellas"));
-                    
+                    producto.setActivo(consulta.getBoolean("activo"));
                     productos.add(producto);
             }
-                JOptionPane.showMessageDialog(null, "Se encontraron los productos");
+                //JOptionPane.showMessageDialog(null, "Se encontraron productos");
                 System.out.println("Se encontraron los productos");
             } else {
-                JOptionPane.showMessageDialog(null, "No se encontraron los productos");
+                JOptionPane.showMessageDialog(null, "No se encontraron productos");
+                System.out.println("No se encontraron los productos");
+            }
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al obtener los productos");
+            System.out.println(ex.getMessage());
+        }
+
+        return productos;
+    }
+    
+    public List<Producto> buscarProductosActivosPorNombre(String nombre) {
+
+        Producto producto;
+        List<Producto> productos = new ArrayList<>();
+
+        try {
+            PreparedStatement instruccion = con.prepareStatement("SELECT * FROM producto WHERE nombre LIKE '%"+ nombre +"%' AND activo=1;");
+            ResultSet consulta = instruccion.executeQuery();
+            
+            if (consulta.next()) {
+                consulta.beforeFirst();
+                while (consulta.next()) {
+                    producto= new Producto();
+                    producto.setId_producto(consulta.getInt("id_producto"));
+                    producto.setNombre(consulta.getString("nombre"));
+                    producto.setUso(consulta.getString("uso"));
+                    producto.setTamaño(consulta.getInt("tamaño_cm3"));
+                    producto.setCosto(consulta.getDouble("costo"));
+                    producto.setCosto_publico(consulta.getDouble("costo_publico"));
+                    producto.setEstrellas(consulta.getInt("estrellas"));
+                    producto.setActivo(consulta.getBoolean("activo"));
+                    productos.add(producto);
+            }
+                //JOptionPane.showMessageDialog(null, "Se encontraron productos");
+                System.out.println("Se encontraron los productos");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontraron productos");
                 System.out.println("No se encontraron los productos");
             }
             

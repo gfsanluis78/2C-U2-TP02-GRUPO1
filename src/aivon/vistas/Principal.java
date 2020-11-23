@@ -47,6 +47,7 @@ public class Principal extends javax.swing.JFrame {
         jCheckBoxMenuItem_campañaActualizar = new javax.swing.JCheckBoxMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jmi_pedido_alta = new javax.swing.JMenuItem();
+        jmi_pedido_actualizar = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -155,6 +156,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jMenu5.add(jmi_pedido_alta);
+
+        jmi_pedido_actualizar.setText("Pedido Actualizar");
+        jmi_pedido_actualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_pedido_actualizarActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jmi_pedido_actualizar);
 
         jMenuBar1.add(jMenu5);
 
@@ -284,6 +293,19 @@ public class Principal extends javax.swing.JFrame {
         pal.show();
     }//GEN-LAST:event_jmi_pedido_altaActionPerformed
 
+    private void jmi_pedido_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_pedido_actualizarActionPerformed
+        // TODO add your handling code here:
+        jdp_escritorio.removeAll();
+        jdp_escritorio.repaint();
+        PedidoActualizar ped_act=new PedidoActualizar();
+        ped_act.setVisible(true);
+        jdp_escritorio.add(ped_act);
+        Dimension desktopSize = jdp_escritorio.getSize();
+        Dimension FrameSize = ped_act.getSize();
+        ped_act.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        ped_act.show();
+    }//GEN-LAST:event_jmi_pedido_actualizarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -336,6 +358,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmi_actualizar_revendedor;
     private javax.swing.JMenuItem jmi_alta_revendedor;
     private javax.swing.JMenuItem jmi_baja_revendedor;
+    private javax.swing.JMenuItem jmi_pedido_actualizar;
     private javax.swing.JMenuItem jmi_pedido_alta;
     private javax.swing.JMenuItem jmi_producto_actualizar;
     private javax.swing.JMenuItem jmi_producto_alta;
