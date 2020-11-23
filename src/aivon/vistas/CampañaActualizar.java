@@ -7,9 +7,11 @@ package aivon.vistas;
 
 import aivon.entidades.Campaña;
 import aivon.entidades.Producto;
+import aivon.entidades.Revendedor;
 import aivon.modelos.CampañaData;
 import aivon.modelos.Conexion;
 import aivon.modelos.ProductoData;
+import aivon.modelos.RevendedorData;
 import static java.lang.ProcessBuilder.Redirect.to;
 import java.sql.Date;
 import java.time.Instant;
@@ -28,6 +30,7 @@ import javax.swing.table.DefaultTableModel;
 public class CampañaActualizar extends javax.swing.JInternalFrame {
     private Conexion conexion;
     private CampañaData cd;
+    private RevendedorData rd;
     private Campaña campaña;
     
     
@@ -40,6 +43,7 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
         try {
             conexion = new Conexion();
             cd = new CampañaData(conexion);
+            rd = new RevendedorData(conexion);
             modelo = new DefaultTableModel();
             armaCabeceraTabla();
             cargaCampañas();
@@ -210,6 +214,11 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
 
         bg_jrb_activo.add(jrb_activo_si);
         jrb_activo_si.setText("SÍ");
+        jrb_activo_si.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrb_activo_siActionPerformed(evt);
+            }
+        });
 
         jbt_salir.setText("SALIR");
         jbt_salir.addActionListener(new java.awt.event.ActionListener() {
@@ -461,9 +470,21 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
             jrb_activo_si.setSelected(false);
             jrb_activo_no.setSelected(true);
         
-         }    
+         }
+        actualizarNiveles();
         
     }//GEN-LAST:event_jb_modificar_campaña_selActionPerformed
+   private void actualizarNiveles(){
+       List<Revendedor> lista = rd.buscarRevendedores();
+       lista.forEach((revendedor) -> {
+           rd.calcularNivelRevendedor(revendedor);
+        });
+       
+   }
+    
+    private void jrb_activo_siActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrb_activo_siActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jrb_activo_siActionPerformed
     private void limpiar() {
         jtf_nombre.setText("");
 
