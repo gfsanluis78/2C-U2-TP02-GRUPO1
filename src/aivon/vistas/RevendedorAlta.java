@@ -71,6 +71,7 @@ public class RevendedorAlta extends javax.swing.JInternalFrame {
      private static final String EMAIL_PATTERN2 = "^(.+)@(\\S+)$";
      private static final String NOMBRE = "/^[A-Z a-z\\s]+$/";
      private static final String EMAIL_PATTERN3 = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$";
+     private static final String EMAIL_PATTERN4="[A-Za-z0-9_-]+([A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(a?.[A-Za-z0-9-]+)*([A-Za-z]{2,})$";
     private void Limpiar(){
         jtf_nombre.setText("");
         jtf_apellido.setText("");
@@ -670,16 +671,16 @@ public class RevendedorAlta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jcb_activoActionPerformed
 
     private void jtf_emailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_emailFocusLost
-//        String email=jtf_email.getText();
-//        System.out.println(email);
-//        System.out.println(Validacion.isValid(email));
-//        if(email.matches(EMAIL_PATTERN)){
-//            jcb_activo.setEnabled(true);
-//        }
-//        else{
-//            jcb_activo.setEnabled(false);
-//            jtf_aviso.setText("Debe ingresar un email valido");
-//        }
+        String email=jtf_email.getText();
+        System.out.println(email);
+        System.out.println(Validacion.isValid(email));
+        if(Validacion.isValid(email)){
+            jcb_activo.setEnabled(true);
+        }
+        else{
+            jcb_activo.setEnabled(false);
+            jtf_aviso.setText("Debe ingresar un email valido");
+        }
     }//GEN-LAST:event_jtf_emailFocusLost
 
 

@@ -37,10 +37,12 @@ public class RevendedorModificar extends javax.swing.JInternalFrame {
              revendedor_data=new RevendedorData(conexion);
              historico_data=new HistoricoData(conexion);
              jb_actualizar.setEnabled(false);
+             desactivarCampos();
                           
         } catch (Exception e) {
         }
     }
+    private static final String EMAIL_PATTERN4="[A-Za-z0-9_-]+([A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(a?.[A-Za-z0-9-]+)*([A-Za-z]{2,})$";
     private void delay(String mensaje, int a, int b ){
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
@@ -59,6 +61,7 @@ public class RevendedorModificar extends javax.swing.JInternalFrame {
         jcb_activo.setSelectedIndex(0);
         jtf_dni_buscar.setText("");
         jtf_telefono.setText("");
+        jtf_caracteristica.setText("");
        this.delay("", 5, 5);
     }
     private boolean isDNI(){
@@ -92,24 +95,27 @@ public class RevendedorModificar extends javax.swing.JInternalFrame {
 
     }
     private void activarCampos() {
-        jtf_nombre.setEnabled(true);
-        jtf_apellido.setEnabled(true);
-        jtf_dni.setEnabled(true);
-        jtf_email.setEnabled(true);
+        jtf_nombre.setEditable(true);
+        jtf_apellido.setEditable(true);
+        jtf_dni.setEditable(true);
+        jtf_email.setEditable(true);
         jcb_activo.setSelectedIndex(0);
         jcb_activo.setEnabled(true);
-        jtf_dni_buscar.setEnabled(true);
-        jtf_telefono.setEnabled(true);
+        jtf_telefono.setEditable(true);
+        jtf_caracteristica.setEditable(true);
+        jtf_email.setFocusable(true);
     }
     private void desactivarCampos() {
-        jtf_nombre.setEnabled(false);
-        jtf_apellido.setEnabled(false);
-        jtf_dni.setEnabled(false);
-        jtf_email.setEnabled(false);
+        jtf_nombre.setEditable(false);
+        jtf_apellido.setEditable(false);
+        jtf_dni.setEditable(false);
+        jtf_email.setEditable(false);
         jcb_activo.setSelectedIndex(0);
         jcb_activo.setEnabled(false);
-        jtf_dni_buscar.setEnabled(false);
-        jtf_telefono.setEnabled(false);
+        jtf_telefono.setEditable(false);
+        jtf_caracteristica.setEditable(false);
+        jb_actualizar.setEnabled(false);
+        jtf_email.setFocusable(false);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -136,7 +142,6 @@ public class RevendedorModificar extends javax.swing.JInternalFrame {
         jtf_nombre = new javax.swing.JTextField();
         jtf_aviso = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jcb_activo = new javax.swing.JComboBox<>();
         jb_actualizar = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JSeparator();
         jb_limpiar = new javax.swing.JButton();
@@ -146,6 +151,7 @@ public class RevendedorModificar extends javax.swing.JInternalFrame {
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(8, 0), new java.awt.Dimension(8, 0), new java.awt.Dimension(8, 32767));
         jtf_caracteristica = new javax.swing.JTextField();
         jtf_telefono = new javax.swing.JTextField();
+        jcb_activo = new javax.swing.JComboBox<>();
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(filler2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 400, 30, 10));
@@ -199,24 +205,40 @@ public class RevendedorModificar extends javax.swing.JInternalFrame {
 
         jtf_email.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jtf_email.setCaretColor(new java.awt.Color(255, 51, 51));
-        jtf_email.setEnabled(false);
+        jtf_email.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtf_emailFocusLost(evt);
+            }
+        });
         getContentPane().add(jtf_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 250, 230, -1));
 
         jtf_apellido.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jtf_apellido.setCaretColor(new java.awt.Color(255, 51, 51));
-        jtf_apellido.setEnabled(false);
+        jtf_apellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_apellidoKeyTyped(evt);
+            }
+        });
         getContentPane().add(jtf_apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, 140, -1));
 
         jtf_dni.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jtf_dni.setCaretColor(new java.awt.Color(255, 51, 51));
-        jtf_dni.setEnabled(false);
+        jtf_dni.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_dniKeyTyped(evt);
+            }
+        });
         getContentPane().add(jtf_dni, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 170, 100, -1));
 
         jtf_nombre.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jtf_nombre.setToolTipText("");
         jtf_nombre.setCaretColor(new java.awt.Color(255, 51, 51));
-        jtf_nombre.setEnabled(false);
         jtf_nombre.setName(""); // NOI18N
+        jtf_nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_nombreKeyTyped(evt);
+            }
+        });
         getContentPane().add(jtf_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, 140, -1));
 
         jtf_aviso.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -226,12 +248,6 @@ public class RevendedorModificar extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Estado:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 330, -1, -1));
-
-        jcb_activo.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jcb_activo.setForeground(new java.awt.Color(0, 0, 0));
-        jcb_activo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "  ", "SI", "NO" }));
-        jcb_activo.setEnabled(false);
-        getContentPane().add(jcb_activo, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 290, 68, -1));
 
         jb_actualizar.setText("Actualizar");
         jb_actualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -257,7 +273,7 @@ public class RevendedorModificar extends javax.swing.JInternalFrame {
         getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 270, 45, 48));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel1.setText("Baja Revendedoras");
+        jLabel1.setText("Actualizar Revendedoras");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, -1, -1));
         getContentPane().add(filler1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 120, 90, 100));
         getContentPane().add(filler3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 370, 340, 40));
@@ -281,6 +297,7 @@ public class RevendedorModificar extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jtf_caracteristica, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 210, 50, -1));
 
+        jtf_telefono.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jtf_telefono.setCaretColor(new java.awt.Color(255, 51, 51));
         jtf_telefono.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -298,6 +315,10 @@ public class RevendedorModificar extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(jtf_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 210, 90, -1));
+
+        jcb_activo.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jcb_activo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elija", "SI", "NO" }));
+        getContentPane().add(jcb_activo, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 290, 70, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -338,17 +359,29 @@ public class RevendedorModificar extends javax.swing.JInternalFrame {
             //            }
         if(this.isDNI()){
             try {
-                revendedor=new Revendedor();
-                revendedor=revendedor_data.buscarRevendedor(jtf_dni_buscar.getText());
+                
+                revendedor = new Revendedor();
+                revendedor = revendedor_data.buscarRevendedor(jtf_dni_buscar.getText());
                 jtf_nombre.setText(revendedor.getNombre());
                 jtf_apellido.setText(revendedor.getApellido());
                 jtf_dni.setText(revendedor.getDni());
                 jtf_email.setText(revendedor.getEmail());
-                jtf_telefono.setText(revendedor.getTel());
-                if(revendedor.isActivo()){
-                    jcb_activo.setSelectedIndex(1);
+                String aux ="";
+                for (int i = 0; i < revendedor.getTel().length()-6; i++) {
+                    aux += revendedor.getTel().charAt(i);
                 }
-                else{
+                jtf_caracteristica.setText(aux);
+                aux = "";
+                for (int i = 4; i < revendedor.getTel().length(); i++) {
+                    aux += revendedor.getTel().charAt(i);
+                }
+                jtf_telefono.setText(aux);
+                if (revendedor.isActivo()) {
+                    jcb_activo.setSelectedIndex(1);
+                    System.out.println("Esta activo o no: "+ revendedor.isActivo());
+                    System.out.println("Seleccion de comboBox: "+ jcb_activo.getSelectedIndex());
+                    System.out.println("Seleccion de comboBox: "+ jcb_activo.getSelectedItem().toString());
+                } else {
                     jcb_activo.setSelectedIndex(2);
                 }
                 jb_actualizar.setEnabled(true);
@@ -363,10 +396,22 @@ public class RevendedorModificar extends javax.swing.JInternalFrame {
 
     private void jb_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_actualizarActionPerformed
         if((JOptionPane.YES_NO_OPTION==JOptionPane.showConfirmDialog(this, "Esta seguro que desea borrar", "Borrar Revendedor", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE))){
-            revendedor_data.borrarRevendedor(jtf_dni_buscar.getText());
+            revendedor = new Revendedor();
+            revendedor.setNombre(jtf_nombre.getText());
+            revendedor.setApellido(jtf_apellido.getText());
+            revendedor.setDni(jtf_dni.getText());
+            revendedor.setEmail(jtf_email.getText());
+            revendedor.setTel(jtf_caracteristica.getText()+jtf_telefono.getText());
+            if ( jcb_activo.getSelectedItem().toString().equalsIgnoreCase("si")){
+                revendedor.setActivo(true);
+            }
+            else{
+                revendedor.setActivo(false);
+            }
+            revendedor_data.modificarRevendedor(revendedor);
             desactivarCampos();
             this.Limpiar();
-            this.delay("Revendedor Borrado con Exito", 6, 6);
+            this.delay("Revendedor Actualizado con Exito", 6, 6);
         }
 
         this.delay("", 4, 4);
@@ -374,6 +419,7 @@ public class RevendedorModificar extends javax.swing.JInternalFrame {
 
     private void jb_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_limpiarActionPerformed
         this.Limpiar();
+        this.desactivarCampos();
     }//GEN-LAST:event_jb_limpiarActionPerformed
 
     private void jtf_caracteristicaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_caracteristicaFocusGained
@@ -435,6 +481,62 @@ public class RevendedorModificar extends javax.swing.JInternalFrame {
         }
         this.delay("", 3, 2);
     }//GEN-LAST:event_jtf_telefonoKeyTyped
+
+    private void jtf_nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_nombreKeyTyped
+       //######  Controla que no sean numeros y que no tenga espacios no dejando entrar espacios        
+        if(!(evt.getKeyChar()==KeyEvent.VK_BACK_SPACE)&&!(Character.isDigit(evt.getKeyChar()))&&!(evt.getKeyChar()==KeyEvent.VK_SPACE)){
+            
+        }
+        else{
+            jtf_aviso.setText("Solo letras");
+            evt.consume();
+        }
+        this.delay("", 3, 2);
+    }//GEN-LAST:event_jtf_nombreKeyTyped
+
+    private void jtf_dniKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_dniKeyTyped
+                 char caracter = evt.getKeyChar();
+//#####  Controla que sean solo numeros y sin espacios  ########################
+        if (((caracter < '0')
+                || (caracter > '9'))
+                && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
+            evt.consume();  // ignorar el evento de teclado
+            jtf_aviso.setText("Solo numeros");
+        }
+//######    Controla que sean 8 digitos   ######################################
+        if(!(jtf_dni.getText().length()<8)){
+            evt.consume();
+            jtf_aviso.setText("Solo 8 digitos");
+        }
+        this.delay("", 3, 2);
+    }//GEN-LAST:event_jtf_dniKeyTyped
+
+    private void jtf_apellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_apellidoKeyTyped
+        //######  Controla que no sean numeros y que no tenga espacios no dejando entrar espacios        
+        if(!(evt.getKeyChar()==KeyEvent.VK_BACK_SPACE)&&!(Character.isDigit(evt.getKeyChar()))&&!(evt.getKeyChar()==KeyEvent.VK_SPACE)){
+            
+        }
+        else{
+            jtf_aviso.setText("Solo letras");
+            evt.consume();
+        }
+        this.delay("", 3, 2);
+    }//GEN-LAST:event_jtf_apellidoKeyTyped
+
+    private void jtf_emailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_emailFocusLost
+         String email=jtf_email.getText();
+        System.out.println(email);
+        System.out.println("Validacion match: "+ email.matches(EMAIL_PATTERN4));
+        System.out.println("Validacion Clase: "+ Validacion.isValid(email));
+        if(email.matches(EMAIL_PATTERN4)){
+            jcb_activo.setEnabled(true);
+        }
+        else{
+            jcb_activo.setEnabled(false);
+            jtf_aviso.setText("Debe ingresar un email valido");
+        }
+        this.delay("", 1, 5);
+    }//GEN-LAST:event_jtf_emailFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
