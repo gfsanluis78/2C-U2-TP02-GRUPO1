@@ -49,8 +49,10 @@ public class Principal extends javax.swing.JFrame {
         jmi_pedido_alta = new javax.swing.JMenuItem();
         jmi_pedido_actualizar = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
+        jmi_pedidos_x_campaña = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1366, 768));
 
         javax.swing.GroupLayout jdp_escritorioLayout = new javax.swing.GroupLayout(jdp_escritorio);
         jdp_escritorio.setLayout(jdp_escritorioLayout);
@@ -168,6 +170,15 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu5);
 
         jMenu6.setText("Consultas");
+
+        jmi_pedidos_x_campaña.setText("Pedidos por Campaña");
+        jmi_pedidos_x_campaña.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_pedidos_x_campañaActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jmi_pedidos_x_campaña);
+
         jMenuBar1.add(jMenu6);
 
         setJMenuBar(jMenuBar1);
@@ -306,6 +317,19 @@ public class Principal extends javax.swing.JFrame {
         ped_act.show();
     }//GEN-LAST:event_jmi_pedido_actualizarActionPerformed
 
+    private void jmi_pedidos_x_campañaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_pedidos_x_campañaActionPerformed
+        // TODO add your handling code here:
+        jdp_escritorio.removeAll();
+        jdp_escritorio.repaint();
+        ConsultaPedidosPorCampaña ped_x_camp =new ConsultaPedidosPorCampaña();
+        ped_x_camp.setVisible(true);
+        jdp_escritorio.add(ped_x_camp);
+        Dimension desktopSize = jdp_escritorio.getSize();
+        Dimension FrameSize = ped_x_camp.getSize();
+        ped_x_camp.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        ped_x_camp.show();
+    }//GEN-LAST:event_jmi_pedidos_x_campañaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -344,6 +368,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmi_baja_revendedor;
     private javax.swing.JMenuItem jmi_pedido_actualizar;
     private javax.swing.JMenuItem jmi_pedido_alta;
+    private javax.swing.JMenuItem jmi_pedidos_x_campaña;
     private javax.swing.JMenuItem jmi_producto_actualizar;
     private javax.swing.JMenuItem jmi_producto_alta;
     // End of variables declaration//GEN-END:variables

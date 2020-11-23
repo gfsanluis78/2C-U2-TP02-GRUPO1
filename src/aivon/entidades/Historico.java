@@ -15,7 +15,7 @@ public class Historico {
     private Campaña campaña;
     private double monto_min;
     private double monto_max;
-    private int nivel;
+    private int nivel=1;
     private double ganancia;
     private int estrellas_campaña_revendedor;
     //private boolean estado_campaña_revendedor;
@@ -23,12 +23,12 @@ public class Historico {
     public Historico() {
     }
 
-    public Historico(Revendedor revendedor, Campaña campaña, double monto_min, double monto_max, int nivel) {
+    public Historico(Revendedor revendedor, Campaña campaña, double monto_min, double monto_max) {
         this.revendedor = revendedor;
         this.campaña = campaña;
         this.monto_min = monto_min;
         this.monto_max = monto_max;
-        this.nivel = nivel;
+        //this.nivel = nivel;
     }
 
     public Historico(Revendedor revendedor, Campaña campaña) {
@@ -36,23 +36,23 @@ public class Historico {
         this.campaña = campaña;
     }
           
-    public Historico(Revendedor revendedor, Campaña campaña, double monto_min, double monto_max, int nivel, double ganancia, int estrellas_campaña_revendedor) {
+    public Historico(Revendedor revendedor, Campaña campaña, double monto_min, double monto_max,   double ganancia, int estrellas_campaña_revendedor) {
         this.revendedor = revendedor;
         this.campaña = campaña;
         this.monto_min = monto_min;
         this.monto_max = monto_max;
-        this.nivel = nivel;
+        //this.nivel = nivel;
         this.ganancia = ganancia;
         this.estrellas_campaña_revendedor = estrellas_campaña_revendedor;
     }
     
-    public Historico(int id_historico, Revendedor revendedor, Campaña campaña, double monto_min, double monto_max, int nivel, double ganancia, int estrellas_campaña_revendedor) {
+    public Historico(int id_historico, Revendedor revendedor, Campaña campaña, double monto_min, double monto_max,    double ganancia, int estrellas_campaña_revendedor) {
         this.id_historico = id_historico;
         this.revendedor = revendedor;
         this.campaña = campaña;
         this.monto_min = monto_min;
         this.monto_max = monto_max;
-        this.nivel = nivel;
+        //this.nivel = nivel;
         this.ganancia = ganancia;
         this.estrellas_campaña_revendedor = estrellas_campaña_revendedor;
     }
