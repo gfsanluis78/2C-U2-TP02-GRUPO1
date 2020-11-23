@@ -37,11 +37,17 @@ public class Principal extends javax.swing.JFrame {
         jmi_producto_alta = new javax.swing.JMenuItem();
         jmi_producto_actualizar = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        jmi_alta_revendedor = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jmi_baja_revendedor = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        jmi_actualizar_revendedor = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jCheckBoxMenuItem_campañaAlta = new javax.swing.JCheckBoxMenuItem();
         jCheckBoxMenuItem_campañaActualizar = new javax.swing.JCheckBoxMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jmi_pedido_alta = new javax.swing.JMenuItem();
+        jmi_pedido_actualizar = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -90,6 +96,33 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Revendedor");
+
+        jmi_alta_revendedor.setText("Alta Revendedoras");
+        jmi_alta_revendedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_alta_revendedorActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jmi_alta_revendedor);
+        jMenu3.add(jSeparator1);
+
+        jmi_baja_revendedor.setText("Baja Revendedoras");
+        jmi_baja_revendedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_baja_revendedorActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jmi_baja_revendedor);
+        jMenu3.add(jSeparator2);
+
+        jmi_actualizar_revendedor.setText("Modificar Revendedora");
+        jmi_actualizar_revendedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_actualizar_revendedorActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jmi_actualizar_revendedor);
+
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Campaña");
@@ -123,6 +156,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jMenu5.add(jmi_pedido_alta);
+
+        jmi_pedido_actualizar.setText("Pedido Actualizar");
+        jmi_pedido_actualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_pedido_actualizarActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jmi_pedido_actualizar);
 
         jMenuBar1.add(jMenu5);
 
@@ -178,6 +219,41 @@ public class Principal extends javax.swing.JFrame {
         pac.show();
     }//GEN-LAST:event_jmi_producto_actualizarActionPerformed
 
+    private void jmi_alta_revendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_alta_revendedorActionPerformed
+        jdp_escritorio.removeAll();
+        jdp_escritorio.repaint();
+        RevendedorAlta ra=new RevendedorAlta();
+        ra.setVisible(true);
+        jdp_escritorio.add(ra);
+        Dimension desktopSize = jdp_escritorio.getSize();
+        Dimension FrameSize = ra.getSize();
+        ra.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        ra.show();
+    }//GEN-LAST:event_jmi_alta_revendedorActionPerformed
+
+    private void jmi_baja_revendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_baja_revendedorActionPerformed
+        jdp_escritorio.removeAll();
+        jdp_escritorio.repaint();
+        RevendedorBaja rb=new RevendedorBaja();
+        rb.setVisible(true);
+        jdp_escritorio.add(rb);
+        Dimension desktopSize = jdp_escritorio.getSize();
+        Dimension FrameSize = rb.getSize();
+        rb.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        rb.show();
+    }//GEN-LAST:event_jmi_baja_revendedorActionPerformed
+
+    private void jmi_actualizar_revendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_actualizar_revendedorActionPerformed
+        jdp_escritorio.removeAll();
+        jdp_escritorio.repaint();
+        RevendedorModificar rac=new RevendedorModificar();
+        rac.setVisible(true);
+        jdp_escritorio.add(rac);
+        Dimension desktopSize = jdp_escritorio.getSize();
+        Dimension FrameSize = rac.getSize();
+        rac.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        rac.show();
+    }//GEN-LAST:event_jmi_actualizar_revendedorActionPerformed
     private void jCheckBoxMenuItem_campañaAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem_campañaAltaActionPerformed
         // TODO add your handling code here:
         jdp_escritorio.removeAll();
@@ -216,6 +292,19 @@ public class Principal extends javax.swing.JFrame {
         pal.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
         pal.show();
     }//GEN-LAST:event_jmi_pedido_altaActionPerformed
+
+    private void jmi_pedido_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_pedido_actualizarActionPerformed
+        // TODO add your handling code here:
+        jdp_escritorio.removeAll();
+        jdp_escritorio.repaint();
+        PedidoActualizar ped_act=new PedidoActualizar();
+        ped_act.setVisible(true);
+        jdp_escritorio.add(ped_act);
+        Dimension desktopSize = jdp_escritorio.getSize();
+        Dimension FrameSize = ped_act.getSize();
+        ped_act.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        ped_act.show();
+    }//GEN-LAST:event_jmi_pedido_actualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -263,7 +352,13 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JDesktopPane jdp_escritorio;
+    private javax.swing.JMenuItem jmi_actualizar_revendedor;
+    private javax.swing.JMenuItem jmi_alta_revendedor;
+    private javax.swing.JMenuItem jmi_baja_revendedor;
+    private javax.swing.JMenuItem jmi_pedido_actualizar;
     private javax.swing.JMenuItem jmi_pedido_alta;
     private javax.swing.JMenuItem jmi_producto_actualizar;
     private javax.swing.JMenuItem jmi_producto_alta;

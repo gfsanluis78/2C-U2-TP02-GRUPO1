@@ -56,7 +56,7 @@ public class RevendedorData {
 
             instruccion.close();
         }catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al guardar Revendedor");
+            //JOptionPane.showMessageDialog(null, "Error al guardar Revendedor");
             System.out.println(ex.getMessage());
         }
        
@@ -204,7 +204,8 @@ public class RevendedorData {
                     revendedor.setActivo(consulta.getBoolean("activo"));
                     
                 } else {
-                    JOptionPane.showMessageDialog(null, "No se pudo buscar revendedor por dni");
+                    JOptionPane.showMessageDialog(null, "No existe el Revendedor con DNI: " + dni);
+                    //JOptionPane.showMessageDialog(null, "No se pudo buscar revendedor por dni");
                     System.out.println("No se pudo buscar revendedor por dni");
                 }
             }
