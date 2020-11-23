@@ -330,17 +330,16 @@ public class PedidoActualizar extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(jtf_dni, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jb_buscar_revendedor)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jtf_activo)
                                     .addComponent(jtf_apellido_rev)
                                     .addComponent(jtf_nombre_rev, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jtf_dni, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jb_buscar_revendedor)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -359,30 +358,31 @@ public class PedidoActualizar extends javax.swing.JInternalFrame {
                                         .addComponent(jtf_id_camp, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jtf_id, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(73, 73, 73)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(26, 26, 26)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jdc_fecha_pago, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jdc_fecha_ingreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jdc_fecha_entrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jb_actualizar_fecha_pago, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jb_actualizar_fecha_entrega))
-                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jb_guardar_f_pago)
-                                    .addComponent(jb_guardar_f_entrega))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(26, 26, 26)
+                                        .addComponent(jdc_fecha_pago, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jb_actualizar_fecha_pago, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jb_guardar_f_pago))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel6)
+                                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jdc_fecha_ingreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jdc_fecha_entrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jb_actualizar_fecha_entrega)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jb_guardar_f_entrega)))))))
+                        .addGap(109, 109, 109))))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 716, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -391,7 +391,7 @@ public class PedidoActualizar extends javax.swing.JInternalFrame {
                         .addComponent(jb_limpiar)
                         .addGap(255, 255, 255)
                         .addComponent(jb_salir)))
-                .addGap(0, 36, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -421,7 +421,7 @@ public class PedidoActualizar extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jtf_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -436,26 +436,23 @@ public class PedidoActualizar extends javax.swing.JInternalFrame {
                             .addComponent(jLabel9)
                             .addComponent(jtf_cant_est, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jdc_fecha_ingreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel6))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jdc_fecha_pago, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jb_actualizar_fecha_pago, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jb_guardar_f_pago, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jdc_fecha_entrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jb_actualizar_fecha_entrega, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jb_guardar_f_entrega, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jdc_fecha_ingreso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(11, 11, 11)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jdc_fecha_entrega, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jb_actualizar_fecha_entrega, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jb_guardar_f_entrega, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jdc_fecha_pago, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jb_actualizar_fecha_pago, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jb_guardar_f_pago, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(11, 11, 11)))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -522,18 +519,22 @@ public class PedidoActualizar extends javax.swing.JInternalFrame {
 
     private void jb_actualizar_fecha_pagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_actualizar_fecha_pagoActionPerformed
         // TODO add your handling code here:
-        if (pedido.getFecha_pago()!=null) {
-            JOptionPane.showMessageDialog(this, "El pedido ya fue pagado");
+        if (pedido.getFecha_entrega() != null) {
+            if (pedido.getFecha_pago() != null) {
+                JOptionPane.showMessageDialog(this, "El pedido ya fue pagado");
+            } else {
+                jdc_fecha_pago.setEnabled(true);
+                jdc_fecha_pago.setDate(Date.valueOf(LocalDate.now()));
+                jb_guardar_f_pago.setEnabled(true);
+            }
         } else {
-            jdc_fecha_pago.setEnabled(true);
-            jdc_fecha_pago.setDate(Date.valueOf(LocalDate.now()));
-            jb_guardar_f_pago.setEnabled(true);
+            JOptionPane.showMessageDialog(this, "El pedido no registra fecha de entrega");
         }
     }//GEN-LAST:event_jb_actualizar_fecha_pagoActionPerformed
 
     private void jb_actualizar_fecha_entregaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_actualizar_fecha_entregaActionPerformed
         // TODO add your handling code here:
-        if (pedido.getFecha_pago() != null) {
+        if (pedido.getFecha_ingreso() != null) {
             if (pedido.getFecha_entrega() != null) {
                 JOptionPane.showMessageDialog(this, "El pedido ya fue entregado");
             } else {
@@ -542,7 +543,7 @@ public class PedidoActualizar extends javax.swing.JInternalFrame {
                 jb_guardar_f_entrega.setEnabled(true);
             }
         } else {
-            JOptionPane.showMessageDialog(this, "El pedido aún no fue pagado");
+            JOptionPane.showMessageDialog(this, "El pedido no registra fecha de ingreso");
         }
         
 
@@ -550,14 +551,14 @@ public class PedidoActualizar extends javax.swing.JInternalFrame {
 
     private void jb_guardar_f_pagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_guardar_f_pagoActionPerformed
         // TODO add your handling code here:
-        LocalDate fecha_ingreso = pedido.getFecha_ingreso();
+        LocalDate fecha_entrega = pedido.getFecha_entrega();
         
        // if (pedido.getFecha_pago() == null) {
             if (jdc_fecha_pago.getDate() != null) {
                 LocalDate fecha_pago = LocalDateTime.ofInstant(jdc_fecha_pago.getDate().toInstant(), ZoneId.systemDefault()).toLocalDate();
 
-                if (fecha_pago.isAfter(fecha_ingreso) || fecha_pago.isEqual(fecha_ingreso)) {
-                    Period p = Period.between(fecha_ingreso, fecha_pago);
+                if (fecha_pago.isAfter(fecha_entrega) || fecha_pago.isEqual(fecha_entrega)) {
+                    Period p = Period.between(fecha_pago, fecha_entrega);
 
                     if (p.getDays() < 11) {
                         ped.actualizarFechaPago(pedido, fecha_pago);
@@ -572,12 +573,12 @@ public class PedidoActualizar extends javax.swing.JInternalFrame {
                     }
 
                 } else {
-                    JOptionPane.showMessageDialog(this, "La fecha de pago debe ser posterior\na la fecha de ingreso del pedido");
+                    JOptionPane.showMessageDialog(this, "La fecha de pago debe ser posterior o igual\na la fecha de entrega del pedido");
                     jdc_fecha_pago.requestFocus();
                 }
 
             } else {
-                JOptionPane.showMessageDialog(this, "Debe ingresar una fecha de pago");
+                JOptionPane.showMessageDialog(this, "Debe ingresar una fecha de pago válida");
                 jdc_fecha_pago.requestFocus();
             }
 
@@ -590,10 +591,9 @@ public class PedidoActualizar extends javax.swing.JInternalFrame {
         
         if (jdc_fecha_entrega.getDate()!=null) {
             LocalDate fecha_entrega = LocalDateTime.ofInstant(jdc_fecha_entrega.getDate().toInstant(), ZoneId.systemDefault()).toLocalDate();
-            LocalDate fecha_pago = pedido.getFecha_pago();
-            //LocalDate fecha_pago = LocalDateTime.ofInstant(jdc_fecha_pago.getDate().toInstant(), ZoneId.systemDefault()).toLocalDate();
+            LocalDate fecha_ingreso = pedido.getFecha_ingreso();
             
-            if (fecha_entrega.isAfter(fecha_pago)||fecha_entrega.isEqual(fecha_pago)) {
+            if (fecha_entrega.isAfter(fecha_ingreso)||fecha_entrega.isEqual(fecha_ingreso)) {
                 ped.actualizarFechaEntrega(pedido, fecha_entrega);
                 pedido = ped.buscarPedido(revendedor.getId_revendedor(), campaña.getId_campaña());
                 jdc_fecha_entrega.setEnabled(false);
@@ -602,12 +602,12 @@ public class PedidoActualizar extends javax.swing.JInternalFrame {
                 //jdc_fecha_entrega.setEnabled(false);
                 
             } else {
-                JOptionPane.showMessageDialog(this, "La fecha de entrega debe ser posterior\na la fecha de pago");
+                JOptionPane.showMessageDialog(this, "La fecha de entrega debe ser posterior o igual\na la fecha de ingreso");
                 jdc_fecha_entrega.requestFocus();
             }
             
         } else {
-            JOptionPane.showMessageDialog(this, "Debe ingresar una fecha de entrega");
+            JOptionPane.showMessageDialog(this, "Debe ingresar una fecha de entrega válida");
             jdc_fecha_entrega.requestFocus();
         }
     }//GEN-LAST:event_jb_guardar_f_entregaActionPerformed
