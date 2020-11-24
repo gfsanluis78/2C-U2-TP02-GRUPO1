@@ -82,30 +82,29 @@
             <Property name="text" type="java.lang.String" value="Campa&#xf1;a"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JCheckBoxMenuItem" name="jCheckBoxMenuItem_campa&#xf1;aAlta">
+            <MenuItem class="javax.swing.JMenuItem" name="jm_campa&#xf1;aAlta">
               <Properties>
-                <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="Campa&#xf1;a Alta"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxMenuItem_campa&#xf1;aAltaActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jm_campa&#xf1;aAltaActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JCheckBoxMenuItem" name="jCheckBoxMenuItem_campa&#xf1;aActualizar">
-              <Properties>
-                <Property name="selected" type="boolean" value="true"/>
-                <Property name="text" type="java.lang.String" value="Campa&#xf1;a Actualizar"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxMenuItem_campa&#xf1;aActualizarActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
+            <MenuItem class="javax.swing.JMenuItem" name="jm_campa&#xf1;aCerrar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Campa&#xf1;a Cerrar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem3ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jm_campa&#xf1;aCerrarActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jm_campa&#xf1;aActualizar">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Camapa&#xf1;a Actualizar"/>
+                <Property name="actionCommand" type="java.lang.String" value="Campa&#xf1;a Actualizar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jm_campa&#xf1;aActualizarActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>

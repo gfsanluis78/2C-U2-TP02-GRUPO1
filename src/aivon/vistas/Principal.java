@@ -44,9 +44,9 @@ public class Principal extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jmi_actualizar_revendedor = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jCheckBoxMenuItem_campañaAlta = new javax.swing.JCheckBoxMenuItem();
-        jCheckBoxMenuItem_campañaActualizar = new javax.swing.JCheckBoxMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        jm_campañaAlta = new javax.swing.JMenuItem();
+        jm_campañaCerrar = new javax.swing.JMenuItem();
+        jm_campañaActualizar = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jmi_pedido_alta = new javax.swing.JMenuItem();
         jmi_pedido_actualizar = new javax.swing.JMenuItem();
@@ -132,31 +132,30 @@ public class Principal extends javax.swing.JFrame {
 
         jMenu4.setText("Campaña");
 
-        jCheckBoxMenuItem_campañaAlta.setSelected(true);
-        jCheckBoxMenuItem_campañaAlta.setText("Campaña Alta");
-        jCheckBoxMenuItem_campañaAlta.addActionListener(new java.awt.event.ActionListener() {
+        jm_campañaAlta.setText("Campaña Alta");
+        jm_campañaAlta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxMenuItem_campañaAltaActionPerformed(evt);
+                jm_campañaAltaActionPerformed(evt);
             }
         });
-        jMenu4.add(jCheckBoxMenuItem_campañaAlta);
+        jMenu4.add(jm_campañaAlta);
 
-        jCheckBoxMenuItem_campañaActualizar.setSelected(true);
-        jCheckBoxMenuItem_campañaActualizar.setText("Campaña Actualizar");
-        jCheckBoxMenuItem_campañaActualizar.addActionListener(new java.awt.event.ActionListener() {
+        jm_campañaCerrar.setText("Campaña Cerrar");
+        jm_campañaCerrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxMenuItem_campañaActualizarActionPerformed(evt);
+                jm_campañaCerrarActionPerformed(evt);
             }
         });
-        jMenu4.add(jCheckBoxMenuItem_campañaActualizar);
+        jMenu4.add(jm_campañaCerrar);
 
-        jMenuItem3.setText("Campaña Cerrar");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        jm_campañaActualizar.setText("Camapaña Actualizar");
+        jm_campañaActualizar.setActionCommand("Campaña Actualizar");
+        jm_campañaActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                jm_campañaActualizarActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem3);
+        jMenu4.add(jm_campañaActualizar);
 
         jMenuBar1.add(jMenu4);
 
@@ -284,32 +283,7 @@ public class Principal extends javax.swing.JFrame {
         rac.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
         rac.show();
     }//GEN-LAST:event_jmi_actualizar_revendedorActionPerformed
-    private void jCheckBoxMenuItem_campañaAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem_campañaAltaActionPerformed
-        // TODO add your handling code here:
-        jdp_escritorio.removeAll();
-        jdp_escritorio.repaint();
-        CampañaAlta cal=new CampañaAlta();
-        cal.setVisible(true);
-        jdp_escritorio.add(cal);
-        Dimension desktopSize = jdp_escritorio.getSize();
-        Dimension FrameSize = cal.getSize();
-        cal.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
-        cal.show();
-    }//GEN-LAST:event_jCheckBoxMenuItem_campañaAltaActionPerformed
 
-    private void jCheckBoxMenuItem_campañaActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem_campañaActualizarActionPerformed
-        // TODO add your handling code here:
-        jdp_escritorio.removeAll();
-        jdp_escritorio.repaint();
-        CampañaActualizar cal=new CampañaActualizar();
-        cal.setVisible(true);
-        jdp_escritorio.add(cal);
-        Dimension desktopSize = jdp_escritorio.getSize();
-        Dimension FrameSize = cal.getSize();
-        cal.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
-        cal.show();
-        
-    }//GEN-LAST:event_jCheckBoxMenuItem_campañaActualizarActionPerformed
     private void jmi_pedido_altaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_pedido_altaActionPerformed
         // TODO add your handling code here:
         jdp_escritorio.removeAll();
@@ -362,7 +336,21 @@ public class Principal extends javax.swing.JFrame {
         camp_x_rev.show();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void jm_campañaActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_campañaActualizarActionPerformed
+        // TODO add your handling code here:
+        jdp_escritorio.removeAll();
+        jdp_escritorio.repaint();
+        CampañaActualizar cal=new CampañaActualizar();
+        cal.setVisible(true);
+        jdp_escritorio.add(cal);
+        Dimension desktopSize = jdp_escritorio.getSize();
+        Dimension FrameSize = cal.getSize();
+        cal.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        cal.show();
+
+    }//GEN-LAST:event_jm_campañaActualizarActionPerformed
+
+    private void jm_campañaCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_campañaCerrarActionPerformed
         // TODO add your handling code here:
         jdp_escritorio.removeAll();
         jdp_escritorio.repaint();
@@ -373,7 +361,21 @@ public class Principal extends javax.swing.JFrame {
         Dimension FrameSize = camp_cerrar.getSize();
         camp_cerrar.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
         camp_cerrar.show();
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_jm_campañaCerrarActionPerformed
+
+    private void jm_campañaAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_campañaAltaActionPerformed
+        // TODO add your handling code here:
+        jdp_escritorio.removeAll();
+        jdp_escritorio.repaint();
+        CampañaAlta cal=new CampañaAlta();
+        cal.setVisible(true);
+        jdp_escritorio.add(cal);
+        Dimension desktopSize = jdp_escritorio.getSize();
+        Dimension FrameSize = cal.getSize();
+        cal.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        cal.show();
+
+    }//GEN-LAST:event_jm_campañaAltaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -404,8 +406,6 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem_campañaActualizar;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem_campañaAlta;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -415,10 +415,12 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JDesktopPane jdp_escritorio;
+    private javax.swing.JMenuItem jm_campañaActualizar;
+    private javax.swing.JMenuItem jm_campañaAlta;
+    private javax.swing.JMenuItem jm_campañaCerrar;
     private javax.swing.JMenuItem jmi_actualizar_revendedor;
     private javax.swing.JMenuItem jmi_alta_revendedor;
     private javax.swing.JMenuItem jmi_baja_revendedor;
