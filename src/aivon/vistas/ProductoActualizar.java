@@ -507,21 +507,26 @@ public class ProductoActualizar extends javax.swing.JInternalFrame {
                                             if (costo_publico > 0) {
                                                 producto.setCosto_publico(costo_publico);
                                                 //#################### VALIDANDO BOOL Y CARGA ##########################
-                                                if (jrb_activo_si.isSelected()) {
-                                                    producto.setActivo(true);
-                                                    pd.modificarProducto(producto); // MODIFICACION DEL PRODUCTO
-                                                    this.cargaProductos();
-                                                    jtf_buscar_por_nombre.setText("");
-                                                    this.limpiar();
-                                                } else if (jrb_activo_no.isSelected()) {
-                                                    producto.setActivo(false);
-                                                    pd.modificarProducto(producto); // MODIFICACION DEL PRODUCTO
-                                                    this.cargaProductos();
-                                                    jtf_buscar_por_nombre.setText("");
-                                                    this.limpiar();
-                                                } else {
-                                                    JOptionPane.showMessageDialog(this, "Debe seleccionar un estado activo o inactivo");
+                                                int respuesta = JOptionPane.showConfirmDialog(this, "¿Seguro que desea modificar el producto?", "Modificar producto", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+                                                if (respuesta == 0) {
+                                                    if (jrb_activo_si.isSelected()) {
+                                                        producto.setActivo(true);
+                                                        pd.modificarProducto(producto); // MODIFICACION DEL PRODUCTO
+                                                        this.cargaProductos();
+                                                        jtf_buscar_por_nombre.setText("");
+                                                        this.limpiar();
+                                                    } else if (jrb_activo_no.isSelected()) {
+                                                        producto.setActivo(false);
+                                                        pd.modificarProducto(producto); // MODIFICACION DEL PRODUCTO
+                                                        this.cargaProductos();
+                                                        jtf_buscar_por_nombre.setText("");
+                                                        this.limpiar();
+                                                    } else {
+                                                        JOptionPane.showMessageDialog(this, "Debe seleccionar un estado activo o inactivo");
+                                                    }
                                                 }
+                                             
                                                 //########################################################################
                                             } else {
                                                 JOptionPane.showMessageDialog(this, "Debe ingresar un costo público válido");
