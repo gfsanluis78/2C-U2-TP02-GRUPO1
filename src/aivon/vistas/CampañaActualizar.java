@@ -446,7 +446,7 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
         // BOTON MODIFICAR CAMPAÑA SELECCIONADO
         int fila_sel = jt_campañas.getSelectedRow();
         
-        
+        if(fila_sel != -1){
         try{
         int id_campaña = Integer.parseInt(jt_campañas.getValueAt(fila_sel, 0).toString());
         campaña = cd.buscarCampaña(id_campaña);
@@ -472,11 +472,15 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
         
          }
         actualizarNiveles();
+        }JOptionPane.showMessageDialog(this, "Debe seleccionar una campaña");
+        System.out.println("Debe selecconar una campaña");
         
     }//GEN-LAST:event_jb_modificar_campaña_selActionPerformed
-   private void actualizarNiveles(){
+       
+    private void actualizarNiveles(){
        List<Revendedor> lista = rd.buscarRevendedores();
        lista.forEach((revendedor) -> {
+           
            rd.calcularNivelRevendedor(revendedor);
         });
        

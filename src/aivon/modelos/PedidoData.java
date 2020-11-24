@@ -113,6 +113,53 @@ public class PedidoData {
 
         return pedido;
     }
+    //################### BUSCAR UN PEDIDO PAGO X REVENDEDOR Y CAMAPAÑA #################
+
+    public Pedido buscarPedidoPago(int id_revendedor, int id_campaña) {
+        Pedido pedido = null;
+        Revendedor revendedor;
+        Campaña campaña;
+        try {
+            Statement statement = c.createStatement();
+            ResultSet consulta = statement.executeQuery("SELECT * FROM pedido WHERE id_campaña="
+                    + id_campaña + " AND id_revendedor=" + id_revendedor + " AND fecha_pago is not null ;");
+
+            if (consulta.next()) {
+                pedido = new Pedido();
+                pedido.setId_pedido(consulta.getInt("id_pedido"));
+                pedido.setFecha_ingreso(consulta.getDate("fecha_ingreso").toLocalDate());
+                pedido.setActivo(consulta.getBoolean("activo"));
+                if (consulta.getDate("fecha_entrega") != null) {
+                    pedido.setFecha_entrega(consulta.getDate("fecha_entrega").toLocalDate());
+                } else {
+                    System.out.println("No hay fecha de entrega aún");
+                }
+
+                if (consulta.getDate("fecha_pago") != null) {
+                    pedido.setFecha_pago(consulta.getDate("fecha_pago").toLocalDate());
+                } else {
+                    System.out.println("No hay fecha de pago aún");
+                }
+                pedido.setCantidad_cajas(this.cantCajasPedido(pedido));
+                pedido.setEstrellas_pedido(this.cantEstrellasPedido(pedido));
+
+                revendedor = this.buscarRevendedor(id_revendedor);
+                campaña = this.buscarCampaña(id_campaña);
+
+                pedido.setRevendedor(revendedor);
+                pedido.setCampaña(campaña);
+            } else {
+                System.out.println("No se pudo obtener pedido");
+                //JOptionPane.showMessageDialog(null, "No se pudo obtener pedido");
+            }
+            statement.close();
+        } catch (SQLException e) {
+            //JOptionPane.showMessageDialog(null, "Error al obtener pedido");
+            System.out.println(e.getMessage());
+        }
+
+        return pedido;
+    }
 //##############################################################################
 //################ COSTO PEDIDO ################################################    
 
@@ -473,6 +520,57 @@ public class PedidoData {
                     revendedor = this.buscarRevendedor(id_revendedor);
                     pedido.setRevendedor(revendedor);
                     pedido.setCampaña(campaña);
+                    pedidos.add(pedido);
+                }
+            } else {
+                System.out.println("No se pudo obtener lista de pedidos");
+                JOptionPane.showMessageDialog(null, "No se pudo obtener lista de pedidos");
+            }
+            statement.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al obtener lista de pedidos");
+            System.out.println(e.getMessage());
+        }
+
+        return pedidos;
+    }
+    //################### LISTA DE PEDIDOS PAGOS X REVENDEDOR ############################
+
+    public List<Pedido> listaPedidosPagosxREVENDEDOR(Revendedor revendedor) {
+
+        List<Pedido> pedidos = new ArrayList();
+        Pedido pedido;
+       
+        try {
+            Statement statement = c.createStatement();
+            ResultSet consulta = statement.executeQuery("SELECT * FROM pedido WHERE fecha_pago IS NOT NULL AND id_revendedor=" + revendedor.getId_revendedor() + ";");
+
+            if (consulta.next()) {
+                consulta.beforeFirst();
+                while (consulta.next()) {
+
+                    pedido = new Pedido();
+                    pedido.setId_pedido(consulta.getInt("id_pedido"));
+                    pedido.setFecha_ingreso(consulta.getDate("fecha_ingreso").toLocalDate());
+                    if (consulta.getDate("fecha_entrega") != null) {
+                        pedido.setFecha_entrega(consulta.getDate("fecha_entrega").toLocalDate());
+                    } else {
+                        System.out.println("No hay fecha de entrega aún para el pedido con id: " + consulta.getInt("id_pedido"));
+                    }
+
+                    if (consulta.getDate("fecha_pago") != null) {
+                        pedido.setFecha_pago(consulta.getDate("fecha_pago").toLocalDate());
+                    } else {
+                        System.out.println("No hay fecha de pago aún para el pedido con id: " + consulta.getInt("id_pedido"));
+                    }
+
+                    pedido.setCantidad_cajas(this.cantCajasPedido(pedido));
+                    pedido.setEstrellas_pedido(this.cantEstrellasPedido(pedido));
+                    pedido.setActivo(consulta.getBoolean("activo"));
+                    pedido.setRevendedor(revendedor);
+                    pedido.setCampaña(this.buscarCampaña(consulta.getInt("id_campaña")));
+                    
+                   
                     pedidos.add(pedido);
                 }
             } else {
