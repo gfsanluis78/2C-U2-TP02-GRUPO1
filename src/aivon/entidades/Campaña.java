@@ -102,9 +102,14 @@ public class Campaña {
         this.activa = activa;
     }
 
+//    @Override
+//    public String toString() {
+//        return "Campa\u00f1a{" + "id_campa\u00f1a=" + id_campaña + ", nombre=" + nombre + ", fecha_inicio=" + fecha_inicio + ", fecha_fin=" + fecha_fin + ", monto_min=" + monto_min + ", monto_max=" + monto_max + ", activa=" + activa + '}';
+//    }
+
     @Override
     public String toString() {
-        return "Campa\u00f1a{" + "id_campa\u00f1a=" + id_campaña + ", nombre=" + nombre + ", fecha_inicio=" + fecha_inicio + ", fecha_fin=" + fecha_fin + ", monto_min=" + monto_min + ", monto_max=" + monto_max + ", activa=" + activa + '}';
+        return id_campaña + " - " + nombre;
     }
 
         

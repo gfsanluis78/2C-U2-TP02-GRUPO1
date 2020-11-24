@@ -6,6 +6,7 @@
 package aivon.vistas;
 
 import java.awt.Dimension;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -49,8 +50,11 @@ public class Principal extends javax.swing.JFrame {
         jmi_pedido_alta = new javax.swing.JMenuItem();
         jmi_pedido_actualizar = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
+        jmi_pedidos_x_campaña = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1366, 768));
 
         javax.swing.GroupLayout jdp_escritorioLayout = new javax.swing.GroupLayout(jdp_escritorio);
         jdp_escritorio.setLayout(jdp_escritorioLayout);
@@ -168,6 +172,23 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu5);
 
         jMenu6.setText("Consultas");
+
+        jmi_pedidos_x_campaña.setText("Pedidos por Campaña");
+        jmi_pedidos_x_campaña.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_pedidos_x_campañaActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jmi_pedidos_x_campaña);
+
+        jMenuItem2.setText("Campañas por Revendedor");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem2);
+
         jMenuBar1.add(jMenu6);
 
         setJMenuBar(jMenuBar1);
@@ -306,6 +327,32 @@ public class Principal extends javax.swing.JFrame {
         ped_act.show();
     }//GEN-LAST:event_jmi_pedido_actualizarActionPerformed
 
+    private void jmi_pedidos_x_campañaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_pedidos_x_campañaActionPerformed
+        // TODO add your handling code here:
+        jdp_escritorio.removeAll();
+        jdp_escritorio.repaint();
+        ConsultaPedidosPorCampaña ped_x_camp =new ConsultaPedidosPorCampaña();
+        ped_x_camp.setVisible(true);
+        jdp_escritorio.add(ped_x_camp);
+        Dimension desktopSize = jdp_escritorio.getSize();
+        Dimension FrameSize = ped_x_camp.getSize();
+        ped_x_camp.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        ped_x_camp.show();
+    }//GEN-LAST:event_jmi_pedidos_x_campañaActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        jdp_escritorio.removeAll();
+        jdp_escritorio.repaint();
+        ConsultaCampañasPoRevendedor camp_x_rev =new ConsultaCampañasPoRevendedor();
+        camp_x_rev.setVisible(true);
+        jdp_escritorio.add(camp_x_rev);
+        Dimension desktopSize = jdp_escritorio.getSize();
+        Dimension FrameSize = camp_x_rev.getSize();
+        camp_x_rev.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        camp_x_rev.show();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -314,26 +361,19 @@ public class Principal extends javax.swing.JFrame {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+                      //</editor-fold>
+        */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException classNotFoundException) {
         }
-        //</editor-fold>
-
-        /* Create and display the form */
+       
+        
+       /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Principal().setVisible(true);
@@ -352,6 +392,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JDesktopPane jdp_escritorio;
@@ -360,6 +401,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmi_baja_revendedor;
     private javax.swing.JMenuItem jmi_pedido_actualizar;
     private javax.swing.JMenuItem jmi_pedido_alta;
+    private javax.swing.JMenuItem jmi_pedidos_x_campaña;
     private javax.swing.JMenuItem jmi_producto_actualizar;
     private javax.swing.JMenuItem jmi_producto_alta;
     // End of variables declaration//GEN-END:variables
