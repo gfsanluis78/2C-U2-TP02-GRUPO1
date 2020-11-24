@@ -31,37 +31,35 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jl_activo" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="110" max="32767" attributes="0"/>
-                                      <Component id="jrb_activo_si" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jrb_activo_no" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jl_activo" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="110" max="32767" attributes="0"/>
+                                  <Component id="jrb_activo_si" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="jrb_activo_no" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jL_montoMinimo" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jl_montoMaximo" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jL_montoMinimo" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jl_montoMaximo" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="119" pref="73" max="32767" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jtf_montoMaximo" alignment="0" min="-2" pref="75" max="-2" attributes="0"/>
-                                          <Component id="jtf_montoMinimo" alignment="0" min="-2" pref="75" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jb_limpiar" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="jb_cargar" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="119" pref="73" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jtf_montoMaximo" alignment="0" min="-2" pref="75" max="-2" attributes="0"/>
+                                      <Component id="jtf_montoMinimo" alignment="0" min="-2" pref="75" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Component id="jbt_salir" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jb_limpiar" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="jb_cargar" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <Component id="jb_modificar_campaña_sel" min="-2" max="-2" attributes="0"/>
+                          <Component id="jbt_salir" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -80,7 +78,7 @@
                       <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jtf_nombre" max="32767" attributes="0"/>
-                          <Component id="jDateChooser_inicio" max="32767" attributes="0"/>
+                          <Component id="jDateChooser_inicio" pref="162" max="32767" attributes="0"/>
                           <Component id="jDateChooser_fin" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -99,17 +97,16 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="53" max="32767" attributes="0"/>
+              <EmptySpace pref="57" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="jb_modificar_campaña_sel" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
                               <Component id="jtf_nombre" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -201,6 +198,10 @@
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jt_campa&#xf1;asMouseClicked"/>
+            <EventHandler event="caretPositionChanged" listener="java.awt.event.InputMethodListener" parameters="java.awt.event.InputMethodEvent" handler="jt_campa&#xf1;asCaretPositionChanged"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -208,14 +209,6 @@
       <Properties>
         <Property name="orientation" type="int" value="1"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="jb_modificar_campa&#xf1;a_sel">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="CAMBIAR ESTADO CAMPA&#xd1;A SELECCIONADA"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jb_modificar_campa&#xf1;a_selActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
