@@ -46,6 +46,7 @@ public class Principal extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         jCheckBoxMenuItem_campañaAlta = new javax.swing.JCheckBoxMenuItem();
         jCheckBoxMenuItem_campañaActualizar = new javax.swing.JCheckBoxMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jmi_pedido_alta = new javax.swing.JMenuItem();
         jmi_pedido_actualizar = new javax.swing.JMenuItem();
@@ -148,6 +149,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jMenu4.add(jCheckBoxMenuItem_campañaActualizar);
+
+        jMenuItem3.setText("Campaña Cerrar");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem3);
 
         jMenuBar1.add(jMenu4);
 
@@ -353,6 +362,19 @@ public class Principal extends javax.swing.JFrame {
         camp_x_rev.show();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        jdp_escritorio.removeAll();
+        jdp_escritorio.repaint();
+        CampañaCerrar camp_cerrar =new CampañaCerrar();
+        camp_cerrar.setVisible(true);
+        jdp_escritorio.add(camp_cerrar);
+        Dimension desktopSize = jdp_escritorio.getSize();
+        Dimension FrameSize = camp_cerrar.getSize();
+        camp_cerrar.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        camp_cerrar.show();
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -393,6 +415,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JDesktopPane jdp_escritorio;
