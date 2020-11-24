@@ -48,7 +48,6 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
             armaCabeceraTabla();
             cargaCampañas();
             deshabilitarCampos();
-//            jrb_activo_no.setDisabledSelectedIcon(frameIcon);
         } catch (Exception e) {
         }
     }
@@ -233,6 +232,11 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
         jl_fin.setText("FECHA FIN");
 
         jtf_activo.setEditable(false);
+        jtf_activo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtf_activoActionPerformed(evt);
+            }
+        });
         jtf_activo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtf_activoKeyTyped(evt);
@@ -376,7 +380,7 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
             campaña.setNombre(jtf_nombre.getText());
             try {
                 double monto_min = Double.parseDouble(jtf_montoMinimo.getText());
-                if (monto_min > 0) {
+                if (monto_min > 0 && monto_min < campaña.getMonto_max()) {
                     campaña.setMonto_min(monto_min);
                 }
             } catch (NumberFormatException e) {
@@ -425,6 +429,7 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
     private void jb_modificar_campaña_selActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_modificar_campaña_selActionPerformed
         // BOTON MODIFICAR CAMPAÑA SELECCIONADO
         int fila_sel = jt_campañas.getSelectedRow();
+        System.out.println(fila_sel);
         
         if(fila_sel != -1){
         try{
@@ -434,7 +439,7 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(this, "Fallo al traer id entero");
          }
         
-        System.out.println("El estado activo de la campaña es "+campaña.isActiva());
+        //System.out.println("El estado activo de la campaña es "+campaña.isActiva());
         this.habilitarCampos();
         jtf_nombre.setText(campaña.getNombre());
         jtf_montoMinimo.setText(String.valueOf(campaña.getMonto_min()));
@@ -449,15 +454,22 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
             jtf_activo.setText("No");
         
          }
-        actualizarNiveles();
-        }JOptionPane.showMessageDialog(this, "Debe seleccionar una campaña");
-        System.out.println("Debe selecconar una campaña");
+//        actualizarNiveles();
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar una campaña");
+            System.out.println("Debe seleccionar una campaña");
+        }
+        
         
     }//GEN-LAST:event_jb_modificar_campaña_selActionPerformed
 
     private void jtf_activoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_activoKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_jtf_activoKeyTyped
+
+    private void jtf_activoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_activoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtf_activoActionPerformed
        
     private void actualizarNiveles(){
        List<Revendedor> lista = rd.buscarRevendedores();
@@ -472,6 +484,7 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
 
         jtf_montoMinimo.setText("");
         jtf_montoMaximo.setText("");
+        jtf_activo.setText("");
 //        jrb_activo_si.setSelected(false);
 //        jrb_activo_no.setSelected(false);
         jDateChooser_inicio.setDate(null);
