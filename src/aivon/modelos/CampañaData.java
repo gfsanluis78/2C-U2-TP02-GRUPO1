@@ -16,10 +16,10 @@ import javax.swing.JOptionPane;
 public class CampañaData {
     
     private Connection con;
-
+        
     public CampañaData(Conexion conexion) {
         con = conexion.getConnection();
-    
+        
     
 }
 //--------------------------ALTA---------------------------------------------------------//////
@@ -188,7 +188,7 @@ public class CampañaData {
             
             if (celAfectadas > 0) {
                 System.out.println("Campaña Cerrada");
-                JOptionPane.showMessageDialog(null, "Campaña Cerrada");
+                JOptionPane.showMessageDialog(null, "Campaña Cerrada");                          
             } else {
                 System.out.println("El Registro " + campaña.getId_campaña() + " no pudo ser desactivada");
                 JOptionPane.showMessageDialog(null, "La Campaña no se pudo cerrar");
