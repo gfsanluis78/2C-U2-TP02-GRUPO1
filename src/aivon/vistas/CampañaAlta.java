@@ -308,13 +308,19 @@ public class CampañaAlta extends javax.swing.JInternalFrame {
                                 fecha = LocalDateTime.ofInstant(jDateChooser_inicio.getDate().toInstant(), ZoneId.systemDefault()).toLocalDate();
 
                                 if (jDateChooser_inicio.getDate() != null) {
-                                    if (jDateChooser_inicio.getDate().after(Date.valueOf(cd.ultimaCampaña().getFecha_fin()))) {
+                                    if (cd.ultimaCampaña().getFecha_fin() != null) {
+                                        if (jDateChooser_inicio.getDate().after(Date.valueOf(cd.ultimaCampaña().getFecha_fin()))) {
+                                            campaña.setFecha_inicio(fecha);
+                                            cd.guardarCampaña(campaña);
+                                            limpiar();
+                                        } else {
+                                            JOptionPane.showMessageDialog(this, "La fecha elegida es anterior a la fecha de fin de la ultima campaña");
+                                            jDateChooser_inicio.requestFocus();
+                                        }
+                                    } else {
                                         campaña.setFecha_inicio(fecha);
                                         cd.guardarCampaña(campaña);
                                         limpiar();
-                                    } else {
-                                        JOptionPane.showMessageDialog(this, "La fecha elegida es anterior a la fecha de fin de la ultima campaña");
-                                        jDateChooser_inicio.requestFocus();
                                     }
 
                                 } else {
@@ -354,6 +360,7 @@ public class CampañaAlta extends javax.swing.JInternalFrame {
 
 
     }//GEN-LAST:event_jbt_cargarActionPerformed
+
     private void limpiar() {
         jtf_nombre.setText("");
         jtf_montoMinimo.setText("");
