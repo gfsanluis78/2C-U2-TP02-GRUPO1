@@ -363,6 +363,19 @@ public class ConsultaCampañasPoRevendedor extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jb_salirActionPerformed
     private void limpiar() {
         
+        jtf_dni.setText("");
+        
+        jtf_apellido_rev.setText("");
+        jtf_nombre_rev.setText("");
+        jtf_activo.setText("");
+        jtf_estrellas.setText("");
+        jtf_nivel.setText("");
+        borraFilasTablaCampañasXRevendedor();
+        jtf_dni.setEditable(true);
+        
+      
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
