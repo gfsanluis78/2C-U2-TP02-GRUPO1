@@ -150,7 +150,6 @@ public class Principal extends javax.swing.JFrame {
         jMenu4.add(jm_campañaCerrar);
 
         jm_campañaActualizar.setText("Campaña Actualizar");
-        jm_campañaActualizar.setActionCommand("Campaña Actualizar");
         jm_campañaActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jm_campañaActualizarActionPerformed(evt);
