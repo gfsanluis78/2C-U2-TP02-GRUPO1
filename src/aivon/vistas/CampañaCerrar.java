@@ -420,6 +420,7 @@ public class CampañaCerrar extends javax.swing.JInternalFrame {
                     campaña.setActiva(true);
                     cd.desactivarCampañas();
                     cd.modificarCampaña(campaña); 
+                    actualizarNiveles();
                     this.cargaCampañas();
                     limpiar();
                 } else if (jrb_activo_no.isSelected()) {

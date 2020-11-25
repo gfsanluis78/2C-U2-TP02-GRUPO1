@@ -477,22 +477,11 @@ public class ProductoActualizar extends javax.swing.JInternalFrame {
 
     private void jb_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_limpiarActionPerformed
         // TODO add your handling code here:
-        jtf_nombre.setText("");
-        jtf_uso.setText("");
-        jtf_volumen.setText("");
-        jtf_costo_lista.setText("");
-        jtf_costo_publico.setText("");
-        jtf_estrellas.setText("");
-        jrb_activo_si.setSelected(false);
-        jrb_activo_no.setSelected(false);
-
-        jtf_nombre.requestFocus();
+        this.limpiar();
     }//GEN-LAST:event_jb_limpiarActionPerformed
 
     private void jb_cargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_cargarActionPerformed
         // TODO add your handling code here:
-        
-
         //#################### VALIDANDO STRINGS ###############################
         if (jtf_nombre.getText().length() > 4) {
             producto.setNombre(jtf_nombre.getText());
@@ -518,19 +507,26 @@ public class ProductoActualizar extends javax.swing.JInternalFrame {
                                             if (costo_publico > 0) {
                                                 producto.setCosto_publico(costo_publico);
                                                 //#################### VALIDANDO BOOL Y CARGA ##########################
-                                                if (jrb_activo_si.isSelected()) {
-                                                    producto.setActivo(true);
-                                                    pd.modificarProducto(producto); // MODIFICACION DEL PRODUCTO
-                                                    this.cargaProductos();
-                                                    jtf_buscar_por_nombre.setText("");
-                                                } else if (jrb_activo_no.isSelected()) {
-                                                    producto.setActivo(false);
-                                                    pd.modificarProducto(producto); // MODIFICACION DEL PRODUCTO
-                                                    this.cargaProductos();
-                                                    jtf_buscar_por_nombre.setText("");
-                                                } else {
-                                                    JOptionPane.showMessageDialog(this, "Debe seleccionar un estado activo o inactivo");
+                                                int respuesta = JOptionPane.showConfirmDialog(this, "¿Seguro que desea modificar el producto?", "Modificar producto", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+                                                if (respuesta == 0) {
+                                                    if (jrb_activo_si.isSelected()) {
+                                                        producto.setActivo(true);
+                                                        pd.modificarProducto(producto); // MODIFICACION DEL PRODUCTO
+                                                        this.cargaProductos();
+                                                        jtf_buscar_por_nombre.setText("");
+                                                        this.limpiar();
+                                                    } else if (jrb_activo_no.isSelected()) {
+                                                        producto.setActivo(false);
+                                                        pd.modificarProducto(producto); // MODIFICACION DEL PRODUCTO
+                                                        this.cargaProductos();
+                                                        jtf_buscar_por_nombre.setText("");
+                                                        this.limpiar();
+                                                    } else {
+                                                        JOptionPane.showMessageDialog(this, "Debe seleccionar un estado activo o inactivo");
+                                                    }
                                                 }
+                                             
                                                 //########################################################################
                                             } else {
                                                 JOptionPane.showMessageDialog(this, "Debe ingresar un costo público válido");
@@ -606,29 +602,40 @@ public class ProductoActualizar extends javax.swing.JInternalFrame {
 
     private void jb_modificar_producto_selActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_modificar_producto_selActionPerformed
         // BOTON MODIFICAR PRODUCTO SELECCIONADO
+
         int fila_sel = jt_productos.getSelectedRow();
-        int id_producto = Integer.parseInt(jt_productos.getValueAt(fila_sel, 0).toString());
-        
-        producto = pd.buscarProducto(id_producto);
-        System.out.println("El estado activo del producto es "+producto.isActivo());
-        this.habilitarCampos();
-        jtf_nombre.setText(producto.getNombre());
-        jtf_uso.setText(producto.getUso());
-        jtf_volumen.setText(String.valueOf(producto.getTamaño()));
-        jtf_costo_lista.setText(String.valueOf(producto.getCosto()));
-        jtf_costo_publico.setText(String.valueOf(producto.getCosto_publico()));
-        jtf_estrellas.setText(String.valueOf(producto.getEstrellas()));
-        
-        if (producto.isActivo()) {
-            jrb_activo_no.setSelected(false);
-            jrb_activo_si.setSelected(true);
-            
+
+        if (fila_sel >= 0) {
+            int id_producto = Integer.parseInt(jt_productos.getValueAt(fila_sel, 0).toString());
+
+            producto = pd.buscarProducto(id_producto);
+
+            if (producto != null) {
+                System.out.println("El estado activo del producto es " + producto.isActivo());
+                this.habilitarCampos();
+                jtf_nombre.setText(producto.getNombre());
+                jtf_uso.setText(producto.getUso());
+                jtf_volumen.setText(String.valueOf(producto.getTamaño()));
+                jtf_costo_lista.setText(String.valueOf(producto.getCosto()));
+                jtf_costo_publico.setText(String.valueOf(producto.getCosto_publico()));
+                jtf_estrellas.setText(String.valueOf(producto.getEstrellas()));
+
+                if (producto.isActivo()) {
+                    jrb_activo_no.setSelected(false);
+                    jrb_activo_si.setSelected(true);
+
+                } else {
+                    jrb_activo_si.setSelected(false);
+                    jrb_activo_no.setSelected(true);
+                }
+            }
+
         } else {
-            jrb_activo_si.setSelected(false);
-            jrb_activo_no.setSelected(true);
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un producto");
+            jt_productos.requestFocus();
         }
-        
-        
+
+
     }//GEN-LAST:event_jb_modificar_producto_selActionPerformed
 
     private void jb_buscar_por_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_buscar_por_nombreActionPerformed
@@ -678,4 +685,22 @@ public class ProductoActualizar extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtf_uso;
     private javax.swing.JTextField jtf_volumen;
     // End of variables declaration//GEN-END:variables
+
+    private void limpiar() {
+        
+        jtf_nombre.setText("");
+        jtf_uso.setText("");
+        jtf_volumen.setText("");
+        jtf_costo_lista.setText("");
+        jtf_costo_publico.setText("");
+        jtf_estrellas.setText("");
+        jrb_activo_si.setSelected(false);
+        jrb_activo_no.setSelected(false);
+        jrb_activo_si.setEnabled(false);
+        jrb_activo_no.setEnabled(false);
+        producto = null;
+        jb_cargar.setEnabled(false);
+        jb_limpiar.setEnabled(false);
+        //jtf_nombre.requestFocus();
+    }
 }

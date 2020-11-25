@@ -53,6 +53,7 @@ public class Principal extends javax.swing.JFrame {
         jMenu6 = new javax.swing.JMenu();
         jmi_pedidos_x_campaña = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jmi_ranking = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1366, 768));
@@ -61,11 +62,11 @@ public class Principal extends javax.swing.JFrame {
         jdp_escritorio.setLayout(jdp_escritorioLayout);
         jdp_escritorioLayout.setHorizontalGroup(
             jdp_escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 973, Short.MAX_VALUE)
+            .addGap(0, 1366, Short.MAX_VALUE)
         );
         jdp_escritorioLayout.setVerticalGroup(
             jdp_escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 739, Short.MAX_VALUE)
+            .addGap(0, 747, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Archivo");
@@ -148,7 +149,7 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu4.add(jm_campañaCerrar);
 
-        jm_campañaActualizar.setText("Camapaña Actualizar");
+        jm_campañaActualizar.setText("Campaña Actualizar");
         jm_campañaActualizar.setActionCommand("Campaña Actualizar");
         jm_campañaActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -196,6 +197,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jMenu6.add(jMenuItem2);
+
+        jmi_ranking.setText("Ranking Revendedores");
+        jmi_ranking.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_rankingActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jmi_ranking);
 
         jMenuBar1.add(jMenu6);
 
@@ -376,6 +385,18 @@ public class Principal extends javax.swing.JFrame {
         cal.show();
 
     }//GEN-LAST:event_jm_campañaAltaActionPerformed
+    private void jmi_rankingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_rankingActionPerformed
+        // TODO add your handling code here:
+        jdp_escritorio.removeAll();
+        jdp_escritorio.repaint();
+        ConsultaRankingRev rank = new ConsultaRankingRev();
+        rank.setVisible(true);
+        jdp_escritorio.add(rank);
+        Dimension desktopSize = jdp_escritorio.getSize();
+        Dimension FrameSize = rank.getSize();
+        rank.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        rank.show();
+    }//GEN-LAST:event_jmi_rankingActionPerformed
 
     /**
      * @param args the command line arguments
@@ -429,5 +450,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmi_pedidos_x_campaña;
     private javax.swing.JMenuItem jmi_producto_actualizar;
     private javax.swing.JMenuItem jmi_producto_alta;
+    private javax.swing.JMenuItem jmi_ranking;
     // End of variables declaration//GEN-END:variables
 }
