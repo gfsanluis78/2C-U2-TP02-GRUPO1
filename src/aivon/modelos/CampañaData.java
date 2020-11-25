@@ -49,7 +49,7 @@ public class CampañaData {
                 if (resultado.next()) {
                campaña.setId_campaña(resultado.getInt(1));
                     System.out.println("Campaña cargada");
-                    JOptionPane.showMessageDialog(null, "Campaña cargada");
+                    //JOptionPane.showMessageDialog(null, "Campaña cargada");
                 } else {
                     JOptionPane.showMessageDialog(null, "No pudo obtener id");
                     System.out.println("No pudo obtener id");
@@ -89,7 +89,7 @@ public class CampañaData {
             int celAfectadas = statement.executeUpdate("DELETE FROM campaña WHERE id_campaña=" + id + ";");
 
             if (celAfectadas > 0) {
-                JOptionPane.showMessageDialog(null, "Campaña Borrada");
+                //JOptionPane.showMessageDialog(null, "Campaña Borrada");
                 System.out.println("Campaña Borrada");
             } else {
                 JOptionPane.showMessageDialog(null, "El Registro con id " + id + " que pretende borrar no existe!!");
@@ -111,7 +111,7 @@ public class CampañaData {
             int celAfectadas = statement.executeUpdate("DELETE FROM campaña WHERE nombre='" + nombre + "';");
 
             if (celAfectadas > 0) {
-                JOptionPane.showMessageDialog(null, "Campaña Borrada");
+                //JOptionPane.showMessageDialog(null, "Campaña Borrada");
                 System.out.println("Campaña Borrada");
             } else {
                 JOptionPane.showMessageDialog(null, "El Registro con nombre " + nombre + " que pretende borrar no existe!!");
@@ -168,7 +168,7 @@ public class CampañaData {
                     
                 } else {
                     
-                    System.out.println("No se pudo setear las modificaiones a la campaña");
+                    System.out.println("No se pudo setear las modificaciones a la campaña");
                 }
             
             statement.close();
@@ -188,7 +188,7 @@ public class CampañaData {
             
             if (celAfectadas > 0) {
                 System.out.println("Campaña Cerrada");
-                JOptionPane.showMessageDialog(null, "Campaña Cerrada");                          
+                //JOptionPane.showMessageDialog(null, "Campaña Cerrada");                          
             } else {
                 System.out.println("El Registro " + campaña.getId_campaña() + " no pudo ser desactivada");
                 JOptionPane.showMessageDialog(null, "La Campaña no se pudo cerrar");
@@ -247,7 +247,7 @@ public class CampañaData {
                     
                                        
                 } else {
-                    JOptionPane.showMessageDialog(null, "No existe la campaña con ese Id de registro");
+                    //JOptionPane.showMessageDialog(null, "No existe la campaña con ese Id de registro");
                     System.out.println("No existe la campaña con ese Id de registro");
                 }
             }
@@ -386,7 +386,7 @@ public class CampañaData {
                     
                     campañas.add(campaña);
             }
-                JOptionPane.showMessageDialog(null, "Se encontraron campañas");
+                //JOptionPane.showMessageDialog(null, "Se encontraron campañas");
                 System.out.println("Se encontraron campañas");
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontraron campañas");
@@ -470,7 +470,7 @@ public class CampañaData {
                     
                     campañas.add(campaña);
             }
-                JOptionPane.showMessageDialog(null, "Se encontraron campañas activas");
+                //JOptionPane.showMessageDialog(null, "Se encontraron campañas activas");
                 System.out.println("Se encontraron campañas activas");
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontraron campañas activas");
@@ -498,7 +498,7 @@ public void desactivarCampañas() {
             
             if (celAfectadas > 0) {
                 System.out.println("Campaña activa desactivada");
-                JOptionPane.showMessageDialog(null, "Campaña Cerrada");
+                //JOptionPane.showMessageDialog(null, "Campaña Cerrada");
             
             } else { 
                 System.out.println("No hay campañas activas para desactivar");
@@ -531,7 +531,7 @@ public Campaña ultimaCampaña(){
                                        
                     
                 } else {
-                    JOptionPane.showMessageDialog(null, "No se pudo buscar la ultima campaña");
+                    //JOptionPane.showMessageDialog(null, "No se pudo buscar la ultima campaña");
                     System.out.println("No existe la campaña ultima campaña");
                 }
             

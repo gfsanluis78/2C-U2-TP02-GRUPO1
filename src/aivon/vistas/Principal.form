@@ -82,22 +82,28 @@
             <Property name="text" type="java.lang.String" value="Campa&#xf1;a"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JCheckBoxMenuItem" name="jCheckBoxMenuItem_campa&#xf1;aAlta">
+            <MenuItem class="javax.swing.JMenuItem" name="jm_campa&#xf1;aAlta">
               <Properties>
-                <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="Campa&#xf1;a Alta"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxMenuItem_campa&#xf1;aAltaActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jm_campa&#xf1;aAltaActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JCheckBoxMenuItem" name="jCheckBoxMenuItem_campa&#xf1;aActualizar">
+            <MenuItem class="javax.swing.JMenuItem" name="jm_campa&#xf1;aCerrar">
               <Properties>
-                <Property name="selected" type="boolean" value="true"/>
+                <Property name="text" type="java.lang.String" value="Campa&#xf1;a Cerrar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jm_campa&#xf1;aCerrarActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jm_campa&#xf1;aActualizar">
+              <Properties>
                 <Property name="text" type="java.lang.String" value="Campa&#xf1;a Actualizar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxMenuItem_campa&#xf1;aActualizarActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jm_campa&#xf1;aActualizarActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -146,6 +152,14 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem2ActionPerformed"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jmi_ranking">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Ranking Revendedores"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmi_rankingActionPerformed"/>
+              </Events>
+            </MenuItem>
           </SubComponents>
         </Menu>
       </SubComponents>
@@ -192,12 +206,12 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="973" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="1366" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="739" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="747" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>

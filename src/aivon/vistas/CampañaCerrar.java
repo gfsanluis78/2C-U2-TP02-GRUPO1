@@ -27,7 +27,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Genaro
  */
-public class CampañaActualizar extends javax.swing.JInternalFrame {
+public class CampañaCerrar extends javax.swing.JInternalFrame {
 
     private Conexion conexion;
     private CampañaData cd;
@@ -39,7 +39,7 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
     /**
      * Creates new form ProductoActualizar
      */
-    public CampañaActualizar() {
+    public CampañaCerrar() {
         initComponents();
         try {
             conexion = new Conexion();
@@ -97,12 +97,10 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
         jtf_nombre.setEnabled(false);
         jtf_montoMinimo.setEnabled(false);
         jtf_montoMaximo.setEnabled(false);
-        jDateChooser_inicio.setEnabled(false);
-        jDateChooser_fin.setEnabled(false);
-//        jrb_activo_si.setSelected(false);
-//        jrb_activo_no.setSelected(false);
-//        jrb_activo_si.setEnabled(false);
-//        jrb_activo_no.setEnabled(false);
+        jrb_activo_si.setSelected(false);
+        jrb_activo_no.setSelected(false);
+        jrb_activo_si.setEnabled(false);
+        jrb_activo_no.setEnabled(false);
         jb_cargar.setEnabled(false);
         jb_limpiar.setEnabled(false);
         //jb_baja.setEnabled(false);
@@ -112,12 +110,10 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
         jtf_nombre.setEnabled(true);
         jtf_montoMinimo.setEnabled(true);
         jtf_montoMaximo.setEnabled(true);
-        jDateChooser_inicio.setEnabled(true);
-        jDateChooser_fin.setEnabled(true);
-//        jrb_activo_si.setSelected(true);
-//        jrb_activo_no.setSelected(true);
-//        jrb_activo_si.setEnabled(true);
-//        jrb_activo_no.setEnabled(true);
+        jrb_activo_si.setSelected(true);
+        jrb_activo_no.setSelected(true);
+        jrb_activo_si.setEnabled(true);
+        jrb_activo_no.setEnabled(true);
         jb_cargar.setEnabled(true);
         jb_limpiar.setEnabled(true);
         //jb_baja.setEnabled(true);
@@ -144,14 +140,15 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
         jb_limpiar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jb_cargar = new javax.swing.JButton();
+        jrb_activo_si = new javax.swing.JRadioButton();
         jbt_salir = new javax.swing.JButton();
+        jrb_activo_no = new javax.swing.JRadioButton();
         jl_activo = new javax.swing.JLabel();
         jtf_nombre = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jDateChooser_inicio = new com.toedter.calendar.JDateChooser();
         jl_fin = new javax.swing.JLabel();
         jDateChooser_fin = new com.toedter.calendar.JDateChooser();
-        jtf_activo = new javax.swing.JTextField();
 
         jt_campañas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -177,6 +174,13 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
                 jt_campañasMouseClicked(evt);
             }
         });
+        jt_campañas.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+                jt_campañasCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
+        });
         jScrollPane1.setViewportView(jt_campañas);
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -187,12 +191,14 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
 
         jl_montoMaximo.setText("MONTO MAXIMO");
 
+        jtf_montoMinimo.setEditable(false);
         jtf_montoMinimo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtf_montoMinimoKeyTyped(evt);
             }
         });
 
+        jtf_montoMaximo.setEditable(false);
         jtf_montoMaximo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtf_montoMaximoKeyTyped(evt);
@@ -208,10 +214,18 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
 
         jLabel2.setText("NOMBRE");
 
-        jb_cargar.setText("CARGAR");
+        jb_cargar.setText("ACTUALIZAR ESTADO CAMPAÑA");
         jb_cargar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jb_cargarActionPerformed(evt);
+            }
+        });
+
+        bg_jrb_activo.add(jrb_activo_si);
+        jrb_activo_si.setText("SÍ");
+        jrb_activo_si.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrb_activo_siActionPerformed(evt);
             }
         });
 
@@ -222,8 +236,12 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
             }
         });
 
+        bg_jrb_activo.add(jrb_activo_no);
+        jrb_activo_no.setText("NO");
+
         jl_activo.setText("ACTIVO");
 
+        jtf_nombre.setEditable(false);
         jtf_nombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtf_nombreKeyTyped(evt);
@@ -231,21 +249,13 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("ACTUALIZACIÓN DE CAMPAÑAS");
+        jLabel1.setText("CIERRE DE CAMPAÑAS");
+
+        jDateChooser_inicio.setEnabled(false);
 
         jl_fin.setText("FECHA FIN");
 
-        jtf_activo.setEditable(false);
-        jtf_activo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtf_activoActionPerformed(evt);
-            }
-        });
-        jtf_activo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jtf_activoKeyTyped(evt);
-            }
-        });
+        jDateChooser_fin.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -253,42 +263,40 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(199, 199, 199)
-                        .addComponent(jbt_salir))
+                        .addGap(259, 259, 259)
+                        .addComponent(jbt_salir)
+                        .addContainerGap(58, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(3, 3, 3)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(jb_limpiar)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
-                                        .addComponent(jb_cargar))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jl_activo)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jrb_activo_si)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(jrb_activo_no))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jL_montoMinimo)
+                                                .addComponent(jl_montoMaximo))
+                                            .addGap(119, 133, Short.MAX_VALUE)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(jtf_montoMaximo, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jtf_montoMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jL_montoMinimo)
-                                            .addComponent(jl_montoMaximo)
-                                            .addComponent(jl_activo))
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jtf_activo, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jtf_montoMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jtf_montoMaximo, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addComponent(jb_limpiar)
+                                        .addGap(27, 27, 27)
+                                        .addComponent(jb_cargar)))
+                                .addGap(26, 26, 26))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -298,18 +306,22 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
                                             .addComponent(jLabel3)))
                                     .addComponent(jl_fin, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(32, 32, 32)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jDateChooser_inicio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
-                                    .addComponent(jtf_nombre, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jDateChooser_fin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
-                .addContainerGap(20, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtf_nombre)
+                                    .addComponent(jDateChooser_inicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jDateChooser_fin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap())))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(347, 347, 347)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGap(23, 23, 23)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -333,11 +345,12 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jl_montoMaximo)
                             .addComponent(jtf_montoMaximo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(49, 49, 49)
+                        .addGap(44, 44, 44)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jl_activo)
-                            .addComponent(jtf_activo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(47, 47, 47)
+                            .addComponent(jrb_activo_si)
+                            .addComponent(jrb_activo_no))
+                        .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jb_limpiar)
                             .addComponent(jb_cargar))
@@ -384,7 +397,7 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
             campaña.setNombre(jtf_nombre.getText());
             try {
                 double monto_min = Double.parseDouble(jtf_montoMinimo.getText());
-                if (monto_min > 0 && monto_min < campaña.getMonto_max()) {
+                if (monto_min > 0) {
                     campaña.setMonto_min(monto_min);
                 }
             } catch (NumberFormatException e) {
@@ -405,19 +418,35 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
             LocalDate fecha;
             fecha = LocalDateTime.ofInstant(jDateChooser_inicio.getDate().toInstant(), ZoneId.systemDefault()).toLocalDate();
             if (jDateChooser_inicio.getDate() != null) {
+                campaña.setFecha_inicio(fecha);
 
-                int respuesta = JOptionPane.showConfirmDialog(this, "¿Seguro que desea modificar la campaña?", "Modificar Campaña", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                int respuesta = JOptionPane.showConfirmDialog(this, "¿Seguro que desea modificar el estdo de la campaña?", "Modificar Estado de Campaña", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
                 if (respuesta == 0) {
-                    campaña.setFecha_inicio(fecha);
-                    cd.modificarCampaña(campaña);
-                    this.cargaCampañas();
-                    limpiar();
+                    if (jrb_activo_si.isSelected()) {
+                        campaña.setActiva(true);
+                        cd.desactivarCampañas();
+                        cd.modificarCampaña(campaña);
+
+                        this.cargaCampañas();
+                        limpiar();
+                    } else if (jrb_activo_no.isSelected()) {
+                        campaña.setActiva(false);
+                        cd.modificarCampaña(campaña);
+                        this.cargaCampañas();
+                        limpiar();
+
+                        actualizarNiveles();
+                    }
+                } else {
+                    System.out.println("Modificacion cancelada");
                 }
+            } else {
+                JOptionPane.showMessageDialog(this, "La fecha elegida es nula");
+                jDateChooser_inicio.requestFocus();
 
             }
         }
-
 
     }//GEN-LAST:event_jb_cargarActionPerformed
 
@@ -433,22 +462,31 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jtf_nombreKeyTyped
 
-    private void jtf_activoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_activoKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtf_activoKeyTyped
+    private void actualizarNiveles() {
+        List<Revendedor> lista = rd.buscarRevendedores();
+        lista.forEach((revendedor) -> {
 
-    private void jtf_activoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_activoActionPerformed
+            rd.calcularNivelRevendedorMejorado(revendedor);
+        });
+
+    }
+
+    private void jrb_activo_siActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrb_activo_siActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtf_activoActionPerformed
+    }//GEN-LAST:event_jrb_activo_siActionPerformed
+
+    private void jt_campañasCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jt_campañasCaretPositionChanged
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jt_campañasCaretPositionChanged
 
     private void jt_campañasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_campañasMouseClicked
         // TODO add your handling code here:
-
+        jrb_activo_no.setEnabled(true);
+        jrb_activo_si.setEnabled(true);
         int fila_sel = jt_campañas.getSelectedRow();
-        System.out.println(fila_sel);
-
+        System.out.println("la fila seleccionda es" + fila_sel);
         if (fila_sel != -1) {
-            jb_cargar.setEnabled(true);
             try {
                 int id_campaña = Integer.parseInt(jt_campañas.getValueAt(fila_sel, 0).toString());
                 campaña = cd.buscarCampaña(id_campaña);
@@ -456,7 +494,7 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "Fallo al traer id entero");
             }
 
-            //System.out.println("El estado activo de la campaña es "+campaña.isActiva());
+            System.out.println("El estado activo de la campaña es " + campaña.isActiva());
             this.habilitarCampos();
             jtf_nombre.setText(campaña.getNombre());
             jtf_montoMinimo.setText(String.valueOf(campaña.getMonto_min()));
@@ -465,13 +503,15 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
             jDateChooser_fin.setDate(Date.valueOf(campaña.getFecha_fin()));
 
             if (campaña.isActiva()) {
-                jtf_activo.setText("Si");
+                jrb_activo_no.setSelected(false);
+                jrb_activo_si.setSelected(true);
 
             } else {
-                jtf_activo.setText("No");
+                jrb_activo_si.setSelected(false);
+                jrb_activo_no.setSelected(true);
 
             }
-//        actualizarNiveles();
+            //actualizarNiveles();
         } else {
             JOptionPane.showMessageDialog(this, "Debe seleccionar una campaña");
             System.out.println("Debe seleccionar una campaña");
@@ -479,29 +519,18 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
 
 
     }//GEN-LAST:event_jt_campañasMouseClicked
-
-    private void actualizarNiveles() {
-        List<Revendedor> lista = rd.buscarRevendedores();
-        lista.forEach((revendedor) -> {
-
-            rd.calcularNivelRevendedor(revendedor);
-        });
-
-    }
-
     private void limpiar() {
+        jrb_activo_no.setEnabled(false);
+        jrb_activo_si.setEnabled(false);
         jtf_nombre.setText("");
-        deshabilitarCampos();
         jtf_montoMinimo.setText("");
         jtf_montoMaximo.setText("");
-        jtf_activo.setText("");
-//        jrb_activo_si.setSelected(false);
-//        jrb_activo_no.setSelected(false);
+        jrb_activo_si.setSelected(false);
+        jrb_activo_no.setSelected(true);
         jDateChooser_inicio.setDate(null);
         jDateChooser_fin.setDate(null);
-        cargaCampañas();
-        jb_cargar.setEnabled(false);
         jtf_nombre.requestFocus();
+        cargaCampañas();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -520,8 +549,9 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jl_activo;
     private javax.swing.JLabel jl_fin;
     private javax.swing.JLabel jl_montoMaximo;
+    private javax.swing.JRadioButton jrb_activo_no;
+    private javax.swing.JRadioButton jrb_activo_si;
     private javax.swing.JTable jt_campañas;
-    private javax.swing.JTextField jtf_activo;
     private javax.swing.JTextField jtf_montoMaximo;
     private javax.swing.JTextField jtf_montoMinimo;
     private javax.swing.JTextField jtf_nombre;

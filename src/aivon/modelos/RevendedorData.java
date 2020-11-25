@@ -272,8 +272,8 @@ public class RevendedorData {
                     
                     revendedores.add(revendedor);
             }
-                JOptionPane.showMessageDialog(null, "Se encontraron revendedores");
-                System.out.println("Se encontraron revdendedores");
+                //JOptionPane.showMessageDialog(null, "Se encontraron revendedores");
+                //System.out.println("Se encontraron revdendedores");
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontraron revendedores");
                 System.out.println("No se encontraron revendedores");
@@ -556,7 +556,7 @@ public class RevendedorData {
             int celAfectadas = statement.executeUpdate("Update revendedor Set nivel = "+nivel+" where id_revendedor = "+revendedor.getId_revendedor()+";");
             if (celAfectadas > 0) {
                 System.out.println("Nivel actualizado");
-                JOptionPane.showMessageDialog(null, "Nivel actualizado");
+                //JOptionPane.showMessageDialog(null, "Nivel actualizado");
             } else {
                 System.out.println("El Registro del nivel de Id " + revendedor.getId_revendedor() + " no pudo ser actualizado");
                 JOptionPane.showMessageDialog(null, "El Nivel del Revendedor no se pudo actualizar");
@@ -588,10 +588,12 @@ public class RevendedorData {
             
             int celAfectadas = statement.executeUpdate("Update revendedor Set nivel = "+nivel+" where id_revendedor = "+revendedor.getId_revendedor()+";");
             if (celAfectadas > 0) {
-                System.out.println("Nivel actualizado");
-                JOptionPane.showMessageDialog(null, "Nivel actualizado");
+
+                //System.out.println("Nivel actualizado");
+
+                //JOptionPane.showMessageDialog(null, "Nivel actualizado");
             } else {
-                System.out.println("El Registro del nivel de Id " + revendedor.getId_revendedor() + " no pudo ser actualizado");
+                System.out.println("El nivel de Id " + revendedor.getId_revendedor() + " no pudo ser actualizado");
                 JOptionPane.showMessageDialog(null, "El Nivel del Revendedor no se pudo actualizar");
             }
         ResultSet consulta = statement.executeQuery("SELECT nivel FROM revendedor WHERE id_revendedor = "+revendedor.getId_revendedor()+";");
@@ -600,8 +602,8 @@ public class RevendedorData {
                 revendedor.setNivel(nivel);
                 System.out.println(nivel);
             } else {
-                JOptionPane.showMessageDialog(null, "No se obtuvo nivel");
-                System.out.println("No se obtuvo el nivel");
+                JOptionPane.showMessageDialog(null, "No se cargó el nivel");
+                System.out.println("No se cargó el nivel");
             }
             statement.close();
 

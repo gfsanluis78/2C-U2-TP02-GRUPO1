@@ -244,15 +244,7 @@ public class ProductoAlta extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        jtf_nombre.setText("");
-        jtf_uso.setText("");
-        jtf_volumen.setText("");
-        jtf_costo_lista.setText("");
-        jtf_costo_publico.setText("");
-        jtf_estrellas.setText("");
-        jrb_activo_si.setSelected(true);
-        
-        jtf_nombre.requestFocus();
+        this.limpiar();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jtf_nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_nombreKeyTyped
@@ -348,14 +340,19 @@ public class ProductoAlta extends javax.swing.JInternalFrame {
                                             if (costo_publico > 0) {
                                                 producto.setCosto_publico(costo_publico);
                                                 //#################### VALIDANDO BOOL Y CARGA ##########################
-                                                if (jrb_activo_si.isSelected()) {
-                                                    producto.setActivo(true); // ALTA DEL PRODUCTO
-                                                    pd.altaProducto(producto);
-                                                } else if (jrd_activo_no.isSelected()) {
-                                                    producto.setActivo(false);
-                                                    pd.altaProducto(producto); // ALTA DEL PRODUCTO
-                                                } else {
-                                                    JOptionPane.showMessageDialog(this, "Debe seleccionar un estado activo o inactivo");
+                                                int respuesta = JOptionPane.showConfirmDialog(this, "¿Seguro que desea cargar estos datos?", "Alta producto", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                                                if (respuesta == 0) {
+                                                    if (jrb_activo_si.isSelected()) {
+                                                        producto.setActivo(true); // ALTA DEL PRODUCTO
+                                                        pd.altaProducto(producto);
+                                                        this.limpiar();
+                                                    } else if (jrd_activo_no.isSelected()) {
+                                                        producto.setActivo(false);
+                                                        pd.altaProducto(producto); // ALTA DEL PRODUCTO
+                                                        this.limpiar();
+                                                    } else {
+                                                        JOptionPane.showMessageDialog(this, "Debe seleccionar un estado activo o inactivo");
+                                                    }
                                                 }
                                             } else {
                                                 JOptionPane.showMessageDialog(this, "Debe ingresar un costo público válido");
@@ -438,4 +435,16 @@ public class ProductoAlta extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtf_uso;
     private javax.swing.JTextField jtf_volumen;
     // End of variables declaration//GEN-END:variables
+
+    private void limpiar() {
+        jtf_nombre.setText("");
+        jtf_uso.setText("");
+        jtf_volumen.setText("");
+        jtf_costo_lista.setText("");
+        jtf_costo_publico.setText("");
+        jtf_estrellas.setText("");
+        jrb_activo_si.setSelected(true);
+        
+        jtf_nombre.requestFocus();
+    }
 }

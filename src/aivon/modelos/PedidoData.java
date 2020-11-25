@@ -575,7 +575,11 @@ public class PedidoData {
                 }
             } else {
                 System.out.println("No se pudo obtener lista de pedidos");
-                JOptionPane.showMessageDialog(null, "No se pudo obtener lista de pedidos");
+
+                //JOptionPane.showMessageDialog(null, "No se pudo obtener lista de pedidos o no existen para ese revendedor");
+
+                //JOptionPane.showMessageDialog(null, "No se pudo obtener lista de pedidos");
+
             }
             statement.close();
         } catch (SQLException e) {
