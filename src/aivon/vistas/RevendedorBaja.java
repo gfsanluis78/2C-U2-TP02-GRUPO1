@@ -55,6 +55,7 @@ public class RevendedorBaja extends javax.swing.JInternalFrame {
         jcb_activo.setSelectedIndex(0);
         jtf_dni_buscar.setText("");
         jtf_telefono.setText("");
+        jb_baja.setEnabled(false);
        this.delay("", 5, 5);
     }
     private boolean isDNI(){
@@ -192,6 +193,11 @@ public class RevendedorBaja extends javax.swing.JInternalFrame {
         jcb_activo.setForeground(new java.awt.Color(0, 0, 0));
         jcb_activo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "  ", "SI", "NO" }));
         jcb_activo.setEnabled(false);
+        jcb_activo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcb_activoActionPerformed(evt);
+            }
+        });
         getContentPane().add(jcb_activo, new org.netbeans.lib.awtextra.AbsoluteConstraints(421, 324, 68, -1));
 
         jb_baja.setText("Baja");
@@ -212,7 +218,7 @@ public class RevendedorBaja extends javax.swing.JInternalFrame {
                 jb_limpiarActionPerformed(evt);
             }
         });
-        getContentPane().add(jb_limpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(178, 315, -1, -1));
+        getContentPane().add(jb_limpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, -1, -1));
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
         getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 305, 45, 48));
@@ -229,7 +235,7 @@ public class RevendedorBaja extends javax.swing.JInternalFrame {
                 jb_salirActionPerformed(evt);
             }
         });
-        getContentPane().add(jb_salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 10, -1, -1));
+        getContentPane().add(jb_salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 390, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -298,10 +304,13 @@ public class RevendedorBaja extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jb_limpiarActionPerformed
 
     private void jb_bajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_bajaActionPerformed
-        if((JOptionPane.YES_NO_OPTION==JOptionPane.showConfirmDialog(this, "Esta seguro que desea borrar", "Borrar Revendedor", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE))){
-            revendedor_data.borrarRevendedor(jtf_dni_buscar.getText());
+        if((JOptionPane.YES_NO_OPTION==JOptionPane.showConfirmDialog(this, "Seguro que desea borrar el Revendedor", "Borrar Revendedor", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE))){
+            revendedor_data.inhabilitarRevendedor(jtf_dni_buscar.getText());
             this.Limpiar();
             this.delay("Revendedor Borrado con Exito", 6, 6);
+        }
+        else{
+            
         }
                 
         this.delay("", 4, 4);
@@ -310,6 +319,10 @@ public class RevendedorBaja extends javax.swing.JInternalFrame {
     private void jb_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_salirActionPerformed
         this.dispose();
     }//GEN-LAST:event_jb_salirActionPerformed
+
+    private void jcb_activoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcb_activoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcb_activoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
