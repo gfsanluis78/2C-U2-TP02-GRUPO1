@@ -371,7 +371,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="jb_reiniciar_tabla_productos">
       <Properties>
-        <Property name="text" type="java.lang.String" value="REINICIAR"/>
+        <Property name="text" type="java.lang.String" value="REINICIAR TABLA"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jb_reiniciar_tabla_productosActionPerformed"/>
