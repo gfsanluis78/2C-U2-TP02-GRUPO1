@@ -291,7 +291,7 @@ public class ProductoActualizar extends javax.swing.JInternalFrame {
             }
         });
 
-        jb_reiniciar_tabla_productos.setText("REINICIAR");
+        jb_reiniciar_tabla_productos.setText("REINICIAR TABLA");
         jb_reiniciar_tabla_productos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jb_reiniciar_tabla_productosActionPerformed(evt);
@@ -641,6 +641,8 @@ public class ProductoActualizar extends javax.swing.JInternalFrame {
     private void jb_buscar_por_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_buscar_por_nombreActionPerformed
         // TODO add your handling code here:
         if ("".equals(jtf_buscar_por_nombre.getText())) {
+            this.cargaProductos();
+            jtf_buscar_por_nombre.setText("");
             jtf_buscar_por_nombre.requestFocus();
         } else {
             this.cargaProductosPorNombre(jtf_buscar_por_nombre.getText());
