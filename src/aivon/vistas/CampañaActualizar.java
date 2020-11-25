@@ -22,19 +22,20 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-    
+
 /**
  *
  * @author Genaro
  */
 public class CampañaActualizar extends javax.swing.JInternalFrame {
+
     private Conexion conexion;
     private CampañaData cd;
     private RevendedorData rd;
     private Campaña campaña;
-    
-    
+
     private DefaultTableModel modelo;
+
     /**
      * Creates new form ProductoActualizar
      */
@@ -48,6 +49,7 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
             armaCabeceraTabla();
             cargaCampañas();
             deshabilitarCampos();
+            jt_campañas.requestFocus();
         } catch (Exception e) {
         }
     }
@@ -62,20 +64,20 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
         columnas.add("Monto Minimo");
         columnas.add("Monto Maximo");
         columnas.add("Activo");
-        
+
         columnas.forEach((it) -> {
             modelo.addColumn(it);
         });
         jt_campañas.setModel(modelo);
     }
-    
+
     private void borraFilasTabla() {
         int a = modelo.getRowCount() - 1;
         for (int i = a; i >= 0; i--) {
             modelo.removeRow(i);
         }
     }
-    
+
     private void cargaCampañas() {
         this.borraFilasTabla();
 
@@ -86,11 +88,11 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
             } else {
                 modelo.addRow(new Object[]{p.getId_campaña(), p.getNombre(), p.getFecha_inicio(), p.getFecha_fin(), p.getMonto_min(), p.getMonto_max(), "No"});
             }
-            
+
         });
 
     }
-    
+
     private void deshabilitarCampos() {
         jtf_nombre.setEnabled(false);
         jtf_montoMinimo.setEnabled(false);
@@ -105,7 +107,7 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
         jb_limpiar.setEnabled(false);
         //jb_baja.setEnabled(false);
     }
-    
+
     private void habilitarCampos() {
         jtf_nombre.setEnabled(true);
         jtf_montoMinimo.setEnabled(true);
@@ -120,6 +122,7 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
         jb_limpiar.setEnabled(true);
         //jb_baja.setEnabled(true);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -351,10 +354,10 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
     private void jtf_montoMinimoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_montoMinimoKeyTyped
         // TODO add your handling code here:
         char caracter = evt.getKeyChar();
-        if (((caracter < '0')|| (caracter > '9')) && (caracter != '\b') &&(caracter != '.')) {
+        if (((caracter < '0') || (caracter > '9')) && (caracter != '\b') && (caracter != '.')) {
             evt.consume();
         }
-        if(!(jtf_montoMinimo.getText().length()<7)){
+        if (!(jtf_montoMinimo.getText().length() < 7)) {
             evt.consume();
         }
     }//GEN-LAST:event_jtf_montoMinimoKeyTyped
@@ -362,10 +365,10 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
     private void jtf_montoMaximoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_montoMaximoKeyTyped
         // TODO add your handling code here:
         char caracter = evt.getKeyChar();
-        if (((caracter < '0')|| (caracter > '9')) && (caracter != '\b') &&(caracter != '.')) {
+        if (((caracter < '0') || (caracter > '9')) && (caracter != '\b') && (caracter != '.')) {
             evt.consume();
         }
-        if(!(jtf_montoMaximo.getText().length()<7)){
+        if (!(jtf_montoMaximo.getText().length() < 7)) {
             evt.consume();
         }
     }//GEN-LAST:event_jtf_montoMaximoKeyTyped
@@ -402,17 +405,20 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
             LocalDate fecha;
             fecha = LocalDateTime.ofInstant(jDateChooser_inicio.getDate().toInstant(), ZoneId.systemDefault()).toLocalDate();
             if (jDateChooser_inicio.getDate() != null) {
-                campaña.setFecha_inicio(fecha);
-                cd.modificarCampaña(campaña); 
+
+                int respuesta = JOptionPane.showConfirmDialog(this, "¿Seguro que desea modificar la campaña?", "Modificar Campaña", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+                if (respuesta == 0) {
+                    campaña.setFecha_inicio(fecha);
+                    cd.modificarCampaña(campaña);
                     this.cargaCampañas();
                     limpiar();
-           
+                }
 
             }
         }
 
 
-        
     }//GEN-LAST:event_jb_cargarActionPerformed
 
     private void jbt_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_salirActionPerformed
@@ -422,7 +428,7 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
 
     private void jtf_nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_nombreKeyTyped
         // TODO add your handling code here:
-        if(!(jtf_nombre.getText().length()<30)){
+        if (!(jtf_nombre.getText().length() < 30)) {
             evt.consume();
         }
     }//GEN-LAST:event_jtf_nombreKeyTyped
@@ -437,53 +443,54 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
 
     private void jt_campañasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_campañasMouseClicked
         // TODO add your handling code here:
-        
+
         int fila_sel = jt_campañas.getSelectedRow();
         System.out.println(fila_sel);
-        
-        if(fila_sel != -1){
+
+        if (fila_sel != -1) {
             jb_cargar.setEnabled(true);
-        try{
-        int id_campaña = Integer.parseInt(jt_campañas.getValueAt(fila_sel, 0).toString());
-        campaña = cd.buscarCampaña(id_campaña);
-         }catch (NumberFormatException e) {
-                    JOptionPane.showMessageDialog(this, "Fallo al traer id entero");
-         }
-        
-        //System.out.println("El estado activo de la campaña es "+campaña.isActiva());
-        this.habilitarCampos();
-        jtf_nombre.setText(campaña.getNombre());
-        jtf_montoMinimo.setText(String.valueOf(campaña.getMonto_min()));
-        jtf_montoMaximo.setText(String.valueOf(campaña.getMonto_max()));
-        jDateChooser_inicio.setDate(Date.valueOf(campaña.getFecha_inicio()));
-        jDateChooser_fin.setDate(Date.valueOf(campaña.getFecha_fin()));
-                
-        if (campaña.isActiva()) {
-            jtf_activo.setText("Si");
-            
-        } else {
-            jtf_activo.setText("No");
-        
-         }
+            try {
+                int id_campaña = Integer.parseInt(jt_campañas.getValueAt(fila_sel, 0).toString());
+                campaña = cd.buscarCampaña(id_campaña);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Fallo al traer id entero");
+            }
+
+            //System.out.println("El estado activo de la campaña es "+campaña.isActiva());
+            this.habilitarCampos();
+            jtf_nombre.setText(campaña.getNombre());
+            jtf_montoMinimo.setText(String.valueOf(campaña.getMonto_min()));
+            jtf_montoMaximo.setText(String.valueOf(campaña.getMonto_max()));
+            jDateChooser_inicio.setDate(Date.valueOf(campaña.getFecha_inicio()));
+            jDateChooser_fin.setDate(Date.valueOf(campaña.getFecha_fin()));
+
+            if (campaña.isActiva()) {
+                jtf_activo.setText("Si");
+
+            } else {
+                jtf_activo.setText("No");
+
+            }
 //        actualizarNiveles();
         } else {
             JOptionPane.showMessageDialog(this, "Debe seleccionar una campaña");
             System.out.println("Debe seleccionar una campaña");
         }
-        
-        
+
+
     }//GEN-LAST:event_jt_campañasMouseClicked
-       
-    private void actualizarNiveles(){
-       List<Revendedor> lista = rd.buscarRevendedores();
-       lista.forEach((revendedor) -> {
-           
-           rd.calcularNivelRevendedor(revendedor);
+
+    private void actualizarNiveles() {
+        List<Revendedor> lista = rd.buscarRevendedores();
+        lista.forEach((revendedor) -> {
+
+            rd.calcularNivelRevendedor(revendedor);
         });
-       
-   }
-        private void limpiar() {
-           jtf_nombre.setText("");
+
+    }
+
+    private void limpiar() {
+        jtf_nombre.setText("");
         deshabilitarCampos();
         jtf_montoMinimo.setText("");
         jtf_montoMaximo.setText("");

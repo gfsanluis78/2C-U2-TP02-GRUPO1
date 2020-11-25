@@ -101,7 +101,6 @@
             <MenuItem class="javax.swing.JMenuItem" name="jm_campa&#xf1;aActualizar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Campa&#xf1;a Actualizar"/>
-                <Property name="actionCommand" type="java.lang.String" value="Campa&#xf1;a Actualizar"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jm_campa&#xf1;aActualizarActionPerformed"/>

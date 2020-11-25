@@ -247,7 +247,7 @@ public class CampañaData {
                     
                                        
                 } else {
-                    JOptionPane.showMessageDialog(null, "No existe la campaña con ese Id de registro");
+                    //JOptionPane.showMessageDialog(null, "No existe la campaña con ese Id de registro");
                     System.out.println("No existe la campaña con ese Id de registro");
                 }
             }
@@ -531,7 +531,7 @@ public Campaña ultimaCampaña(){
                                        
                     
                 } else {
-                    JOptionPane.showMessageDialog(null, "No se pudo buscar la ultima campaña");
+                    //JOptionPane.showMessageDialog(null, "No se pudo buscar la ultima campaña");
                     System.out.println("No existe la campaña ultima campaña");
                 }
             
