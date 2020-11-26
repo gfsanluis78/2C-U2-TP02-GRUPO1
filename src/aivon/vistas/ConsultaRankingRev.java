@@ -72,7 +72,7 @@ public class ConsultaRankingRev extends javax.swing.JInternalFrame {
         lista.forEach((r) -> {
             String nombre = r.getNombre()+" "+r.getApellido();
             //modelo.addRow(new Object[]{r.getId_revendedor(), nombre, rd.calcularNivelRevendedorMejorado(r), rd.estrellasTotalesRevendedor(r), rd.gananciaFinalRevendedor(r)});
-            modelo.addRow(new Object[]{r.getId_revendedor(), nombre, rd.calcularNivelRevendedorMejorado(r), rd.estrellasTotalesRevendedor(r), rd.gananciaFinalRevendedor(r)});
+            modelo.addRow(new Object[]{r.getId_revendedor(), nombre, r.getNivel(), rd.estrellasTotalesRevendedor(r), rd.gananciaFinalRevendedor(r)});
         });
         // Instanciamos el TableRowSorter y lo añadimos al JTable
             TableRowSorter<TableModel> elQueOrdena = new TableRowSorter<>(modelo);
