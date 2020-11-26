@@ -116,7 +116,26 @@ public class RevendedorData {
         }
 
     }
-     
+     public void inhabilitarRevendedor(String dni) { 
+
+        try {
+            Statement statement = con.createStatement();
+            int celAfectadas = statement.executeUpdate("UPDATE revendedor SET activo=0  WHERE dni='" + dni + "';");
+
+            if (celAfectadas > 0) {
+                JOptionPane.showMessageDialog(null, "Revendedor Inhabilitado");
+                System.out.println("Revendedor Inhabilitado");
+            } else {
+                JOptionPane.showMessageDialog(null, "El Registro con dni " + dni + " que pretende inhabilitar no existe!!");
+                System.out.println("El Registro con dni " + dni + " que pretende inhabilitar no existe!!");
+            }
+            statement.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al inhabilitar revendedor por dni");
+            System.out.println("Error al inhabilitar revendedor");
+        }
+
+    }
     
             
     //----------------------MODIFICACION-----------------------------------------------////

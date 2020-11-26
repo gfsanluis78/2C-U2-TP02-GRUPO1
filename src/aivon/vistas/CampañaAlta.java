@@ -9,6 +9,7 @@ import aivon.entidades.Campaña;
 import aivon.modelos.CampañaData;
 import aivon.modelos.Conexion;
 import aivon.modelos.ProductoData;
+import java.awt.HeadlessException;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -296,35 +297,56 @@ public class CampañaAlta extends javax.swing.JInternalFrame {
                 double monto_min = Double.parseDouble(jtf_montoMinimo.getText());
                 if (monto_min > 0) {
                     campaña.setMonto_min(monto_min);
-
                     try {
                         double monto_max = Double.parseDouble(jtf_montoMaximo.getText());
                         if (monto_max > campaña.getMonto_min()) {
                             campaña.setMonto_max(monto_max);
-
+                            if(jDateChooser_inicio.getDate() != null){
+                            //try {
                             LocalDate fecha = null;
-
+                            fecha = LocalDateTime.ofInstant(jDateChooser_inicio.getDate().toInstant(), ZoneId.systemDefault()).toLocalDate();
+                            System.out.println(fecha.toString());
                             try {
-                                fecha = LocalDateTime.ofInstant(jDateChooser_inicio.getDate().toInstant(), ZoneId.systemDefault()).toLocalDate();
-
-                                if (jDateChooser_inicio.getDate() != null) {
-                                    if (jDateChooser_inicio.getDate().after(Date.valueOf(cd.ultimaCampaña().getFecha_fin()))) {
-                                        campaña.setFecha_inicio(fecha);
-                                        cd.guardarCampaña(campaña);
-                                        limpiar();
-                                    } else {
-                                        JOptionPane.showMessageDialog(this, "La fecha elegida es anterior a la fecha de fin de la ultima campaña");
-                                        jDateChooser_inicio.requestFocus();
+                                if (fecha != null) {
+                                    try {
+                                        if (cd.ultimaCampaña() != null) {
+                                            System.out.println(cd.ultimaCampaña().toString());
+//                                            if (cd.ultimaCampaña() != null) {
+                                                if (jDateChooser_inicio.getDate().after(Date.valueOf(cd.ultimaCampaña().getFecha_fin()))) {
+                                                    campaña.setFecha_inicio(fecha);
+                                                    cd.guardarCampaña(campaña);
+                                                    limpiar();
+                                                } else {
+                                                    JOptionPane.showMessageDialog(this, "La fecha elegida es anterior a la fecha de fin de la ultima campaña");
+                                                    jDateChooser_inicio.requestFocus();
+                                                }
+//                                            } else {
+//
+//                                            }
+                                        } else {
+                                            System.out.println("Campaña anterior nula o no existe");
+                                            campaña.setFecha_inicio(fecha);
+                                            cd.guardarCampaña(campaña);
+                                            System.out.println("Felicitaciones. Ha dado de alta la primer Campaña");
+                                            limpiar();
+                                        }
+                                    } catch (HeadlessException headlessException) {
+                                        System.out.println("No hay ultima campaña");
                                     }
-
                                 } else {
                                     JOptionPane.showMessageDialog(this, "La fecha elegida es nula");
                                     jDateChooser_inicio.requestFocus();
                                 }
+                            } catch (HeadlessException headlessException) {
+                                System.out.println("Fecha nula no se pudo traer");
+                            }
 
-                            } catch (Exception e) {
-                                JOptionPane.showMessageDialog(this, "No ha elegido una fecha" + e.toString());
-                                jDateChooser_inicio.requestFocus();
+//                            } catch (Exception e) {
+//                                JOptionPane.showMessageDialog(this, "No ha elegido una fecha" + e.toString());
+//                                jDateChooser_inicio.requestFocus();
+//                            }
+                            } else {
+                                JOptionPane.showMessageDialog(this, "Debe seleccionar una fecha.");
                             }
                         } else {
                             JOptionPane.showMessageDialog(this, "Debe ingresar un monto maximo mayor que el monto minimo");
@@ -354,6 +376,7 @@ public class CampañaAlta extends javax.swing.JInternalFrame {
 
 
     }//GEN-LAST:event_jbt_cargarActionPerformed
+
     private void limpiar() {
         jtf_nombre.setText("");
         jtf_montoMinimo.setText("");
