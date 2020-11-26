@@ -487,7 +487,7 @@ public class aivon {
 //            
 //        }
           
-            sd.revisar();
+//            sd.revisar();
 
     
     }
