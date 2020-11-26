@@ -117,7 +117,7 @@ public class RevendedorModificar extends javax.swing.JInternalFrame {
         jrb_no.setEnabled(false);
         jtf_telefono.setEditable(false);
         jtf_caracteristica.setEditable(false);
-        //jb_actualizar.setEnabled(false);
+        jb_actualizar.setEnabled(false);
         jtf_email.setEnabled(false);
     }
     /**
@@ -496,15 +496,15 @@ public class RevendedorModificar extends javax.swing.JInternalFrame {
                         revendedor_data.modificarRevendedor(revendedor);
                         desactivarCampos();
                         this.Limpiar();
-                        this.delay("Revendedor Actualizado con Exito", 6, 6);
+                        this.delay("Revendedor Actualizado con Exito", 3, 3);
                     } else {
                         jtf_aviso.setText("Corrija los que desee o busque de nuevo");
-                        this.delay("", 9, 9);
+                        this.delay("", 4, 4);
 
                     }
                 }         
        
-        this.delay("", 4, 4);
+        this.delay("", 5, 5);
         
     }//GEN-LAST:event_jb_actualizarActionPerformed
 
