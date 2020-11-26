@@ -304,10 +304,10 @@ public class RevendedorBaja extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jb_limpiarActionPerformed
 
     private void jb_bajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_bajaActionPerformed
-        if((JOptionPane.YES_NO_OPTION==JOptionPane.showConfirmDialog(this, "Seguro que desea borrar el Revendedor", "Borrar Revendedor", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE))){
+        if((JOptionPane.YES_NO_OPTION==JOptionPane.showConfirmDialog(this, "Seguro que desea inhabilitar el Revendedor", "Inhabilitar Revendedor", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE))){
             revendedor_data.inhabilitarRevendedor(jtf_dni_buscar.getText());
             this.Limpiar();
-            this.delay("Revendedor Borrado con Exito", 6, 6);
+            this.delay("Revendedor inhabilitado con Exito", 6, 6);
         }
         else{
             

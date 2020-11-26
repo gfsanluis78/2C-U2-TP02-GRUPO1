@@ -32,7 +32,7 @@ public class ProductoData {
     public void altaProducto (Producto producto){
         
         String pre_instruccion;
-        pre_instruccion="INSERT INTO producto(nombre, uso, tamaño_cm3, costo, costo_publico, estrellas) VALUES (?,?,?,?,?,?);";
+        pre_instruccion="INSERT INTO producto(nombre, uso, tamaño_cm3, costo, costo_publico, estrellas, activo) VALUES (?,?,?,?,?,?,?);";
         
         try{
         
@@ -45,7 +45,7 @@ public class ProductoData {
         instruccion.setDouble(4, producto.getCosto());
         instruccion.setDouble(5, producto.getCosto_publico());
         instruccion.setInt(6, producto.getEstrellas());
-                
+        instruccion.setBoolean(7, producto.isActivo());
         
         instruccion.executeUpdate();
         
