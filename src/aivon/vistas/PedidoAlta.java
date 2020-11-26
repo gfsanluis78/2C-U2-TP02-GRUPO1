@@ -715,7 +715,7 @@ public class PedidoAlta extends javax.swing.JInternalFrame {
             
         
         if (jdc_fecha_ingreso.getDate() != null) {
-
+            jdc_fecha_ingreso.setEnabled(false);
             campaña = cd.buscarCampañaActiva();
 
             if (campaña != null) {

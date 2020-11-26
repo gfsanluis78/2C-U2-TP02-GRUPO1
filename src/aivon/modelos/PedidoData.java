@@ -523,8 +523,8 @@ public class PedidoData {
                     pedidos.add(pedido);
                 }
             } else {
-                System.out.println("No se pudo obtener lista de pedidos");
-                JOptionPane.showMessageDialog(null, "No se pudo obtener lista de pedidos");
+                System.out.println("No se encontraron pedidos");
+                JOptionPane.showMessageDialog(null, "No se encontraron pedidos");
             }
             statement.close();
         } catch (SQLException e) {
