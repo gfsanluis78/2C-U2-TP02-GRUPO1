@@ -481,7 +481,7 @@ public int validarCampos(){
              return cont;
          }
          
-         if (!(jtf_email.getText().matches(EMAIL_PATTERN4))) {
+         if (!(jtf_email.getText().matches(EMAIL_PATTERN3))) {
              cont++;   
              jtf_aviso.setText("Debe ingresar Email valido");
              return cont;
