@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-11-2020 a las 16:24:44
--- Versión del servidor: 10.4.14-MariaDB
--- Versión de PHP: 7.4.10
+-- Tiempo de generación: 26-11-2020 a las 03:24:16
+-- Versión del servidor: 10.4.6-MariaDB
+-- Versión de PHP: 7.3.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -42,18 +43,12 @@ CREATE TABLE `caja_pedido` (
 --
 
 INSERT INTO `caja_pedido` (`id_caja`, `id_pedido`, `id_producto`, `cantidad_producto`, `costo_caja`, `costo_caja_publico`, `estrellas_caja`) VALUES
-(3, 5, 2, 5, 1500, 1750, 25),
-(4, 5, 5, 3, 750, 900, 3),
-(5, 5, 7, 5, 500, 750, 5),
-(11, 12, 7, 5, 500, 1000, 25),
-(12, 13, 3, 5, 350, 500, 10),
-(13, 13, 4, 2, 100, 140, 6),
-(14, 14, 2, 5, 1500, 2000, 50),
-(15, 14, 5, 3, 750, 1050, 15),
-(16, 14, 7, 5, 500, 1000, 25),
-(17, 15, 4, 5, 250, 350, 15),
-(18, 15, 6, 3, 600, 750, 3),
-(19, 15, 7, 5, 500, 1000, 25);
+(1, 16, 17, 2, 780, 980, 4),
+(2, 16, 9, 2, 320, 640, 4),
+(3, 16, 1, 1, 1674, 2790, 5),
+(8, 17, 17, 1, 390, 490, 2),
+(9, 17, 7, 1, 731, 975, 2),
+(10, 17, 6, 1, 1500, 2300, 4);
 
 -- --------------------------------------------------------
 
@@ -76,19 +71,9 @@ CREATE TABLE `campaña` (
 --
 
 INSERT INTO `campaña` (`id_campaña`, `nombre`, `fecha_inicio`, `fecha_fin`, `monto_min`, `monto_max`, `activa`) VALUES
-(1, 'Primera', '2020-01-01', '2020-01-26', 1500, 2000, 0),
-(2, 'Segunda', '2020-01-27', '2020-02-21', 1500, 2000, 0),
-(3, 'Tercera', '2020-02-22', '2020-03-18', 1500, 2000, 0),
-(4, 'Cuarta', '2020-03-19', '2020-04-13', 1500, 2000, 0),
-(5, 'Quinta', '2020-04-14', '2020-05-09', 1500, 2000, 0),
-(6, 'Sexta', '2020-05-10', '2020-06-04', 1500, 2000, 0),
-(7, 'Septima', '2020-06-05', '2020-06-30', 1500, 2000, 0),
-(8, 'Octava', '2020-07-01', '2020-07-26', 1500, 2000, 0),
-(9, 'Novena', '2020-07-27', '2020-08-22', 1500, 2000, 0),
-(10, 'Decima', '2020-08-23', '2020-09-17', 1500, 2000, 0),
-(11, 'DECIMAPRIMERA', '2020-09-18', '2020-10-13', 1500, 2000, 0),
-(12, 'DECIMASEGUNDA', '2020-10-14', '2020-11-08', 1500, 2000, 0),
-(13, 'DECIMATERCERA', '2020-11-09', '2020-12-04', 1500, 2000, 1);
+(1, 'NOV-DIC-2020', '2020-11-20', '2020-12-15', 2500, 3000, 1),
+(2, 'DIC-ENE-2021', '2020-12-16', '2021-01-10', 2500, 3200, 0),
+(3, 'ENE-FEB-2021', '2021-01-11', '2021-02-05', 2900, 3400, 0);
 
 -- --------------------------------------------------------
 
@@ -106,15 +91,6 @@ CREATE TABLE `historico` (
   `ganancia` double NOT NULL DEFAULT 0,
   `nivel` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `historico`
---
-
-INSERT INTO `historico` (`id_historico`, `id_revendedor`, `id_campaña`, `monto_min`, `monto_max`, `estrellas_campaña_revendedor`, `ganancia`, `nivel`) VALUES
-(4, 1, 12, 1500, 2000, 33, 650, 1),
-(5, 3, 12, 1500, 2000, 25, 500, 1),
-(6, 4, 12, 1500, 2000, 16, 190, 1);
 
 -- --------------------------------------------------------
 
@@ -137,11 +113,8 @@ CREATE TABLE `pedido` (
 --
 
 INSERT INTO `pedido` (`id_pedido`, `id_revendedor`, `id_campaña`, `fecha_ingreso`, `fecha_entrega`, `fecha_pago`, `activo`) VALUES
-(5, 1, 12, '2020-11-06', '2020-11-08', '2020-11-18', 1),
-(12, 3, 12, '2020-11-05', '2020-11-06', '2020-11-07', 1),
-(13, 4, 12, '2020-10-28', '2020-11-01', '2020-11-03', 1),
-(14, 1, 13, '2020-11-15', NULL, NULL, 1),
-(15, 3, 13, '2020-11-15', NULL, NULL, 1);
+(16, 3, 1, '2020-11-25', '2020-11-25', '2020-11-26', 1),
+(17, 1, 1, '2020-11-21', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -165,21 +138,25 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`id_producto`, `nombre`, `uso`, `tamaño_cm3`, `costo`, `costo_publico`, `estrellas`, `activo`) VALUES
-(1, 'CREMA MIVEA', 'CREMA CORPORAL', 100, 200, 230, 2, 1),
-(2, 'DESODORANTE ROXANA', 'DESODORANTE CORPORAL', 240, 300, 400, 10, 1),
-(3, 'ESMALTE UÑAS', 'MANOS', 10, 70, 100, 2, 1),
-(4, 'ESPONJA VEGETAL', 'CORPORAL', 30, 50, 70, 3, 1),
-(5, 'Jabon liquido Frutilla', 'Cabello', 120, 250, 350, 5, 1),
-(6, 'Shampoo ', 'Cabello', 120, 200, 250, 1, 1),
-(7, 'SHAMPOO PARA BARBA ', 'Cabello', 120, 100, 200, 5, 1),
-(8, 'SUERO REDUCTOR DE ARRUGAS', 'PIEL', 130, 1002, 1305, 5, 1),
-(9, 'DESODORANTE CORPORAL', 'PERSONAL', 130, 270, 330, 4, 1),
-(10, 'DESODORANTE ANTIMANCHAS', 'PERSONAL', 130, 180, 225, 4, 1),
-(11, 'ANTISEÑALES', 'PIEL', 130, 960, 870, 4, 1),
-(12, 'JABONES EN BARRA LIMON', 'PIEL', 130, 336, 280, 4, 1),
-(13, 'ACEITE CORPORAL ALMENDRAS', 'PIEL', 130, 913, 800, 4, 1),
-(14, 'BALSAMO POST BARBA', 'BARBA', 130, 344, 250, 4, 1),
-(15, 'MASCARILLA EXFOLIANTE', 'CARA', 130, 590, 389, 4, 1);
+(1, 'SERUM NOCTURNO', 'ROSTRO', 210, 1674, 2790, 5, 1),
+(2, 'HIDRATANTE PARA MANOS', 'MANOS', 90, 400, 515, 2, 1),
+(3, 'JABON DE CEREZA', 'MANOS', 30, 283, 435, 1, 1),
+(4, 'DESODORANTE ROLL ON', 'CORPORAL', 160, 186, 310, 2, 1),
+(5, 'CREMA MANOS MARACUYA', 'MANOS', 75, 361, 515, 2, 1),
+(6, 'KIT POST SOLAR', 'CORPORAL', 120, 1500, 2300, 4, 1),
+(7, 'LOCION FACIAL', 'ROSTRO', 120, 731, 975, 2, 1),
+(8, 'LOCION PARA BEBE', 'CORPORAL', 120, 945, 1260, 2, 1),
+(9, 'SHAMPOO LIMPIEZA PROFUNDA', 'CABELLO', 230, 160, 320, 2, 1),
+(10, 'CLASICO FEMENINA', 'CORPORAL', 120, 2000, 2560, 3, 1),
+(11, 'LOCIO FRESCOR CASTAÑA', 'CORPORAL', 130, 1000, 1815, 2, 1),
+(12, 'LOCION HOMBRE ESSENCE', 'CORPORAL', 150, 2334, 3335, 2, 1),
+(13, 'LOCION HOMBRE DESPERTE', 'CORPORAL', 140, 1745, 2685, 2, 1),
+(14, 'LOCION HOMBRE QUIMICA HUMO', 'CORPORAL', 150, 2000, 2335, 2, 1),
+(15, 'LOCION HOMBRE PAZ E HUMOR', 'CORPORAL', 140, 1800, 2205, 2, 1),
+(16, 'LOCION HOMBRE POTENCE', 'CORPORAL', 140, 1800, 2545, 2, 0),
+(17, 'SHAMPOO PARAUA', 'CABELLO', 120, 390, 490, 2, 1),
+(18, 'SHAMPOO ANTICASPA', 'CABELLO', 230, 380, 425, 2, 1),
+(19, 'CREMA DE MANOS DE PAPAYA', 'CORPORAL', 120, 100, 210, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -203,9 +180,9 @@ CREATE TABLE `revendedor` (
 --
 
 INSERT INTO `revendedor` (`id_revendedor`, `nombre`, `apellido`, `dni`, `tel`, `email`, `nivel`, `activo`) VALUES
-(1, 'Ezequiel', 'Albornoz', '36227970', '1123917575', 'franco.ezequielq@outlook.com', 1, 1),
-(3, 'Mario', 'Avaca', '30377673', '2664222979', 'marioraulavaca@gmail.com', 1, 1),
-(4, 'Genaro', 'Farias', '26525567', '2664692950', 'gfsanluis78@gmail.com', 1, 1);
+(1, 'Ezequiel', 'Albornoz', '36227970', '2664234522', 'eze@gmail.com', 1, 1),
+(2, 'Genaro', 'Farias', '26525567', '2664342342', 'genaro@gmail.com', 1, 1),
+(3, 'Raul', 'Avaca', '30377673', '2664123312', 'mario@gmail.com', 1, 0);
 
 --
 -- Índices para tablas volcadas
@@ -263,37 +240,37 @@ ALTER TABLE `revendedor`
 -- AUTO_INCREMENT de la tabla `caja_pedido`
 --
 ALTER TABLE `caja_pedido`
-  MODIFY `id_caja` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_caja` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `campaña`
 --
 ALTER TABLE `campaña`
-  MODIFY `id_campaña` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_campaña` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `historico`
 --
 ALTER TABLE `historico`
-  MODIFY `id_historico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_historico` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `revendedor`
 --
 ALTER TABLE `revendedor`
-  MODIFY `id_revendedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_revendedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas
