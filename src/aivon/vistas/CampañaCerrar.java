@@ -92,10 +92,10 @@ public class CampañaCerrar extends javax.swing.JInternalFrame {
             }
 
         });
-         // Instanciamos el TableRowSorter y lo añadimos al JTable
-            TableRowSorter<TableModel> elQueOrdena = new TableRowSorter<>(modelo);
-            
-            jt_campañas.setRowSorter(elQueOrdena);
+        // Instanciamos el TableRowSorter y lo añadimos al JTable
+        TableRowSorter<TableModel> elQueOrdena = new TableRowSorter<>(modelo);
+
+        jt_campañas.setRowSorter(elQueOrdena);
 
     }
 
@@ -181,10 +181,10 @@ public class CampañaCerrar extends javax.swing.JInternalFrame {
             }
         });
         jt_campañas.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jt_campañasCaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jScrollPane1.setViewportView(jt_campañas);
@@ -255,7 +255,7 @@ public class CampañaCerrar extends javax.swing.JInternalFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("CIERRE DE CAMPAÑAS");
+        jLabel1.setText("APERTURA Y CIERRE DE CAMPAÑAS");
 
         jDateChooser_inicio.setEnabled(false);
 
@@ -318,16 +318,16 @@ public class CampañaCerrar extends javax.swing.JInternalFrame {
                                     .addComponent(jDateChooser_fin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addContainerGap())))
             .addGroup(layout.createSequentialGroup()
-                .addGap(347, 347, 347)
+                .addGap(353, 353, 353)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(22, 22, 22)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -426,7 +426,7 @@ public class CampañaCerrar extends javax.swing.JInternalFrame {
             if (jDateChooser_inicio.getDate() != null) {
                 campaña.setFecha_inicio(fecha);
 
-                int respuesta = JOptionPane.showConfirmDialog(this, "¿Seguro que desea modificar el estdo de la campaña?", "Modificar Estado de Campaña", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                int respuesta = JOptionPane.showConfirmDialog(this, "¿Seguro que desea modificar el estado de la campaña?", "Modificar Estado de Campaña", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
                 if (respuesta == 0) {
                     if (jrb_activo_si.isSelected()) {

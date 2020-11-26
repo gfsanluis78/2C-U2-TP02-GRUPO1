@@ -92,7 +92,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jm_campa&#xf1;aCerrar">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Campa&#xf1;a Cerrar"/>
+                <Property name="text" type="java.lang.String" value="Campa&#xf1;a Apertura y  Cierre"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jm_campa&#xf1;aCerrarActionPerformed"/>

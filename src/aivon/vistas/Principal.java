@@ -141,7 +141,7 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu4.add(jm_campañaAlta);
 
-        jm_campañaCerrar.setText("Campaña Cerrar");
+        jm_campañaCerrar.setText("Campaña Apertura y  Cierre");
         jm_campañaCerrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jm_campañaCerrarActionPerformed(evt);
