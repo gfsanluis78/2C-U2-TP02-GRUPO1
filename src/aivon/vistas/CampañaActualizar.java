@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -90,6 +92,10 @@ public class CampañaActualizar extends javax.swing.JInternalFrame {
             }
 
         });
+         // Instanciamos el TableRowSorter y lo añadimos al JTable
+            TableRowSorter<TableModel> elQueOrdena = new TableRowSorter<>(modelo);
+            
+            jt_campañas.setRowSorter(elQueOrdena);
 
     }
 

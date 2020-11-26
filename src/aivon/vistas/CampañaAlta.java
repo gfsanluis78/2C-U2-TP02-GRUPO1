@@ -142,8 +142,7 @@ public class CampañaAlta extends javax.swing.JInternalFrame {
         jLabel2.setText("N° Campaña");
 
         jt_idNextCampana.setEditable(false);
-        jt_idNextCampana.setText("___");
-        jt_idNextCampana.setToolTipText("El numero de Id que se va a dar de alta");
+        jt_idNextCampana.setToolTipText("Numero de Id de la camaña que se va a dar de alta");
         jt_idNextCampana.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jt_idNextCampanaActionPerformed(evt);
@@ -162,64 +161,60 @@ public class CampañaAlta extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(79, 79, 79)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jbt_limpiar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbt_cargar))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jl_montoMinimo)
-                                .addComponent(jl_montoMaximo))
-                            .addGap(131, 131, 131)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jtf_montoMaximo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jtf_montoMinimo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jL_nombre)
-                                .addComponent(jl_fechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(26, 26, 26)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jtf_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jDateChooser_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jt_idNextCampana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addGap(0, 85, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 83, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(199, 199, 199)
-                                .addComponent(jbt_salir))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(144, 144, 144)
-                                .addComponent(jLabel1)))
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jbt_limpiar)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jbt_cargar))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jl_montoMinimo)
+                                            .addComponent(jl_montoMaximo))
+                                        .addGap(131, 131, 131)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jtf_montoMaximo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jtf_montoMinimo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jL_nombre)
+                                            .addComponent(jl_fechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(26, 26, 26)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(jtf_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jDateChooser_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel2)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jt_idNextCampana, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(120, 120, 120)
+                                .addComponent(jbt_salir)
+                                .addGap(116, 116, 116)))
+                        .addGap(81, 81, 81))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jDateChooser_finUltima, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(jDateChooser_finUltima, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(7, 7, 7)
-                        .addComponent(jLabel3))
-                    .addComponent(jDateChooser_finUltima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(13, 13, 13)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jDateChooser_finUltima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(19, 19, 19)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jt_idNextCampana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
@@ -245,7 +240,7 @@ public class CampañaAlta extends javax.swing.JInternalFrame {
                     .addComponent(jbt_cargar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jbt_salir)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         pack();
@@ -301,21 +296,28 @@ public class CampañaAlta extends javax.swing.JInternalFrame {
                         double monto_max = Double.parseDouble(jtf_montoMaximo.getText());
                         if (monto_max > campaña.getMonto_min()) {
                             campaña.setMonto_max(monto_max);
-                            if(jDateChooser_inicio.getDate() != null){
-                            //try {
-                            LocalDate fecha = null;
-                            fecha = LocalDateTime.ofInstant(jDateChooser_inicio.getDate().toInstant(), ZoneId.systemDefault()).toLocalDate();
-                            System.out.println(fecha.toString());
-                            try {
-                                if (fecha != null) {
-                                    try {
-                                        if (cd.ultimaCampaña() != null) {
-                                            System.out.println(cd.ultimaCampaña().toString());
+                            if (jDateChooser_inicio.getDate() != null) {
+                                //try {
+                                LocalDate fecha = null;
+                                fecha = LocalDateTime.ofInstant(jDateChooser_inicio.getDate().toInstant(), ZoneId.systemDefault()).toLocalDate();
+                                System.out.println(fecha.toString());
+                                try {
+                                    if (fecha != null) {
+                                        try {
+                                            if (cd.ultimaCampaña() != null) {
+                                                System.out.println(cd.ultimaCampaña().toString());
 //                                            if (cd.ultimaCampaña() != null) {
                                                 if (jDateChooser_inicio.getDate().after(Date.valueOf(cd.ultimaCampaña().getFecha_fin()))) {
                                                     campaña.setFecha_inicio(fecha);
-                                                    cd.guardarCampaña(campaña);
-                                                    limpiar();
+
+                                                    int respuesta = JOptionPane.showConfirmDialog(this, "¿Seguro que desea dar de alta esta campaña?", "Alta Campaña", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+                                                    if (respuesta == 0) {
+                                                        cd.guardarCampaña(campaña);
+                                                        limpiar();
+                                                    } else {
+                                                        System.out.println("Nueva Campaña Cargada");
+                                                    }
                                                 } else {
                                                     JOptionPane.showMessageDialog(this, "La fecha elegida es anterior a la fecha de fin de la ultima campaña");
                                                     jDateChooser_inicio.requestFocus();
@@ -323,23 +325,23 @@ public class CampañaAlta extends javax.swing.JInternalFrame {
 //                                            } else {
 //
 //                                            }
-                                        } else {
-                                            System.out.println("Campaña anterior nula o no existe");
-                                            campaña.setFecha_inicio(fecha);
-                                            cd.guardarCampaña(campaña);
-                                            System.out.println("Felicitaciones. Ha dado de alta la primer Campaña");
-                                            limpiar();
+                                            } else {
+                                                System.out.println("Campaña anterior nula o no existe");
+                                                campaña.setFecha_inicio(fecha);
+                                                cd.guardarCampaña(campaña);
+                                                System.out.println("Felicitaciones. Ha dado de alta la primer Campaña");
+                                                limpiar();
+                                            }
+                                        } catch (HeadlessException headlessException) {
+                                            System.out.println("No hay ultima campaña");
                                         }
-                                    } catch (HeadlessException headlessException) {
-                                        System.out.println("No hay ultima campaña");
+                                    } else {
+                                        JOptionPane.showMessageDialog(this, "La fecha elegida es nula");
+                                        jDateChooser_inicio.requestFocus();
                                     }
-                                } else {
-                                    JOptionPane.showMessageDialog(this, "La fecha elegida es nula");
-                                    jDateChooser_inicio.requestFocus();
+                                } catch (HeadlessException headlessException) {
+                                    System.out.println("Fecha nula no se pudo traer");
                                 }
-                            } catch (HeadlessException headlessException) {
-                                System.out.println("Fecha nula no se pudo traer");
-                            }
 
 //                            } catch (Exception e) {
 //                                JOptionPane.showMessageDialog(this, "No ha elegido una fecha" + e.toString());

@@ -49,7 +49,7 @@ public class CampañaData {
                 if (resultado.next()) {
                campaña.setId_campaña(resultado.getInt(1));
                     System.out.println("Campaña cargada");
-                    //JOptionPane.showMessageDialog(null, "Campaña cargada");
+                    JOptionPane.showMessageDialog(null, "Nueva Campaña cargada");
                 } else {
                     JOptionPane.showMessageDialog(null, "No pudo obtener id");
                     System.out.println("No pudo obtener id");
