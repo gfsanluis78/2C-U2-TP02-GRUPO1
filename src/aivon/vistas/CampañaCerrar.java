@@ -12,6 +12,7 @@ import aivon.modelos.CampañaData;
 import aivon.modelos.Conexion;
 import aivon.modelos.ProductoData;
 import aivon.modelos.RevendedorData;
+import aivon.modelos.SeguimientoData;
 import static java.lang.ProcessBuilder.Redirect.to;
 import java.sql.Date;
 import java.time.Instant;
@@ -35,6 +36,7 @@ public class CampañaCerrar extends javax.swing.JInternalFrame {
     private CampañaData cd;
     private RevendedorData rd;
     private Campaña campaña;
+    private SeguimientoData sd;
 
     private DefaultTableModel modelo;
 
@@ -47,6 +49,7 @@ public class CampañaCerrar extends javax.swing.JInternalFrame {
             conexion = new Conexion();
             cd = new CampañaData(conexion);
             rd = new RevendedorData(conexion);
+            sd=new SeguimientoData(conexion);
             modelo = new DefaultTableModel();
             armaCabeceraTabla();
             cargaCampañas();
@@ -430,13 +433,21 @@ public class CampañaCerrar extends javax.swing.JInternalFrame {
 
                 if (respuesta == 0) {
                     if (jrb_activo_si.isSelected()) {
+                        int cont=sd.revisar();
+                        if(cont>0){
+                            JOptionPane.showMessageDialog(this, "Al cierre de campaña, se inhabilitaron "+ cont +" revendedores");
+                        }
                         campaña.setActiva(true);
                         cd.desactivarCampañas();
                         cd.modificarCampaña(campaña);
-
+                        
                         this.cargaCampañas();
                         limpiar();
                     } else if (jrb_activo_no.isSelected()) {
+                        int cont=sd.revisar();
+                        if(cont>0){
+                            JOptionPane.showMessageDialog(this, "Al cierre de campaña, se inhabilitaron "+ cont +" revendedores");
+                        }
                         campaña.setActiva(false);
                         cd.modificarCampaña(campaña);
                         this.cargaCampañas();

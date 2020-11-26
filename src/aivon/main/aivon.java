@@ -46,7 +46,7 @@ public class aivon {
         PedidoData ped = new PedidoData(con);
         HistoricoData hd= new HistoricoData(con);
         RevendedorData rd = new RevendedorData(con);
-        
+        SeguimientoData sd=new SeguimientoData(con);
 //##############################################################################
 //#################   ALTA PRODUCTO     ########################################
     //Se debe controlar en vistas que los precios no pueden ser nulos/vacios
@@ -487,7 +487,7 @@ public class aivon {
 //            
 //        }
           
-
+            sd.revisar();
 
     
     }

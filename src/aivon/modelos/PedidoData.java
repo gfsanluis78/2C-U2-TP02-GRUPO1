@@ -113,6 +113,52 @@ public class PedidoData {
 
         return pedido;
     }
+    
+    public Pedido buscarPedidoSeguimiento(int id_revendedor, int id_campaña) {
+        Pedido pedido = null;
+        Revendedor revendedor;
+        Campaña campaña;
+        try {
+            Statement statement = c.createStatement();
+            ResultSet consulta = statement.executeQuery("SELECT * FROM pedido WHERE id_campaña="
+                    + id_campaña + " AND id_revendedor=" + id_revendedor + ";");
+
+            if (consulta.next()) {
+                pedido = new Pedido();
+                pedido.setId_pedido(consulta.getInt("id_pedido"));
+                pedido.setFecha_ingreso(consulta.getDate("fecha_ingreso").toLocalDate());
+                pedido.setActivo(consulta.getBoolean("activo"));
+                if (consulta.getDate("fecha_entrega") != null) {
+                    pedido.setFecha_entrega(consulta.getDate("fecha_entrega").toLocalDate());
+                } else {
+                    System.out.println("No hay fecha de entrega aún");
+                }
+
+                if (consulta.getDate("fecha_pago") != null) {
+                    pedido.setFecha_pago(consulta.getDate("fecha_pago").toLocalDate());
+                } else {
+                    System.out.println("No hay fecha de pago aún");
+                }
+                pedido.setCantidad_cajas(this.cantCajasPedido(pedido));
+                pedido.setEstrellas_pedido(this.cantEstrellasPedido(pedido));
+
+                revendedor = this.buscarRevendedor(id_revendedor);
+                campaña = this.buscarCampaña(id_campaña);
+
+                pedido.setRevendedor(revendedor);
+                pedido.setCampaña(campaña);
+            } else {
+                System.out.println("No se pudo obtener pedido");
+                //JOptionPane.showMessageDialog(null, "No se pudo obtener pedido");
+            }
+            statement.close();
+        } catch (SQLException e) {
+            //JOptionPane.showMessageDialog(null, "Error al obtener pedido");
+            System.out.println(e.getMessage());
+        }
+
+        return pedido;
+    }
     //################### BUSCAR UN PEDIDO PAGO X REVENDEDOR Y CAMAPAÑA #################
 
     public Pedido buscarPedidoPago(int id_revendedor, int id_campaña) {
